@@ -5,6 +5,20 @@
 //includes
 #include "i2c_driver.h"
 
+// constant
+__code const static uint8_t edid[128] = {
+    0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, // header
+    0b01010000, 0b00110011, // 0 T A S
+    0xE6, 0x21, 0x34, 0x69, 0x42, 0x0F, //funny numbers for product code/serial number
+    0x11, 0x24, // week 17 2026
+    0x01, 0x03, // EDID version 1.3
+    0x80, LCD_H_SIZE_CM, LCD_V_SIZE_CM, 0x78, 0x02,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //25-34 Chromaticity coordinates default for now
+    0x31, 0b01000000, // standard timing 1: 640 4:3 @60fps
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // we only have 1 standard timing
+    {0}
+};
+
 //
 // funcitons
 //
@@ -15,209 +29,30 @@ void i2c_init(){
     SCL = 1;
 }
 
-// Writes a byte to the EEPROM at the specified page/reg
-char EEPROM_sendByte(char page, char reg, char toSend){
-    // ensure we asked for a valid page
-    if(page>EEPROM_MAX_PAGE){
-        return EEPROM_ERROR_PAGE_NUM;
+// runs the sending of edid, returns an error if the computer NACKs before sending all of EDID
+char i2c_edidSend(){
+    i2c_findStart();
+    // saying it wants to talk to the monitor
+    if(i2c_pullByte()!=MONITOR_WRITE_ADDRESS||MONITOR_WRITE_ADDRESS){
+        return I2C_ERROR_MONITOR_ADDRESS;
     }
-    // fit the format of the byte to send
-    char controlByte = (EEPROM_ADDRESS<<4)+(page<<1);
-
-    // start I2C
-    if(i2c_sendStart()==ERROR){
-        return ERROR_START;
+    i2c_sendAck();
+    // saying it wants to read from byte 0
+    if(i2c_pullByte()!=0){
+        return I2C_ERROR_MONITR_SET_0;
     }
-    // send the controlByte
-    if(i2c_sendByte(controlByte)==ERROR){
-        return ERROR_ACK_CTRL;
-    }
-    // send which of the 256 registers
-    if(i2c_sendByte(reg)==ERROR){
-        return ERROR_ACK_LOCATION;
-    }
-    // send the data
-    if(i2c_sendByte(toSend)==ERROR){
-        return ERROR_ACK_DATA;
-    }
-    // end I2C
-    i2c_sendEnd();
-    return SUCCESS;
-}
-
-// Reads a byte from the EEPROM at the specified page/reg
-char EEPROM_readByte(char page, char reg, char *toReceive){
-    // ensure we asked for a valid page
-    if(page>EEPROM_MAX_PAGE){
-        return EEPROM_ERROR_PAGE_NUM;
-    }
-    // fit the format of the byte to write (we want to change the data pointer)
-    char controlByte = (EEPROM_ADDRESS<<4)+(page<<1);
-    // ensure we are writing to an empty refernce value
-    *toReceive = 0;
-
-    // start I2C
-    if(i2c_sendStart()==ERROR){
-        return ERROR_START;
-    }
-    // send the controlByte
-    if(i2c_sendByte(controlByte)==ERROR){
-        return ERROR_ACK_CTRL;
-    }
-    // send which of the 256 registers
-    if(i2c_sendByte(reg)==ERROR){
-        return ERROR_ACK_LOCATION;
-    }
-
-    // force a start (we changed the location of the register pointer)
-    // force start
-    SDA=1;
-    SCL=1;
-    SDA=0;
-    SCL=0;
-
-    // now we are reading, so we add one to go into read mode
-    controlByte++;
-
-    // send the new controlByte
-    if(i2c_sendByte(controlByte)==ERROR){
-        return ERROR_ACK_CTRL;
-    }
-
-    //reading the data
-    *toReceive |= i2c_pullBit() << 7;
-    *toReceive |= i2c_pullBit() << 6;
-    *toReceive |= i2c_pullBit() << 5;
-    *toReceive |= i2c_pullBit() << 4;
-    *toReceive |= i2c_pullBit() << 3;
-    *toReceive |= i2c_pullBit() << 2;
-    *toReceive |= i2c_pullBit() << 1;
-    *toReceive |= i2c_pullBit();
-
-    // Nack
-    i2c_sendBit(1);
-
-    // end I2C
-    i2c_sendEnd();
-    return SUCCESS;
-}
-
-// Writes a series of bytes to the EEPROM at the specified page/starting reg
-char EEPROM_sendBytes(char page, char reg, char *toSend, char size){
-    // ensure we asked for a valid page
-    if(page>EEPROM_MAX_PAGE){
-        return EEPROM_ERROR_PAGE_NUM;
-    }
-    //ensure we don't roll over
-    if(reg+size>EEPROM_MAX_REG){
-        return EEPROM_ERROR_PAGE_OVERRUN;
-    }
-    // fit the format of the byte to send
-    char controlByte = (EEPROM_ADDRESS<<4)+(page<<1);
-
-    // start I2C
-    if(i2c_sendStart()==ERROR){
-        return ERROR_START;
-    }
-    // send the controlByte
-    if(i2c_sendByte(controlByte)==ERROR){
-        return ERROR_ACK_CTRL;
-    }
-    // send which of the 256 registers
-    if(i2c_sendByte(reg)==ERROR){
-        return ERROR_ACK_LOCATION;
-    }
-    for(char i = 0; i<size; i++){
-        // send the data
-        if(i2c_sendByte(toSend[i])==ERROR){
-            return ERROR_ACK_DATA;
+    i2c_sendAck();
+    // now we are sending the EDID
+    while(1){
+        // send EDID, if NACK then we restart
+        for(uint8_t i = 0; i<127; i++){
+            if(i2c_sendByte(edid[i])){
+                return I2C_ERROR_MONITR_EDID;
+            }
+        }
+        // send last byte of EDID, if nack we are done!
+        if(i2c_sendByte(edid[127])){
+            return 0;
         }
     }
-    // end I2C
-    i2c_sendEnd();
-    return SUCCESS;
-}
-
-// Reads a series of bytes from the EEPROM at the speciried page/starting reg
-char EEPROM_readBytes(char page, char reg, char *toReceive, int size){
-    // ensure we asked for a valid page
-    if(page>EEPROM_MAX_PAGE){
-        return EEPROM_ERROR_PAGE_NUM;
-    }
-    //ensure we don't roll over
-    if(reg+size>EEPROM_MAX_REG){
-        return EEPROM_ERROR_PAGE_OVERRUN;
-    }
-    // fit the format of the byte to read
-    char controlByte = (EEPROM_ADDRESS<<4)+(page<<1);
-    // ensure we are writing to an empty refernce value
-    *toReceive = 0;
-
-    // start I2C
-    if(i2c_sendStart()==ERROR){
-        return ERROR_START;
-    }
-    // send the controlByte
-    if(i2c_sendByte(controlByte)==ERROR){
-        return ERROR_ACK_CTRL;
-    }
-    // send which of the 256 registers
-    if(i2c_sendByte(reg)==ERROR){
-        return ERROR_ACK_LOCATION;
-    }
-
-    // force a start (we changed the location of the register pointer)
-    SCL=1;
-    SDA=0;
-    SCL=0;
-    // now we are reading, so we add one to go into read mode
-    controlByte++;
-
-    // send the new controlByte
-    if(i2c_sendByte(controlByte)==ERROR){
-        return ERROR_ACK_CTRL;
-    }
-
-    //reading the data
-    for(int i = 0; i<size; i++){
-        toReceive[i] = 0;
-        toReceive[i] |= i2c_pullBit() << 7;
-        toReceive[i] |= i2c_pullBit() << 6;
-        toReceive[i] |= i2c_pullBit() << 5;
-        toReceive[i] |= i2c_pullBit() << 4;
-        toReceive[i] |= i2c_pullBit() << 3;
-        toReceive[i] |= i2c_pullBit() << 2;
-        toReceive[i] |= i2c_pullBit() << 1;
-        toReceive[i] |= i2c_pullBit();
-        // ACK
-        if(i+1!=size){
-            i2c_sendBit(0);
-        }
-    }
-
-    // Nack
-    i2c_sendBit(1);
-
-    // end I2C
-    i2c_sendEnd();
-    return SUCCESS;
-}
-
-// resets the EEPROM
-char EEPROM_reset(){
-    if(i2c_sendStart()==ERROR){
-        return ERROR_START;
-    }
-    // force 9 bits
-    i2c_sendByte(EEPROM_RESET);
-    i2c_sendBit(1);
-    
-    // force start
-    SCL=1;
-    SDA=0;
-    SCL=0;
-
-    // end I2C
-    i2c_sendEnd();
-    return SUCCESS;
 }

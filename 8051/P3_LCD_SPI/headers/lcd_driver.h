@@ -18,18 +18,6 @@
 #define LCD_ERROR_X_SIZE 3
 #define LCD_ERROR_BAD_INPUT 255
 
-#define LCD_DDRAM_MAX_ADDRESS 127
-#define LCD_CGRAM_MAX_ADDRESS 0
-#define LCD_MAX_INDEX 127
-#define LCD_NUM_INDEXS 64
-#define LCD_ROW_0_START 0
-#define LCD_ROW_1_START 64
-#define LCD_ROW_2_START 16
-#define LCD_ROW_3_START 80
-#define LCD_MAX_INDEX_COL 15
-#define LCD_MAX_INDEX_ROW 3
-#define CURSOR_TIMER_LOC 87
-
 #define LCD_BASE_ADDRESS (1<<15)  // A15 needs to be high for enable
 #define LCD_READ_ADDRESS (1<<14)  // R/W
 #define LCD_WRITE_ADDRESS (0<<14) // R/W
@@ -93,12 +81,6 @@ char lcd_pullBusy();
 // blocking function until the busy flag is off
 void lcd_pullBusyBlock();
 
-// attempts to send the cursor to a location (DDRAM)
-char lcd_cursorSetAddress(uint8_t address);
-
-// attempts to send the cursor at a location (x,y)
-char lcd_cursorSetCoordinate(char x, char y);
-
 // attempts to set the character at the current cursor position
 char lcd_putchar(char inputChar);
 
@@ -107,8 +89,5 @@ uint16_t lcd_putString(char *string, uint16_t length, uint16_t start);
 
 // clears the LCD
 void lcd_clear();
-
-// ensures the cursor wraps properly
-void lcd_increaseCursorPosition();
 
 #endif // LCD_DRIVER_H_

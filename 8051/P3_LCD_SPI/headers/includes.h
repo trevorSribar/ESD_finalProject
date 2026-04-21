@@ -12,5 +12,6 @@
 #include <at89c51ed2.h>
 #include <stdlib.h>
 #include <string.h>
+#include "my_serial.h"
 
 #endif // INCLUDES_H_

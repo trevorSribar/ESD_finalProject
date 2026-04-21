@@ -11,6 +11,10 @@
    ---------------------------------------------------------------------------------*/
 #include "my_serial.h"
 
+//
+// functions
+//
+
 int putchar(int c)
 {
     while (!TI){
@@ -56,33 +60,17 @@ int getandputchar(void)
   return SBUF;
 }
 
-// volatile char BUTTON_INTERRUPT = 0;
-// #define INT1_INTERRUPT_NUMBER 2 //IE1_VECTOR from 8051.h
-// // button attaached to INT1
-// void Intr(void) __interrupt (INT1_INTERRUPT_NUMBER) {
-//     //reset the speed of the clocks
-//     CKRL = 255;
-//     BUTTON_INTERRUPT = 1;
-// }
-
-// int getandputchar(void)
-// {
-//   while (!RI){
-//     if(BUTTON_INTERRUPT==1){
-//       BUTTON_INTERRUPT = 0;
-//       return 0;
-//     }
-//   }
-//        // wait for RI to get set data is received
-//   RI = 0; // clear RI flag
-//   while (!TI){
-//     if(BUTTON_INTERRUPT==1){
-//       BUTTON_INTERRUPT = 0;
-//       return 0;
-//     }
-//   }
-//        // wait for TI to get set previous transmission completed
-//   TI = 0;   // clear TI flag
-//   SBUF = SBUF; // load serial port with transmit value
-//   return SBUF;
-// }
+// initializes the UART communication and X2 mode
+void serial_initX2(uint8_t baudRate){
+    TH1 = baudRate;
+    TL1 = baudRate;
+    // code from paulmon UART init
+    __asm
+    mov	tmod, #0x21	;set timer #1 for 8 bit auto-reload
+	mov	pcon, #0x80	;configure built-in uart
+	mov	scon, #0x52
+	setb	tr1		;start the baud rate timer
+    __endasm;
+    CKCON0 |= X2_MODE; //set the clock to X2 mode
+    CKCON0 |= TIMER1_SPEED; //slow down the baud rate
+}

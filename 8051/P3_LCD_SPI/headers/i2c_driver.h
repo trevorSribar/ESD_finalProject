@@ -9,70 +9,71 @@
 #include "includes.h"
 
 // defines
-#define SDA P1_7    // PIN 1.7 is SDA
-#define SCL P1_6    // PIN 1.6 is SCL
+#define SDA P1_5    // PIN 1.5 is SDA
+#define SCL P1_0    // PIN 1.0 is SCL
 #define ERROR 1
 #define SUCCESS 0
-#define EEPROM_ADDRESS 0b1010
-#define EEPROM_READ 1
-#define EEPROM_WRITE 0
-
-#define EEPROM_RESET 0b11111111
-#define EEPROM_MAX_PAGE 7
-#define EEPROM_MAX_REG 256
-#define EEPROM_ERROR_PAGE_NUM 2
-#define EEPROM_ERROR_PAGE_OVERRUN 3
-#define ERROR_ACK_CTRL 4
-#define ERROR_ACK_LOCATION 5
-#define ERROR_ACK_DATA 6
-#define ERROR_START 7
+#define I2C_ERROR_MONITOR_ADDRESS 2
+#define I2C_ERROR_MONITR_SET_0 3
+#define I2C_ERROR_MONITR_EDID 4
+#define MONITOR_READ_ADDRESS 0xA1 // Monitors have a default address of 0x50 << 1 + 1 for R
+#define MONITOR_WRITE_ADDRESS 0xA0 // Monitors have a default address of 0x50 << 1 + 0 for W
+#define LCD_H_SIZE_CM 0x00 // change this
+#define LCD_V_SIZE_CM 0x00 // change this
 
 //
 // inline functions
 //
 
-//csends the start condition
-static inline char i2c_sendStart(){
-    if(SDA==0||SCL==0){return ERROR;}
-
-    SDA=0;
-    SCL=0;
-
-    return SUCCESS;
+static inline void i2c_findStart(){
+    while(SCL==0);
+    while(SDA==1);
 }
 
-// sends the start condition
-static inline void i2c_sendBit(char bit){
-    SDA=bit;
-    SCL=1;
-    SCL=0;
-    SDA=1;
+static inline void i2c_sendAck(){
+    while(SCL==1);
+    SDA = 0;
+    while(SCL==0);
+    SDA = 1;
 }
 
-// sends
+// pulls the current bit that is being sent
 static inline char i2c_pullBit(){
-    SCL=1;
+    while(SCL==0);
     char toReturn = (volatile char)SDA;
-    SCL=0;
     return toReturn;
-}
-
-// waits and sends the end condition
-static inline void i2c_sendEnd(){
-    SDA=0;
-    SCL=1;
-    SDA=1;
 }
 
 // sends a byte of data
 static inline char i2c_sendByte(char a){
-    for(int i=7; i>=0; i--){
-        i2c_sendBit(1 & (a>>i));
+    for(uint8_t i=7; i>=0; i--){
+        while(SCL==1);
+        SDA = (1 & (a>>i));
+        while(SCL==0);
     }
     if(i2c_pullBit()){
         return ERROR;
     }
     return SUCCESS;
+}
+
+static inline char i2c_pullByte(){
+    char returned = i2c_pullBit()<<7;
+    while(SCL==1);
+    returned |= i2c_pullBit()<<6;
+    while(SCL==1);
+    returned |= i2c_pullBit()<<5;
+    while(SCL==1);
+    returned |= i2c_pullBit()<<4;
+    while(SCL==1);
+    returned |= i2c_pullBit()<<3;
+    while(SCL==1);
+    returned |= i2c_pullBit()<<2;
+    while(SCL==1);
+    returned |= i2c_pullBit()<<1;
+    while(SCL==1);
+    returned |= i2c_pullBit();
+    return returned;
 }
 
 //
@@ -82,19 +83,9 @@ static inline char i2c_sendByte(char a){
 // pulls t  he lines high so that I2C can be used
 void i2c_init();
 
-// Writes a byte to the EEPROM at the specified page/reg
-char EEPROM_sendByte(char page, char reg, char toSend);
+// runs the sending of edid, returns an error if the computer NACKs before sending all of EDID
+char i2c_edidSend();
 
-// Reads a byte from the EEPROM at the specified page/reg
-char EEPROM_readByte(char page, char reg, char *toReceive);
 
-// Writes a series of bytes to the EEPROM at the specified page/starting reg
-char EEPROM_sendBytes(char page, char reg, char *toSend, char size);
-
-// Reads a series of bytes from the EEPROM at the speciried page/starting reg
-char EEPROM_readBytes(char page, char reg, char *toReceive, int size);
-
-// resets the EEPROM
-char EEPROM_reset();
 
 #endif // I2C_DRIVER_H_

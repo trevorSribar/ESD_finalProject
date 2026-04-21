@@ -12,8 +12,8 @@ PUTTY = "C:\Program Files\PuTTY\putty.exe"
 CC = $(SDCC_PATH)
 
 all: bin/output.hex
-	$(BATCH_ISP_PATH) -device at89c51rc2 -hardware RS232 -port COM4 -baudrate 57600 -operation memory flash loadbuffer ./bin/output.hex program verify start reset 0
-	$(PUTTY) -load 8051
+	$(BATCH_ISP_PATH) -device at89c51rc2 -hardware RS232 -port COM4 -baudrate 9600 -operation memory flash loadbuffer ./bin/output.hex program verify start reset 0
+	$(PUTTY) -load 8051_140625
 
 # Link all .rel object files into final executable (.hex)
 # --code-loc  : The start location of the user code segment
@@ -25,7 +25,7 @@ all: bin/output.hex
 
 bin/output.hex: bin/main.rel bin/_heap.rel bin/my_serial.rel bin/i2c_driver.rel bin/lcd_driver.rel bin/timer.rel bin/terminal.rel 
 	$(CC) bin/main.rel bin/my_serial.rel bin/_heap.rel bin/i2c_driver.rel bin/lcd_driver.rel bin/timer.rel bin/terminal.rel \
-	--code-loc 0x2000 --code-size 0x7FFF \
+	--code-loc 0x0000 --code-size 0x7FFF \
 	--xram-loc 0x0001 --xram-size 0x7FFF \
 	--model-large --out-fmt-ihx -o bin/output.hex
 

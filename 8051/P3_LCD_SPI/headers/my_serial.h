@@ -14,6 +14,16 @@
 
 #include "includes.h"
 
+//defines
+#define X2_MODE 1
+#define TIMER1_SPEED (1<<2)
+#define Baud_140625 255
+#define Baud_46875 253
+
+//
+// functions
+//
+
 
 /* Transmit a character on the serial port
  * Parameters:
@@ -33,6 +43,8 @@ int putchar(int c);
  */
 int getchar(void);
 
+// trevor added functions
+
 /* Receive a character on the serial port and prints it to the serial port
  * Parameters:
  *          void
@@ -41,6 +53,9 @@ int getchar(void);
  * 			int character from user
  */
 int getandputchar(void);
+
+// initializes the UART communication and X2 mode
+void serial_initX2(uint8_t baudRate);
 
 
 // int getandputchar(void);
