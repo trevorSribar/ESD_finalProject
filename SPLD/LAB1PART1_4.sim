@@ -1,0 +1,29 @@
+%SIGNAL
+PIN   4 =  A15 
+PIN  18 =  CE_NVSRAM_n 
+PIN  17 =  INVERTED_RST 
+PIN  19 =  OUTPUT_n 
+PIN   2 =  PSEN_n 
+PIN   9 =  RD_n 
+PIN   3 =  RST_n 
+PIN   8 =  WR_n 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CE_NVSRAM_n =>
+    A15
+
+C_LATCH =>
+    A15
+  # WR_n
+
+INVERTED_RST =>
+    !RST_n
+
+OUTPUT_n =>
+    RD_n
+
+%END

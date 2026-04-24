@@ -102,8 +102,8 @@ void lcd_init(){
     LCD_COMMAND_REGISTER_PIN = 1;
     lcd_writeAddress(0); //high byte
     lcd_writeAddress(0); //low byte
-    lcd_writeAddress((LCD_PIXEL_VRES-1)>>8); // high byte
-    lcd_writeAddress((LCD_PIXEL_VRES-1)&0xFF); // low byte
+    lcd_writeAddress((LCD_PIXEL_HRES-1)>>8); // high byte
+    lcd_writeAddress((LCD_PIXEL_HRES-1)&0xFF); // low byte
 
     // Display ON
     LCD_COMMAND_REGISTER_PIN = 0;

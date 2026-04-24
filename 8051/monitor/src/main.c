@@ -25,7 +25,6 @@ int main(void)
     // lcd test
     uint8_t r, g, b = 0;
     while(1){
-        printf_tiny("Writing pixle %u,%u,%u\n\r",r,g,b);
         lcd_putSpecificColorPixel(r,g,b);
         r+=2;
         if(r==LCD_NUM_VALUES_R){

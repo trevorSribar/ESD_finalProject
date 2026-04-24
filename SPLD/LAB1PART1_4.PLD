@@ -1,0 +1,28 @@
+Name     LabFinal;
+PartNo   00;
+Date     4/24/2026;
+Revision 5w;
+Designer Trevor Sribar;
+Company  ITLP;
+Assembly None;
+Location ;
+Device   g16v8a;
+
+/* *************** INPUT PINS *********************/
+PIN 4  = A15                        ; /* used for CE (NVSRAM)& for C_Latch   */ 
+PIN 8  = WR_n				  ; /* used for C_Latch & Chip enable for NVSRAM */
+PIN 9  = RD_n                       ; /* used for OE & Chip enable for NVSRAM  */ 
+PIN 3	= RST_n                     ; /* used for !RST for LCD                */ 
+PIN 2  = PSEN_n                     ; /* used for OE (NVSRAM)                 */ 
+
+/* *************** OUTPUT PINS ********************/
+PIN 19  = OUTPUT_n;                     /* for RD on NVSRAM                                */ 
+PIN 18  = CE_NVSRAM_n;                 /* for output on NVSRAM                               */
+PIN 17  = INVERTED_RST;			    /* for debug latch */
+
+/* ***************** LOGIC ************************/
+
+CE_NVSRAM_n = A15;
+OUTPUT_n = RD_n;/* RD_n # PSEN_n; */
+C_LATCH = A15 # WR_n;
+INVERTED_RST = !RST_n;
