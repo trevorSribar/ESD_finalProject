@@ -117,8 +117,9 @@ void lcd_init(){
 
 
     // // Prepare for pixel writes (Start write function)
-    // LCD_COMMAND_REGISTER_PIN = 0;
-    // lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
+    LCD_COMMAND_REGISTER_PIN = 0;
+    lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
+    LCD_COMMAND_REGISTER_PIN = 1; //remove this later
 
     // we are no longer sending commands to LCD 0
     // LCD_0_ENABLE_PIN = 1;
