@@ -26,15 +26,17 @@
 //
 
 static inline void i2c_findStart(){
-    while(SCL==0);
-    while(SDA==1);
+    while(SCL==0); // make sure it isn't currently clocking values
+    while(SDA==1); // wait for the start condition (as both are now high)
+    while(SCL==1); // wait for the clock line to go low, so we can call pullByte without causing errors
 }
 
 static inline void i2c_sendAck(){
     while(SCL==1);
     SDA = 0;
-    while(SCL==0);
-    SDA = 1;
+    while(SCL==0);  // wait till the data is clocked in
+    while(SCL==1);  // data is being clocked in
+    SDA = 1;        // now we reset the line
 }
 
 // pulls the current bit that is being sent
@@ -46,11 +48,41 @@ static inline char i2c_pullBit(){
 
 // sends a byte of data
 static inline char i2c_sendByte(char a){
-    for(uint8_t i=7; i>=0; i--){
-        while(SCL==1);
-        SDA = (1 & (a>>i));
-        while(SCL==0);
-    }
+    // ACK waits for the line to go low again
+    // bit 7
+    SDA = (1 & (a>>7));
+    while(SCL==0);
+    while(SCL==1);
+    // bit 6
+    SDA = (1 & (a>>6));
+    while(SCL==0);
+    while(SCL==1);
+    // bit 5
+    SDA = (1 & (a>>5));
+    while(SCL==0);
+    while(SCL==1);
+    // bit 4
+    SDA = (1 & (a>>4));
+    while(SCL==0);
+    while(SCL==1);
+    // bit 3
+    SDA = (1 & (a>>3));
+    while(SCL==0);
+    while(SCL==1);
+    // bit 2
+    SDA = (1 & (a>>2));
+    while(SCL==0);
+    while(SCL==1);
+    // bit 1
+    SDA = (1 & (a>>1));
+    while(SCL==0);
+    while(SCL==1);
+    // bit 0
+    SDA = (1 & a);
+    while(SCL==0);
+    while(SCL==1);
+
+    // check ACK
     if(i2c_pullBit()){
         return ERROR;
     }
@@ -58,21 +90,40 @@ static inline char i2c_sendByte(char a){
 }
 
 static inline char i2c_pullByte(){
-    char returned = i2c_pullBit()<<7;
-    while(SCL==1);
+    // bit 7
+    while(SCL==0);                      // wait till data is valid
+    char returned = i2c_pullBit()<<7;   // data is now valid
+    while(SCL==1);                      // wait for pulled data to go away
+    // bit 6
+    while(SCL==0);                      // wait till data is valid ... 
     returned |= i2c_pullBit()<<6;
     while(SCL==1);
+    // bit 5
+    while(SCL==0);
     returned |= i2c_pullBit()<<5;
     while(SCL==1);
+    // bit 4
+    while(SCL==0);
     returned |= i2c_pullBit()<<4;
     while(SCL==1);
+    // bit 3
+    while(SCL==0);
     returned |= i2c_pullBit()<<3;
     while(SCL==1);
+    // bit 2
+    while(SCL==0);
     returned |= i2c_pullBit()<<2;
     while(SCL==1);
+    // bit 1
+    while(SCL==0);
     returned |= i2c_pullBit()<<1;
     while(SCL==1);
+    // bit 0
+    while(SCL==0);
     returned |= i2c_pullBit();
+
+    i2c_sendAck(); //send ack waits till the data is pulled down, then changes the value to 0
+
     return returned;
 }
 

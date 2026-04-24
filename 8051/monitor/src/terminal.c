@@ -22,9 +22,6 @@ uint8_t Terminal_run(void){
             case 'L':{
                 break;
             }
-            // default :{
-            //     printf_tiny("\t is not a command (char %u, %x)\n\r",receivedCharacter,receivedCharacter);
-            // }
         }
     }
     return 0;

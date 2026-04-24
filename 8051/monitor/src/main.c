@@ -18,9 +18,27 @@ void interrupt_init(void);
 int main(void)
 {
     serial_initX2(Baud_140625);
-    interrupt_init();
-    i2c_init();
-    // lcd_init();
+    // interrupt_init();
+    // i2c_init();
+    lcd_init();
+    // lcd test
+    uint8_t r, g, b;
+    while(1){
+        lcd_putSpecificColorPixel(r,g,b);
+        r++;
+        if(r==LCD_NUM_VALUES_R){
+            r = 0;
+            g++;
+            if(g==LCD_NUM_VALUES_G){
+                g = 0;
+                b++
+                if(b==LCD_NUM_VALUES_B){
+                    b=0;
+                }
+            }
+        }
+    }
+    // end lcd test
     while(Terminal_run());;
     // Return
     printf_tiny("End program\n\r");
