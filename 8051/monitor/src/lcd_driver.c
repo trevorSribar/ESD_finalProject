@@ -82,7 +82,7 @@ void lcd_init(){
     LCD_COMMAND_REGISTER_PIN = 0;
     lcd_writeAddress(LCD_MEMORY_ACCESS_CONTROL_ADDRESS);
     LCD_COMMAND_REGISTER_PIN = 1;
-    lcd_writeAddress(0); //standard values, left right, top bottom, RGB, idk look at the datasheet pg 193
+    lcd_writeAddress(0x48); //standard values, left right, top bottom, RGB, idk look at the datasheet pg 193, arduino library had 0x48
 
     // Normal Display Mode ON
     LCD_COMMAND_REGISTER_PIN = 0;
