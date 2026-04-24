@@ -41,6 +41,8 @@
 #define LCD_NUM_VALUES_G  64
 #define LCD_NUM_VALUES_B  32
 
+#define LCD_ENSURE_WRITE_ADDRESS (1<<15)
+
 //
 // static inline functions
 //
