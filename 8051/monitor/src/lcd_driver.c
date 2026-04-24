@@ -66,8 +66,6 @@ void lcd_init(){
     // Prepare for pixel writes (Start write function)
     LCD_COMMAND_REGISTER_PIN = 0;
     lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
-    LCD_COMMAND_REGISTER_PIN = 1;
-    lcd_writeAddress(LCD_BRIGHTNESS);
 
     // we are no longer sending commands to LCD 0
     LCD_0_ENABLE_PIN = 1;
@@ -90,6 +88,11 @@ void lcd_putPixel(){
 void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b){
     // we are sending data to LCD 0
     LCD_0_ENABLE_PIN = 0;
+
+    // Start a write
+    LCD_COMMAND_REGISTER_PIN = 0;
+    lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
+    LCD_COMMAND_REGISTER_PIN = 1;
     
     __xdata uint16_t *pixelToSend;
     uint16_t measuredBit = (b%LCD_NUM_VALUES_B) + ((g%LCD_NUM_VALUES_G)<<LCD_GREEN_OFFSET) + ((r%LCD_NUM_VALUES_R)<<LCD_RED_OFFSET);
