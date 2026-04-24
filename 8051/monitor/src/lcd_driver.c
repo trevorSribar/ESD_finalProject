@@ -26,16 +26,19 @@ void lcd_init(){
     lcd_writeAddress(LCD_INTERFACE_PIXEL_FORMAT_ADDRESS);
     LCD_COMMAND_REGISTER_PIN = 1;
     lcd_writeAddress(LCD_16_BITS_PER_PIXEL_MODE);
+    lcd_initdelay(LCD_DELAY_120_MS);
 
     // Memory Access Control
     LCD_COMMAND_REGISTER_PIN = 0;
     lcd_writeAddress(LCD_MEMORY_ACCESS_CONTROL_ADDRESS);
     LCD_COMMAND_REGISTER_PIN = 1;
     lcd_writeAddress(0); //standard values, left right, top bottom, RGB, idk look at the datasheet pg 193
+    lcd_initdelay(LCD_DELAY_120_MS);
 
     // Normal Display Mode ON
     LCD_COMMAND_REGISTER_PIN = 0;
     lcd_writeAddress(LCD_NORMAL_DISPLAY_MODE_ON);
+    lcd_initdelay(LCD_DELAY_120_MS);
 
     // Comlumn Address Set
     lcd_writeAddress(LCD_COLUMN_SET_ADDRESS);
@@ -44,6 +47,7 @@ void lcd_init(){
     lcd_writeAddress(0); // low byte
     lcd_writeAddress((LCD_PIXEL_HRES-1)>>8); // high byte
     lcd_writeAddress((LCD_PIXEL_HRES-1)&0xFF); // low byte
+    lcd_initdelay(LCD_DELAY_120_MS);
 
     // Page Address Set
     LCD_COMMAND_REGISTER_PIN = 0;
@@ -53,19 +57,23 @@ void lcd_init(){
     lcd_writeAddress(0); //low byte
     lcd_writeAddress((LCD_PIXEL_VRES-1)>>8); // high byte
     lcd_writeAddress((LCD_PIXEL_VRES-1)&0xFF); // low byte
+    lcd_initdelay(LCD_DELAY_120_MS);
 
     // Display ON
     LCD_COMMAND_REGISTER_PIN = 0;
     lcd_writeAddress(LCD_DISPLAY_ON);
+    lcd_initdelay(LCD_DELAY_120_MS);
 
     // change the display brightness
     lcd_writeAddress(LCD_DISPLAY_BRIGHTNESS_ADDRESS);
     LCD_COMMAND_REGISTER_PIN = 1;
     lcd_writeAddress(LCD_BRIGHTNESS);
+    lcd_initdelay(LCD_DELAY_120_MS);
 
     // Prepare for pixel writes (Start write function)
     LCD_COMMAND_REGISTER_PIN = 0;
     lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
+    lcd_initdelay(LCD_DELAY_120_MS);
 
     // we are no longer sending commands to LCD 0
     LCD_0_ENABLE_PIN = 1;
