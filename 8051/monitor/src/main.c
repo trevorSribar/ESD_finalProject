@@ -27,13 +27,13 @@ int main(void)
     while(1){
         printf_tiny("Writing pixle %u,%u,%u\n\r",r,g,b);
         lcd_putSpecificColorPixel(r,g,b);
-        r++;
+        r+=2;
         if(r==LCD_NUM_VALUES_R){
             r = 0;
-            g++;
+            g+=2;
             if(g==LCD_NUM_VALUES_G){
                 g = 0;
-                b++;
+                b+=2;
                 if(b==LCD_NUM_VALUES_B){
                     b=0;
                 }
