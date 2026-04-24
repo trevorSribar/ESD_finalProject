@@ -9,8 +9,8 @@
 #include "includes.h"
 
 //defines
-#define LCD_PIXEL_VRES 480
-#define LCD_PIXEL_HRES 320
+#define LCD_PIXEL_HRES 480
+#define LCD_PIXEL_VRES 320
 
 #define LCD_DELAY_120_MS 135000
 #define LCD_DELAY_5_MS 5625
@@ -49,9 +49,10 @@
 
 // writes an address to the LCD
 static inline void lcd_writeAddress(uint16_t address){
-    __xdata uint8_t *writeToLCD;
+    __xdata uint16_t *writeToLCD;
+    address = address | LCD_ENSURE_WRITE_ADDRESS;
     writeToLCD = (__xdata uint16_t*)address;
-    *writeToLCD = (uint16_t) address;
+    *writeToLCD = address;
 }
 
 // delays for ~44 ms on 2x clock mode
