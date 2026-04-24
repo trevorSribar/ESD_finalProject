@@ -23,10 +23,10 @@ all: bin/output.hex
 # --model-large : Generate code for Large model programs
 # --out-fmt-ihx : Generate Intel HEX output format
 
-bin/output.hex: bin/main.rel bin/_heap.rel bin/my_serial.rel bin/i2c_driver.rel bin/lcd_driver.rel bin/timer.rel bin/terminal.rel 
-	$(CC) bin/main.rel bin/my_serial.rel bin/_heap.rel bin/i2c_driver.rel bin/lcd_driver.rel bin/timer.rel bin/terminal.rel \
+bin/output.hex: bin/main.rel bin/my_serial.rel bin/i2c_driver.rel bin/lcd_driver.rel bin/timer.rel bin/terminal.rel 
+	$(CC) bin/main.rel bin/my_serial.rel bin/i2c_driver.rel bin/lcd_driver.rel bin/timer.rel bin/terminal.rel \
 	--code-loc 0x0000 --code-size 0x7FFF \
-	--xram-loc 0x0001 --xram-size 0x7FFF \
+	--xram-loc 0x0001 --xram-size 0x03FF \
 	--model-large --out-fmt-ihx -o bin/output.hex
 
 # Compile main application file
@@ -37,9 +37,6 @@ bin/output.hex: bin/main.rel bin/_heap.rel bin/my_serial.rel bin/i2c_driver.rel 
 
 bin/main.rel: src/main.c headers/my_serial.h headers/terminal.h headers/i2c_driver.h headers/lcd_driver.h
 	$(CC) -c -mmcs51 --model-large -I headers src/main.c -o bin/main.rel
-
-bin/_heap.rel: src/_heap.c
-	$(CC) -c -mmcs51 --model-large -D HEAP_SIZE=8192 src/_heap.c -o bin/_heap.rel
 
 bin/my_serial.rel: src/my_serial.c headers/my_serial.h
 	$(CC) -c -mmcs51 --model-large -I headers src/my_serial.c -o  bin/my_serial.rel
