@@ -83,6 +83,12 @@ void lcd_init(){
 void lcd_putPixel(){
     // we are sending data to LCD 0
     LCD_0_ENABLE_PIN = 0;
+
+    // Start a write
+    LCD_COMMAND_REGISTER_PIN = 0;
+    lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
+    LCD_COMMAND_REGISTER_PIN = 1;
+
     __xdata uint16_t *pixelToSend;
     uint16_t measuredBit = P1 & LCD_PULL_PIXEL_MASK;
     measuredBit = (measuredBit

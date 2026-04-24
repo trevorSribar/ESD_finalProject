@@ -48,15 +48,14 @@
 //
 
 // writes an address to the LCD
-static inline void lcd_writeAddress(uint16_t address){
-    __xdata uint16_t *writeToLCD;
+static inline void lcd_writeAddress(uint8_t address){
+    __xdata uint16_t *writeToLCD = (__xdata uint8_t*) LCD_ENSURE_WRITE_ADDRESS;
     address = address | LCD_ENSURE_WRITE_ADDRESS;
-    writeToLCD = (__xdata uint16_t*)address;
     *writeToLCD = address;
 }
 
 // delays for ~44 ms on 2x clock mode
-static inline void lcd_initdelay(uint16_t delayAmount){
+static inline void lcd_initdelay(uint32_t delayAmount){
     // 4 instructions, COMP, INC, NOP, JMP; delayAmount * 4 * (1/11.0592 MHz * 6) = seconds
     for(uint32_t i = 0; i < delayAmount; i++){
         ;
