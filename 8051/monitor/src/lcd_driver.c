@@ -77,9 +77,11 @@ void lcd_init(){
 void lcd_putPixel(){
     // we are sending data to LCD 0
     LCD_0_ENABLE_PIN = 0;
-    __xdata uint16_t pixelToSend = P1 & LCD_PULL_PIXEL_MASK;
-    pixelToSend = (__xdata uint16_t*) (pixelToSend + (pixelToSend<<LCD_GREEN_OFFSET) + (pixelToSend<<LCD_RED_OFFSET))
-    *pixelToSend = pixelToSend;
+    __xdata uint16_t *pixelToSend;
+    uint16_t measuredBit = P1 & LCD_PULL_PIXEL_MASK;
+    measuredBit = (measuredBit + (measuredBit<<LCD_GREEN_OFFSET) + (measuredBit<<LCD_RED_OFFSET));
+    pixelToSend = (__xdata uint16_t*) measuredBit;
+    *pixelToSend = measuredBit;
     // we are no long sending data to LCD 0
     LCD_0_ENABLE_PIN = 1;
 }
@@ -89,9 +91,10 @@ void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b){
     // we are sending data to LCD 0
     LCD_0_ENABLE_PIN = 0;
     
-    __xdata uint16_t pixelToSend;
-    pixelToSend = (__xdata uint16_t*) ((b%LCD_NUM_VALUES_B) + ((g%LCD_NUM_VALUES_G)<<LCD_GREEN_OFFSET) + ((r%LCD_NUM_VALUES_R)<<LCD_RED_OFFSET));
-    *pixelToSend = pixelToSend;
+    __xdata uint16_t *pixelToSend;
+    uint16_t measuredBit = (b%LCD_NUM_VALUES_B) + ((g%LCD_NUM_VALUES_G)<<LCD_GREEN_OFFSET) + ((r%LCD_NUM_VALUES_R)<<LCD_RED_OFFSET);
+    pixelToSend = (__xdata uint16_t*) measuredBit;
+    *pixelToSend = measuredBit;
 
     // we are no long sending data to LCD 0
     LCD_0_ENABLE_PIN = 1;
@@ -107,10 +110,7 @@ void lcd_clear(){
             lcd_putSpecificColorPixel(LCD_CLEARED_COLOR,LCD_CLEARED_COLOR,LCD_CLEARED_COLOR);
         }
     }
-    lcd_pullBusyBlock();
-    uint16_t address = LCD_BASE_ADDRESS + LCD_WRITE_ADDRESS + LCD_COMMAND_ADDRESS + 1;
-    lcd_writeAddress(address);
-    // we are no long sending dat
-    a to LCD 0
+
+    // we are no long sending data to LCD 0
     LCD_0_ENABLE_PIN = 1;
 }

@@ -15,9 +15,9 @@
 #define LCD_DELAY_120_MS 135000
 #define LCD_DELAY_5_MS 5625
 
-#define LCD_COMMAND_REGISTER_PIN P1.7
-#define LCD_0_ENABLE_PIN P3.4
-#define LCD_1_ENABLE_PIN P3.5
+#define LCD_COMMAND_REGISTER_PIN P1_7
+#define LCD_0_ENABLE_PIN P3_4
+#define LCD_1_ENABLE_PIN P3_5
 
 #define LCD_SOFT_RESET_ADDRESS 1
 #define LCD_SLEEP_OUT_ADDRESS 0x11
@@ -68,7 +68,7 @@ static inline void lcd_initdelay(uint16_t delayAmount){
 void lcd_init();
 
 // attempts to set the character at the current cursor position
-char lcd_putPixel();
+void lcd_putPixel();
 
 // puts the color asked for onto the current pixel location
 void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b);

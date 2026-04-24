@@ -21,9 +21,11 @@ int main(void)
     // interrupt_init();
     // i2c_init();
     lcd_init();
+    printf_tiny("Initialzied the LCD\n\r");
     // lcd test
-    uint8_t r, g, b;
+    uint8_t r, g, b = 0;
     while(1){
+        printf_tiny("Writing pixle %u,%u,%u\n\r",r,g,b);
         lcd_putSpecificColorPixel(r,g,b);
         r++;
         if(r==LCD_NUM_VALUES_R){
@@ -31,7 +33,7 @@ int main(void)
             g++;
             if(g==LCD_NUM_VALUES_G){
                 g = 0;
-                b++
+                b++;
                 if(b==LCD_NUM_VALUES_B){
                     b=0;
                 }
