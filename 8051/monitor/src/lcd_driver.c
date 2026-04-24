@@ -121,7 +121,7 @@ void lcd_init(){
     // lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
 
     // we are no longer sending commands to LCD 0
-    LCD_0_ENABLE_PIN = 1;
+    // LCD_0_ENABLE_PIN = 1;
 }
 
 // attempts to put the color at port 0 onto the current pixel location
@@ -148,12 +148,12 @@ void lcd_putPixel(){
 // puts the color asked for onto the current pixel location
 void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b){
     // we are sending data to LCD 0
-    LCD_0_ENABLE_PIN = 0;
+    // LCD_0_ENABLE_PIN = 0;
 
     // Start a write
-    LCD_COMMAND_REGISTER_PIN = 0;
-    lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
-    LCD_COMMAND_REGISTER_PIN = 1;
+    // LCD_COMMAND_REGISTER_PIN = 0;
+    // lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
+    // LCD_COMMAND_REGISTER_PIN = 1;
     
     __xdata uint16_t *pixelToSend;
     uint16_t measuredBit = ((b & (LCD_NUM_VALUES_B-1)) 
@@ -163,7 +163,7 @@ void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b){
     *pixelToSend = measuredBit;
 
     // we are no long sending data to LCD 0
-    LCD_0_ENABLE_PIN = 1;
+    // LCD_0_ENABLE_PIN = 1;
 }
 
 // clears the LCD
