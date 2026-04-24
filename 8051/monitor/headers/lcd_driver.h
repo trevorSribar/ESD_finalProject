@@ -49,8 +49,7 @@
 
 // writes an address to the LCD
 static inline void lcd_writeAddress(uint8_t address){
-    __xdata uint16_t *writeToLCD = (__xdata uint8_t*) LCD_ENSURE_WRITE_ADDRESS;
-    address = address | LCD_ENSURE_WRITE_ADDRESS;
+    __xdata uint8_t *writeToLCD = (__xdata uint8_t*) LCD_ENSURE_WRITE_ADDRESS;
     *writeToLCD = address;
 }
 
