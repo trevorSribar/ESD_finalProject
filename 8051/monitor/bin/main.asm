@@ -470,6 +470,8 @@ _main_g_10001_147:
 	.ds 1
 _main_b_10001_147:
 	.ds 1
+_main_delayAmount_40001_154:
+	.ds 4
 ;--------------------------------------------------------
 ; absolute external ram data
 ;--------------------------------------------------------
@@ -993,7 +995,7 @@ _lcd_writeAddress:
 	movx	@dptr,a
 ;	headers/lcd_driver.h:53: *writeToLCD = address;
 	movx	a,@dptr
-	mov	dptr,#0x8000
+	mov	dptr,#0x0800
 	movx	@dptr,a
 ;	headers/lcd_driver.h:54: }
 	ret
@@ -1070,6 +1072,9 @@ _lcd_initdelay:
 ;r             Allocated with name '_main_r_10001_147'
 ;g             Allocated with name '_main_g_10001_147'
 ;b             Allocated with name '_main_b_10001_147'
+;__300010024   Allocated with name '_main___300010024_30001_153'
+;delayAmount   Allocated with name '_main_delayAmount_40001_154'
+;i             Allocated with name '_main_i_60001_156'
 ;------------------------------------------------------------
 ;	src/main.c:18: int main(void)
 ;	-----------------------------------------
@@ -1158,27 +1163,27 @@ _main:
 	mov	dptr,#_main_b_10001_147
 	clr	a
 	movx	@dptr,a
-;	src/main.c:46: while(1);;
-;	src/main.c:47: }
+;	src/main.c:51: while(1);;
+;	src/main.c:52: }
 	sjmp	00108$
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'interrupt_init'
 ;------------------------------------------------------------
-;	src/main.c:49: void interrupt_init(void){
+;	src/main.c:54: void interrupt_init(void){
 ;	-----------------------------------------
 ;	 function interrupt_init
 ;	-----------------------------------------
 _interrupt_init:
-;	src/main.c:51: IEN0 |= ENABLE_INTERRUPTS;
+;	src/main.c:56: IEN0 |= ENABLE_INTERRUPTS;
 	orl	_IEN0,#0x80
-;	src/main.c:52: IEN0 |= INT0_INTERRUPT_ENABLE;
+;	src/main.c:57: IEN0 |= INT0_INTERRUPT_ENABLE;
 	orl	_IEN0,#0x01
-;	src/main.c:53: }
+;	src/main.c:58: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'timer0_interrupt'
 ;------------------------------------------------------------
-;	src/main.c:55: void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
+;	src/main.c:60: void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
 ;	-----------------------------------------
 ;	 function timer0_interrupt
 ;	-----------------------------------------
@@ -1187,14 +1192,14 @@ _timer0_interrupt:
 	push	dpl
 	push	dph
 	push	psw
-;	src/main.c:56: numTimerInterrupts++;
+;	src/main.c:61: numTimerInterrupts++;
 	mov	dptr,#_numTimerInterrupts
 	movx	a,@dptr
 	add	a, #0x01
 	movx	@dptr,a
-;	src/main.c:57: TH0 = TIMER0_PRESCALE;
+;	src/main.c:62: TH0 = TIMER0_PRESCALE;
 	mov	_TH0,#0x03
-;	src/main.c:58: }
+;	src/main.c:63: }
 	pop	psw
 	pop	dph
 	pop	dpl
@@ -1205,12 +1210,12 @@ _timer0_interrupt:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'Intr0'
 ;------------------------------------------------------------
-;	src/main.c:61: void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
+;	src/main.c:66: void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
 ;	-----------------------------------------
 ;	 function Intr0
 ;	-----------------------------------------
 _Intr0:
-;	src/main.c:62: }
+;	src/main.c:67: }
 	reti
 ;	eliminated unneeded mov psw,# (no regs used in bank)
 ;	eliminated unneeded push/pop not_psw

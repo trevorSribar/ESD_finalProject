@@ -449,1052 +449,1031 @@
                                     449 ; uninitialized external ram data
                                     450 ;--------------------------------------------------------
                                     451 	.area XSEG    (XDATA)
-      000010                        452 _lcd_writeAddress_address_10000_79:
-      000010                        453 	.ds 1
-      000011                        454 _lcd_initdelay_delayAmount_10000_81:
-      000011                        455 	.ds 4
-      000015                        456 _lcd_init_address_30000_88:
-      000015                        457 	.ds 1
-      000016                        458 _lcd_init_delayAmount_30000_91:
-      000016                        459 	.ds 4
-      00001A                        460 _lcd_init_address_30000_95:
-      00001A                        461 	.ds 1
-      00001B                        462 _lcd_init_delayAmount_30000_98:
-      00001B                        463 	.ds 4
-      00001F                        464 _lcd_init_address_30000_102:
-      00001F                        465 	.ds 1
-      000020                        466 _lcd_init_address_30000_105:
-      000020                        467 	.ds 1
-      000021                        468 _lcd_init_address_30000_108:
-      000021                        469 	.ds 1
-      000022                        470 _lcd_init_address_30000_111:
-      000022                        471 	.ds 1
-      000023                        472 _lcd_init_address_30000_114:
-      000023                        473 	.ds 1
-      000024                        474 _lcd_init_address_30000_117:
-      000024                        475 	.ds 1
-      000025                        476 _lcd_init_address_30000_120:
-      000025                        477 	.ds 1
-      000026                        478 _lcd_init_address_30000_123:
-      000026                        479 	.ds 1
-      000027                        480 _lcd_init_address_30000_126:
-      000027                        481 	.ds 1
-      000028                        482 _lcd_init_address_30000_129:
-      000028                        483 	.ds 1
-      000029                        484 _lcd_init_address_30000_132:
-      000029                        485 	.ds 1
-      00002A                        486 _lcd_init_address_30000_135:
-      00002A                        487 	.ds 1
-      00002B                        488 _lcd_init_address_30000_138:
-      00002B                        489 	.ds 1
-      00002C                        490 _lcd_init_address_30000_141:
-      00002C                        491 	.ds 1
-      00002D                        492 _lcd_init_address_30000_144:
-      00002D                        493 	.ds 1
-      00002E                        494 _lcd_init_address_30000_147:
-      00002E                        495 	.ds 1
-      00002F                        496 _lcd_init_address_30000_150:
-      00002F                        497 	.ds 1
-      000030                        498 _lcd_init_address_30000_153:
-      000030                        499 	.ds 1
-      000031                        500 _lcd_init_address_30000_156:
-      000031                        501 	.ds 1
-      000032                        502 _lcd_init_address_30000_159:
-      000032                        503 	.ds 1
-      000033                        504 _lcd_init_address_30000_162:
-      000033                        505 	.ds 1
-      000034                        506 _lcd_init_address_30000_165:
-      000034                        507 	.ds 1
-      000035                        508 _lcd_init_address_30000_168:
-      000035                        509 	.ds 1
-      000036                        510 _lcd_init_address_30000_171:
-      000036                        511 	.ds 1
-      000037                        512 _lcd_init_address_30000_174:
-      000037                        513 	.ds 1
-      000038                        514 _lcd_init_address_30000_177:
-      000038                        515 	.ds 1
-      000039                        516 _lcd_init_address_30000_180:
-      000039                        517 	.ds 1
-      00003A                        518 _lcd_init_address_30000_183:
-      00003A                        519 	.ds 1
-      00003B                        520 _lcd_init_address_30000_186:
-      00003B                        521 	.ds 1
-      00003C                        522 _lcd_init_address_30000_189:
-      00003C                        523 	.ds 1
-      00003D                        524 _lcd_init_address_30000_192:
-      00003D                        525 	.ds 1
-      00003E                        526 _lcd_init_address_30000_195:
-      00003E                        527 	.ds 1
-      00003F                        528 _lcd_init_address_30000_198:
-      00003F                        529 	.ds 1
-      000040                        530 _lcd_init_address_30000_201:
-      000040                        531 	.ds 1
-      000041                        532 _lcd_init_address_30000_204:
-      000041                        533 	.ds 1
-      000042                        534 _lcd_init_address_30000_207:
-      000042                        535 	.ds 1
-      000043                        536 _lcd_init_address_30000_210:
-      000043                        537 	.ds 1
-      000044                        538 _lcd_init_address_30000_213:
-      000044                        539 	.ds 1
-      000045                        540 _lcd_init_address_30000_216:
-      000045                        541 	.ds 1
-      000046                        542 _lcd_init_address_30000_219:
-      000046                        543 	.ds 1
-      000047                        544 _lcd_init_address_30000_222:
-      000047                        545 	.ds 1
-      000048                        546 _lcd_init_address_30000_225:
-      000048                        547 	.ds 1
-      000049                        548 _lcd_init_address_30000_228:
-      000049                        549 	.ds 1
-      00004A                        550 _lcd_init_address_30000_231:
-      00004A                        551 	.ds 1
-      00004B                        552 _lcd_init_address_30000_234:
-      00004B                        553 	.ds 1
-      00004C                        554 _lcd_init_address_30000_237:
-      00004C                        555 	.ds 1
-      00004D                        556 _lcd_init_address_30000_240:
-      00004D                        557 	.ds 1
-      00004E                        558 _lcd_init_address_30000_243:
-      00004E                        559 	.ds 1
-      00004F                        560 _lcd_init_address_30000_246:
-      00004F                        561 	.ds 1
-      000050                        562 _lcd_init_address_30000_249:
-      000050                        563 	.ds 1
-      000051                        564 _lcd_init_address_30000_252:
-      000051                        565 	.ds 1
-      000052                        566 _lcd_init_address_30000_255:
-      000052                        567 	.ds 1
-      000053                        568 _lcd_init_address_30000_258:
-      000053                        569 	.ds 1
-      000054                        570 _lcd_init_address_30000_261:
-      000054                        571 	.ds 1
-      000055                        572 _lcd_init_address_30000_264:
-      000055                        573 	.ds 1
-      000056                        574 _lcd_init_address_30000_267:
-      000056                        575 	.ds 1
-      000057                        576 _lcd_init_address_30000_270:
-      000057                        577 	.ds 1
-      000058                        578 _lcd_init_address_30000_273:
-      000058                        579 	.ds 1
-      000059                        580 _lcd_init_address_30000_276:
-      000059                        581 	.ds 1
-      00005A                        582 _lcd_init_address_30000_279:
-      00005A                        583 	.ds 1
-      00005B                        584 _lcd_init_address_30000_282:
-      00005B                        585 	.ds 1
-      00005C                        586 _lcd_init_address_30000_285:
-      00005C                        587 	.ds 1
-      00005D                        588 _lcd_init_address_30000_288:
-      00005D                        589 	.ds 1
-      00005E                        590 _lcd_init_delayAmount_30000_291:
-      00005E                        591 	.ds 4
-      000062                        592 _lcd_init_address_30000_295:
-      000062                        593 	.ds 1
-      000063                        594 _lcd_putPixel_address_30000_300:
-      000063                        595 	.ds 1
-      000064                        596 _lcd_putSpecificColorPixel_PARM_2:
-      000064                        597 	.ds 1
-      000065                        598 _lcd_putSpecificColorPixel_PARM_3:
-      000065                        599 	.ds 1
-      000066                        600 _lcd_putSpecificColorPixel_r_10000_302:
-      000066                        601 	.ds 1
+      000014                        452 _lcd_writeAddress_address_10000_79:
+      000014                        453 	.ds 1
+      000015                        454 _lcd_initdelay_delayAmount_10000_81:
+      000015                        455 	.ds 4
+      000019                        456 _lcd_init_address_30000_88:
+      000019                        457 	.ds 1
+      00001A                        458 _lcd_init_delayAmount_30000_91:
+      00001A                        459 	.ds 4
+      00001E                        460 _lcd_init_address_30000_95:
+      00001E                        461 	.ds 1
+      00001F                        462 _lcd_init_delayAmount_30000_98:
+      00001F                        463 	.ds 4
+      000023                        464 _lcd_init_address_30000_102:
+      000023                        465 	.ds 1
+      000024                        466 _lcd_init_address_30000_105:
+      000024                        467 	.ds 1
+      000025                        468 _lcd_init_address_30000_108:
+      000025                        469 	.ds 1
+      000026                        470 _lcd_init_address_30000_111:
+      000026                        471 	.ds 1
+      000027                        472 _lcd_init_address_30000_114:
+      000027                        473 	.ds 1
+      000028                        474 _lcd_init_address_30000_117:
+      000028                        475 	.ds 1
+      000029                        476 _lcd_init_address_30000_120:
+      000029                        477 	.ds 1
+      00002A                        478 _lcd_init_address_30000_123:
+      00002A                        479 	.ds 1
+      00002B                        480 _lcd_init_address_30000_126:
+      00002B                        481 	.ds 1
+      00002C                        482 _lcd_init_address_30000_129:
+      00002C                        483 	.ds 1
+      00002D                        484 _lcd_init_address_30000_132:
+      00002D                        485 	.ds 1
+      00002E                        486 _lcd_init_address_30000_135:
+      00002E                        487 	.ds 1
+      00002F                        488 _lcd_init_address_30000_138:
+      00002F                        489 	.ds 1
+      000030                        490 _lcd_init_address_30000_141:
+      000030                        491 	.ds 1
+      000031                        492 _lcd_init_address_30000_144:
+      000031                        493 	.ds 1
+      000032                        494 _lcd_init_address_30000_147:
+      000032                        495 	.ds 1
+      000033                        496 _lcd_init_address_30000_150:
+      000033                        497 	.ds 1
+      000034                        498 _lcd_init_address_30000_153:
+      000034                        499 	.ds 1
+      000035                        500 _lcd_init_address_30000_156:
+      000035                        501 	.ds 1
+      000036                        502 _lcd_init_address_30000_159:
+      000036                        503 	.ds 1
+      000037                        504 _lcd_init_address_30000_162:
+      000037                        505 	.ds 1
+      000038                        506 _lcd_init_address_30000_165:
+      000038                        507 	.ds 1
+      000039                        508 _lcd_init_address_30000_168:
+      000039                        509 	.ds 1
+      00003A                        510 _lcd_init_address_30000_171:
+      00003A                        511 	.ds 1
+      00003B                        512 _lcd_init_address_30000_174:
+      00003B                        513 	.ds 1
+      00003C                        514 _lcd_init_address_30000_177:
+      00003C                        515 	.ds 1
+      00003D                        516 _lcd_init_address_30000_180:
+      00003D                        517 	.ds 1
+      00003E                        518 _lcd_init_address_30000_183:
+      00003E                        519 	.ds 1
+      00003F                        520 _lcd_init_address_30000_186:
+      00003F                        521 	.ds 1
+      000040                        522 _lcd_init_address_30000_189:
+      000040                        523 	.ds 1
+      000041                        524 _lcd_init_address_30000_192:
+      000041                        525 	.ds 1
+      000042                        526 _lcd_init_address_30000_195:
+      000042                        527 	.ds 1
+      000043                        528 _lcd_init_address_30000_198:
+      000043                        529 	.ds 1
+      000044                        530 _lcd_init_address_30000_201:
+      000044                        531 	.ds 1
+      000045                        532 _lcd_init_address_30000_204:
+      000045                        533 	.ds 1
+      000046                        534 _lcd_init_address_30000_207:
+      000046                        535 	.ds 1
+      000047                        536 _lcd_init_address_30000_210:
+      000047                        537 	.ds 1
+      000048                        538 _lcd_init_address_30000_213:
+      000048                        539 	.ds 1
+      000049                        540 _lcd_init_address_30000_216:
+      000049                        541 	.ds 1
+      00004A                        542 _lcd_init_address_30000_219:
+      00004A                        543 	.ds 1
+      00004B                        544 _lcd_init_address_30000_222:
+      00004B                        545 	.ds 1
+      00004C                        546 _lcd_init_address_30000_225:
+      00004C                        547 	.ds 1
+      00004D                        548 _lcd_init_address_30000_228:
+      00004D                        549 	.ds 1
+      00004E                        550 _lcd_init_address_30000_231:
+      00004E                        551 	.ds 1
+      00004F                        552 _lcd_init_address_30000_234:
+      00004F                        553 	.ds 1
+      000050                        554 _lcd_init_address_30000_237:
+      000050                        555 	.ds 1
+      000051                        556 _lcd_init_address_30000_240:
+      000051                        557 	.ds 1
+      000052                        558 _lcd_init_address_30000_243:
+      000052                        559 	.ds 1
+      000053                        560 _lcd_init_address_30000_246:
+      000053                        561 	.ds 1
+      000054                        562 _lcd_init_address_30000_249:
+      000054                        563 	.ds 1
+      000055                        564 _lcd_init_address_30000_252:
+      000055                        565 	.ds 1
+      000056                        566 _lcd_init_address_30000_255:
+      000056                        567 	.ds 1
+      000057                        568 _lcd_init_address_30000_258:
+      000057                        569 	.ds 1
+      000058                        570 _lcd_init_address_30000_261:
+      000058                        571 	.ds 1
+      000059                        572 _lcd_init_address_30000_264:
+      000059                        573 	.ds 1
+      00005A                        574 _lcd_init_address_30000_267:
+      00005A                        575 	.ds 1
+      00005B                        576 _lcd_init_address_30000_270:
+      00005B                        577 	.ds 1
+      00005C                        578 _lcd_init_address_30000_273:
+      00005C                        579 	.ds 1
+      00005D                        580 _lcd_init_address_30000_276:
+      00005D                        581 	.ds 1
+      00005E                        582 _lcd_init_address_30000_279:
+      00005E                        583 	.ds 1
+      00005F                        584 _lcd_init_address_30000_282:
+      00005F                        585 	.ds 1
+      000060                        586 _lcd_init_address_30000_285:
+      000060                        587 	.ds 1
+      000061                        588 _lcd_init_address_30000_288:
+      000061                        589 	.ds 1
+      000062                        590 _lcd_init_delayAmount_30000_291:
+      000062                        591 	.ds 4
+      000066                        592 _lcd_init_address_30000_295:
+      000066                        593 	.ds 1
+      000067                        594 _lcd_putSpecificColorPixel_PARM_2:
+      000067                        595 	.ds 1
+      000068                        596 _lcd_putSpecificColorPixel_PARM_3:
+      000068                        597 	.ds 1
+      000069                        598 _lcd_putSpecificColorPixel_r_10000_298:
+      000069                        599 	.ds 1
+                                    600 ;--------------------------------------------------------
+                                    601 ; absolute external ram data
                                     602 ;--------------------------------------------------------
-                                    603 ; absolute external ram data
+                                    603 	.area XABS    (ABS,XDATA)
                                     604 ;--------------------------------------------------------
-                                    605 	.area XABS    (ABS,XDATA)
+                                    605 ; initialized external ram data
                                     606 ;--------------------------------------------------------
-                                    607 ; initialized external ram data
-                                    608 ;--------------------------------------------------------
-                                    609 	.area XISEG   (XDATA)
-                                    610 	.area HOME    (CODE)
-                                    611 	.area GSINIT0 (CODE)
-                                    612 	.area GSINIT1 (CODE)
-                                    613 	.area GSINIT2 (CODE)
-                                    614 	.area GSINIT3 (CODE)
-                                    615 	.area GSINIT4 (CODE)
-                                    616 	.area GSINIT5 (CODE)
-                                    617 	.area GSINIT  (CODE)
-                                    618 	.area GSFINAL (CODE)
-                                    619 	.area CSEG    (CODE)
+                                    607 	.area XISEG   (XDATA)
+                                    608 	.area HOME    (CODE)
+                                    609 	.area GSINIT0 (CODE)
+                                    610 	.area GSINIT1 (CODE)
+                                    611 	.area GSINIT2 (CODE)
+                                    612 	.area GSINIT3 (CODE)
+                                    613 	.area GSINIT4 (CODE)
+                                    614 	.area GSINIT5 (CODE)
+                                    615 	.area GSINIT  (CODE)
+                                    616 	.area GSFINAL (CODE)
+                                    617 	.area CSEG    (CODE)
+                                    618 ;--------------------------------------------------------
+                                    619 ; global & static initialisations
                                     620 ;--------------------------------------------------------
-                                    621 ; global & static initialisations
-                                    622 ;--------------------------------------------------------
-                                    623 	.area HOME    (CODE)
+                                    621 	.area HOME    (CODE)
+                                    622 	.area GSINIT  (CODE)
+                                    623 	.area GSFINAL (CODE)
                                     624 	.area GSINIT  (CODE)
-                                    625 	.area GSFINAL (CODE)
-                                    626 	.area GSINIT  (CODE)
+                                    625 ;--------------------------------------------------------
+                                    626 ; Home
                                     627 ;--------------------------------------------------------
-                                    628 ; Home
-                                    629 ;--------------------------------------------------------
-                                    630 	.area HOME    (CODE)
-                                    631 	.area HOME    (CODE)
+                                    628 	.area HOME    (CODE)
+                                    629 	.area HOME    (CODE)
+                                    630 ;--------------------------------------------------------
+                                    631 ; code
                                     632 ;--------------------------------------------------------
-                                    633 ; code
-                                    634 ;--------------------------------------------------------
-                                    635 	.area CSEG    (CODE)
+                                    633 	.area CSEG    (CODE)
+                                    634 ;------------------------------------------------------------
+                                    635 ;Allocation info for local variables in function 'lcd_writeAddress'
                                     636 ;------------------------------------------------------------
-                                    637 ;Allocation info for local variables in function 'lcd_writeAddress'
-                                    638 ;------------------------------------------------------------
-                                    639 ;address       Allocated with name '_lcd_writeAddress_address_10000_79'
-                                    640 ;writeToLCD    Allocated with name '_lcd_writeAddress_writeToLCD_10000_80'
-                                    641 ;------------------------------------------------------------
-                                    642 ;	headers/lcd_driver.h:51: static inline void lcd_writeAddress(uint8_t address){
+                                    637 ;address       Allocated with name '_lcd_writeAddress_address_10000_79'
+                                    638 ;writeToLCD    Allocated with name '_lcd_writeAddress_writeToLCD_10000_80'
+                                    639 ;------------------------------------------------------------
+                                    640 ;	headers/lcd_driver.h:51: static inline void lcd_writeAddress(uint8_t address){
+                                    641 ;	-----------------------------------------
+                                    642 ;	 function lcd_writeAddress
                                     643 ;	-----------------------------------------
-                                    644 ;	 function lcd_writeAddress
-                                    645 ;	-----------------------------------------
-      000538                        646 _lcd_writeAddress:
-                           000007   647 	ar7 = 0x07
-                           000006   648 	ar6 = 0x06
-                           000005   649 	ar5 = 0x05
-                           000004   650 	ar4 = 0x04
-                           000003   651 	ar3 = 0x03
-                           000002   652 	ar2 = 0x02
-                           000001   653 	ar1 = 0x01
-                           000000   654 	ar0 = 0x00
-      000538 E5 82            [12]  655 	mov	a,dpl
-      00053A 90 00 10         [24]  656 	mov	dptr,#_lcd_writeAddress_address_10000_79
-      00053D F0               [24]  657 	movx	@dptr,a
-                                    658 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      00053E E0               [24]  659 	movx	a,@dptr
-      00053F 90 80 00         [24]  660 	mov	dptr,#0x8000
-      000542 F0               [24]  661 	movx	@dptr,a
-                                    662 ;	headers/lcd_driver.h:54: }
-      000543 22               [24]  663 	ret
+      000538                        644 _lcd_writeAddress:
+                           000007   645 	ar7 = 0x07
+                           000006   646 	ar6 = 0x06
+                           000005   647 	ar5 = 0x05
+                           000004   648 	ar4 = 0x04
+                           000003   649 	ar3 = 0x03
+                           000002   650 	ar2 = 0x02
+                           000001   651 	ar1 = 0x01
+                           000000   652 	ar0 = 0x00
+      000538 E5 82            [12]  653 	mov	a,dpl
+      00053A 90 00 14         [24]  654 	mov	dptr,#_lcd_writeAddress_address_10000_79
+      00053D F0               [24]  655 	movx	@dptr,a
+                                    656 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      00053E E0               [24]  657 	movx	a,@dptr
+      00053F 90 08 00         [24]  658 	mov	dptr,#0x0800
+      000542 F0               [24]  659 	movx	@dptr,a
+                                    660 ;	headers/lcd_driver.h:54: }
+      000543 22               [24]  661 	ret
+                                    662 ;------------------------------------------------------------
+                                    663 ;Allocation info for local variables in function 'lcd_initdelay'
                                     664 ;------------------------------------------------------------
-                                    665 ;Allocation info for local variables in function 'lcd_initdelay'
-                                    666 ;------------------------------------------------------------
-                                    667 ;delayAmount   Allocated with name '_lcd_initdelay_delayAmount_10000_81'
-                                    668 ;i             Allocated with name '_lcd_initdelay_i_20000_83'
-                                    669 ;------------------------------------------------------------
-                                    670 ;	headers/lcd_driver.h:57: static inline void lcd_initdelay(uint32_t delayAmount){
+                                    665 ;delayAmount   Allocated with name '_lcd_initdelay_delayAmount_10000_81'
+                                    666 ;i             Allocated with name '_lcd_initdelay_i_20000_83'
+                                    667 ;------------------------------------------------------------
+                                    668 ;	headers/lcd_driver.h:57: static inline void lcd_initdelay(uint32_t delayAmount){
+                                    669 ;	-----------------------------------------
+                                    670 ;	 function lcd_initdelay
                                     671 ;	-----------------------------------------
-                                    672 ;	 function lcd_initdelay
-                                    673 ;	-----------------------------------------
-      000544                        674 _lcd_initdelay:
-      000544 AF 82            [24]  675 	mov	r7,dpl
-      000546 AE 83            [24]  676 	mov	r6,dph
-      000548 AD F0            [24]  677 	mov	r5,b
-      00054A FC               [12]  678 	mov	r4,a
-      00054B 90 00 11         [24]  679 	mov	dptr,#_lcd_initdelay_delayAmount_10000_81
-      00054E EF               [12]  680 	mov	a,r7
-      00054F F0               [24]  681 	movx	@dptr,a
-      000550 EE               [12]  682 	mov	a,r6
-      000551 A3               [24]  683 	inc	dptr
-      000552 F0               [24]  684 	movx	@dptr,a
-      000553 ED               [12]  685 	mov	a,r5
-      000554 A3               [24]  686 	inc	dptr
-      000555 F0               [24]  687 	movx	@dptr,a
-      000556 EC               [12]  688 	mov	a,r4
-      000557 A3               [24]  689 	inc	dptr
-      000558 F0               [24]  690 	movx	@dptr,a
-                                    691 ;	headers/lcd_driver.h:59: for(uint32_t i = 0; i < delayAmount; i++){
-      000559 90 00 11         [24]  692 	mov	dptr,#_lcd_initdelay_delayAmount_10000_81
-      00055C E0               [24]  693 	movx	a,@dptr
-      00055D FC               [12]  694 	mov	r4,a
-      00055E A3               [24]  695 	inc	dptr
-      00055F E0               [24]  696 	movx	a,@dptr
-      000560 FD               [12]  697 	mov	r5,a
-      000561 A3               [24]  698 	inc	dptr
-      000562 E0               [24]  699 	movx	a,@dptr
-      000563 FE               [12]  700 	mov	r6,a
-      000564 A3               [24]  701 	inc	dptr
-      000565 E0               [24]  702 	movx	a,@dptr
-      000566 FF               [12]  703 	mov	r7,a
-      000567 78 00            [12]  704 	mov	r0,#0x00
-      000569 79 00            [12]  705 	mov	r1,#0x00
-      00056B 7A 00            [12]  706 	mov	r2,#0x00
-      00056D 7B 00            [12]  707 	mov	r3,#0x00
-      00056F                        708 00103$:
-      00056F C3               [12]  709 	clr	c
-      000570 E8               [12]  710 	mov	a,r0
-      000571 9C               [12]  711 	subb	a,r4
-      000572 E9               [12]  712 	mov	a,r1
-      000573 9D               [12]  713 	subb	a,r5
-      000574 EA               [12]  714 	mov	a,r2
-      000575 9E               [12]  715 	subb	a,r6
-      000576 EB               [12]  716 	mov	a,r3
-      000577 9F               [12]  717 	subb	a,r7
-      000578 50 0F            [24]  718 	jnc	00105$
-      00057A 08               [12]  719 	inc	r0
-      00057B B8 00 09         [24]  720 	cjne	r0,#0x00,00121$
-      00057E 09               [12]  721 	inc	r1
-      00057F B9 00 05         [24]  722 	cjne	r1,#0x00,00121$
-      000582 0A               [12]  723 	inc	r2
-      000583 BA 00 E9         [24]  724 	cjne	r2,#0x00,00103$
-      000586 0B               [12]  725 	inc	r3
-      000587                        726 00121$:
-      000587 80 E6            [24]  727 	sjmp	00103$
-      000589                        728 00105$:
-                                    729 ;	headers/lcd_driver.h:62: }
-      000589 22               [24]  730 	ret
+      000544                        672 _lcd_initdelay:
+      000544 AF 82            [24]  673 	mov	r7,dpl
+      000546 AE 83            [24]  674 	mov	r6,dph
+      000548 AD F0            [24]  675 	mov	r5,b
+      00054A FC               [12]  676 	mov	r4,a
+      00054B 90 00 15         [24]  677 	mov	dptr,#_lcd_initdelay_delayAmount_10000_81
+      00054E EF               [12]  678 	mov	a,r7
+      00054F F0               [24]  679 	movx	@dptr,a
+      000550 EE               [12]  680 	mov	a,r6
+      000551 A3               [24]  681 	inc	dptr
+      000552 F0               [24]  682 	movx	@dptr,a
+      000553 ED               [12]  683 	mov	a,r5
+      000554 A3               [24]  684 	inc	dptr
+      000555 F0               [24]  685 	movx	@dptr,a
+      000556 EC               [12]  686 	mov	a,r4
+      000557 A3               [24]  687 	inc	dptr
+      000558 F0               [24]  688 	movx	@dptr,a
+                                    689 ;	headers/lcd_driver.h:59: for(uint32_t i = 0; i < delayAmount; i++){
+      000559 90 00 15         [24]  690 	mov	dptr,#_lcd_initdelay_delayAmount_10000_81
+      00055C E0               [24]  691 	movx	a,@dptr
+      00055D FC               [12]  692 	mov	r4,a
+      00055E A3               [24]  693 	inc	dptr
+      00055F E0               [24]  694 	movx	a,@dptr
+      000560 FD               [12]  695 	mov	r5,a
+      000561 A3               [24]  696 	inc	dptr
+      000562 E0               [24]  697 	movx	a,@dptr
+      000563 FE               [12]  698 	mov	r6,a
+      000564 A3               [24]  699 	inc	dptr
+      000565 E0               [24]  700 	movx	a,@dptr
+      000566 FF               [12]  701 	mov	r7,a
+      000567 78 00            [12]  702 	mov	r0,#0x00
+      000569 79 00            [12]  703 	mov	r1,#0x00
+      00056B 7A 00            [12]  704 	mov	r2,#0x00
+      00056D 7B 00            [12]  705 	mov	r3,#0x00
+      00056F                        706 00103$:
+      00056F C3               [12]  707 	clr	c
+      000570 E8               [12]  708 	mov	a,r0
+      000571 9C               [12]  709 	subb	a,r4
+      000572 E9               [12]  710 	mov	a,r1
+      000573 9D               [12]  711 	subb	a,r5
+      000574 EA               [12]  712 	mov	a,r2
+      000575 9E               [12]  713 	subb	a,r6
+      000576 EB               [12]  714 	mov	a,r3
+      000577 9F               [12]  715 	subb	a,r7
+      000578 50 0F            [24]  716 	jnc	00105$
+      00057A 08               [12]  717 	inc	r0
+      00057B B8 00 09         [24]  718 	cjne	r0,#0x00,00121$
+      00057E 09               [12]  719 	inc	r1
+      00057F B9 00 05         [24]  720 	cjne	r1,#0x00,00121$
+      000582 0A               [12]  721 	inc	r2
+      000583 BA 00 E9         [24]  722 	cjne	r2,#0x00,00103$
+      000586 0B               [12]  723 	inc	r3
+      000587                        724 00121$:
+      000587 80 E6            [24]  725 	sjmp	00103$
+      000589                        726 00105$:
+                                    727 ;	headers/lcd_driver.h:62: }
+      000589 22               [24]  728 	ret
+                                    729 ;------------------------------------------------------------
+                                    730 ;Allocation info for local variables in function 'lcd_init'
                                     731 ;------------------------------------------------------------
-                                    732 ;Allocation info for local variables in function 'lcd_init'
-                                    733 ;------------------------------------------------------------
-                                    734 ;__200000004   Allocated with name '_lcd_init___200000004_20000_87'
-                                    735 ;address       Allocated with name '_lcd_init_address_30000_88'
-                                    736 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_89'
-                                    737 ;__200000006   Allocated with name '_lcd_init___200000006_20000_90'
-                                    738 ;delayAmount   Allocated with name '_lcd_init_delayAmount_30000_91'
-                                    739 ;i             Allocated with name '_lcd_init_i_50000_93'
-                                    740 ;__200000008   Allocated with name '_lcd_init___200000008_20000_94'
-                                    741 ;address       Allocated with name '_lcd_init_address_30000_95'
-                                    742 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_96'
-                                    743 ;__200000010   Allocated with name '_lcd_init___200000010_20000_97'
-                                    744 ;delayAmount   Allocated with name '_lcd_init_delayAmount_30000_98'
-                                    745 ;i             Allocated with name '_lcd_init_i_50000_100'
-                                    746 ;__200000012   Allocated with name '_lcd_init___200000012_20000_101'
-                                    747 ;address       Allocated with name '_lcd_init_address_30000_102'
-                                    748 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_103'
-                                    749 ;__200000014   Allocated with name '_lcd_init___200000014_20000_104'
-                                    750 ;address       Allocated with name '_lcd_init_address_30000_105'
-                                    751 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_106'
-                                    752 ;__200000016   Allocated with name '_lcd_init___200000016_20000_107'
-                                    753 ;address       Allocated with name '_lcd_init_address_30000_108'
-                                    754 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_109'
-                                    755 ;__200000018   Allocated with name '_lcd_init___200000018_20000_110'
-                                    756 ;address       Allocated with name '_lcd_init_address_30000_111'
-                                    757 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_112'
-                                    758 ;__200000020   Allocated with name '_lcd_init___200000020_20000_113'
-                                    759 ;address       Allocated with name '_lcd_init_address_30000_114'
-                                    760 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_115'
-                                    761 ;__200000022   Allocated with name '_lcd_init___200000022_20000_116'
-                                    762 ;address       Allocated with name '_lcd_init_address_30000_117'
-                                    763 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_118'
-                                    764 ;__200000024   Allocated with name '_lcd_init___200000024_20000_119'
-                                    765 ;address       Allocated with name '_lcd_init_address_30000_120'
-                                    766 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_121'
-                                    767 ;__200000026   Allocated with name '_lcd_init___200000026_20000_122'
-                                    768 ;address       Allocated with name '_lcd_init_address_30000_123'
-                                    769 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_124'
-                                    770 ;__200000028   Allocated with name '_lcd_init___200000028_20000_125'
-                                    771 ;address       Allocated with name '_lcd_init_address_30000_126'
-                                    772 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_127'
-                                    773 ;__200000030   Allocated with name '_lcd_init___200000030_20000_128'
-                                    774 ;address       Allocated with name '_lcd_init_address_30000_129'
-                                    775 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_130'
-                                    776 ;__200000032   Allocated with name '_lcd_init___200000032_20000_131'
-                                    777 ;address       Allocated with name '_lcd_init_address_30000_132'
-                                    778 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_133'
-                                    779 ;__200000034   Allocated with name '_lcd_init___200000034_20000_134'
-                                    780 ;address       Allocated with name '_lcd_init_address_30000_135'
-                                    781 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_136'
-                                    782 ;__200000036   Allocated with name '_lcd_init___200000036_20000_137'
-                                    783 ;address       Allocated with name '_lcd_init_address_30000_138'
-                                    784 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_139'
-                                    785 ;__200000038   Allocated with name '_lcd_init___200000038_20000_140'
-                                    786 ;address       Allocated with name '_lcd_init_address_30000_141'
-                                    787 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_142'
-                                    788 ;__200000040   Allocated with name '_lcd_init___200000040_20000_143'
-                                    789 ;address       Allocated with name '_lcd_init_address_30000_144'
-                                    790 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_145'
-                                    791 ;__200000042   Allocated with name '_lcd_init___200000042_20000_146'
-                                    792 ;address       Allocated with name '_lcd_init_address_30000_147'
-                                    793 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_148'
-                                    794 ;__200000044   Allocated with name '_lcd_init___200000044_20000_149'
-                                    795 ;address       Allocated with name '_lcd_init_address_30000_150'
-                                    796 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_151'
-                                    797 ;__200000046   Allocated with name '_lcd_init___200000046_20000_152'
-                                    798 ;address       Allocated with name '_lcd_init_address_30000_153'
-                                    799 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_154'
-                                    800 ;__200000048   Allocated with name '_lcd_init___200000048_20000_155'
-                                    801 ;address       Allocated with name '_lcd_init_address_30000_156'
-                                    802 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_157'
-                                    803 ;__200000050   Allocated with name '_lcd_init___200000050_20000_158'
-                                    804 ;address       Allocated with name '_lcd_init_address_30000_159'
-                                    805 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_160'
-                                    806 ;__200000052   Allocated with name '_lcd_init___200000052_20000_161'
-                                    807 ;address       Allocated with name '_lcd_init_address_30000_162'
-                                    808 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_163'
-                                    809 ;__200000054   Allocated with name '_lcd_init___200000054_20000_164'
-                                    810 ;address       Allocated with name '_lcd_init_address_30000_165'
-                                    811 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_166'
-                                    812 ;__200000056   Allocated with name '_lcd_init___200000056_20000_167'
-                                    813 ;address       Allocated with name '_lcd_init_address_30000_168'
-                                    814 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_169'
-                                    815 ;__200000058   Allocated with name '_lcd_init___200000058_20000_170'
-                                    816 ;address       Allocated with name '_lcd_init_address_30000_171'
-                                    817 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_172'
-                                    818 ;__200000060   Allocated with name '_lcd_init___200000060_20000_173'
-                                    819 ;address       Allocated with name '_lcd_init_address_30000_174'
-                                    820 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_175'
-                                    821 ;__200000062   Allocated with name '_lcd_init___200000062_20000_176'
-                                    822 ;address       Allocated with name '_lcd_init_address_30000_177'
-                                    823 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_178'
-                                    824 ;__200000064   Allocated with name '_lcd_init___200000064_20000_179'
-                                    825 ;address       Allocated with name '_lcd_init_address_30000_180'
-                                    826 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_181'
-                                    827 ;__200000066   Allocated with name '_lcd_init___200000066_20000_182'
-                                    828 ;address       Allocated with name '_lcd_init_address_30000_183'
-                                    829 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_184'
-                                    830 ;__200000068   Allocated with name '_lcd_init___200000068_20000_185'
-                                    831 ;address       Allocated with name '_lcd_init_address_30000_186'
-                                    832 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_187'
-                                    833 ;__200000070   Allocated with name '_lcd_init___200000070_20000_188'
-                                    834 ;address       Allocated with name '_lcd_init_address_30000_189'
-                                    835 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_190'
-                                    836 ;__200000072   Allocated with name '_lcd_init___200000072_20000_191'
-                                    837 ;address       Allocated with name '_lcd_init_address_30000_192'
-                                    838 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_193'
-                                    839 ;__200000074   Allocated with name '_lcd_init___200000074_20000_194'
-                                    840 ;address       Allocated with name '_lcd_init_address_30000_195'
-                                    841 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_196'
-                                    842 ;__200000076   Allocated with name '_lcd_init___200000076_20000_197'
-                                    843 ;address       Allocated with name '_lcd_init_address_30000_198'
-                                    844 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_199'
-                                    845 ;__200000078   Allocated with name '_lcd_init___200000078_20000_200'
-                                    846 ;address       Allocated with name '_lcd_init_address_30000_201'
-                                    847 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_202'
-                                    848 ;__200000080   Allocated with name '_lcd_init___200000080_20000_203'
-                                    849 ;address       Allocated with name '_lcd_init_address_30000_204'
-                                    850 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_205'
-                                    851 ;__200000082   Allocated with name '_lcd_init___200000082_20000_206'
-                                    852 ;address       Allocated with name '_lcd_init_address_30000_207'
-                                    853 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_208'
-                                    854 ;__200000084   Allocated with name '_lcd_init___200000084_20000_209'
-                                    855 ;address       Allocated with name '_lcd_init_address_30000_210'
-                                    856 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_211'
-                                    857 ;__200000086   Allocated with name '_lcd_init___200000086_20000_212'
-                                    858 ;address       Allocated with name '_lcd_init_address_30000_213'
-                                    859 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_214'
-                                    860 ;__200000088   Allocated with name '_lcd_init___200000088_20000_215'
-                                    861 ;address       Allocated with name '_lcd_init_address_30000_216'
-                                    862 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_217'
-                                    863 ;__200000090   Allocated with name '_lcd_init___200000090_20000_218'
-                                    864 ;address       Allocated with name '_lcd_init_address_30000_219'
-                                    865 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_220'
-                                    866 ;__200000092   Allocated with name '_lcd_init___200000092_20000_221'
-                                    867 ;address       Allocated with name '_lcd_init_address_30000_222'
-                                    868 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_223'
-                                    869 ;__200000094   Allocated with name '_lcd_init___200000094_20000_224'
-                                    870 ;address       Allocated with name '_lcd_init_address_30000_225'
-                                    871 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_226'
-                                    872 ;__200000096   Allocated with name '_lcd_init___200000096_20000_227'
-                                    873 ;address       Allocated with name '_lcd_init_address_30000_228'
-                                    874 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_229'
-                                    875 ;__200000098   Allocated with name '_lcd_init___200000098_20000_230'
-                                    876 ;address       Allocated with name '_lcd_init_address_30000_231'
-                                    877 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_232'
-                                    878 ;__200000100   Allocated with name '_lcd_init___200000100_20000_233'
-                                    879 ;address       Allocated with name '_lcd_init_address_30000_234'
-                                    880 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_235'
-                                    881 ;__200000102   Allocated with name '_lcd_init___200000102_20000_236'
-                                    882 ;address       Allocated with name '_lcd_init_address_30000_237'
-                                    883 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_238'
-                                    884 ;__200000104   Allocated with name '_lcd_init___200000104_20000_239'
-                                    885 ;address       Allocated with name '_lcd_init_address_30000_240'
-                                    886 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_241'
-                                    887 ;__200000106   Allocated with name '_lcd_init___200000106_20000_242'
-                                    888 ;address       Allocated with name '_lcd_init_address_30000_243'
-                                    889 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_244'
-                                    890 ;__200000108   Allocated with name '_lcd_init___200000108_20000_245'
-                                    891 ;address       Allocated with name '_lcd_init_address_30000_246'
-                                    892 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_247'
-                                    893 ;__200000110   Allocated with name '_lcd_init___200000110_20000_248'
-                                    894 ;address       Allocated with name '_lcd_init_address_30000_249'
-                                    895 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_250'
-                                    896 ;__200000112   Allocated with name '_lcd_init___200000112_20000_251'
-                                    897 ;address       Allocated with name '_lcd_init_address_30000_252'
-                                    898 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_253'
-                                    899 ;__200000114   Allocated with name '_lcd_init___200000114_20000_254'
-                                    900 ;address       Allocated with name '_lcd_init_address_30000_255'
-                                    901 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_256'
-                                    902 ;__200000116   Allocated with name '_lcd_init___200000116_20000_257'
-                                    903 ;address       Allocated with name '_lcd_init_address_30000_258'
-                                    904 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_259'
-                                    905 ;__200000118   Allocated with name '_lcd_init___200000118_20000_260'
-                                    906 ;address       Allocated with name '_lcd_init_address_30000_261'
-                                    907 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_262'
-                                    908 ;__200000120   Allocated with name '_lcd_init___200000120_20000_263'
-                                    909 ;address       Allocated with name '_lcd_init_address_30000_264'
-                                    910 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_265'
-                                    911 ;__200000122   Allocated with name '_lcd_init___200000122_20000_266'
-                                    912 ;address       Allocated with name '_lcd_init_address_30000_267'
-                                    913 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_268'
-                                    914 ;__200000124   Allocated with name '_lcd_init___200000124_20000_269'
-                                    915 ;address       Allocated with name '_lcd_init_address_30000_270'
-                                    916 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_271'
-                                    917 ;__200000126   Allocated with name '_lcd_init___200000126_20000_272'
-                                    918 ;address       Allocated with name '_lcd_init_address_30000_273'
-                                    919 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_274'
-                                    920 ;__200000128   Allocated with name '_lcd_init___200000128_20000_275'
-                                    921 ;address       Allocated with name '_lcd_init_address_30000_276'
-                                    922 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_277'
-                                    923 ;__200000130   Allocated with name '_lcd_init___200000130_20000_278'
-                                    924 ;address       Allocated with name '_lcd_init_address_30000_279'
-                                    925 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_280'
-                                    926 ;__200000132   Allocated with name '_lcd_init___200000132_20000_281'
-                                    927 ;address       Allocated with name '_lcd_init_address_30000_282'
-                                    928 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_283'
-                                    929 ;__200000134   Allocated with name '_lcd_init___200000134_20000_284'
-                                    930 ;address       Allocated with name '_lcd_init_address_30000_285'
-                                    931 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_286'
-                                    932 ;__200000136   Allocated with name '_lcd_init___200000136_20000_287'
-                                    933 ;address       Allocated with name '_lcd_init_address_30000_288'
-                                    934 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_289'
-                                    935 ;__200000138   Allocated with name '_lcd_init___200000138_20000_290'
-                                    936 ;delayAmount   Allocated with name '_lcd_init_delayAmount_30000_291'
-                                    937 ;i             Allocated with name '_lcd_init_i_50000_293'
-                                    938 ;__200000140   Allocated with name '_lcd_init___200000140_20000_294'
-                                    939 ;address       Allocated with name '_lcd_init_address_30000_295'
-                                    940 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_296'
-                                    941 ;------------------------------------------------------------
-                                    942 ;	src/lcd_driver.c:13: void lcd_init(){
+                                    732 ;__200000004   Allocated with name '_lcd_init___200000004_20000_87'
+                                    733 ;address       Allocated with name '_lcd_init_address_30000_88'
+                                    734 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_89'
+                                    735 ;__200000006   Allocated with name '_lcd_init___200000006_20000_90'
+                                    736 ;delayAmount   Allocated with name '_lcd_init_delayAmount_30000_91'
+                                    737 ;i             Allocated with name '_lcd_init_i_50000_93'
+                                    738 ;__200000008   Allocated with name '_lcd_init___200000008_20000_94'
+                                    739 ;address       Allocated with name '_lcd_init_address_30000_95'
+                                    740 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_96'
+                                    741 ;__200000010   Allocated with name '_lcd_init___200000010_20000_97'
+                                    742 ;delayAmount   Allocated with name '_lcd_init_delayAmount_30000_98'
+                                    743 ;i             Allocated with name '_lcd_init_i_50000_100'
+                                    744 ;__200000012   Allocated with name '_lcd_init___200000012_20000_101'
+                                    745 ;address       Allocated with name '_lcd_init_address_30000_102'
+                                    746 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_103'
+                                    747 ;__200000014   Allocated with name '_lcd_init___200000014_20000_104'
+                                    748 ;address       Allocated with name '_lcd_init_address_30000_105'
+                                    749 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_106'
+                                    750 ;__200000016   Allocated with name '_lcd_init___200000016_20000_107'
+                                    751 ;address       Allocated with name '_lcd_init_address_30000_108'
+                                    752 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_109'
+                                    753 ;__200000018   Allocated with name '_lcd_init___200000018_20000_110'
+                                    754 ;address       Allocated with name '_lcd_init_address_30000_111'
+                                    755 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_112'
+                                    756 ;__200000020   Allocated with name '_lcd_init___200000020_20000_113'
+                                    757 ;address       Allocated with name '_lcd_init_address_30000_114'
+                                    758 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_115'
+                                    759 ;__200000022   Allocated with name '_lcd_init___200000022_20000_116'
+                                    760 ;address       Allocated with name '_lcd_init_address_30000_117'
+                                    761 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_118'
+                                    762 ;__200000024   Allocated with name '_lcd_init___200000024_20000_119'
+                                    763 ;address       Allocated with name '_lcd_init_address_30000_120'
+                                    764 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_121'
+                                    765 ;__200000026   Allocated with name '_lcd_init___200000026_20000_122'
+                                    766 ;address       Allocated with name '_lcd_init_address_30000_123'
+                                    767 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_124'
+                                    768 ;__200000028   Allocated with name '_lcd_init___200000028_20000_125'
+                                    769 ;address       Allocated with name '_lcd_init_address_30000_126'
+                                    770 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_127'
+                                    771 ;__200000030   Allocated with name '_lcd_init___200000030_20000_128'
+                                    772 ;address       Allocated with name '_lcd_init_address_30000_129'
+                                    773 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_130'
+                                    774 ;__200000032   Allocated with name '_lcd_init___200000032_20000_131'
+                                    775 ;address       Allocated with name '_lcd_init_address_30000_132'
+                                    776 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_133'
+                                    777 ;__200000034   Allocated with name '_lcd_init___200000034_20000_134'
+                                    778 ;address       Allocated with name '_lcd_init_address_30000_135'
+                                    779 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_136'
+                                    780 ;__200000036   Allocated with name '_lcd_init___200000036_20000_137'
+                                    781 ;address       Allocated with name '_lcd_init_address_30000_138'
+                                    782 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_139'
+                                    783 ;__200000038   Allocated with name '_lcd_init___200000038_20000_140'
+                                    784 ;address       Allocated with name '_lcd_init_address_30000_141'
+                                    785 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_142'
+                                    786 ;__200000040   Allocated with name '_lcd_init___200000040_20000_143'
+                                    787 ;address       Allocated with name '_lcd_init_address_30000_144'
+                                    788 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_145'
+                                    789 ;__200000042   Allocated with name '_lcd_init___200000042_20000_146'
+                                    790 ;address       Allocated with name '_lcd_init_address_30000_147'
+                                    791 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_148'
+                                    792 ;__200000044   Allocated with name '_lcd_init___200000044_20000_149'
+                                    793 ;address       Allocated with name '_lcd_init_address_30000_150'
+                                    794 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_151'
+                                    795 ;__200000046   Allocated with name '_lcd_init___200000046_20000_152'
+                                    796 ;address       Allocated with name '_lcd_init_address_30000_153'
+                                    797 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_154'
+                                    798 ;__200000048   Allocated with name '_lcd_init___200000048_20000_155'
+                                    799 ;address       Allocated with name '_lcd_init_address_30000_156'
+                                    800 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_157'
+                                    801 ;__200000050   Allocated with name '_lcd_init___200000050_20000_158'
+                                    802 ;address       Allocated with name '_lcd_init_address_30000_159'
+                                    803 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_160'
+                                    804 ;__200000052   Allocated with name '_lcd_init___200000052_20000_161'
+                                    805 ;address       Allocated with name '_lcd_init_address_30000_162'
+                                    806 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_163'
+                                    807 ;__200000054   Allocated with name '_lcd_init___200000054_20000_164'
+                                    808 ;address       Allocated with name '_lcd_init_address_30000_165'
+                                    809 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_166'
+                                    810 ;__200000056   Allocated with name '_lcd_init___200000056_20000_167'
+                                    811 ;address       Allocated with name '_lcd_init_address_30000_168'
+                                    812 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_169'
+                                    813 ;__200000058   Allocated with name '_lcd_init___200000058_20000_170'
+                                    814 ;address       Allocated with name '_lcd_init_address_30000_171'
+                                    815 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_172'
+                                    816 ;__200000060   Allocated with name '_lcd_init___200000060_20000_173'
+                                    817 ;address       Allocated with name '_lcd_init_address_30000_174'
+                                    818 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_175'
+                                    819 ;__200000062   Allocated with name '_lcd_init___200000062_20000_176'
+                                    820 ;address       Allocated with name '_lcd_init_address_30000_177'
+                                    821 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_178'
+                                    822 ;__200000064   Allocated with name '_lcd_init___200000064_20000_179'
+                                    823 ;address       Allocated with name '_lcd_init_address_30000_180'
+                                    824 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_181'
+                                    825 ;__200000066   Allocated with name '_lcd_init___200000066_20000_182'
+                                    826 ;address       Allocated with name '_lcd_init_address_30000_183'
+                                    827 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_184'
+                                    828 ;__200000068   Allocated with name '_lcd_init___200000068_20000_185'
+                                    829 ;address       Allocated with name '_lcd_init_address_30000_186'
+                                    830 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_187'
+                                    831 ;__200000070   Allocated with name '_lcd_init___200000070_20000_188'
+                                    832 ;address       Allocated with name '_lcd_init_address_30000_189'
+                                    833 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_190'
+                                    834 ;__200000072   Allocated with name '_lcd_init___200000072_20000_191'
+                                    835 ;address       Allocated with name '_lcd_init_address_30000_192'
+                                    836 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_193'
+                                    837 ;__200000074   Allocated with name '_lcd_init___200000074_20000_194'
+                                    838 ;address       Allocated with name '_lcd_init_address_30000_195'
+                                    839 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_196'
+                                    840 ;__200000076   Allocated with name '_lcd_init___200000076_20000_197'
+                                    841 ;address       Allocated with name '_lcd_init_address_30000_198'
+                                    842 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_199'
+                                    843 ;__200000078   Allocated with name '_lcd_init___200000078_20000_200'
+                                    844 ;address       Allocated with name '_lcd_init_address_30000_201'
+                                    845 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_202'
+                                    846 ;__200000080   Allocated with name '_lcd_init___200000080_20000_203'
+                                    847 ;address       Allocated with name '_lcd_init_address_30000_204'
+                                    848 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_205'
+                                    849 ;__200000082   Allocated with name '_lcd_init___200000082_20000_206'
+                                    850 ;address       Allocated with name '_lcd_init_address_30000_207'
+                                    851 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_208'
+                                    852 ;__200000084   Allocated with name '_lcd_init___200000084_20000_209'
+                                    853 ;address       Allocated with name '_lcd_init_address_30000_210'
+                                    854 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_211'
+                                    855 ;__200000086   Allocated with name '_lcd_init___200000086_20000_212'
+                                    856 ;address       Allocated with name '_lcd_init_address_30000_213'
+                                    857 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_214'
+                                    858 ;__200000088   Allocated with name '_lcd_init___200000088_20000_215'
+                                    859 ;address       Allocated with name '_lcd_init_address_30000_216'
+                                    860 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_217'
+                                    861 ;__200000090   Allocated with name '_lcd_init___200000090_20000_218'
+                                    862 ;address       Allocated with name '_lcd_init_address_30000_219'
+                                    863 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_220'
+                                    864 ;__200000092   Allocated with name '_lcd_init___200000092_20000_221'
+                                    865 ;address       Allocated with name '_lcd_init_address_30000_222'
+                                    866 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_223'
+                                    867 ;__200000094   Allocated with name '_lcd_init___200000094_20000_224'
+                                    868 ;address       Allocated with name '_lcd_init_address_30000_225'
+                                    869 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_226'
+                                    870 ;__200000096   Allocated with name '_lcd_init___200000096_20000_227'
+                                    871 ;address       Allocated with name '_lcd_init_address_30000_228'
+                                    872 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_229'
+                                    873 ;__200000098   Allocated with name '_lcd_init___200000098_20000_230'
+                                    874 ;address       Allocated with name '_lcd_init_address_30000_231'
+                                    875 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_232'
+                                    876 ;__200000100   Allocated with name '_lcd_init___200000100_20000_233'
+                                    877 ;address       Allocated with name '_lcd_init_address_30000_234'
+                                    878 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_235'
+                                    879 ;__200000102   Allocated with name '_lcd_init___200000102_20000_236'
+                                    880 ;address       Allocated with name '_lcd_init_address_30000_237'
+                                    881 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_238'
+                                    882 ;__200000104   Allocated with name '_lcd_init___200000104_20000_239'
+                                    883 ;address       Allocated with name '_lcd_init_address_30000_240'
+                                    884 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_241'
+                                    885 ;__200000106   Allocated with name '_lcd_init___200000106_20000_242'
+                                    886 ;address       Allocated with name '_lcd_init_address_30000_243'
+                                    887 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_244'
+                                    888 ;__200000108   Allocated with name '_lcd_init___200000108_20000_245'
+                                    889 ;address       Allocated with name '_lcd_init_address_30000_246'
+                                    890 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_247'
+                                    891 ;__200000110   Allocated with name '_lcd_init___200000110_20000_248'
+                                    892 ;address       Allocated with name '_lcd_init_address_30000_249'
+                                    893 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_250'
+                                    894 ;__200000112   Allocated with name '_lcd_init___200000112_20000_251'
+                                    895 ;address       Allocated with name '_lcd_init_address_30000_252'
+                                    896 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_253'
+                                    897 ;__200000114   Allocated with name '_lcd_init___200000114_20000_254'
+                                    898 ;address       Allocated with name '_lcd_init_address_30000_255'
+                                    899 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_256'
+                                    900 ;__200000116   Allocated with name '_lcd_init___200000116_20000_257'
+                                    901 ;address       Allocated with name '_lcd_init_address_30000_258'
+                                    902 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_259'
+                                    903 ;__200000118   Allocated with name '_lcd_init___200000118_20000_260'
+                                    904 ;address       Allocated with name '_lcd_init_address_30000_261'
+                                    905 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_262'
+                                    906 ;__200000120   Allocated with name '_lcd_init___200000120_20000_263'
+                                    907 ;address       Allocated with name '_lcd_init_address_30000_264'
+                                    908 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_265'
+                                    909 ;__200000122   Allocated with name '_lcd_init___200000122_20000_266'
+                                    910 ;address       Allocated with name '_lcd_init_address_30000_267'
+                                    911 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_268'
+                                    912 ;__200000124   Allocated with name '_lcd_init___200000124_20000_269'
+                                    913 ;address       Allocated with name '_lcd_init_address_30000_270'
+                                    914 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_271'
+                                    915 ;__200000126   Allocated with name '_lcd_init___200000126_20000_272'
+                                    916 ;address       Allocated with name '_lcd_init_address_30000_273'
+                                    917 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_274'
+                                    918 ;__200000128   Allocated with name '_lcd_init___200000128_20000_275'
+                                    919 ;address       Allocated with name '_lcd_init_address_30000_276'
+                                    920 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_277'
+                                    921 ;__200000130   Allocated with name '_lcd_init___200000130_20000_278'
+                                    922 ;address       Allocated with name '_lcd_init_address_30000_279'
+                                    923 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_280'
+                                    924 ;__200000132   Allocated with name '_lcd_init___200000132_20000_281'
+                                    925 ;address       Allocated with name '_lcd_init_address_30000_282'
+                                    926 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_283'
+                                    927 ;__200000134   Allocated with name '_lcd_init___200000134_20000_284'
+                                    928 ;address       Allocated with name '_lcd_init_address_30000_285'
+                                    929 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_286'
+                                    930 ;__200000136   Allocated with name '_lcd_init___200000136_20000_287'
+                                    931 ;address       Allocated with name '_lcd_init_address_30000_288'
+                                    932 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_289'
+                                    933 ;__200000138   Allocated with name '_lcd_init___200000138_20000_290'
+                                    934 ;delayAmount   Allocated with name '_lcd_init_delayAmount_30000_291'
+                                    935 ;i             Allocated with name '_lcd_init_i_50000_293'
+                                    936 ;__200000140   Allocated with name '_lcd_init___200000140_20000_294'
+                                    937 ;address       Allocated with name '_lcd_init_address_30000_295'
+                                    938 ;writeToLCD    Allocated with name '_lcd_init_writeToLCD_40000_296'
+                                    939 ;------------------------------------------------------------
+                                    940 ;	src/lcd_driver.c:13: void lcd_init(){
+                                    941 ;	-----------------------------------------
+                                    942 ;	 function lcd_init
                                     943 ;	-----------------------------------------
-                                    944 ;	 function lcd_init
-                                    945 ;	-----------------------------------------
-      00058A                        946 _lcd_init:
-                                    947 ;	src/lcd_driver.c:15: LCD_0_ENABLE_PIN = 0;
-                                    948 ;	assignBit
-      00058A C2 B4            [12]  949 	clr	_P3_4
-                                    950 ;	src/lcd_driver.c:17: LCD_COMMAND_REGISTER_PIN = 0;
-                                    951 ;	assignBit
-      00058C C2 97            [12]  952 	clr	_P1_7
-                                    953 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      00058E 90 80 00         [24]  954 	mov	dptr,#0x8000
-      000591 74 01            [12]  955 	mov	a,#0x01
-      000593 F0               [24]  956 	movx	@dptr,a
-                                    957 ;	src/lcd_driver.c:59: lcd_writeAddress(0x00);
-      000594 7C 00            [12]  958 	mov	r4,#0x00
-      000596 7D 00            [12]  959 	mov	r5,#0x00
-      000598 7E 00            [12]  960 	mov	r6,#0x00
-      00059A 7F 00            [12]  961 	mov	r7,#0x00
-      00059C                        962 00174$:
-      00059C C3               [12]  963 	clr	c
-      00059D EC               [12]  964 	mov	a,r4
-      00059E 94 60            [12]  965 	subb	a,#0x60
-      0005A0 ED               [12]  966 	mov	a,r5
-      0005A1 94 3D            [12]  967 	subb	a,#0x3d
-      0005A3 EE               [12]  968 	mov	a,r6
-      0005A4 94 08            [12]  969 	subb	a,#0x08
-      0005A6 EF               [12]  970 	mov	a,r7
-      0005A7 94 00            [12]  971 	subb	a,#0x00
-      0005A9 50 0F            [24]  972 	jnc	00103$
-      0005AB 0C               [12]  973 	inc	r4
-      0005AC BC 00 09         [24]  974 	cjne	r4,#0x00,00224$
-      0005AF 0D               [12]  975 	inc	r5
-      0005B0 BD 00 05         [24]  976 	cjne	r5,#0x00,00224$
-      0005B3 0E               [12]  977 	inc	r6
-                                    978 ;	src/lcd_driver.c:19: lcd_initdelay(LCD_DELAY_120_MS);
-      0005B4 BE 00 E5         [24]  979 	cjne	r6,#0x00,00174$
-      0005B7 0F               [12]  980 	inc	r7
-      0005B8                        981 00224$:
-      0005B8 80 E2            [24]  982 	sjmp	00174$
-      0005BA                        983 00103$:
-                                    984 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0005BA 90 80 00         [24]  985 	mov	dptr,#0x8000
-      0005BD 74 11            [12]  986 	mov	a,#0x11
-      0005BF F0               [24]  987 	movx	@dptr,a
-                                    988 ;	src/lcd_driver.c:59: lcd_writeAddress(0x00);
-      0005C0 7C 00            [12]  989 	mov	r4,#0x00
-      0005C2 7D 00            [12]  990 	mov	r5,#0x00
-      0005C4 7E 00            [12]  991 	mov	r6,#0x00
-      0005C6 7F 00            [12]  992 	mov	r7,#0x00
-      0005C8                        993 00177$:
-      0005C8 C3               [12]  994 	clr	c
-      0005C9 EC               [12]  995 	mov	a,r4
-      0005CA 94 60            [12]  996 	subb	a,#0x60
-      0005CC ED               [12]  997 	mov	a,r5
-      0005CD 94 3D            [12]  998 	subb	a,#0x3d
-      0005CF EE               [12]  999 	mov	a,r6
-      0005D0 94 08            [12] 1000 	subb	a,#0x08
-      0005D2 EF               [12] 1001 	mov	a,r7
-      0005D3 94 00            [12] 1002 	subb	a,#0x00
-      0005D5 50 0F            [24] 1003 	jnc	00106$
-      0005D7 0C               [12] 1004 	inc	r4
-      0005D8 BC 00 09         [24] 1005 	cjne	r4,#0x00,00226$
-      0005DB 0D               [12] 1006 	inc	r5
-      0005DC BD 00 05         [24] 1007 	cjne	r5,#0x00,00226$
-      0005DF 0E               [12] 1008 	inc	r6
-                                   1009 ;	src/lcd_driver.c:23: lcd_initdelay(LCD_DELAY_120_MS);
-      0005E0 BE 00 E5         [24] 1010 	cjne	r6,#0x00,00177$
-      0005E3 0F               [12] 1011 	inc	r7
-      0005E4                       1012 00226$:
-      0005E4 80 E2            [24] 1013 	sjmp	00177$
-      0005E6                       1014 00106$:
-                                   1015 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0005E6 90 80 00         [24] 1016 	mov	dptr,#0x8000
-      0005E9 74 3A            [12] 1017 	mov	a,#0x3a
-      0005EB F0               [24] 1018 	movx	@dptr,a
-                                   1019 ;	src/lcd_driver.c:27: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1020 ;	assignBit
-      0005EC D2 97            [12] 1021 	setb	_P1_7
-                                   1022 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0005EE 90 80 00         [24] 1023 	mov	dptr,#0x8000
-      0005F1 74 55            [12] 1024 	mov	a,#0x55
-      0005F3 F0               [24] 1025 	movx	@dptr,a
-                                   1026 ;	src/lcd_driver.c:33: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1027 ;	assignBit
-      0005F4 C2 97            [12] 1028 	clr	_P1_7
-                                   1029 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0005F6 90 80 00         [24] 1030 	mov	dptr,#0x8000
-      0005F9 74 C0            [12] 1031 	mov	a,#0xc0
-      0005FB F0               [24] 1032 	movx	@dptr,a
-                                   1033 ;	src/lcd_driver.c:35: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1034 ;	assignBit
-      0005FC D2 97            [12] 1035 	setb	_P1_7
-                                   1036 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0005FE 90 80 00         [24] 1037 	mov	dptr,#0x8000
-      000601 74 0E            [12] 1038 	mov	a,#0x0e
-      000603 F0               [24] 1039 	movx	@dptr,a
-      000604 F0               [24] 1040 	movx	@dptr,a
-                                   1041 ;	src/lcd_driver.c:40: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1042 ;	assignBit
-      000605 C2 97            [12] 1043 	clr	_P1_7
-                                   1044 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      000607 90 80 00         [24] 1045 	mov	dptr,#0x8000
-      00060A 74 C1            [12] 1046 	mov	a,#0xc1
-      00060C F0               [24] 1047 	movx	@dptr,a
-                                   1048 ;	src/lcd_driver.c:42: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1049 ;	assignBit
-      00060D D2 97            [12] 1050 	setb	_P1_7
-                                   1051 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      00060F 90 80 00         [24] 1052 	mov	dptr,#0x8000
-      000612 74 41            [12] 1053 	mov	a,#0x41
-      000614 F0               [24] 1054 	movx	@dptr,a
-      000615 E4               [12] 1055 	clr	a
-      000616 F0               [24] 1056 	movx	@dptr,a
-                                   1057 ;	src/lcd_driver.c:47: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1058 ;	assignBit
-      000617 C2 97            [12] 1059 	clr	_P1_7
-                                   1060 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      000619 90 80 00         [24] 1061 	mov	dptr,#0x8000
-      00061C 74 C2            [12] 1062 	mov	a,#0xc2
-      00061E F0               [24] 1063 	movx	@dptr,a
-                                   1064 ;	src/lcd_driver.c:49: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1065 ;	assignBit
-      00061F D2 97            [12] 1066 	setb	_P1_7
-                                   1067 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      000621 90 80 00         [24] 1068 	mov	dptr,#0x8000
-      000624 74 55            [12] 1069 	mov	a,#0x55
-      000626 F0               [24] 1070 	movx	@dptr,a
-                                   1071 ;	assignBit
-      000627 C2 97            [12] 1072 	clr	_P1_7
-      000629 90 80 00         [24] 1073 	mov	dptr,#0x8000
-      00062C 74 C5            [12] 1074 	mov	a,#0xc5
-      00062E F0               [24] 1075 	movx	@dptr,a
-                                   1076 ;	src/lcd_driver.c:55: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1077 ;	assignBit
-      00062F D2 97            [12] 1078 	setb	_P1_7
-                                   1079 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      000631 90 80 00         [24] 1080 	mov	dptr,#0x8000
-      000634 E4               [12] 1081 	clr	a
-      000635 F0               [24] 1082 	movx	@dptr,a
-      000636 F0               [24] 1083 	movx	@dptr,a
-      000637 F0               [24] 1084 	movx	@dptr,a
-      000638 F0               [24] 1085 	movx	@dptr,a
-                                   1086 ;	src/lcd_driver.c:62: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1087 ;	assignBit
-      000639 C2 97            [12] 1088 	clr	_P1_7
-                                   1089 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      00063B 90 80 00         [24] 1090 	mov	dptr,#0x8000
-      00063E 74 E0            [12] 1091 	mov	a,#0xe0
-      000640 F0               [24] 1092 	movx	@dptr,a
-                                   1093 ;	src/lcd_driver.c:64: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1094 ;	assignBit
-      000641 D2 97            [12] 1095 	setb	_P1_7
-                                   1096 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      000643 90 80 00         [24] 1097 	mov	dptr,#0x8000
-      000646 74 0F            [12] 1098 	mov	a,#0x0f
-      000648 F0               [24] 1099 	movx	@dptr,a
-      000649 74 1F            [12] 1100 	mov	a,#0x1f
-      00064B F0               [24] 1101 	movx	@dptr,a
-      00064C 74 1C            [12] 1102 	mov	a,#0x1c
-      00064E F0               [24] 1103 	movx	@dptr,a
-      00064F 74 0C            [12] 1104 	mov	a,#0x0c
-      000651 F0               [24] 1105 	movx	@dptr,a
-      000652 74 0F            [12] 1106 	mov	a,#0x0f
-      000654 F0               [24] 1107 	movx	@dptr,a
-      000655 74 08            [12] 1108 	mov	a,#0x08
-      000657 F0               [24] 1109 	movx	@dptr,a
-      000658 74 48            [12] 1110 	mov	a,#0x48
-      00065A F0               [24] 1111 	movx	@dptr,a
-      00065B 74 98            [12] 1112 	mov	a,#0x98
-      00065D F0               [24] 1113 	movx	@dptr,a
-      00065E 74 37            [12] 1114 	mov	a,#0x37
-      000660 F0               [24] 1115 	movx	@dptr,a
-      000661 74 0A            [12] 1116 	mov	a,#0x0a
-      000663 F0               [24] 1117 	movx	@dptr,a
-      000664 74 13            [12] 1118 	mov	a,#0x13
-      000666 F0               [24] 1119 	movx	@dptr,a
-      000667 74 04            [12] 1120 	mov	a,#0x04
-      000669 F0               [24] 1121 	movx	@dptr,a
-      00066A 74 11            [12] 1122 	mov	a,#0x11
-      00066C F0               [24] 1123 	movx	@dptr,a
-      00066D 74 0D            [12] 1124 	mov	a,#0x0d
-      00066F F0               [24] 1125 	movx	@dptr,a
-      000670 E4               [12] 1126 	clr	a
-      000671 F0               [24] 1127 	movx	@dptr,a
-                                   1128 ;	src/lcd_driver.c:71: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1129 ;	assignBit
-      000672 C2 97            [12] 1130 	clr	_P1_7
-                                   1131 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      000674 90 80 00         [24] 1132 	mov	dptr,#0x8000
-      000677 74 E1            [12] 1133 	mov	a,#0xe1
-      000679 F0               [24] 1134 	movx	@dptr,a
-                                   1135 ;	src/lcd_driver.c:73: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1136 ;	assignBit
-      00067A D2 97            [12] 1137 	setb	_P1_7
-                                   1138 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      00067C 90 80 00         [24] 1139 	mov	dptr,#0x8000
-      00067F 74 0F            [12] 1140 	mov	a,#0x0f
-      000681 F0               [24] 1141 	movx	@dptr,a
-      000682 74 32            [12] 1142 	mov	a,#0x32
-      000684 F0               [24] 1143 	movx	@dptr,a
-      000685 74 2E            [12] 1144 	mov	a,#0x2e
-      000687 F0               [24] 1145 	movx	@dptr,a
-      000688 74 0B            [12] 1146 	mov	a,#0x0b
-      00068A F0               [24] 1147 	movx	@dptr,a
-      00068B 74 0D            [12] 1148 	mov	a,#0x0d
-      00068D F0               [24] 1149 	movx	@dptr,a
-      00068E 74 05            [12] 1150 	mov	a,#0x05
-      000690 F0               [24] 1151 	movx	@dptr,a
-      000691 74 47            [12] 1152 	mov	a,#0x47
-      000693 F0               [24] 1153 	movx	@dptr,a
-      000694 74 75            [12] 1154 	mov	a,#0x75
-      000696 F0               [24] 1155 	movx	@dptr,a
-      000697 74 37            [12] 1156 	mov	a,#0x37
-      000699 F0               [24] 1157 	movx	@dptr,a
-      00069A 74 06            [12] 1158 	mov	a,#0x06
-      00069C F0               [24] 1159 	movx	@dptr,a
-      00069D 74 10            [12] 1160 	mov	a,#0x10
-      00069F F0               [24] 1161 	movx	@dptr,a
-      0006A0 74 03            [12] 1162 	mov	a,#0x03
-      0006A2 F0               [24] 1163 	movx	@dptr,a
-      0006A3 74 24            [12] 1164 	mov	a,#0x24
-      0006A5 F0               [24] 1165 	movx	@dptr,a
-      0006A6 74 20            [12] 1166 	mov	a,#0x20
-      0006A8 F0               [24] 1167 	movx	@dptr,a
-      0006A9 E4               [12] 1168 	clr	a
-      0006AA F0               [24] 1169 	movx	@dptr,a
-                                   1170 ;	src/lcd_driver.c:82: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1171 ;	assignBit
-      0006AB C2 97            [12] 1172 	clr	_P1_7
-                                   1173 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0006AD 90 80 00         [24] 1174 	mov	dptr,#0x8000
-      0006B0 74 36            [12] 1175 	mov	a,#0x36
-      0006B2 F0               [24] 1176 	movx	@dptr,a
-                                   1177 ;	src/lcd_driver.c:84: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1178 ;	assignBit
-      0006B3 D2 97            [12] 1179 	setb	_P1_7
-                                   1180 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0006B5 90 80 00         [24] 1181 	mov	dptr,#0x8000
-      0006B8 74 48            [12] 1182 	mov	a,#0x48
-      0006BA F0               [24] 1183 	movx	@dptr,a
-                                   1184 ;	src/lcd_driver.c:88: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1185 ;	assignBit
-      0006BB C2 97            [12] 1186 	clr	_P1_7
-                                   1187 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0006BD 90 80 00         [24] 1188 	mov	dptr,#0x8000
-      0006C0 74 13            [12] 1189 	mov	a,#0x13
-      0006C2 F0               [24] 1190 	movx	@dptr,a
-      0006C3 74 2A            [12] 1191 	mov	a,#0x2a
-      0006C5 F0               [24] 1192 	movx	@dptr,a
-                                   1193 ;	src/lcd_driver.c:93: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1194 ;	assignBit
-      0006C6 D2 97            [12] 1195 	setb	_P1_7
-                                   1196 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0006C8 90 80 00         [24] 1197 	mov	dptr,#0x8000
-      0006CB E4               [12] 1198 	clr	a
-      0006CC F0               [24] 1199 	movx	@dptr,a
-      0006CD F0               [24] 1200 	movx	@dptr,a
-      0006CE 04               [12] 1201 	inc	a
-      0006CF F0               [24] 1202 	movx	@dptr,a
-      0006D0 74 3F            [12] 1203 	mov	a,#0x3f
-      0006D2 F0               [24] 1204 	movx	@dptr,a
-                                   1205 ;	src/lcd_driver.c:100: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1206 ;	assignBit
-      0006D3 C2 97            [12] 1207 	clr	_P1_7
-                                   1208 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0006D5 90 80 00         [24] 1209 	mov	dptr,#0x8000
-      0006D8 74 2B            [12] 1210 	mov	a,#0x2b
-      0006DA F0               [24] 1211 	movx	@dptr,a
-                                   1212 ;	src/lcd_driver.c:102: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1213 ;	assignBit
-      0006DB D2 97            [12] 1214 	setb	_P1_7
-                                   1215 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0006DD 90 80 00         [24] 1216 	mov	dptr,#0x8000
-      0006E0 E4               [12] 1217 	clr	a
-      0006E1 F0               [24] 1218 	movx	@dptr,a
-      0006E2 F0               [24] 1219 	movx	@dptr,a
-      0006E3 04               [12] 1220 	inc	a
-      0006E4 F0               [24] 1221 	movx	@dptr,a
-      0006E5 74 DF            [12] 1222 	mov	a,#0xdf
-      0006E7 F0               [24] 1223 	movx	@dptr,a
-                                   1224 ;	src/lcd_driver.c:109: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1225 ;	assignBit
-      0006E8 C2 97            [12] 1226 	clr	_P1_7
-                                   1227 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0006EA 90 80 00         [24] 1228 	mov	dptr,#0x8000
-      0006ED 74 29            [12] 1229 	mov	a,#0x29
-      0006EF F0               [24] 1230 	movx	@dptr,a
-      0006F0 74 51            [12] 1231 	mov	a,#0x51
-      0006F2 F0               [24] 1232 	movx	@dptr,a
-                                   1233 ;	src/lcd_driver.c:114: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1234 ;	assignBit
-      0006F3 D2 97            [12] 1235 	setb	_P1_7
-                                   1236 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      0006F5 90 80 00         [24] 1237 	mov	dptr,#0x8000
-      0006F8 74 E6            [12] 1238 	mov	a,#0xe6
-      0006FA F0               [24] 1239 	movx	@dptr,a
-                                   1240 ;	src/lcd_driver.c:59: lcd_writeAddress(0x00);
-      0006FB 7C 00            [12] 1241 	mov	r4,#0x00
-      0006FD 7D 00            [12] 1242 	mov	r5,#0x00
-      0006FF 7E 00            [12] 1243 	mov	r6,#0x00
-      000701 7F 00            [12] 1244 	mov	r7,#0x00
-      000703                       1245 00180$:
-      000703 C3               [12] 1246 	clr	c
-      000704 EC               [12] 1247 	mov	a,r4
-      000705 94 60            [12] 1248 	subb	a,#0x60
-      000707 ED               [12] 1249 	mov	a,r5
-      000708 94 3D            [12] 1250 	subb	a,#0x3d
-      00070A EE               [12] 1251 	mov	a,r6
-      00070B 94 08            [12] 1252 	subb	a,#0x08
-      00070D EF               [12] 1253 	mov	a,r7
-      00070E 94 00            [12] 1254 	subb	a,#0x00
-      000710 50 0F            [24] 1255 	jnc	00171$
-      000712 0C               [12] 1256 	inc	r4
-      000713 BC 00 09         [24] 1257 	cjne	r4,#0x00,00228$
-      000716 0D               [12] 1258 	inc	r5
-      000717 BD 00 05         [24] 1259 	cjne	r5,#0x00,00228$
-      00071A 0E               [12] 1260 	inc	r6
-                                   1261 ;	src/lcd_driver.c:116: lcd_initdelay(LCD_DELAY_120_MS);
-      00071B BE 00 E5         [24] 1262 	cjne	r6,#0x00,00180$
-      00071E 0F               [12] 1263 	inc	r7
-      00071F                       1264 00228$:
-      00071F 80 E2            [24] 1265 	sjmp	00180$
-      000721                       1266 00171$:
-                                   1267 ;	src/lcd_driver.c:120: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1268 ;	assignBit
-      000721 C2 97            [12] 1269 	clr	_P1_7
-                                   1270 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      000723 90 80 00         [24] 1271 	mov	dptr,#0x8000
-      000726 74 2C            [12] 1272 	mov	a,#0x2c
-      000728 F0               [24] 1273 	movx	@dptr,a
-                                   1274 ;	src/lcd_driver.c:122: LCD_COMMAND_REGISTER_PIN = 1; //remove this later
-                                   1275 ;	assignBit
-      000729 D2 97            [12] 1276 	setb	_P1_7
-                                   1277 ;	src/lcd_driver.c:126: }
-      00072B 22               [24] 1278 	ret
+      00058A                        944 _lcd_init:
+                                    945 ;	src/lcd_driver.c:15: LCD_0_ENABLE_PIN = 0;
+                                    946 ;	assignBit
+      00058A C2 B4            [12]  947 	clr	_P3_4
+                                    948 ;	src/lcd_driver.c:17: LCD_COMMAND_REGISTER_PIN = 0;
+                                    949 ;	assignBit
+      00058C C2 97            [12]  950 	clr	_P1_7
+                                    951 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      00058E 90 08 00         [24]  952 	mov	dptr,#0x0800
+      000591 74 01            [12]  953 	mov	a,#0x01
+      000593 F0               [24]  954 	movx	@dptr,a
+                                    955 ;	src/lcd_driver.c:59: lcd_writeAddress(0x00);
+      000594 7C 00            [12]  956 	mov	r4,#0x00
+      000596 7D 00            [12]  957 	mov	r5,#0x00
+      000598 7E 00            [12]  958 	mov	r6,#0x00
+      00059A 7F 00            [12]  959 	mov	r7,#0x00
+      00059C                        960 00174$:
+      00059C C3               [12]  961 	clr	c
+      00059D EC               [12]  962 	mov	a,r4
+      00059E 94 60            [12]  963 	subb	a,#0x60
+      0005A0 ED               [12]  964 	mov	a,r5
+      0005A1 94 3D            [12]  965 	subb	a,#0x3d
+      0005A3 EE               [12]  966 	mov	a,r6
+      0005A4 94 08            [12]  967 	subb	a,#0x08
+      0005A6 EF               [12]  968 	mov	a,r7
+      0005A7 94 00            [12]  969 	subb	a,#0x00
+      0005A9 50 0F            [24]  970 	jnc	00103$
+      0005AB 0C               [12]  971 	inc	r4
+      0005AC BC 00 09         [24]  972 	cjne	r4,#0x00,00224$
+      0005AF 0D               [12]  973 	inc	r5
+      0005B0 BD 00 05         [24]  974 	cjne	r5,#0x00,00224$
+      0005B3 0E               [12]  975 	inc	r6
+                                    976 ;	src/lcd_driver.c:19: lcd_initdelay(LCD_DELAY_120_MS);
+      0005B4 BE 00 E5         [24]  977 	cjne	r6,#0x00,00174$
+      0005B7 0F               [12]  978 	inc	r7
+      0005B8                        979 00224$:
+      0005B8 80 E2            [24]  980 	sjmp	00174$
+      0005BA                        981 00103$:
+                                    982 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0005BA 90 08 00         [24]  983 	mov	dptr,#0x0800
+      0005BD 74 11            [12]  984 	mov	a,#0x11
+      0005BF F0               [24]  985 	movx	@dptr,a
+                                    986 ;	src/lcd_driver.c:59: lcd_writeAddress(0x00);
+      0005C0 7C 00            [12]  987 	mov	r4,#0x00
+      0005C2 7D 00            [12]  988 	mov	r5,#0x00
+      0005C4 7E 00            [12]  989 	mov	r6,#0x00
+      0005C6 7F 00            [12]  990 	mov	r7,#0x00
+      0005C8                        991 00177$:
+      0005C8 C3               [12]  992 	clr	c
+      0005C9 EC               [12]  993 	mov	a,r4
+      0005CA 94 60            [12]  994 	subb	a,#0x60
+      0005CC ED               [12]  995 	mov	a,r5
+      0005CD 94 3D            [12]  996 	subb	a,#0x3d
+      0005CF EE               [12]  997 	mov	a,r6
+      0005D0 94 08            [12]  998 	subb	a,#0x08
+      0005D2 EF               [12]  999 	mov	a,r7
+      0005D3 94 00            [12] 1000 	subb	a,#0x00
+      0005D5 50 0F            [24] 1001 	jnc	00106$
+      0005D7 0C               [12] 1002 	inc	r4
+      0005D8 BC 00 09         [24] 1003 	cjne	r4,#0x00,00226$
+      0005DB 0D               [12] 1004 	inc	r5
+      0005DC BD 00 05         [24] 1005 	cjne	r5,#0x00,00226$
+      0005DF 0E               [12] 1006 	inc	r6
+                                   1007 ;	src/lcd_driver.c:23: lcd_initdelay(LCD_DELAY_120_MS);
+      0005E0 BE 00 E5         [24] 1008 	cjne	r6,#0x00,00177$
+      0005E3 0F               [12] 1009 	inc	r7
+      0005E4                       1010 00226$:
+      0005E4 80 E2            [24] 1011 	sjmp	00177$
+      0005E6                       1012 00106$:
+                                   1013 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0005E6 90 08 00         [24] 1014 	mov	dptr,#0x0800
+      0005E9 74 3A            [12] 1015 	mov	a,#0x3a
+      0005EB F0               [24] 1016 	movx	@dptr,a
+                                   1017 ;	src/lcd_driver.c:27: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1018 ;	assignBit
+      0005EC D2 97            [12] 1019 	setb	_P1_7
+                                   1020 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0005EE 90 08 00         [24] 1021 	mov	dptr,#0x0800
+      0005F1 74 55            [12] 1022 	mov	a,#0x55
+      0005F3 F0               [24] 1023 	movx	@dptr,a
+                                   1024 ;	src/lcd_driver.c:33: LCD_COMMAND_REGISTER_PIN = 0;
+                                   1025 ;	assignBit
+      0005F4 C2 97            [12] 1026 	clr	_P1_7
+                                   1027 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0005F6 90 08 00         [24] 1028 	mov	dptr,#0x0800
+      0005F9 74 C0            [12] 1029 	mov	a,#0xc0
+      0005FB F0               [24] 1030 	movx	@dptr,a
+                                   1031 ;	src/lcd_driver.c:35: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1032 ;	assignBit
+      0005FC D2 97            [12] 1033 	setb	_P1_7
+                                   1034 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0005FE 90 08 00         [24] 1035 	mov	dptr,#0x0800
+      000601 74 0E            [12] 1036 	mov	a,#0x0e
+      000603 F0               [24] 1037 	movx	@dptr,a
+      000604 F0               [24] 1038 	movx	@dptr,a
+                                   1039 ;	src/lcd_driver.c:40: LCD_COMMAND_REGISTER_PIN = 0;
+                                   1040 ;	assignBit
+      000605 C2 97            [12] 1041 	clr	_P1_7
+                                   1042 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      000607 90 08 00         [24] 1043 	mov	dptr,#0x0800
+      00060A 74 C1            [12] 1044 	mov	a,#0xc1
+      00060C F0               [24] 1045 	movx	@dptr,a
+                                   1046 ;	src/lcd_driver.c:42: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1047 ;	assignBit
+      00060D D2 97            [12] 1048 	setb	_P1_7
+                                   1049 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      00060F 90 08 00         [24] 1050 	mov	dptr,#0x0800
+      000612 74 41            [12] 1051 	mov	a,#0x41
+      000614 F0               [24] 1052 	movx	@dptr,a
+      000615 E4               [12] 1053 	clr	a
+      000616 F0               [24] 1054 	movx	@dptr,a
+                                   1055 ;	src/lcd_driver.c:47: LCD_COMMAND_REGISTER_PIN = 0;
+                                   1056 ;	assignBit
+      000617 C2 97            [12] 1057 	clr	_P1_7
+                                   1058 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      000619 90 08 00         [24] 1059 	mov	dptr,#0x0800
+      00061C 74 C2            [12] 1060 	mov	a,#0xc2
+      00061E F0               [24] 1061 	movx	@dptr,a
+                                   1062 ;	src/lcd_driver.c:49: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1063 ;	assignBit
+      00061F D2 97            [12] 1064 	setb	_P1_7
+                                   1065 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      000621 90 08 00         [24] 1066 	mov	dptr,#0x0800
+      000624 74 55            [12] 1067 	mov	a,#0x55
+      000626 F0               [24] 1068 	movx	@dptr,a
+                                   1069 ;	assignBit
+      000627 C2 97            [12] 1070 	clr	_P1_7
+      000629 90 08 00         [24] 1071 	mov	dptr,#0x0800
+      00062C 74 C5            [12] 1072 	mov	a,#0xc5
+      00062E F0               [24] 1073 	movx	@dptr,a
+                                   1074 ;	src/lcd_driver.c:55: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1075 ;	assignBit
+      00062F D2 97            [12] 1076 	setb	_P1_7
+                                   1077 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      000631 90 08 00         [24] 1078 	mov	dptr,#0x0800
+      000634 E4               [12] 1079 	clr	a
+      000635 F0               [24] 1080 	movx	@dptr,a
+      000636 F0               [24] 1081 	movx	@dptr,a
+      000637 F0               [24] 1082 	movx	@dptr,a
+      000638 F0               [24] 1083 	movx	@dptr,a
+                                   1084 ;	src/lcd_driver.c:62: LCD_COMMAND_REGISTER_PIN = 0;
+                                   1085 ;	assignBit
+      000639 C2 97            [12] 1086 	clr	_P1_7
+                                   1087 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      00063B 90 08 00         [24] 1088 	mov	dptr,#0x0800
+      00063E 74 E0            [12] 1089 	mov	a,#0xe0
+      000640 F0               [24] 1090 	movx	@dptr,a
+                                   1091 ;	src/lcd_driver.c:64: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1092 ;	assignBit
+      000641 D2 97            [12] 1093 	setb	_P1_7
+                                   1094 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      000643 90 08 00         [24] 1095 	mov	dptr,#0x0800
+      000646 74 0F            [12] 1096 	mov	a,#0x0f
+      000648 F0               [24] 1097 	movx	@dptr,a
+      000649 74 1F            [12] 1098 	mov	a,#0x1f
+      00064B F0               [24] 1099 	movx	@dptr,a
+      00064C 74 1C            [12] 1100 	mov	a,#0x1c
+      00064E F0               [24] 1101 	movx	@dptr,a
+      00064F 74 0C            [12] 1102 	mov	a,#0x0c
+      000651 F0               [24] 1103 	movx	@dptr,a
+      000652 74 0F            [12] 1104 	mov	a,#0x0f
+      000654 F0               [24] 1105 	movx	@dptr,a
+      000655 74 08            [12] 1106 	mov	a,#0x08
+      000657 F0               [24] 1107 	movx	@dptr,a
+      000658 74 48            [12] 1108 	mov	a,#0x48
+      00065A F0               [24] 1109 	movx	@dptr,a
+      00065B 74 98            [12] 1110 	mov	a,#0x98
+      00065D F0               [24] 1111 	movx	@dptr,a
+      00065E 74 37            [12] 1112 	mov	a,#0x37
+      000660 F0               [24] 1113 	movx	@dptr,a
+      000661 74 0A            [12] 1114 	mov	a,#0x0a
+      000663 F0               [24] 1115 	movx	@dptr,a
+      000664 74 13            [12] 1116 	mov	a,#0x13
+      000666 F0               [24] 1117 	movx	@dptr,a
+      000667 74 04            [12] 1118 	mov	a,#0x04
+      000669 F0               [24] 1119 	movx	@dptr,a
+      00066A 74 11            [12] 1120 	mov	a,#0x11
+      00066C F0               [24] 1121 	movx	@dptr,a
+      00066D 74 0D            [12] 1122 	mov	a,#0x0d
+      00066F F0               [24] 1123 	movx	@dptr,a
+      000670 E4               [12] 1124 	clr	a
+      000671 F0               [24] 1125 	movx	@dptr,a
+                                   1126 ;	src/lcd_driver.c:71: LCD_COMMAND_REGISTER_PIN = 0;
+                                   1127 ;	assignBit
+      000672 C2 97            [12] 1128 	clr	_P1_7
+                                   1129 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      000674 90 08 00         [24] 1130 	mov	dptr,#0x0800
+      000677 74 E1            [12] 1131 	mov	a,#0xe1
+      000679 F0               [24] 1132 	movx	@dptr,a
+                                   1133 ;	src/lcd_driver.c:73: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1134 ;	assignBit
+      00067A D2 97            [12] 1135 	setb	_P1_7
+                                   1136 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      00067C 90 08 00         [24] 1137 	mov	dptr,#0x0800
+      00067F 74 0F            [12] 1138 	mov	a,#0x0f
+      000681 F0               [24] 1139 	movx	@dptr,a
+      000682 74 32            [12] 1140 	mov	a,#0x32
+      000684 F0               [24] 1141 	movx	@dptr,a
+      000685 74 2E            [12] 1142 	mov	a,#0x2e
+      000687 F0               [24] 1143 	movx	@dptr,a
+      000688 74 0B            [12] 1144 	mov	a,#0x0b
+      00068A F0               [24] 1145 	movx	@dptr,a
+      00068B 74 0D            [12] 1146 	mov	a,#0x0d
+      00068D F0               [24] 1147 	movx	@dptr,a
+      00068E 74 05            [12] 1148 	mov	a,#0x05
+      000690 F0               [24] 1149 	movx	@dptr,a
+      000691 74 47            [12] 1150 	mov	a,#0x47
+      000693 F0               [24] 1151 	movx	@dptr,a
+      000694 74 75            [12] 1152 	mov	a,#0x75
+      000696 F0               [24] 1153 	movx	@dptr,a
+      000697 74 37            [12] 1154 	mov	a,#0x37
+      000699 F0               [24] 1155 	movx	@dptr,a
+      00069A 74 06            [12] 1156 	mov	a,#0x06
+      00069C F0               [24] 1157 	movx	@dptr,a
+      00069D 74 10            [12] 1158 	mov	a,#0x10
+      00069F F0               [24] 1159 	movx	@dptr,a
+      0006A0 74 03            [12] 1160 	mov	a,#0x03
+      0006A2 F0               [24] 1161 	movx	@dptr,a
+      0006A3 74 24            [12] 1162 	mov	a,#0x24
+      0006A5 F0               [24] 1163 	movx	@dptr,a
+      0006A6 74 20            [12] 1164 	mov	a,#0x20
+      0006A8 F0               [24] 1165 	movx	@dptr,a
+      0006A9 E4               [12] 1166 	clr	a
+      0006AA F0               [24] 1167 	movx	@dptr,a
+                                   1168 ;	src/lcd_driver.c:82: LCD_COMMAND_REGISTER_PIN = 0;
+                                   1169 ;	assignBit
+      0006AB C2 97            [12] 1170 	clr	_P1_7
+                                   1171 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0006AD 90 08 00         [24] 1172 	mov	dptr,#0x0800
+      0006B0 74 36            [12] 1173 	mov	a,#0x36
+      0006B2 F0               [24] 1174 	movx	@dptr,a
+                                   1175 ;	src/lcd_driver.c:84: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1176 ;	assignBit
+      0006B3 D2 97            [12] 1177 	setb	_P1_7
+                                   1178 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0006B5 90 08 00         [24] 1179 	mov	dptr,#0x0800
+      0006B8 74 48            [12] 1180 	mov	a,#0x48
+      0006BA F0               [24] 1181 	movx	@dptr,a
+                                   1182 ;	src/lcd_driver.c:88: LCD_COMMAND_REGISTER_PIN = 0;
+                                   1183 ;	assignBit
+      0006BB C2 97            [12] 1184 	clr	_P1_7
+                                   1185 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0006BD 90 08 00         [24] 1186 	mov	dptr,#0x0800
+      0006C0 74 13            [12] 1187 	mov	a,#0x13
+      0006C2 F0               [24] 1188 	movx	@dptr,a
+      0006C3 74 2A            [12] 1189 	mov	a,#0x2a
+      0006C5 F0               [24] 1190 	movx	@dptr,a
+                                   1191 ;	src/lcd_driver.c:93: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1192 ;	assignBit
+      0006C6 D2 97            [12] 1193 	setb	_P1_7
+                                   1194 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0006C8 90 08 00         [24] 1195 	mov	dptr,#0x0800
+      0006CB E4               [12] 1196 	clr	a
+      0006CC F0               [24] 1197 	movx	@dptr,a
+      0006CD F0               [24] 1198 	movx	@dptr,a
+      0006CE 04               [12] 1199 	inc	a
+      0006CF F0               [24] 1200 	movx	@dptr,a
+      0006D0 74 3F            [12] 1201 	mov	a,#0x3f
+      0006D2 F0               [24] 1202 	movx	@dptr,a
+                                   1203 ;	src/lcd_driver.c:100: LCD_COMMAND_REGISTER_PIN = 0;
+                                   1204 ;	assignBit
+      0006D3 C2 97            [12] 1205 	clr	_P1_7
+                                   1206 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0006D5 90 08 00         [24] 1207 	mov	dptr,#0x0800
+      0006D8 74 2B            [12] 1208 	mov	a,#0x2b
+      0006DA F0               [24] 1209 	movx	@dptr,a
+                                   1210 ;	src/lcd_driver.c:102: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1211 ;	assignBit
+      0006DB D2 97            [12] 1212 	setb	_P1_7
+                                   1213 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0006DD 90 08 00         [24] 1214 	mov	dptr,#0x0800
+      0006E0 E4               [12] 1215 	clr	a
+      0006E1 F0               [24] 1216 	movx	@dptr,a
+      0006E2 F0               [24] 1217 	movx	@dptr,a
+      0006E3 04               [12] 1218 	inc	a
+      0006E4 F0               [24] 1219 	movx	@dptr,a
+      0006E5 74 DF            [12] 1220 	mov	a,#0xdf
+      0006E7 F0               [24] 1221 	movx	@dptr,a
+                                   1222 ;	src/lcd_driver.c:109: LCD_COMMAND_REGISTER_PIN = 0;
+                                   1223 ;	assignBit
+      0006E8 C2 97            [12] 1224 	clr	_P1_7
+                                   1225 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0006EA 90 08 00         [24] 1226 	mov	dptr,#0x0800
+      0006ED 74 29            [12] 1227 	mov	a,#0x29
+      0006EF F0               [24] 1228 	movx	@dptr,a
+      0006F0 74 51            [12] 1229 	mov	a,#0x51
+      0006F2 F0               [24] 1230 	movx	@dptr,a
+                                   1231 ;	src/lcd_driver.c:114: LCD_COMMAND_REGISTER_PIN = 1;
+                                   1232 ;	assignBit
+      0006F3 D2 97            [12] 1233 	setb	_P1_7
+                                   1234 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      0006F5 90 08 00         [24] 1235 	mov	dptr,#0x0800
+      0006F8 74 E6            [12] 1236 	mov	a,#0xe6
+      0006FA F0               [24] 1237 	movx	@dptr,a
+                                   1238 ;	src/lcd_driver.c:59: lcd_writeAddress(0x00);
+      0006FB 7C 00            [12] 1239 	mov	r4,#0x00
+      0006FD 7D 00            [12] 1240 	mov	r5,#0x00
+      0006FF 7E 00            [12] 1241 	mov	r6,#0x00
+      000701 7F 00            [12] 1242 	mov	r7,#0x00
+      000703                       1243 00180$:
+      000703 C3               [12] 1244 	clr	c
+      000704 EC               [12] 1245 	mov	a,r4
+      000705 94 60            [12] 1246 	subb	a,#0x60
+      000707 ED               [12] 1247 	mov	a,r5
+      000708 94 3D            [12] 1248 	subb	a,#0x3d
+      00070A EE               [12] 1249 	mov	a,r6
+      00070B 94 08            [12] 1250 	subb	a,#0x08
+      00070D EF               [12] 1251 	mov	a,r7
+      00070E 94 00            [12] 1252 	subb	a,#0x00
+      000710 50 0F            [24] 1253 	jnc	00171$
+      000712 0C               [12] 1254 	inc	r4
+      000713 BC 00 09         [24] 1255 	cjne	r4,#0x00,00228$
+      000716 0D               [12] 1256 	inc	r5
+      000717 BD 00 05         [24] 1257 	cjne	r5,#0x00,00228$
+      00071A 0E               [12] 1258 	inc	r6
+                                   1259 ;	src/lcd_driver.c:116: lcd_initdelay(LCD_DELAY_120_MS);
+      00071B BE 00 E5         [24] 1260 	cjne	r6,#0x00,00180$
+      00071E 0F               [12] 1261 	inc	r7
+      00071F                       1262 00228$:
+      00071F 80 E2            [24] 1263 	sjmp	00180$
+      000721                       1264 00171$:
+                                   1265 ;	src/lcd_driver.c:120: LCD_COMMAND_REGISTER_PIN = 0;
+                                   1266 ;	assignBit
+      000721 C2 97            [12] 1267 	clr	_P1_7
+                                   1268 ;	headers/lcd_driver.h:53: *writeToLCD = address;
+      000723 90 08 00         [24] 1269 	mov	dptr,#0x0800
+      000726 74 2C            [12] 1270 	mov	a,#0x2c
+      000728 F0               [24] 1271 	movx	@dptr,a
+                                   1272 ;	src/lcd_driver.c:122: LCD_COMMAND_REGISTER_PIN = 1; //remove this later
+                                   1273 ;	assignBit
+      000729 D2 97            [12] 1274 	setb	_P1_7
+                                   1275 ;	src/lcd_driver.c:126: }
+      00072B 22               [24] 1276 	ret
+                                   1277 ;------------------------------------------------------------
+                                   1278 ;Allocation info for local variables in function 'lcd_putPixel'
                                    1279 ;------------------------------------------------------------
-                                   1280 ;Allocation info for local variables in function 'lcd_putPixel'
-                                   1281 ;------------------------------------------------------------
-                                   1282 ;__200000142   Allocated with name '_lcd_putPixel___200000142_20000_299'
-                                   1283 ;address       Allocated with name '_lcd_putPixel_address_30000_300'
-                                   1284 ;writeToLCD    Allocated with name '_lcd_putPixel_writeToLCD_40000_301'
-                                   1285 ;pixelToSend   Allocated with name '_lcd_putPixel_pixelToSend_10001_298'
-                                   1286 ;measuredBit   Allocated with name '_lcd_putPixel_measuredBit_10001_298'
-                                   1287 ;------------------------------------------------------------
-                                   1288 ;	src/lcd_driver.c:129: void lcd_putPixel(){
-                                   1289 ;	-----------------------------------------
-                                   1290 ;	 function lcd_putPixel
-                                   1291 ;	-----------------------------------------
-      00072C                       1292 _lcd_putPixel:
-                                   1293 ;	src/lcd_driver.c:131: LCD_0_ENABLE_PIN = 0;
-                                   1294 ;	assignBit
-      00072C C2 B4            [12] 1295 	clr	_P3_4
-                                   1296 ;	src/lcd_driver.c:134: LCD_COMMAND_REGISTER_PIN = 0;
-                                   1297 ;	assignBit
-      00072E C2 97            [12] 1298 	clr	_P1_7
-                                   1299 ;	headers/lcd_driver.h:53: *writeToLCD = address;
-      000730 90 80 00         [24] 1300 	mov	dptr,#0x8000
-      000733 74 2C            [12] 1301 	mov	a,#0x2c
-      000735 F0               [24] 1302 	movx	@dptr,a
-                                   1303 ;	src/lcd_driver.c:136: LCD_COMMAND_REGISTER_PIN = 1;
-                                   1304 ;	assignBit
-      000736 D2 97            [12] 1305 	setb	_P1_7
-                                   1306 ;	src/lcd_driver.c:139: uint16_t measuredBit = P1 & LCD_PULL_PIXEL_MASK;
-      000738 AF 90            [24] 1307 	mov	r7,_P1
-      00073A 53 07 1F         [24] 1308 	anl	ar7,#0x1f
-      00073D 7E 00            [12] 1309 	mov	r6,#0x00
-                                   1310 ;	src/lcd_driver.c:141: | (measuredBit<<LCD_GREEN_OFFSET)
-      00073F 8F 04            [24] 1311 	mov	ar4,r7
-      000741 EE               [12] 1312 	mov	a,r6
-      000742 C4               [12] 1313 	swap	a
-      000743 23               [12] 1314 	rl	a
-      000744 54 E0            [12] 1315 	anl	a,#0xe0
-      000746 CC               [12] 1316 	xch	a,r4
-      000747 C4               [12] 1317 	swap	a
-      000748 23               [12] 1318 	rl	a
-      000749 CC               [12] 1319 	xch	a,r4
-      00074A 6C               [12] 1320 	xrl	a,r4
-      00074B CC               [12] 1321 	xch	a,r4
-      00074C 54 E0            [12] 1322 	anl	a,#0xe0
-      00074E CC               [12] 1323 	xch	a,r4
-      00074F 6C               [12] 1324 	xrl	a,r4
-      000750 FD               [12] 1325 	mov	r5,a
-      000751 EF               [12] 1326 	mov	a,r7
-      000752 42 04            [12] 1327 	orl	ar4,a
-      000754 EE               [12] 1328 	mov	a,r6
-      000755 42 05            [12] 1329 	orl	ar5,a
-                                   1330 ;	src/lcd_driver.c:142: | (measuredBit<<LCD_RED_OFFSET));
-      000757 EF               [12] 1331 	mov	a,r7
-      000758 C4               [12] 1332 	swap	a
-      000759 03               [12] 1333 	rr	a
-      00075A 54 F8            [12] 1334 	anl	a,#0xf8
-      00075C FE               [12] 1335 	mov	r6,a
-      00075D E4               [12] 1336 	clr	a
-      00075E 42 04            [12] 1337 	orl	ar4,a
-      000760 EE               [12] 1338 	mov	a,r6
-      000761 42 05            [12] 1339 	orl	ar5,a
-                                   1340 ;	src/lcd_driver.c:143: pixelToSend = (__xdata uint16_t*) (measuredBit|LCD_ENSURE_WRITE_ADDRESS);
-      000763 8C 06            [24] 1341 	mov	ar6,r4
-      000765 8D 07            [24] 1342 	mov	ar7,r5
-      000767 43 07 80         [24] 1343 	orl	ar7,#0x80
-      00076A 8E 82            [24] 1344 	mov	dpl,r6
-      00076C 8F 83            [24] 1345 	mov	dph,r7
-                                   1346 ;	src/lcd_driver.c:144: *pixelToSend = measuredBit;
-      00076E EC               [12] 1347 	mov	a,r4
-      00076F F0               [24] 1348 	movx	@dptr,a
-      000770 ED               [12] 1349 	mov	a,r5
-      000771 A3               [24] 1350 	inc	dptr
-      000772 F0               [24] 1351 	movx	@dptr,a
-                                   1352 ;	src/lcd_driver.c:146: LCD_0_ENABLE_PIN = 1;
-                                   1353 ;	assignBit
-      000773 D2 B4            [12] 1354 	setb	_P3_4
-                                   1355 ;	src/lcd_driver.c:147: }
-      000775 22               [24] 1356 	ret
-                                   1357 ;------------------------------------------------------------
-                                   1358 ;Allocation info for local variables in function 'lcd_putSpecificColorPixel'
-                                   1359 ;------------------------------------------------------------
-                                   1360 ;g             Allocated with name '_lcd_putSpecificColorPixel_PARM_2'
-                                   1361 ;b             Allocated with name '_lcd_putSpecificColorPixel_PARM_3'
-                                   1362 ;r             Allocated with name '_lcd_putSpecificColorPixel_r_10000_302'
-                                   1363 ;pixelToSend   Allocated with name '_lcd_putSpecificColorPixel_pixelToSend_10000_303'
-                                   1364 ;measuredBit   Allocated with name '_lcd_putSpecificColorPixel_measuredBit_10000_303'
-                                   1365 ;------------------------------------------------------------
-                                   1366 ;	src/lcd_driver.c:150: void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b){
-                                   1367 ;	-----------------------------------------
-                                   1368 ;	 function lcd_putSpecificColorPixel
-                                   1369 ;	-----------------------------------------
-      000776                       1370 _lcd_putSpecificColorPixel:
-      000776 E5 82            [12] 1371 	mov	a,dpl
-      000778 90 00 66         [24] 1372 	mov	dptr,#_lcd_putSpecificColorPixel_r_10000_302
-      00077B F0               [24] 1373 	movx	@dptr,a
-                                   1374 ;	src/lcd_driver.c:160: uint16_t measuredBit = ((b & (LCD_NUM_VALUES_B-1)) 
-      00077C 90 00 65         [24] 1375 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_3
-      00077F E0               [24] 1376 	movx	a,@dptr
-      000780 54 1F            [12] 1377 	anl	a,#0x1f
-      000782 FF               [12] 1378 	mov	r7,a
-      000783 90 00 64         [24] 1379 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_2
-      000786 E0               [24] 1380 	movx	a,@dptr
-      000787 54 3F            [12] 1381 	anl	a,#0x3f
-      000789 FE               [12] 1382 	mov	r6,a
-      00078A E4               [12] 1383 	clr	a
-      00078B 23               [12] 1384 	rl	a
-      00078C 54 E0            [12] 1385 	anl	a,#0xe0
-      00078E CE               [12] 1386 	xch	a,r6
-      00078F C4               [12] 1387 	swap	a
-      000790 23               [12] 1388 	rl	a
-      000791 CE               [12] 1389 	xch	a,r6
-      000792 6E               [12] 1390 	xrl	a,r6
-      000793 CE               [12] 1391 	xch	a,r6
-      000794 54 E0            [12] 1392 	anl	a,#0xe0
-      000796 CE               [12] 1393 	xch	a,r6
-      000797 6E               [12] 1394 	xrl	a,r6
-      000798 FD               [12] 1395 	mov	r5,a
-      000799 7C 00            [12] 1396 	mov	r4,#0x00
-      00079B EF               [12] 1397 	mov	a,r7
-      00079C 42 06            [12] 1398 	orl	ar6,a
-      00079E EC               [12] 1399 	mov	a,r4
-      00079F 42 05            [12] 1400 	orl	ar5,a
-      0007A1 90 00 66         [24] 1401 	mov	dptr,#_lcd_putSpecificColorPixel_r_10000_302
-      0007A4 E0               [24] 1402 	movx	a,@dptr
-      0007A5 54 1F            [12] 1403 	anl	a,#0x1f
-      0007A7 C4               [12] 1404 	swap	a
-      0007A8 03               [12] 1405 	rr	a
-      0007A9 54 F8            [12] 1406 	anl	a,#0xf8
-      0007AB FC               [12] 1407 	mov	r4,a
-      0007AC E4               [12] 1408 	clr	a
-      0007AD 42 06            [12] 1409 	orl	ar6,a
-      0007AF EC               [12] 1410 	mov	a,r4
-      0007B0 42 05            [12] 1411 	orl	ar5,a
-                                   1412 ;	src/lcd_driver.c:163: pixelToSend = (__xdata uint16_t*) (measuredBit|LCD_ENSURE_WRITE_ADDRESS);
-      0007B2 8E 04            [24] 1413 	mov	ar4,r6
-      0007B4 8D 07            [24] 1414 	mov	ar7,r5
-      0007B6 43 07 80         [24] 1415 	orl	ar7,#0x80
-      0007B9 8C 82            [24] 1416 	mov	dpl,r4
-      0007BB 8F 83            [24] 1417 	mov	dph,r7
-                                   1418 ;	src/lcd_driver.c:164: *pixelToSend = measuredBit;
-      0007BD EE               [12] 1419 	mov	a,r6
-      0007BE F0               [24] 1420 	movx	@dptr,a
-      0007BF ED               [12] 1421 	mov	a,r5
-      0007C0 A3               [24] 1422 	inc	dptr
-      0007C1 F0               [24] 1423 	movx	@dptr,a
-                                   1424 ;	src/lcd_driver.c:168: }
-      0007C2 22               [24] 1425 	ret
-                                   1426 ;------------------------------------------------------------
-                                   1427 ;Allocation info for local variables in function 'lcd_clear'
-                                   1428 ;------------------------------------------------------------
-                                   1429 ;i             Allocated with name '_lcd_clear_i_20000_305'
-                                   1430 ;j             Allocated with name '_lcd_clear_j_40000_307'
-                                   1431 ;------------------------------------------------------------
-                                   1432 ;	src/lcd_driver.c:171: void lcd_clear(){
-                                   1433 ;	-----------------------------------------
-                                   1434 ;	 function lcd_clear
-                                   1435 ;	-----------------------------------------
-      0007C3                       1436 _lcd_clear:
-                                   1437 ;	src/lcd_driver.c:173: LCD_0_ENABLE_PIN = 0;
-                                   1438 ;	assignBit
-      0007C3 C2 B4            [12] 1439 	clr	_P3_4
-                                   1440 ;	src/lcd_driver.c:175: for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
-      0007C5 7E 00            [12] 1441 	mov	r6,#0x00
-      0007C7 7F 00            [12] 1442 	mov	r7,#0x00
-      0007C9                       1443 00107$:
-      0007C9 8E 04            [24] 1444 	mov	ar4,r6
-      0007CB 8F 05            [24] 1445 	mov	ar5,r7
-      0007CD C3               [12] 1446 	clr	c
-      0007CE EC               [12] 1447 	mov	a,r4
-      0007CF 94 40            [12] 1448 	subb	a,#0x40
-      0007D1 ED               [12] 1449 	mov	a,r5
-      0007D2 94 01            [12] 1450 	subb	a,#0x01
-      0007D4 50 3E            [24] 1451 	jnc	00102$
-                                   1452 ;	src/lcd_driver.c:176: for(uint16_t j = 0; j < LCD_PIXEL_HRES; j++){
-      0007D6 7C 00            [12] 1453 	mov	r4,#0x00
-      0007D8 7D 00            [12] 1454 	mov	r5,#0x00
-      0007DA                       1455 00104$:
-      0007DA 8C 02            [24] 1456 	mov	ar2,r4
-      0007DC 8D 03            [24] 1457 	mov	ar3,r5
-      0007DE C3               [12] 1458 	clr	c
-      0007DF EA               [12] 1459 	mov	a,r2
-      0007E0 94 E0            [12] 1460 	subb	a,#0xe0
-      0007E2 EB               [12] 1461 	mov	a,r3
-      0007E3 94 01            [12] 1462 	subb	a,#0x01
-      0007E5 50 26            [24] 1463 	jnc	00108$
-                                   1464 ;	src/lcd_driver.c:177: lcd_putSpecificColorPixel(LCD_CLEARED_COLOR,LCD_CLEARED_COLOR,LCD_CLEARED_COLOR);
-      0007E7 90 00 64         [24] 1465 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_2
-      0007EA E4               [12] 1466 	clr	a
-      0007EB F0               [24] 1467 	movx	@dptr,a
-      0007EC 90 00 65         [24] 1468 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_3
-      0007EF F0               [24] 1469 	movx	@dptr,a
-      0007F0 75 82 00         [24] 1470 	mov	dpl, #0x00
-      0007F3 C0 07            [24] 1471 	push	ar7
-      0007F5 C0 06            [24] 1472 	push	ar6
-      0007F7 C0 05            [24] 1473 	push	ar5
-      0007F9 C0 04            [24] 1474 	push	ar4
-      0007FB 12 07 76         [24] 1475 	lcall	_lcd_putSpecificColorPixel
-      0007FE D0 04            [24] 1476 	pop	ar4
-      000800 D0 05            [24] 1477 	pop	ar5
-      000802 D0 06            [24] 1478 	pop	ar6
-      000804 D0 07            [24] 1479 	pop	ar7
-                                   1480 ;	src/lcd_driver.c:176: for(uint16_t j = 0; j < LCD_PIXEL_HRES; j++){
-      000806 0C               [12] 1481 	inc	r4
-      000807 BC 00 D0         [24] 1482 	cjne	r4,#0x00,00104$
-      00080A 0D               [12] 1483 	inc	r5
-      00080B 80 CD            [24] 1484 	sjmp	00104$
-      00080D                       1485 00108$:
-                                   1486 ;	src/lcd_driver.c:175: for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
-      00080D 0E               [12] 1487 	inc	r6
-      00080E BE 00 B8         [24] 1488 	cjne	r6,#0x00,00107$
-      000811 0F               [12] 1489 	inc	r7
-      000812 80 B5            [24] 1490 	sjmp	00107$
-      000814                       1491 00102$:
-                                   1492 ;	src/lcd_driver.c:182: LCD_0_ENABLE_PIN = 1;
-                                   1493 ;	assignBit
-      000814 D2 B4            [12] 1494 	setb	_P3_4
-                                   1495 ;	src/lcd_driver.c:183: }
-      000816 22               [24] 1496 	ret
-                                   1497 	.area CSEG    (CODE)
-                                   1498 	.area CONST   (CODE)
-                                   1499 	.area XINIT   (CODE)
-                                   1500 	.area CABS    (ABS,CODE)
+                                   1280 ;pixelToSend   Allocated with name '_lcd_putPixel_pixelToSend_10000_297'
+                                   1281 ;measuredBit   Allocated with name '_lcd_putPixel_measuredBit_10000_297'
+                                   1282 ;------------------------------------------------------------
+                                   1283 ;	src/lcd_driver.c:129: void lcd_putPixel(){
+                                   1284 ;	-----------------------------------------
+                                   1285 ;	 function lcd_putPixel
+                                   1286 ;	-----------------------------------------
+      00072C                       1287 _lcd_putPixel:
+                                   1288 ;	src/lcd_driver.c:131: uint16_t measuredBit = P1 & LCD_PULL_PIXEL_MASK;
+      00072C AF 90            [24] 1289 	mov	r7,_P1
+      00072E 53 07 1F         [24] 1290 	anl	ar7,#0x1f
+      000731 7E 00            [12] 1291 	mov	r6,#0x00
+                                   1292 ;	src/lcd_driver.c:133: | (measuredBit<<LCD_GREEN_OFFSET)
+      000733 8F 04            [24] 1293 	mov	ar4,r7
+      000735 EE               [12] 1294 	mov	a,r6
+      000736 C4               [12] 1295 	swap	a
+      000737 23               [12] 1296 	rl	a
+      000738 54 E0            [12] 1297 	anl	a,#0xe0
+      00073A CC               [12] 1298 	xch	a,r4
+      00073B C4               [12] 1299 	swap	a
+      00073C 23               [12] 1300 	rl	a
+      00073D CC               [12] 1301 	xch	a,r4
+      00073E 6C               [12] 1302 	xrl	a,r4
+      00073F CC               [12] 1303 	xch	a,r4
+      000740 54 E0            [12] 1304 	anl	a,#0xe0
+      000742 CC               [12] 1305 	xch	a,r4
+      000743 6C               [12] 1306 	xrl	a,r4
+      000744 FD               [12] 1307 	mov	r5,a
+      000745 EF               [12] 1308 	mov	a,r7
+      000746 42 04            [12] 1309 	orl	ar4,a
+      000748 EE               [12] 1310 	mov	a,r6
+      000749 42 05            [12] 1311 	orl	ar5,a
+                                   1312 ;	src/lcd_driver.c:134: | (measuredBit<<LCD_RED_OFFSET));
+      00074B EF               [12] 1313 	mov	a,r7
+      00074C C4               [12] 1314 	swap	a
+      00074D 03               [12] 1315 	rr	a
+      00074E 54 F8            [12] 1316 	anl	a,#0xf8
+      000750 FE               [12] 1317 	mov	r6,a
+      000751 E4               [12] 1318 	clr	a
+      000752 42 04            [12] 1319 	orl	ar4,a
+      000754 EE               [12] 1320 	mov	a,r6
+      000755 42 05            [12] 1321 	orl	ar5,a
+                                   1322 ;	src/lcd_driver.c:135: pixelToSend = (__xdata uint16_t*) (measuredBit|LCD_ENSURE_WRITE_ADDRESS);
+      000757 8C 06            [24] 1323 	mov	ar6,r4
+      000759 8D 07            [24] 1324 	mov	ar7,r5
+      00075B 43 07 08         [24] 1325 	orl	ar7,#0x08
+      00075E 8E 82            [24] 1326 	mov	dpl,r6
+      000760 8F 83            [24] 1327 	mov	dph,r7
+                                   1328 ;	src/lcd_driver.c:136: *pixelToSend = measuredBit;
+      000762 EC               [12] 1329 	mov	a,r4
+      000763 F0               [24] 1330 	movx	@dptr,a
+      000764 ED               [12] 1331 	mov	a,r5
+      000765 A3               [24] 1332 	inc	dptr
+      000766 F0               [24] 1333 	movx	@dptr,a
+                                   1334 ;	src/lcd_driver.c:137: }
+      000767 22               [24] 1335 	ret
+                                   1336 ;------------------------------------------------------------
+                                   1337 ;Allocation info for local variables in function 'lcd_putSpecificColorPixel'
+                                   1338 ;------------------------------------------------------------
+                                   1339 ;g             Allocated with name '_lcd_putSpecificColorPixel_PARM_2'
+                                   1340 ;b             Allocated with name '_lcd_putSpecificColorPixel_PARM_3'
+                                   1341 ;r             Allocated with name '_lcd_putSpecificColorPixel_r_10000_298'
+                                   1342 ;pixelToSend   Allocated with name '_lcd_putSpecificColorPixel_pixelToSend_10000_299'
+                                   1343 ;measuredBit   Allocated with name '_lcd_putSpecificColorPixel_measuredBit_10000_299'
+                                   1344 ;------------------------------------------------------------
+                                   1345 ;	src/lcd_driver.c:140: void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b){
+                                   1346 ;	-----------------------------------------
+                                   1347 ;	 function lcd_putSpecificColorPixel
+                                   1348 ;	-----------------------------------------
+      000768                       1349 _lcd_putSpecificColorPixel:
+      000768 E5 82            [12] 1350 	mov	a,dpl
+      00076A 90 00 69         [24] 1351 	mov	dptr,#_lcd_putSpecificColorPixel_r_10000_298
+      00076D F0               [24] 1352 	movx	@dptr,a
+                                   1353 ;	src/lcd_driver.c:150: uint16_t measuredBit = ((b & (LCD_NUM_VALUES_B-1)) 
+      00076E 90 00 68         [24] 1354 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_3
+      000771 E0               [24] 1355 	movx	a,@dptr
+      000772 54 1F            [12] 1356 	anl	a,#0x1f
+      000774 FF               [12] 1357 	mov	r7,a
+      000775 90 00 67         [24] 1358 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_2
+      000778 E0               [24] 1359 	movx	a,@dptr
+      000779 54 3F            [12] 1360 	anl	a,#0x3f
+      00077B FE               [12] 1361 	mov	r6,a
+      00077C E4               [12] 1362 	clr	a
+      00077D 23               [12] 1363 	rl	a
+      00077E 54 E0            [12] 1364 	anl	a,#0xe0
+      000780 CE               [12] 1365 	xch	a,r6
+      000781 C4               [12] 1366 	swap	a
+      000782 23               [12] 1367 	rl	a
+      000783 CE               [12] 1368 	xch	a,r6
+      000784 6E               [12] 1369 	xrl	a,r6
+      000785 CE               [12] 1370 	xch	a,r6
+      000786 54 E0            [12] 1371 	anl	a,#0xe0
+      000788 CE               [12] 1372 	xch	a,r6
+      000789 6E               [12] 1373 	xrl	a,r6
+      00078A FD               [12] 1374 	mov	r5,a
+      00078B 7C 00            [12] 1375 	mov	r4,#0x00
+      00078D EF               [12] 1376 	mov	a,r7
+      00078E 42 06            [12] 1377 	orl	ar6,a
+      000790 EC               [12] 1378 	mov	a,r4
+      000791 42 05            [12] 1379 	orl	ar5,a
+      000793 90 00 69         [24] 1380 	mov	dptr,#_lcd_putSpecificColorPixel_r_10000_298
+      000796 E0               [24] 1381 	movx	a,@dptr
+      000797 54 1F            [12] 1382 	anl	a,#0x1f
+      000799 C4               [12] 1383 	swap	a
+      00079A 03               [12] 1384 	rr	a
+      00079B 54 F8            [12] 1385 	anl	a,#0xf8
+      00079D FC               [12] 1386 	mov	r4,a
+      00079E E4               [12] 1387 	clr	a
+      00079F 42 06            [12] 1388 	orl	ar6,a
+      0007A1 EC               [12] 1389 	mov	a,r4
+      0007A2 42 05            [12] 1390 	orl	ar5,a
+                                   1391 ;	src/lcd_driver.c:153: pixelToSend = (__xdata uint16_t*) (measuredBit|LCD_ENSURE_WRITE_ADDRESS);
+      0007A4 8E 04            [24] 1392 	mov	ar4,r6
+      0007A6 8D 07            [24] 1393 	mov	ar7,r5
+      0007A8 43 07 08         [24] 1394 	orl	ar7,#0x08
+      0007AB 8C 82            [24] 1395 	mov	dpl,r4
+      0007AD 8F 83            [24] 1396 	mov	dph,r7
+                                   1397 ;	src/lcd_driver.c:154: *pixelToSend = measuredBit;
+      0007AF EE               [12] 1398 	mov	a,r6
+      0007B0 F0               [24] 1399 	movx	@dptr,a
+      0007B1 ED               [12] 1400 	mov	a,r5
+      0007B2 A3               [24] 1401 	inc	dptr
+      0007B3 F0               [24] 1402 	movx	@dptr,a
+                                   1403 ;	src/lcd_driver.c:158: }
+      0007B4 22               [24] 1404 	ret
+                                   1405 ;------------------------------------------------------------
+                                   1406 ;Allocation info for local variables in function 'lcd_clear'
+                                   1407 ;------------------------------------------------------------
+                                   1408 ;i             Allocated with name '_lcd_clear_i_20000_301'
+                                   1409 ;j             Allocated with name '_lcd_clear_j_40000_303'
+                                   1410 ;------------------------------------------------------------
+                                   1411 ;	src/lcd_driver.c:161: void lcd_clear(){
+                                   1412 ;	-----------------------------------------
+                                   1413 ;	 function lcd_clear
+                                   1414 ;	-----------------------------------------
+      0007B5                       1415 _lcd_clear:
+                                   1416 ;	src/lcd_driver.c:163: LCD_0_ENABLE_PIN = 0;
+                                   1417 ;	assignBit
+      0007B5 C2 B4            [12] 1418 	clr	_P3_4
+                                   1419 ;	src/lcd_driver.c:165: for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
+      0007B7 7E 00            [12] 1420 	mov	r6,#0x00
+      0007B9 7F 00            [12] 1421 	mov	r7,#0x00
+      0007BB                       1422 00107$:
+      0007BB 8E 04            [24] 1423 	mov	ar4,r6
+      0007BD 8F 05            [24] 1424 	mov	ar5,r7
+      0007BF C3               [12] 1425 	clr	c
+      0007C0 EC               [12] 1426 	mov	a,r4
+      0007C1 94 40            [12] 1427 	subb	a,#0x40
+      0007C3 ED               [12] 1428 	mov	a,r5
+      0007C4 94 01            [12] 1429 	subb	a,#0x01
+      0007C6 50 3E            [24] 1430 	jnc	00102$
+                                   1431 ;	src/lcd_driver.c:166: for(uint16_t j = 0; j < LCD_PIXEL_HRES; j++){
+      0007C8 7C 00            [12] 1432 	mov	r4,#0x00
+      0007CA 7D 00            [12] 1433 	mov	r5,#0x00
+      0007CC                       1434 00104$:
+      0007CC 8C 02            [24] 1435 	mov	ar2,r4
+      0007CE 8D 03            [24] 1436 	mov	ar3,r5
+      0007D0 C3               [12] 1437 	clr	c
+      0007D1 EA               [12] 1438 	mov	a,r2
+      0007D2 94 E0            [12] 1439 	subb	a,#0xe0
+      0007D4 EB               [12] 1440 	mov	a,r3
+      0007D5 94 01            [12] 1441 	subb	a,#0x01
+      0007D7 50 26            [24] 1442 	jnc	00108$
+                                   1443 ;	src/lcd_driver.c:167: lcd_putSpecificColorPixel(LCD_CLEARED_COLOR,LCD_CLEARED_COLOR,LCD_CLEARED_COLOR);
+      0007D9 90 00 67         [24] 1444 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_2
+      0007DC E4               [12] 1445 	clr	a
+      0007DD F0               [24] 1446 	movx	@dptr,a
+      0007DE 90 00 68         [24] 1447 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_3
+      0007E1 F0               [24] 1448 	movx	@dptr,a
+      0007E2 75 82 00         [24] 1449 	mov	dpl, #0x00
+      0007E5 C0 07            [24] 1450 	push	ar7
+      0007E7 C0 06            [24] 1451 	push	ar6
+      0007E9 C0 05            [24] 1452 	push	ar5
+      0007EB C0 04            [24] 1453 	push	ar4
+      0007ED 12 07 68         [24] 1454 	lcall	_lcd_putSpecificColorPixel
+      0007F0 D0 04            [24] 1455 	pop	ar4
+      0007F2 D0 05            [24] 1456 	pop	ar5
+      0007F4 D0 06            [24] 1457 	pop	ar6
+      0007F6 D0 07            [24] 1458 	pop	ar7
+                                   1459 ;	src/lcd_driver.c:166: for(uint16_t j = 0; j < LCD_PIXEL_HRES; j++){
+      0007F8 0C               [12] 1460 	inc	r4
+      0007F9 BC 00 D0         [24] 1461 	cjne	r4,#0x00,00104$
+      0007FC 0D               [12] 1462 	inc	r5
+      0007FD 80 CD            [24] 1463 	sjmp	00104$
+      0007FF                       1464 00108$:
+                                   1465 ;	src/lcd_driver.c:165: for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
+      0007FF 0E               [12] 1466 	inc	r6
+      000800 BE 00 B8         [24] 1467 	cjne	r6,#0x00,00107$
+      000803 0F               [12] 1468 	inc	r7
+      000804 80 B5            [24] 1469 	sjmp	00107$
+      000806                       1470 00102$:
+                                   1471 ;	src/lcd_driver.c:172: LCD_0_ENABLE_PIN = 1;
+                                   1472 ;	assignBit
+      000806 D2 B4            [12] 1473 	setb	_P3_4
+                                   1474 ;	src/lcd_driver.c:173: }
+      000808 22               [24] 1475 	ret
+                                   1476 	.area CSEG    (CODE)
+                                   1477 	.area CONST   (CODE)
+                                   1478 	.area XINIT   (CODE)
+                                   1479 	.area CABS    (ABS,CODE)

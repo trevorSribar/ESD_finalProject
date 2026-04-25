@@ -23,21 +23,26 @@ int main(void)
     lcd_init();
     printf_tiny("Initialzied the LCD\n\r");
     // lcd test
-    uint8_t r, g, b = 0;
+    // uint8_t r, g, b = 0;
+    // while(1){
+    //     lcd_putSpecificColorPixel(r,g,b);
+    //     r+=2;
+    //     if(r==LCD_NUM_VALUES_R){
+    //         r = 0;
+    //         g+=2;
+    //         if(g==LCD_NUM_VALUES_G){
+    //             g = 0;
+    //             b+=2;
+    //             if(b==LCD_NUM_VALUES_B){
+    //                 b=0;
+    //             }
+    //         }
+    //     }
+    // }
     while(1){
-        lcd_putSpecificColorPixel(r,g,b);
-        r+=2;
-        if(r==LCD_NUM_VALUES_R){
-            r = 0;
-            g+=2;
-            if(g==LCD_NUM_VALUES_G){
-                g = 0;
-                b+=2;
-                if(b==LCD_NUM_VALUES_B){
-                    b=0;
-                }
-            }
-        }
+        lcd_putPixel();
+        lcd_initdelay(100);
+        // printf_tiny("ADC valie: %u\n\r",P1&0xFF);
     }
     // end lcd test
     while(Terminal_run());;

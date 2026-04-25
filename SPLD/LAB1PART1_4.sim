@@ -6,6 +6,7 @@ PIN  19 =  OUTPUT_n
 PIN   2 =  PSEN_n 
 PIN   9 =  RD_n 
 PIN   3 =  RST_n 
+PIN  16 =  WR_DRIVER 
 PIN   8 =  WR_n 
 %END
 
@@ -25,5 +26,8 @@ INVERTED_RST =>
 
 OUTPUT_n =>
     RD_n
+
+WR_DRIVER =>
+    WR_n
 
 %END

@@ -932,7 +932,7 @@ _lcd_writeAddress:
 	movx	@dptr,a
 ;	headers/lcd_driver.h:53: *writeToLCD = address;
 	movx	a,@dptr
-	mov	dptr,#0x8000
+	mov	dptr,#0x0800
 	movx	@dptr,a
 ;	headers/lcd_driver.h:54: }
 	ret

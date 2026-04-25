@@ -19,6 +19,7 @@ PIN 2  = PSEN_n                     ; /* used for OE (NVSRAM)                 */
 PIN 19  = OUTPUT_n;                     /* for RD on NVSRAM                                */ 
 PIN 18  = CE_NVSRAM_n;                 /* for output on NVSRAM                               */
 PIN 17  = INVERTED_RST;			    /* for debug latch */
+PIN 16  = WR_DRIVER;				/* for clock ADC */
 
 /* ***************** LOGIC ************************/
 
@@ -26,3 +27,5 @@ CE_NVSRAM_n = A15;
 OUTPUT_n = RD_n;/* RD_n # PSEN_n; */
 C_LATCH = A15 # WR_n;
 INVERTED_RST = !RST_n;
+WR_DRIVER = WR_n;
+

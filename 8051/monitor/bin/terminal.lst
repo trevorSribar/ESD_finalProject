@@ -932,7 +932,7 @@
       000158 F0               [24]  932 	movx	@dptr,a
                                     933 ;	headers/lcd_driver.h:53: *writeToLCD = address;
       000159 E0               [24]  934 	movx	a,@dptr
-      00015A 90 80 00         [24]  935 	mov	dptr,#0x8000
+      00015A 90 08 00         [24]  935 	mov	dptr,#0x0800
       00015D F0               [24]  936 	movx	@dptr,a
                                     937 ;	headers/lcd_driver.h:54: }
       00015E 22               [24]  938 	ret

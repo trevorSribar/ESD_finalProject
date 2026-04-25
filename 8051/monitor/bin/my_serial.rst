@@ -447,10 +447,10 @@
                                     447 ; uninitialized external ram data
                                     448 ;--------------------------------------------------------
                                     449 	.area XSEG    (XDATA)
-      00000A                        450 _putchar_c_10000_79:
-      00000A                        451 	.ds 2
-      00000C                        452 _serial_initX2_baudRate_10000_93:
-      00000C                        453 	.ds 1
+      00000E                        450 _putchar_c_10000_79:
+      00000E                        451 	.ds 2
+      000010                        452 _serial_initX2_baudRate_10000_93:
+      000010                        453 	.ds 1
                                     454 ;--------------------------------------------------------
                                     455 ; absolute external ram data
                                     456 ;--------------------------------------------------------
@@ -505,7 +505,7 @@
                            000000   505 	ar0 = 0x00
       0002F4 AF 83            [24]  506 	mov	r7,dph
       0002F6 E5 82            [12]  507 	mov	a,dpl
-      0002F8 90 00 0A         [24]  508 	mov	dptr,#_putchar_c_10000_79
+      0002F8 90 00 0E         [24]  508 	mov	dptr,#_putchar_c_10000_79
       0002FB F0               [24]  509 	movx	@dptr,a
       0002FC EF               [12]  510 	mov	a,r7
       0002FD A3               [24]  511 	inc	dptr
@@ -523,7 +523,7 @@
                                     523 ;	assignBit
       000309 C2 99            [12]  524 	clr	_TI
                                     525 ;	src/my_serial.c:27: SBUF = c; // load serial port with transmit value
-      00030B 90 00 0A         [24]  526 	mov	dptr,#_putchar_c_10000_79
+      00030B 90 00 0E         [24]  526 	mov	dptr,#_putchar_c_10000_79
       00030E E0               [24]  527 	movx	a,@dptr
       00030F FE               [12]  528 	mov	r6,a
       000310 A3               [24]  529 	inc	dptr
@@ -614,7 +614,7 @@
                                     614 ;	-----------------------------------------
       000353                        615 _serial_initX2:
       000353 E5 82            [12]  616 	mov	a,dpl
-      000355 90 00 0C         [24]  617 	mov	dptr,#_serial_initX2_baudRate_10000_93
+      000355 90 00 10         [24]  617 	mov	dptr,#_serial_initX2_baudRate_10000_93
       000358 F0               [24]  618 	movx	@dptr,a
                                     619 ;	src/my_serial.c:65: TH1 = baudRate;
       000359 E0               [24]  620 	movx	a,@dptr

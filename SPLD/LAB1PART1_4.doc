@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          g16v8as  Library DLIB-h-40-2
-Created         Fri Apr 24 13:02:19 2026
+Created         Fri Apr 24 17:29:57 2026
 Name            LabFinal
 Partno          00
 Revision        5w
@@ -32,6 +32,9 @@ INVERTED_RST =>
 OUTPUT_n =>
     RD_n
 
+WR_DRIVER =>
+    WR_n
+
 
 ===============================================================================
                                  Symbol Table
@@ -49,6 +52,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     PSEN_n                      2        V        -       -       -     
     RD_n                        9        V        -       -       -     
     RST_n                       3        V        -       -       -     
+    WR_DRIVER                   16       V        1       8       1     
     WR_n                        8        V        -       -       -     
 
 
@@ -91,8 +95,8 @@ Pin #17  02050  Pol -  02122  Ac1 x
  00672 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00704 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
-Pin #16  02051  Pol x  02123  Ac1 - 
- 00768 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #16  02051  Pol -  02123  Ac1 x 
+ 00768 ------------------------x------- 
  00800 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00832 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00864 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -151,7 +155,7 @@ LEGEND    X : fuse not blown
                    PSEN_n x---|2           19|---x OUTPUT_n                 
                     RST_n x---|3           18|---x CE_NVSRAM_n              
                       A15 x---|4           17|---x INVERTED_RST             
-                          x---|5           16|---x                          
+                          x---|5           16|---x WR_DRIVER                
                           x---|6           15|---x                          
                           x---|7           14|---x                          
                      WR_n x---|8           13|---x                          
