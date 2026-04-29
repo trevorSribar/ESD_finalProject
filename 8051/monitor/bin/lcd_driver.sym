@@ -409,7 +409,7 @@ Symbol Table
     _WDTPRG                                                     =  0000A7 G
     _WDTRST                                                     =  0000A6 G
     _WR                                                         =  0000B6 G
- 16 _lcd_clear                                                     00027D GR
+ 16 _lcd_clear                                                     00027F GR
  16 _lcd_init                                                      000052 GR
   A _lcd_init_address_30000_102                                    00000F R
   A _lcd_init_address_30000_105                                    000010 R
@@ -492,8 +492,8 @@ Symbol Table
   A _lcd_init_delayAmount_30000_98                                 00000B R
  16 _lcd_initdelay                                                 00000C R
   A _lcd_initdelay_delayAmount_10000_81                            000001 R
- 16 _lcd_putPixel                                                  0001F4 GR
- 16 _lcd_putSpecificColorPixel                                     000230 GR
+ 16 _lcd_putPixel                                                  0001F6 GR
+ 16 _lcd_putSpecificColorPixel                                     000232 GR
   A _lcd_putSpecificColorPixel_PARM_2                              000053 GR
   A _lcd_putSpecificColorPixel_PARM_3                              000054 GR
   A _lcd_putSpecificColorPixel_r_10000_298                         000055 R
@@ -727,7 +727,7 @@ Area Table
   13 GSINIT5                                    size      0   flags   20
   14 GSINIT                                     size      0   flags   20
   15 GSFINAL                                    size      0   flags   20
-  16 CSEG                                       size    2D1   flags   20
+  16 CSEG                                       size    2D7   flags   20
   17 CONST                                      size      0   flags   20
   18 XINIT                                      size      0   flags   20
   19 CABS                                       size      0   flags   28

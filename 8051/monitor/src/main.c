@@ -18,6 +18,8 @@ void interrupt_init(void);
 int main(void)
 {
     serial_initX2(Baud_140625);
+    printf_tiny("Initialzied UART\n\r");
+    // getchar();
     // interrupt_init();
     // i2c_init();
     lcd_init();
@@ -41,8 +43,7 @@ int main(void)
     // }
     while(1){
         lcd_putPixel();
-        lcd_initdelay(100);
-        // printf_tiny("ADC valie: %u\n\r",P1&0xFF);
+        // printf_tiny("ADC valie: %u\n\r",P1&LCD_PULL_PIXEL_MASK);
     }
     // end lcd test
     while(Terminal_run());;

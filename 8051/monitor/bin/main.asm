@@ -11,7 +11,7 @@
 	.globl _Intr0
 	.globl _timer0_interrupt
 	.globl _main
-	.globl _lcd_putSpecificColorPixel
+	.globl _lcd_putPixel
 	.globl _lcd_init
 	.globl _serial_initX2
 	.globl _printf_tiny
@@ -463,14 +463,6 @@ _i2c_sendByte_a_10000_83:
 _lcd_writeAddress_address_10000_127:
 	.ds 1
 _lcd_initdelay_delayAmount_10000_129:
-	.ds 4
-_main_r_10001_147:
-	.ds 1
-_main_g_10001_147:
-	.ds 1
-_main_b_10001_147:
-	.ds 1
-_main_delayAmount_40001_154:
 	.ds 4
 ;--------------------------------------------------------
 ; absolute external ram data
@@ -1069,13 +1061,6 @@ _lcd_initdelay:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
-;r             Allocated with name '_main_r_10001_147'
-;g             Allocated with name '_main_g_10001_147'
-;b             Allocated with name '_main_b_10001_147'
-;__300010024   Allocated with name '_main___300010024_30001_153'
-;delayAmount   Allocated with name '_main_delayAmount_40001_154'
-;i             Allocated with name '_main_i_60001_156'
-;------------------------------------------------------------
 ;	src/main.c:18: int main(void)
 ;	-----------------------------------------
 ;	 function main
@@ -1084,9 +1069,7 @@ _main:
 ;	src/main.c:20: serial_initX2(Baud_140625);
 	mov	dpl, #0xff
 	lcall	_serial_initX2
-;	src/main.c:23: lcd_init();
-	lcall	_lcd_init
-;	src/main.c:24: printf_tiny("Initialzied the LCD\n\r");
+;	src/main.c:21: printf_tiny("Initialzied UART\n\r");
 	mov	a,#___str_0
 	push	acc
 	mov	a,#(___str_0 >> 8)
@@ -1094,96 +1077,41 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	src/main.c:26: uint8_t r, g, b = 0;
-	mov	dptr,#_main_b_10001_147
-	clr	a
-	movx	@dptr,a
-;	src/main.c:27: while(1){
-00108$:
-;	src/main.c:28: lcd_putSpecificColorPixel(r,g,b);
-	mov	dptr,#_main_r_10001_147
-	movx	a,@dptr
-	mov	r7,a
-	mov	dptr,#_main_g_10001_147
-	movx	a,@dptr
-	mov	r6,a
-	mov	dptr,#_main_b_10001_147
-	movx	a,@dptr
-	mov	r5,a
-	mov	dptr,#_lcd_putSpecificColorPixel_PARM_2
-	mov	a,r6
-	movx	@dptr,a
-	mov	dptr,#_lcd_putSpecificColorPixel_PARM_3
-	mov	a,r5
-	movx	@dptr,a
-	mov	dpl, r7
-	push	ar7
-	push	ar6
-	push	ar5
-	lcall	_lcd_putSpecificColorPixel
-	pop	ar5
-	pop	ar6
-	pop	ar7
-;	src/main.c:29: r+=2;
-	mov	dptr,#_main_r_10001_147
-	mov	a,#0x02
-	add	a, r7
-	movx	@dptr,a
-;	src/main.c:30: if(r==LCD_NUM_VALUES_R){
-	movx	a,@dptr
-	mov	r7,a
-	cjne	r7,#0x20,00108$
-;	src/main.c:31: r = 0;
-	mov	dptr,#_main_r_10001_147
-	clr	a
-	movx	@dptr,a
-;	src/main.c:32: g+=2;
-	mov	dptr,#_main_g_10001_147
-	mov	a,#0x02
-	add	a, r6
-	movx	@dptr,a
-;	src/main.c:33: if(g==LCD_NUM_VALUES_G){
-	movx	a,@dptr
-	mov	r7,a
-	cjne	r7,#0x40,00108$
-;	src/main.c:34: g = 0;
-	mov	dptr,#_main_g_10001_147
-	clr	a
-	movx	@dptr,a
-;	src/main.c:35: b+=2;
-	mov	dptr,#_main_b_10001_147
-	mov	a,#0x02
-	add	a, r5
-	movx	@dptr,a
-;	src/main.c:36: if(b==LCD_NUM_VALUES_B){
-	movx	a,@dptr
-	mov	r7,a
-	cjne	r7,#0x20,00108$
-;	src/main.c:37: b=0;
-	mov	dptr,#_main_b_10001_147
-	clr	a
-	movx	@dptr,a
-;	src/main.c:51: while(1);;
-;	src/main.c:52: }
-	sjmp	00108$
+;	src/main.c:25: lcd_init();
+	lcall	_lcd_init
+;	src/main.c:26: printf_tiny("Initialzied the LCD\n\r");
+	mov	a,#___str_1
+	push	acc
+	mov	a,#(___str_1 >> 8)
+	push	acc
+	lcall	_printf_tiny
+	dec	sp
+	dec	sp
+;	src/main.c:44: while(1){
+00102$:
+;	src/main.c:45: lcd_putPixel();
+	lcall	_lcd_putPixel
+;	src/main.c:52: while(1);;
+;	src/main.c:53: }
+	sjmp	00102$
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'interrupt_init'
 ;------------------------------------------------------------
-;	src/main.c:54: void interrupt_init(void){
+;	src/main.c:55: void interrupt_init(void){
 ;	-----------------------------------------
 ;	 function interrupt_init
 ;	-----------------------------------------
 _interrupt_init:
-;	src/main.c:56: IEN0 |= ENABLE_INTERRUPTS;
+;	src/main.c:57: IEN0 |= ENABLE_INTERRUPTS;
 	orl	_IEN0,#0x80
-;	src/main.c:57: IEN0 |= INT0_INTERRUPT_ENABLE;
+;	src/main.c:58: IEN0 |= INT0_INTERRUPT_ENABLE;
 	orl	_IEN0,#0x01
-;	src/main.c:58: }
+;	src/main.c:59: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'timer0_interrupt'
 ;------------------------------------------------------------
-;	src/main.c:60: void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
+;	src/main.c:61: void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
 ;	-----------------------------------------
 ;	 function timer0_interrupt
 ;	-----------------------------------------
@@ -1192,14 +1120,14 @@ _timer0_interrupt:
 	push	dpl
 	push	dph
 	push	psw
-;	src/main.c:61: numTimerInterrupts++;
+;	src/main.c:62: numTimerInterrupts++;
 	mov	dptr,#_numTimerInterrupts
 	movx	a,@dptr
 	add	a, #0x01
 	movx	@dptr,a
-;	src/main.c:62: TH0 = TIMER0_PRESCALE;
+;	src/main.c:63: TH0 = TIMER0_PRESCALE;
 	mov	_TH0,#0x03
-;	src/main.c:63: }
+;	src/main.c:64: }
 	pop	psw
 	pop	dph
 	pop	dpl
@@ -1210,12 +1138,12 @@ _timer0_interrupt:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'Intr0'
 ;------------------------------------------------------------
-;	src/main.c:66: void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
+;	src/main.c:67: void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
 ;	-----------------------------------------
 ;	 function Intr0
 ;	-----------------------------------------
 _Intr0:
-;	src/main.c:67: }
+;	src/main.c:68: }
 	reti
 ;	eliminated unneeded mov psw,# (no regs used in bank)
 ;	eliminated unneeded push/pop not_psw
@@ -1227,13 +1155,20 @@ _Intr0:
 	.area CONST   (CODE)
 	.area CONST   (CODE)
 ___str_0:
-	.ascii "Initialzied the LCD"
+	.ascii "Initialzied UART"
 	.db 0x0a
 	.db 0x0d
 	.db 0x00
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
 ___str_1:
+	.ascii "Initialzied the LCD"
+	.db 0x0a
+	.db 0x0d
+	.db 0x00
+	.area CSEG    (CODE)
+	.area CONST   (CODE)
+___str_2:
 	.ascii "End program"
 	.db 0x0a
 	.db 0x0d

@@ -13,6 +13,7 @@
 void lcd_init(){
     // For LCD 0
     LCD_0_ENABLE_PIN = 0;
+    LCD_1_ENABLE_PIN = 0;
     // SOFT RESET
     LCD_COMMAND_REGISTER_PIN = 0;
     lcd_writeAddress(LCD_SOFT_RESET_ADDRESS);
@@ -161,6 +162,7 @@ void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b){
 void lcd_clear(){
     // we are sending data to LCD 0
     LCD_0_ENABLE_PIN = 0;
+    LCD_1_ENABLE_PIN = 0;
 
     for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
         for(uint16_t j = 0; j < LCD_PIXEL_HRES; j++){
@@ -170,4 +172,5 @@ void lcd_clear(){
 
     // we are no long sending data to LCD 0
     LCD_0_ENABLE_PIN = 1;
+    LCD_1_ENABLE_PIN = 1;
 }

@@ -447,10 +447,10 @@
                                     447 ; uninitialized external ram data
                                     448 ;--------------------------------------------------------
                                     449 	.area XSEG    (XDATA)
-      00000E                        450 _putchar_c_10000_79:
-      00000E                        451 	.ds 2
-      000010                        452 _serial_initX2_baudRate_10000_93:
-      000010                        453 	.ds 1
+      000007                        450 _putchar_c_10000_79:
+      000007                        451 	.ds 2
+      000009                        452 _serial_initX2_baudRate_10000_93:
+      000009                        453 	.ds 1
                                     454 ;--------------------------------------------------------
                                     455 ; absolute external ram data
                                     456 ;--------------------------------------------------------
@@ -494,7 +494,7 @@
                                     494 ;	-----------------------------------------
                                     495 ;	 function putchar
                                     496 ;	-----------------------------------------
-      0002F4                        497 _putchar:
+      0002A4                        497 _putchar:
                            000007   498 	ar7 = 0x07
                            000006   499 	ar6 = 0x06
                            000005   500 	ar5 = 0x05
@@ -503,38 +503,38 @@
                            000002   503 	ar2 = 0x02
                            000001   504 	ar1 = 0x01
                            000000   505 	ar0 = 0x00
-      0002F4 AF 83            [24]  506 	mov	r7,dph
-      0002F6 E5 82            [12]  507 	mov	a,dpl
-      0002F8 90 00 0E         [24]  508 	mov	dptr,#_putchar_c_10000_79
-      0002FB F0               [24]  509 	movx	@dptr,a
-      0002FC EF               [12]  510 	mov	a,r7
-      0002FD A3               [24]  511 	inc	dptr
-      0002FE F0               [24]  512 	movx	@dptr,a
+      0002A4 AF 83            [24]  506 	mov	r7,dph
+      0002A6 E5 82            [12]  507 	mov	a,dpl
+      0002A8 90 00 07         [24]  508 	mov	dptr,#_putchar_c_10000_79
+      0002AB F0               [24]  509 	movx	@dptr,a
+      0002AC EF               [12]  510 	mov	a,r7
+      0002AD A3               [24]  511 	inc	dptr
+      0002AE F0               [24]  512 	movx	@dptr,a
                                     513 ;	src/my_serial.c:20: while (!TI){
-      0002FF                        514 00103$:
-      0002FF 20 99 07         [24]  515 	jb	_TI,00105$
+      0002AF                        514 00103$:
+      0002AF 20 99 07         [24]  515 	jb	_TI,00105$
                                     516 ;	src/my_serial.c:21: if (IE1){
-      000302 30 8B FA         [24]  517 	jnb	_IE1,00103$
+      0002B2 30 8B FA         [24]  517 	jnb	_IE1,00103$
                                     518 ;	src/my_serial.c:22: return 0;
-      000305 90 00 00         [24]  519 	mov	dptr,#0x0000
-      000308 22               [24]  520 	ret
-      000309                        521 00105$:
+      0002B5 90 00 00         [24]  519 	mov	dptr,#0x0000
+      0002B8 22               [24]  520 	ret
+      0002B9                        521 00105$:
                                     522 ;	src/my_serial.c:26: TI = 0;   // clear TI flag
                                     523 ;	assignBit
-      000309 C2 99            [12]  524 	clr	_TI
+      0002B9 C2 99            [12]  524 	clr	_TI
                                     525 ;	src/my_serial.c:27: SBUF = c; // load serial port with transmit value
-      00030B 90 00 0E         [24]  526 	mov	dptr,#_putchar_c_10000_79
-      00030E E0               [24]  527 	movx	a,@dptr
-      00030F FE               [12]  528 	mov	r6,a
-      000310 A3               [24]  529 	inc	dptr
-      000311 E0               [24]  530 	movx	a,@dptr
-      000312 FF               [12]  531 	mov	r7,a
-      000313 8E 99            [24]  532 	mov	_SBUF,r6
+      0002BB 90 00 07         [24]  526 	mov	dptr,#_putchar_c_10000_79
+      0002BE E0               [24]  527 	movx	a,@dptr
+      0002BF FE               [12]  528 	mov	r6,a
+      0002C0 A3               [24]  529 	inc	dptr
+      0002C1 E0               [24]  530 	movx	a,@dptr
+      0002C2 FF               [12]  531 	mov	r7,a
+      0002C3 8E 99            [24]  532 	mov	_SBUF,r6
                                     533 ;	src/my_serial.c:28: return c;
-      000315 8E 82            [24]  534 	mov	dpl, r6
-      000317 8F 83            [24]  535 	mov	dph, r7
+      0002C5 8E 82            [24]  534 	mov	dpl, r6
+      0002C7 8F 83            [24]  535 	mov	dph, r7
                                     536 ;	src/my_serial.c:29: }
-      000319 22               [24]  537 	ret
+      0002C9 22               [24]  537 	ret
                                     538 ;------------------------------------------------------------
                                     539 ;Allocation info for local variables in function 'getchar'
                                     540 ;------------------------------------------------------------
@@ -542,26 +542,26 @@
                                     542 ;	-----------------------------------------
                                     543 ;	 function getchar
                                     544 ;	-----------------------------------------
-      00031A                        545 _getchar:
+      0002CA                        545 _getchar:
                                     546 ;	src/my_serial.c:33: while (!RI){
-      00031A                        547 00103$:
-      00031A 20 98 07         [24]  548 	jb	_RI,00105$
+      0002CA                        547 00103$:
+      0002CA 20 98 07         [24]  548 	jb	_RI,00105$
                                     549 ;	src/my_serial.c:34: if(IE1){
-      00031D 30 8B FA         [24]  550 	jnb	_IE1,00103$
+      0002CD 30 8B FA         [24]  550 	jnb	_IE1,00103$
                                     551 ;	src/my_serial.c:35: return 0;
-      000320 90 00 00         [24]  552 	mov	dptr,#0x0000
-      000323 22               [24]  553 	ret
-      000324                        554 00105$:
+      0002D0 90 00 00         [24]  552 	mov	dptr,#0x0000
+      0002D3 22               [24]  553 	ret
+      0002D4                        554 00105$:
                                     555 ;	src/my_serial.c:39: RI = 0;      // clear RI flag
                                     556 ;	assignBit
-      000324 C2 98            [12]  557 	clr	_RI
+      0002D4 C2 98            [12]  557 	clr	_RI
                                     558 ;	src/my_serial.c:40: return SBUF; // return character from SBUF
-      000326 AE 99            [24]  559 	mov	r6,_SBUF
-      000328 7F 00            [12]  560 	mov	r7,#0x00
-      00032A 8E 82            [24]  561 	mov	dpl, r6
-      00032C 8F 83            [24]  562 	mov	dph, r7
+      0002D6 AE 99            [24]  559 	mov	r6,_SBUF
+      0002D8 7F 00            [12]  560 	mov	r7,#0x00
+      0002DA 8E 82            [24]  561 	mov	dpl, r6
+      0002DC 8F 83            [24]  562 	mov	dph, r7
                                     563 ;	src/my_serial.c:41: }
-      00032E 22               [24]  564 	ret
+      0002DE 22               [24]  564 	ret
                                     565 ;------------------------------------------------------------
                                     566 ;Allocation info for local variables in function 'getandputchar'
                                     567 ;------------------------------------------------------------
@@ -569,40 +569,40 @@
                                     569 ;	-----------------------------------------
                                     570 ;	 function getandputchar
                                     571 ;	-----------------------------------------
-      00032F                        572 _getandputchar:
+      0002DF                        572 _getandputchar:
                                     573 ;	src/my_serial.c:45: while (!RI){
-      00032F                        574 00103$:
-      00032F 20 98 07         [24]  575 	jb	_RI,00105$
+      0002DF                        574 00103$:
+      0002DF 20 98 07         [24]  575 	jb	_RI,00105$
                                     576 ;	src/my_serial.c:46: if (IE1){
-      000332 30 8B FA         [24]  577 	jnb	_IE1,00103$
+      0002E2 30 8B FA         [24]  577 	jnb	_IE1,00103$
                                     578 ;	src/my_serial.c:47: return 0;
-      000335 90 00 00         [24]  579 	mov	dptr,#0x0000
-      000338 22               [24]  580 	ret
-      000339                        581 00105$:
+      0002E5 90 00 00         [24]  579 	mov	dptr,#0x0000
+      0002E8 22               [24]  580 	ret
+      0002E9                        581 00105$:
                                     582 ;	src/my_serial.c:51: RI = 0; // clear RI flag
                                     583 ;	assignBit
-      000339 C2 98            [12]  584 	clr	_RI
+      0002E9 C2 98            [12]  584 	clr	_RI
                                     585 ;	src/my_serial.c:52: while (!TI){
-      00033B                        586 00108$:
-      00033B 20 99 07         [24]  587 	jb	_TI,00110$
+      0002EB                        586 00108$:
+      0002EB 20 99 07         [24]  587 	jb	_TI,00110$
                                     588 ;	src/my_serial.c:53: if (IE1){
-      00033E 30 8B FA         [24]  589 	jnb	_IE1,00108$
+      0002EE 30 8B FA         [24]  589 	jnb	_IE1,00108$
                                     590 ;	src/my_serial.c:54: return 0;
-      000341 90 00 00         [24]  591 	mov	dptr,#0x0000
-      000344 22               [24]  592 	ret
-      000345                        593 00110$:
+      0002F1 90 00 00         [24]  591 	mov	dptr,#0x0000
+      0002F4 22               [24]  592 	ret
+      0002F5                        593 00110$:
                                     594 ;	src/my_serial.c:58: TI = 0;   // clear TI flag
                                     595 ;	assignBit
-      000345 C2 99            [12]  596 	clr	_TI
+      0002F5 C2 99            [12]  596 	clr	_TI
                                     597 ;	src/my_serial.c:59: SBUF = SBUF; // load serial port with transmit value
-      000347 85 99 99         [24]  598 	mov	_SBUF,_SBUF
+      0002F7 85 99 99         [24]  598 	mov	_SBUF,_SBUF
                                     599 ;	src/my_serial.c:60: return SBUF;
-      00034A AE 99            [24]  600 	mov	r6,_SBUF
-      00034C 7F 00            [12]  601 	mov	r7,#0x00
-      00034E 8E 82            [24]  602 	mov	dpl, r6
-      000350 8F 83            [24]  603 	mov	dph, r7
+      0002FA AE 99            [24]  600 	mov	r6,_SBUF
+      0002FC 7F 00            [12]  601 	mov	r7,#0x00
+      0002FE 8E 82            [24]  602 	mov	dpl, r6
+      000300 8F 83            [24]  603 	mov	dph, r7
                                     604 ;	src/my_serial.c:61: }
-      000352 22               [24]  605 	ret
+      000302 22               [24]  605 	ret
                                     606 ;------------------------------------------------------------
                                     607 ;Allocation info for local variables in function 'serial_initX2'
                                     608 ;------------------------------------------------------------
@@ -612,27 +612,27 @@
                                     612 ;	-----------------------------------------
                                     613 ;	 function serial_initX2
                                     614 ;	-----------------------------------------
-      000353                        615 _serial_initX2:
-      000353 E5 82            [12]  616 	mov	a,dpl
-      000355 90 00 10         [24]  617 	mov	dptr,#_serial_initX2_baudRate_10000_93
-      000358 F0               [24]  618 	movx	@dptr,a
+      000303                        615 _serial_initX2:
+      000303 E5 82            [12]  616 	mov	a,dpl
+      000305 90 00 09         [24]  617 	mov	dptr,#_serial_initX2_baudRate_10000_93
+      000308 F0               [24]  618 	movx	@dptr,a
                                     619 ;	src/my_serial.c:65: TH1 = baudRate;
-      000359 E0               [24]  620 	movx	a,@dptr
-      00035A FF               [12]  621 	mov	r7,a
-      00035B 8F 8D            [24]  622 	mov	_TH1,r7
+      000309 E0               [24]  620 	movx	a,@dptr
+      00030A FF               [12]  621 	mov	r7,a
+      00030B 8F 8D            [24]  622 	mov	_TH1,r7
                                     623 ;	src/my_serial.c:66: TL1 = baudRate;
-      00035D 8F 8B            [24]  624 	mov	_TL1,r7
+      00030D 8F 8B            [24]  624 	mov	_TL1,r7
                                     625 ;	src/my_serial.c:73: __endasm;
-      00035F 75 89 21         [24]  626 	mov	tmod, #0x21 ;set timer #1 for 8 bit auto-reload
-      000362 75 87 80         [24]  627 	mov	pcon, #0x80 ;configure built-in uart
-      000365 75 98 52         [24]  628 	mov	scon, #0x52
-      000368 D2 8E            [12]  629 	setb	tr1 ;start the baud rate timer
+      00030F 75 89 21         [24]  626 	mov	tmod, #0x21 ;set timer #1 for 8 bit auto-reload
+      000312 75 87 80         [24]  627 	mov	pcon, #0x80 ;configure built-in uart
+      000315 75 98 52         [24]  628 	mov	scon, #0x52
+      000318 D2 8E            [12]  629 	setb	tr1 ;start the baud rate timer
                                     630 ;	src/my_serial.c:74: CKCON0 |= X2_MODE; //set the clock to X2 mode
-      00036A 43 8F 01         [24]  631 	orl	_CKCON0,#0x01
+      00031A 43 8F 01         [24]  631 	orl	_CKCON0,#0x01
                                     632 ;	src/my_serial.c:75: CKCON0 |= TIMER1_SPEED; //slow down the baud rate
-      00036D 43 8F 04         [24]  633 	orl	_CKCON0,#0x04
+      00031D 43 8F 04         [24]  633 	orl	_CKCON0,#0x04
                                     634 ;	src/my_serial.c:76: }
-      000370 22               [24]  635 	ret
+      000320 22               [24]  635 	ret
                                     636 	.area CSEG    (CODE)
                                     637 	.area CONST   (CODE)
                                     638 	.area XINIT   (CODE)
