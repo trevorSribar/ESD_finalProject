@@ -9,8 +9,8 @@
 #include "includes.h"
 
 // defines
-#define SDA P1_5    // PIN 1.5 is SDA
-#define SCL P1_0    // PIN 1.0 is SCL
+#define SDA P1_6    // PIN 1.6 is SDA
+#define SCL P1_5    // PIN 1.5 is SCL
 #define ERROR 1
 #define SUCCESS 0
 #define I2C_ERROR_MONITOR_ADDRESS 2

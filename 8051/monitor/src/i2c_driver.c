@@ -55,7 +55,7 @@ __code const static uint8_t edid[128] = {
     // no extension
     0x00,
     // checksum
-    0xD4
+    0x98
     /*
 00FFFFFFFFFFFF00
 5033E6213469420F
@@ -101,12 +101,15 @@ void i2c_init(){
 char i2c_edidSend(){
     i2c_findStart();
     // saying it wants to talk to the monitor
-    if(i2c_pullByte()!=MONITOR_WRITE_ADDRESS||MONITOR_WRITE_ADDRESS){
+    uint8_t pulledByte = i2c_pullByte();
+    if(pulledByte!=MONITOR_WRITE_ADDRESS||pulledByte!=MONITOR_WRITE_ADDRESS){
+        printf_tiny("%u is not a monitor Address\n\r",pulledByte);
         return I2C_ERROR_MONITOR_ADDRESS;
     }
     i2c_sendAck();
     // saying it wants to read from byte 0
     if(i2c_pullByte()!=0){
+        printf_tiny("Monitor is not reading from 0\n\r");
         return I2C_ERROR_MONITR_SET_0;
     }
     i2c_sendAck();

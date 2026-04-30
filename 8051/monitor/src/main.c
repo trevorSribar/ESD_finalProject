@@ -20,22 +20,19 @@ void interrupt_init(void);
 int main(void)
 {
     serial_initX2(Baud_140625);
-    printf_tiny("Initialzied UART\n\r");
-    i2c_printEDIDhex();
-    // interrupt_init();
-    // i2c_init();
+    printf_tiny("Initialized UART\n\r");
+    i2c_init();
+    printf_tiny("Attempting to send EDID...\n\r");
+    while(i2c_edidSend()!=0){
+        
+    }
     lcd_init();
     printf_tiny("Initialzied the LCD\n\r");
+    while(P3_3 == 0);
+    interrupt_init();
     while(1){
-        // LCD_1_ENABLE_PIN = 1;
-        // LCD_1_ENABLE_PIN = 0;
-        LCD_1_ENABLE_PIN = 1;
         lcd_putPixel();
-        LCD_1_ENABLE_PIN = 0;
-        // printf_tiny("ADC valie: %u\n\r",P1&LCD_PULL_PIXEL_MASK);
     }
-    // end lcd test
-    while(Terminal_run());;
     // Return
     printf_tiny("End program\n\r");
     while(1);;
