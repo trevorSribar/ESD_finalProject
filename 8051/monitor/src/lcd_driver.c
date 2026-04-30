@@ -142,7 +142,6 @@ __asm
     mov a, r2 ; reload the old value
     rr a
     rr a
-    anl a, #0x07 ; mask the bottom 3 bits
     orl a, r1
     mov dph, a
 
@@ -159,7 +158,7 @@ __asm
     inc dptr
     mov a, dph
     movx @dptr, a
-__endasm
+__endasm;
     // __xdata uint16_t *pixelToSend;
     // uint16_t measuredBit = P1;
     // measuredBit = measuredBit & (uint16_t)LCD_PULL_PIXEL_MASK;
