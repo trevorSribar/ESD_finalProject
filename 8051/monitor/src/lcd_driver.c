@@ -130,19 +130,19 @@ void lcd_init(){
 void lcd_putPixel(){
     __asm 
     mov a, _P1 ; pull the ADC data
-    anl a, #LCD_PULL_PIXEL_MASK ; mask the data
+    anl a, #0x1F ; mask the data
     mov r2, a ; save the value of the accumulator
 
     ; high byte
     rl a
     rl a
     rl a
-    anl a, #0xF8
+    anl a, #0xF8 ; mask just the top 5 bits
     mov r1, a ; save the value of the accumulator
     mov a, r2 ; reload the old value
     rr a
     rr a
-    anl a, #0x07
+    anl a, #0x07 ; mask the bottom 3 bits
     orl a, r1
     mov dph, a
 
@@ -150,7 +150,7 @@ void lcd_putPixel(){
     rl a
     rl a
     rl a
-    anl a, #0xC0
+    anl a, #0xC0 ; mask the top 2 bits
     orl a, r2
     mov dpl, a
 
