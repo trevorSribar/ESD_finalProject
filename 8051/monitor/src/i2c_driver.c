@@ -12,7 +12,7 @@ __code const static uint8_t edid[128] = {
     0xE6, 0x21, 0x34, 0x69, 0x42, 0x0F, //funny numbers for product code/serial number
     0x11, 0x24, // week 17 2026
     0x01, 0x03, // EDID version 1.3
-    0x80, LCD_H_SIZE_CM, LCD_V_SIZE_CM, 0x78, 0x02,
+    0x80, LCD_H_SIZE_CM, LCD_V_SIZE_CM, 0x78, 0x0A,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //25-34 Chromaticity coordinates default for now
     0x20, 0x00, 0x00, // establish timings
     0x31, 0b01000000, // standard timing 1: 640 4:3 @60fps
@@ -36,7 +36,7 @@ __code const static uint8_t edid[128] = {
     0x01, // min Vsync freq 1hz, this is kinda wrong cuz we get 0.5
     0x3C, // max Vsync freq 60hz
     0x01, // min Hsync freq 1khz, this is kinda wrong cuz we get 312
-    0x1C, // max Hsync freq of 28khz
+    0x50, // max Hsync freq of what I need to not throw an error
     0x1A, // kinda doesn't matter cuz it's a pixel clock and we don't have that
     0x00, 0x0A, // line terminator
     0x20, 0x20, 0x20, 0x20, 0x20, 0x20, // padding
