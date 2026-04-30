@@ -128,7 +128,7 @@ void lcd_init(){
 
 // attempts to put the color at port 0 onto the current pixel location
 void lcd_putPixel(){
-    __asm 
+__asm
     mov a, _P1 ; pull the ADC data
     anl a, #0x1F ; mask the data
     mov r2, a ; save the value of the accumulator
@@ -159,7 +159,7 @@ void lcd_putPixel(){
     inc dptr
     mov a, dph
     movx @dptr, a
-    __endasm
+__endasm
     // __xdata uint16_t *pixelToSend;
     // uint16_t measuredBit = P1;
     // measuredBit = measuredBit & (uint16_t)LCD_PULL_PIXEL_MASK;
