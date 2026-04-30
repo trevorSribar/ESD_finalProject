@@ -14,7 +14,7 @@ __code const static uint8_t edid[128] = {
     0x01, 0x03, // EDID version 1.3
     0x80, LCD_H_SIZE_CM, LCD_V_SIZE_CM, 0x78, 0x02,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //25-34 Chromaticity coordinates default for now
-    0x20, 0x00, 0x00 // establish timings
+    0x20, 0x00, 0x00, // establish timings
     0x31, 0b01000000, // standard timing 1: 640 4:3 @60fps
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, // we only have 1 standard timing
@@ -55,29 +55,24 @@ __code const static uint8_t edid[128] = {
     // no extension
     0x00,
     // checksum
-    0x00
+    0xD4
     /*
 00FFFFFFFFFFFF00
-5033
-E6213469420F
-1124
-0103
-8007057802
-00000000000000000000
-3140
-0000000000000000000000000000
-0001
-80A0
-20
-E02D
-10
-1060
-A200
-493100
-0000
-18
-
-    
+5033E6213469420F
+1124010380070578
+0200000000000000
+0000002000003140
+0101010101010101
+0101010101010F00
+80A020E02D101060
+A200493100000018
+000000FD00013C01
+1C1A000A20202020
+2020000000FC0054
+4153204C43440A20
+2020202000000010
+0000000000000000
+00000000000000D4
     */
 };
 
@@ -85,9 +80,15 @@ A200
 // funcitons
 //
 void i2c_printEDIDhex(){
+    uint8_t checkSum = 0;
     for(uint8_t i = 0; i < 128; i++){
+        checkSum+=edid[i];
+        if(edid[i]<16){
+            putchar('0');
+        }
         printf("%X",edid[i]);
     }
+    printf("\n\rChecksum: %u\n\r",checkSum);
 }
 
 // pulls the lines high so that I2C can be used

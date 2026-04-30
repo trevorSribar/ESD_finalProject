@@ -25,7 +25,7 @@ int main(void)
     // interrupt_init();
     // i2c_init();
     lcd_init();
-    printf_tiny("\n\rInitialzied the LCD\n\r");
+    printf_tiny("Initialzied the LCD\n\r");
     while(1){
         // LCD_1_ENABLE_PIN = 1;
         // LCD_1_ENABLE_PIN = 0;
