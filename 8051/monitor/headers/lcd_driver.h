@@ -32,7 +32,7 @@
 
 #define LCD_16_BITS_PER_PIXEL_MODE 0x55
 
-#define LCD_PULL_PIXEL_MASK 0b00011111
+#define LCD_PULL_PIXEL_MASK 0x1F
 #define LCD_GREEN_OFFSET 6
 #define LCD_RED_OFFSET 11
 #define LCD_BRIGHTNESS 0xFF // min of 0, max of FF
