@@ -8,6 +8,7 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
+	.globl _Intr1
 	.globl _Intr0
 	.globl _timer0_interrupt
 	.globl _main
@@ -211,6 +212,7 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
+	.globl _numInterruptsInOneCycle
 	.globl _interrupt_init
 ;--------------------------------------------------------
 ; special function registers
@@ -472,6 +474,8 @@ _lcd_initdelay_delayAmount_10000_129:
 ; initialized external ram data
 ;--------------------------------------------------------
 	.area XISEG   (XDATA)
+_numInterruptsInOneCycle::
+	.ds 1
 	.area HOME    (CODE)
 	.area GSINIT0 (CODE)
 	.area GSINIT1 (CODE)
@@ -491,6 +495,10 @@ __interrupt_vect:
 	ljmp	_Intr0
 	.ds	5
 	ljmp	_timer0_interrupt
+	.ds	5
+	reti
+	.ds	7
+	ljmp	_Intr1
 ; restartable atomic support routines
 	.ds	2
 sdcc_atomic_exchange_rollback_start::
@@ -579,7 +587,7 @@ __sdcc_program_startup:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'i2c_findStart'
 ;------------------------------------------------------------
-;	headers/i2c_driver.h:28: static inline void i2c_findStart(){
+;	headers/i2c_driver.h:30: static inline void i2c_findStart(){
 ;	-----------------------------------------
 ;	 function i2c_findStart
 ;	-----------------------------------------
@@ -592,61 +600,61 @@ _i2c_findStart:
 	ar2 = 0x02
 	ar1 = 0x01
 	ar0 = 0x00
-;	headers/i2c_driver.h:29: while(SCL==0); // make sure it isn't currently clocking values
+;	headers/i2c_driver.h:31: while(SCL==0); // make sure it isn't currently clocking values
 00101$:
 	jnb	_P1_0,00101$
-;	headers/i2c_driver.h:30: while(SDA==1); // wait for the start condition (as both are now high)
+;	headers/i2c_driver.h:32: while(SDA==1); // wait for the start condition (as both are now high)
 00104$:
 	jb	_P1_5,00104$
-;	headers/i2c_driver.h:31: while(SCL==1); // wait for the clock line to go low, so we can call pullByte without causing errors
+;	headers/i2c_driver.h:33: while(SCL==1); // wait for the clock line to go low, so we can call pullByte without causing errors
 00107$:
 	jb	_P1_0,00107$
-;	headers/i2c_driver.h:32: }
+;	headers/i2c_driver.h:34: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'i2c_sendAck'
 ;------------------------------------------------------------
-;	headers/i2c_driver.h:34: static inline void i2c_sendAck(){
+;	headers/i2c_driver.h:36: static inline void i2c_sendAck(){
 ;	-----------------------------------------
 ;	 function i2c_sendAck
 ;	-----------------------------------------
 _i2c_sendAck:
-;	headers/i2c_driver.h:35: while(SCL==1);
+;	headers/i2c_driver.h:37: while(SCL==1);
 00101$:
 	jb	_P1_0,00101$
-;	headers/i2c_driver.h:36: SDA = 0;
+;	headers/i2c_driver.h:38: SDA = 0;
 ;	assignBit
 	clr	_P1_5
-;	headers/i2c_driver.h:37: while(SCL==0);  // wait till the data is clocked in
+;	headers/i2c_driver.h:39: while(SCL==0);  // wait till the data is clocked in
 00104$:
 	jnb	_P1_0,00104$
-;	headers/i2c_driver.h:38: while(SCL==1);  // data is being clocked in
+;	headers/i2c_driver.h:40: while(SCL==1);  // data is being clocked in
 00107$:
 	jb	_P1_0,00107$
-;	headers/i2c_driver.h:39: SDA = 1;        // now we reset the line
+;	headers/i2c_driver.h:41: SDA = 1;        // now we reset the line
 ;	assignBit
 	setb	_P1_5
-;	headers/i2c_driver.h:40: }
+;	headers/i2c_driver.h:42: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'i2c_pullBit'
 ;------------------------------------------------------------
 ;toReturn      Allocated with name '_i2c_pullBit_toReturn_10001_82'
 ;------------------------------------------------------------
-;	headers/i2c_driver.h:43: static inline char i2c_pullBit(){
+;	headers/i2c_driver.h:45: static inline char i2c_pullBit(){
 ;	-----------------------------------------
 ;	 function i2c_pullBit
 ;	-----------------------------------------
 _i2c_pullBit:
-;	headers/i2c_driver.h:44: while(SCL==0);
+;	headers/i2c_driver.h:46: while(SCL==0);
 00101$:
 	jnb	_P1_0,00101$
-;	headers/i2c_driver.h:45: char toReturn = (volatile char)SDA;
+;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_5
 	clr	a
 	rlc	a
-;	headers/i2c_driver.h:46: return toReturn;
-;	headers/i2c_driver.h:47: }
+;	headers/i2c_driver.h:48: return toReturn;
+;	headers/i2c_driver.h:49: }
 	mov	dpl,a
 	ret
 ;------------------------------------------------------------
@@ -656,7 +664,7 @@ _i2c_pullBit:
 ;__200000004   Allocated with name '_i2c_sendByte___200000004_20000_84'
 ;toReturn      Allocated with name '_i2c_sendByte_toReturn_50000_89'
 ;------------------------------------------------------------
-;	headers/i2c_driver.h:50: static inline char i2c_sendByte(char a){
+;	headers/i2c_driver.h:52: static inline char i2c_sendByte(char a){
 ;	-----------------------------------------
 ;	 function i2c_sendByte
 ;	-----------------------------------------
@@ -664,7 +672,7 @@ _i2c_sendByte:
 	mov	a,dpl
 	mov	dptr,#_i2c_sendByte_a_10000_83
 	movx	@dptr,a
-;	headers/i2c_driver.h:53: SDA = (1 & (a>>7));
+;	headers/i2c_driver.h:55: SDA = (1 & (a>>7));
 	movx	a,@dptr
 	mov	r7,a
 	rl	a
@@ -672,13 +680,13 @@ _i2c_sendByte:
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_5,c
-;	headers/i2c_driver.h:54: while(SCL==0);
+;	headers/i2c_driver.h:56: while(SCL==0);
 00101$:
 	jnb	_P1_0,00101$
-;	headers/i2c_driver.h:55: while(SCL==1);
+;	headers/i2c_driver.h:57: while(SCL==1);
 00104$:
 	jb	_P1_0,00104$
-;	headers/i2c_driver.h:57: SDA = (1 & (a>>6));
+;	headers/i2c_driver.h:59: SDA = (1 & (a>>6));
 	mov	a,r7
 	rl	a
 	rl	a
@@ -686,13 +694,13 @@ _i2c_sendByte:
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_5,c
-;	headers/i2c_driver.h:58: while(SCL==0);
+;	headers/i2c_driver.h:60: while(SCL==0);
 00107$:
 	jnb	_P1_0,00107$
-;	headers/i2c_driver.h:59: while(SCL==1);
+;	headers/i2c_driver.h:61: while(SCL==1);
 00110$:
 	jb	_P1_0,00110$
-;	headers/i2c_driver.h:61: SDA = (1 & (a>>5));
+;	headers/i2c_driver.h:63: SDA = (1 & (a>>5));
 	mov	dptr,#_i2c_sendByte_a_10000_83
 	movx	a,@dptr
 	mov	r7,a
@@ -702,26 +710,26 @@ _i2c_sendByte:
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_5,c
-;	headers/i2c_driver.h:62: while(SCL==0);
+;	headers/i2c_driver.h:64: while(SCL==0);
 00113$:
 	jnb	_P1_0,00113$
-;	headers/i2c_driver.h:63: while(SCL==1);
+;	headers/i2c_driver.h:65: while(SCL==1);
 00116$:
 	jb	_P1_0,00116$
-;	headers/i2c_driver.h:65: SDA = (1 & (a>>4));
+;	headers/i2c_driver.h:67: SDA = (1 & (a>>4));
 	mov	a,r7
 	swap	a
 	anl	a,#0x01
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_5,c
-;	headers/i2c_driver.h:66: while(SCL==0);
+;	headers/i2c_driver.h:68: while(SCL==0);
 00119$:
 	jnb	_P1_0,00119$
-;	headers/i2c_driver.h:67: while(SCL==1);
+;	headers/i2c_driver.h:69: while(SCL==1);
 00122$:
 	jb	_P1_0,00122$
-;	headers/i2c_driver.h:69: SDA = (1 & (a>>3));
+;	headers/i2c_driver.h:71: SDA = (1 & (a>>3));
 	mov	dptr,#_i2c_sendByte_a_10000_83
 	movx	a,@dptr
 	mov	r7,a
@@ -731,13 +739,13 @@ _i2c_sendByte:
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_5,c
-;	headers/i2c_driver.h:70: while(SCL==0);
+;	headers/i2c_driver.h:72: while(SCL==0);
 00125$:
 	jnb	_P1_0,00125$
-;	headers/i2c_driver.h:71: while(SCL==1);
+;	headers/i2c_driver.h:73: while(SCL==1);
 00128$:
 	jb	_P1_0,00128$
-;	headers/i2c_driver.h:73: SDA = (1 & (a>>2));
+;	headers/i2c_driver.h:75: SDA = (1 & (a>>2));
 	mov	a,r7
 	rr	a
 	rr	a
@@ -745,13 +753,13 @@ _i2c_sendByte:
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_5,c
-;	headers/i2c_driver.h:74: while(SCL==0);
+;	headers/i2c_driver.h:76: while(SCL==0);
 00131$:
 	jnb	_P1_0,00131$
-;	headers/i2c_driver.h:75: while(SCL==1);
+;	headers/i2c_driver.h:77: while(SCL==1);
 00134$:
 	jb	_P1_0,00134$
-;	headers/i2c_driver.h:77: SDA = (1 & (a>>1));
+;	headers/i2c_driver.h:79: SDA = (1 & (a>>1));
 	mov	dptr,#_i2c_sendByte_a_10000_83
 	movx	a,@dptr
 	mov	r7,a
@@ -760,38 +768,38 @@ _i2c_sendByte:
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_5,c
-;	headers/i2c_driver.h:78: while(SCL==0);
+;	headers/i2c_driver.h:80: while(SCL==0);
 00137$:
 	jnb	_P1_0,00137$
-;	headers/i2c_driver.h:79: while(SCL==1);
+;	headers/i2c_driver.h:81: while(SCL==1);
 00140$:
 	jb	_P1_0,00140$
-;	headers/i2c_driver.h:81: SDA = (1 & a);
+;	headers/i2c_driver.h:83: SDA = (1 & a);
 	mov	a,r7
 	anl	a,#0x01
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_5,c
-;	headers/i2c_driver.h:82: while(SCL==0);
+;	headers/i2c_driver.h:84: while(SCL==0);
 00143$:
 	jnb	_P1_0,00143$
-;	headers/i2c_driver.h:83: while(SCL==1);
+;	headers/i2c_driver.h:85: while(SCL==1);
 00146$:
 	jb	_P1_0,00146$
-;	headers/i2c_driver.h:44: while(SCL==0);
+;	headers/i2c_driver.h:46: while(SCL==0);
 00151$:
 	jnb	_P1_0,00151$
-;	headers/i2c_driver.h:45: char toReturn = (volatile char)SDA;
+;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_5
-;	headers/i2c_driver.h:86: if(i2c_pullBit()){
+;	headers/i2c_driver.h:88: if(i2c_pullBit()){
 	jnc	00150$
-;	headers/i2c_driver.h:87: return ERROR;
+;	headers/i2c_driver.h:89: return ERROR;
 	mov	dpl, #0x01
 	ret
 00150$:
-;	headers/i2c_driver.h:89: return SUCCESS;
+;	headers/i2c_driver.h:91: return SUCCESS;
 	mov	dpl, #0x00
-;	headers/i2c_driver.h:90: }
+;	headers/i2c_driver.h:92: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'i2c_pullByte'
@@ -814,162 +822,162 @@ _i2c_sendByte:
 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_119'
 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_123'
 ;------------------------------------------------------------
-;	headers/i2c_driver.h:92: static inline char i2c_pullByte(){
+;	headers/i2c_driver.h:94: static inline char i2c_pullByte(){
 ;	-----------------------------------------
 ;	 function i2c_pullByte
 ;	-----------------------------------------
 _i2c_pullByte:
-;	headers/i2c_driver.h:94: while(SCL==0);                      // wait till data is valid
+;	headers/i2c_driver.h:96: while(SCL==0);                      // wait till data is valid
 00101$:
 	jnb	_P1_0,00101$
-;	headers/i2c_driver.h:95: char returned = i2c_pullBit()<<7;   // data is now valid
+;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
 00146$:
 	jnb	_P1_0,00146$
-;	headers/i2c_driver.h:45: char toReturn = (volatile char)SDA;
+;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_5
 	clr	a
 	rlc	a
-;	headers/i2c_driver.h:95: char returned = i2c_pullBit()<<7;   // data is now valid
+;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
 	rr	a
 	anl	a,#0x80
 	mov	r7,a
-;	headers/i2c_driver.h:96: while(SCL==1);                      // wait for pulled data to go away
+;	headers/i2c_driver.h:98: while(SCL==1);                      // wait for pulled data to go away
 00104$:
 	jb	_P1_0,00104$
-;	headers/i2c_driver.h:98: while(SCL==0);                      // wait till data is valid ... 
+;	headers/i2c_driver.h:100: while(SCL==0);                      // wait till data is valid ... 
 00107$:
 	jnb	_P1_0,00107$
-;	headers/i2c_driver.h:44: while(SCL==0);
+;	headers/i2c_driver.h:46: while(SCL==0);
 00150$:
 	jnb	_P1_0,00150$
-;	headers/i2c_driver.h:45: char toReturn = (volatile char)SDA;
+;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_5
 	clr	a
 	rlc	a
-;	headers/i2c_driver.h:99: returned |= i2c_pullBit()<<6;
+;	headers/i2c_driver.h:101: returned |= i2c_pullBit()<<6;
 	rr	a
 	rr	a
 	anl	a,#0xc0
 	orl	ar7,a
-;	headers/i2c_driver.h:100: while(SCL==1);
+;	headers/i2c_driver.h:102: while(SCL==1);
 00110$:
 	jb	_P1_0,00110$
-;	headers/i2c_driver.h:102: while(SCL==0);
+;	headers/i2c_driver.h:104: while(SCL==0);
 00113$:
 	jnb	_P1_0,00113$
-;	headers/i2c_driver.h:44: while(SCL==0);
+;	headers/i2c_driver.h:46: while(SCL==0);
 00154$:
 	jnb	_P1_0,00154$
-;	headers/i2c_driver.h:45: char toReturn = (volatile char)SDA;
+;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_5
 	clr	a
 	rlc	a
-;	headers/i2c_driver.h:103: returned |= i2c_pullBit()<<5;
+;	headers/i2c_driver.h:105: returned |= i2c_pullBit()<<5;
 	swap	a
 	rl	a
 	anl	a,#0xe0
 	orl	ar7,a
-;	headers/i2c_driver.h:104: while(SCL==1);
+;	headers/i2c_driver.h:106: while(SCL==1);
 00116$:
 	jb	_P1_0,00116$
-;	headers/i2c_driver.h:106: while(SCL==0);
+;	headers/i2c_driver.h:108: while(SCL==0);
 00119$:
 	jnb	_P1_0,00119$
-;	headers/i2c_driver.h:44: while(SCL==0);
+;	headers/i2c_driver.h:46: while(SCL==0);
 00158$:
 	jnb	_P1_0,00158$
-;	headers/i2c_driver.h:45: char toReturn = (volatile char)SDA;
+;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_5
 	clr	a
 	rlc	a
-;	headers/i2c_driver.h:107: returned |= i2c_pullBit()<<4;
+;	headers/i2c_driver.h:109: returned |= i2c_pullBit()<<4;
 	swap	a
 	anl	a,#0xf0
 	orl	ar7,a
-;	headers/i2c_driver.h:108: while(SCL==1);
+;	headers/i2c_driver.h:110: while(SCL==1);
 00122$:
 	jb	_P1_0,00122$
-;	headers/i2c_driver.h:110: while(SCL==0);
+;	headers/i2c_driver.h:112: while(SCL==0);
 00125$:
 	jnb	_P1_0,00125$
-;	headers/i2c_driver.h:44: while(SCL==0);
+;	headers/i2c_driver.h:46: while(SCL==0);
 00162$:
 	jnb	_P1_0,00162$
-;	headers/i2c_driver.h:45: char toReturn = (volatile char)SDA;
+;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_5
 	clr	a
 	rlc	a
-;	headers/i2c_driver.h:111: returned |= i2c_pullBit()<<3;
+;	headers/i2c_driver.h:113: returned |= i2c_pullBit()<<3;
 	swap	a
 	rr	a
 	anl	a,#0xf8
 	orl	ar7,a
-;	headers/i2c_driver.h:112: while(SCL==1);
+;	headers/i2c_driver.h:114: while(SCL==1);
 00128$:
 	jb	_P1_0,00128$
-;	headers/i2c_driver.h:114: while(SCL==0);
+;	headers/i2c_driver.h:116: while(SCL==0);
 00131$:
 	jnb	_P1_0,00131$
-;	headers/i2c_driver.h:44: while(SCL==0);
+;	headers/i2c_driver.h:46: while(SCL==0);
 00166$:
 	jnb	_P1_0,00166$
-;	headers/i2c_driver.h:45: char toReturn = (volatile char)SDA;
+;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_5
 	clr	a
 	rlc	a
-;	headers/i2c_driver.h:115: returned |= i2c_pullBit()<<2;
+;	headers/i2c_driver.h:117: returned |= i2c_pullBit()<<2;
 	add	a,acc
 	add	a,acc
 	orl	ar7,a
-;	headers/i2c_driver.h:116: while(SCL==1);
+;	headers/i2c_driver.h:118: while(SCL==1);
 00134$:
 	jb	_P1_0,00134$
-;	headers/i2c_driver.h:118: while(SCL==0);
+;	headers/i2c_driver.h:120: while(SCL==0);
 00137$:
 	jnb	_P1_0,00137$
-;	headers/i2c_driver.h:44: while(SCL==0);
+;	headers/i2c_driver.h:46: while(SCL==0);
 00170$:
 	jnb	_P1_0,00170$
-;	headers/i2c_driver.h:45: char toReturn = (volatile char)SDA;
+;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_5
 	clr	a
 	rlc	a
-;	headers/i2c_driver.h:119: returned |= i2c_pullBit()<<1;
+;	headers/i2c_driver.h:121: returned |= i2c_pullBit()<<1;
 	add	a,acc
 	orl	ar7,a
-;	headers/i2c_driver.h:120: while(SCL==1);
+;	headers/i2c_driver.h:122: while(SCL==1);
 00140$:
 	jb	_P1_0,00140$
-;	headers/i2c_driver.h:122: while(SCL==0);
+;	headers/i2c_driver.h:124: while(SCL==0);
 00143$:
 	jnb	_P1_0,00143$
-;	headers/i2c_driver.h:44: while(SCL==0);
+;	headers/i2c_driver.h:46: while(SCL==0);
 00174$:
 	jnb	_P1_0,00174$
-;	headers/i2c_driver.h:45: char toReturn = (volatile char)SDA;
+;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_5
 	clr	a
 	rlc	a
-;	headers/i2c_driver.h:123: returned |= i2c_pullBit();
+;	headers/i2c_driver.h:125: returned |= i2c_pullBit();
 	orl	ar7,a
-;	headers/i2c_driver.h:35: while(SCL==1);
+;	headers/i2c_driver.h:37: while(SCL==1);
 00178$:
 	jb	_P1_0,00178$
-;	headers/i2c_driver.h:36: SDA = 0;
+;	headers/i2c_driver.h:38: SDA = 0;
 ;	assignBit
 	clr	_P1_5
-;	headers/i2c_driver.h:37: while(SCL==0);  // wait till the data is clocked in
+;	headers/i2c_driver.h:39: while(SCL==0);  // wait till the data is clocked in
 00181$:
 	jnb	_P1_0,00181$
-;	headers/i2c_driver.h:38: while(SCL==1);  // data is being clocked in
+;	headers/i2c_driver.h:40: while(SCL==1);  // data is being clocked in
 00184$:
 	jb	_P1_0,00184$
-;	headers/i2c_driver.h:39: SDA = 1;        // now we reset the line
+;	headers/i2c_driver.h:41: SDA = 1;        // now we reset the line
 ;	assignBit
 	setb	_P1_5
-;	headers/i2c_driver.h:127: return returned;
+;	headers/i2c_driver.h:129: return returned;
 	mov	dpl, r7
-;	headers/i2c_driver.h:128: }
+;	headers/i2c_driver.h:130: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'lcd_writeAddress'
@@ -1061,15 +1069,15 @@ _lcd_initdelay:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
-;	src/main.c:18: int main(void)
+;	src/main.c:20: int main(void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	src/main.c:20: serial_initX2(Baud_140625);
+;	src/main.c:22: serial_initX2(Baud_140625);
 	mov	dpl, #0xff
 	lcall	_serial_initX2
-;	src/main.c:21: printf_tiny("Initialzied UART\n\r");
+;	src/main.c:23: printf_tiny("Initialzied UART\n\r");
 	mov	a,#___str_0
 	push	acc
 	mov	a,#(___str_0 >> 8)
@@ -1077,9 +1085,9 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	src/main.c:25: lcd_init();
+;	src/main.c:26: lcd_init();
 	lcall	_lcd_init
-;	src/main.c:26: printf_tiny("Initialzied the LCD\n\r");
+;	src/main.c:27: printf_tiny("Initialzied the LCD\n\r");
 	mov	a,#___str_1
 	push	acc
 	mov	a,#(___str_1 >> 8)
@@ -1087,31 +1095,31 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	src/main.c:44: while(1){
+;	src/main.c:28: while(1){
 00102$:
-;	src/main.c:45: lcd_putPixel();
+;	src/main.c:29: lcd_putPixel();
 	lcall	_lcd_putPixel
-;	src/main.c:52: while(1);;
-;	src/main.c:53: }
+;	src/main.c:36: while(1);;
+;	src/main.c:37: }
 	sjmp	00102$
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'interrupt_init'
 ;------------------------------------------------------------
-;	src/main.c:55: void interrupt_init(void){
+;	src/main.c:39: void interrupt_init(void){
 ;	-----------------------------------------
 ;	 function interrupt_init
 ;	-----------------------------------------
 _interrupt_init:
-;	src/main.c:57: IEN0 |= ENABLE_INTERRUPTS;
+;	src/main.c:41: IEN0 |= ENABLE_INTERRUPTS;
 	orl	_IEN0,#0x80
-;	src/main.c:58: IEN0 |= INT0_INTERRUPT_ENABLE;
+;	src/main.c:42: IEN0 |= INT0_INTERRUPT_ENABLE;
 	orl	_IEN0,#0x01
-;	src/main.c:59: }
+;	src/main.c:43: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'timer0_interrupt'
 ;------------------------------------------------------------
-;	src/main.c:61: void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
+;	src/main.c:45: void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
 ;	-----------------------------------------
 ;	 function timer0_interrupt
 ;	-----------------------------------------
@@ -1120,14 +1128,14 @@ _timer0_interrupt:
 	push	dpl
 	push	dph
 	push	psw
-;	src/main.c:62: numTimerInterrupts++;
+;	src/main.c:46: numTimerInterrupts++;
 	mov	dptr,#_numTimerInterrupts
 	movx	a,@dptr
 	add	a, #0x01
 	movx	@dptr,a
-;	src/main.c:63: TH0 = TIMER0_PRESCALE;
+;	src/main.c:47: TH0 = TIMER0_PRESCALE;
 	mov	_TH0,#0x03
-;	src/main.c:64: }
+;	src/main.c:48: }
 	pop	psw
 	pop	dph
 	pop	dpl
@@ -1138,12 +1146,37 @@ _timer0_interrupt:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'Intr0'
 ;------------------------------------------------------------
-;	src/main.c:67: void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
+;	src/main.c:51: void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
 ;	-----------------------------------------
 ;	 function Intr0
 ;	-----------------------------------------
 _Intr0:
-;	src/main.c:68: }
+	push	acc
+	push	dpl
+	push	dph
+	push	psw
+;	src/main.c:52: numInterruptsInOneCycle++;
+	mov	dptr,#_numInterruptsInOneCycle
+	movx	a,@dptr
+	add	a, #0x01
+	movx	@dptr,a
+;	src/main.c:53: }
+	pop	psw
+	pop	dph
+	pop	dpl
+	pop	acc
+	reti
+;	eliminated unneeded mov psw,# (no regs used in bank)
+;	eliminated unneeded push/pop b
+;------------------------------------------------------------
+;Allocation info for local variables in function 'Intr1'
+;------------------------------------------------------------
+;	src/main.c:56: void Intr1(void) __interrupt (INT1_INTERRUPT_NUMBER) {
+;	-----------------------------------------
+;	 function Intr1
+;	-----------------------------------------
+_Intr1:
+;	src/main.c:58: }
 	reti
 ;	eliminated unneeded mov psw,# (no regs used in bank)
 ;	eliminated unneeded push/pop not_psw
@@ -1175,4 +1208,6 @@ ___str_2:
 	.db 0x00
 	.area CSEG    (CODE)
 	.area XINIT   (CODE)
+__xinit__numInterruptsInOneCycle:
+	.db #0x00	; 0
 	.area CABS    (ABS,CODE)

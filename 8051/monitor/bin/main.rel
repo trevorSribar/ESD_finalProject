@@ -1,5 +1,5 @@
 XH3
-H 1B areas D8 global symbols
+H 1B areas DA global symbols
 M main
 O -mmcs51 --model-large
 S _PT1L Def0000BB
@@ -222,13 +222,14 @@ A BSEG size 0 flags 80 addr 0
 A PSEG size 0 flags 50 addr 0
 A XSEG size 6 flags 40 addr 0
 A XABS size 0 flags 48 addr 0
-A XISEG size 0 flags 40 addr 0
-A HOME size 54 flags 20 addr 0
-S sdcc_atomic_exchange_gptr_impl Def000037
-S sdcc_atomic_compare_exchange_gptr_impl Def000047
-S sdcc_atomic_exchange_rollback_start Def000010
-S sdcc_atomic_exchange_rollback_end Def000037
-S __sdcc_program_startup Def000051
+A XISEG size 1 flags 40 addr 0
+S _numInterruptsInOneCycle Def000000
+A HOME size 64 flags 20 addr 0
+S sdcc_atomic_exchange_gptr_impl Def000047
+S sdcc_atomic_compare_exchange_gptr_impl Def000057
+S sdcc_atomic_exchange_rollback_start Def000020
+S sdcc_atomic_exchange_rollback_end Def000047
+S __sdcc_program_startup Def000061
 A GSINIT0 size 0 flags 20 addr 0
 A GSINIT1 size 0 flags 20 addr 0
 A GSINIT2 size 0 flags 20 addr 0
@@ -237,13 +238,14 @@ A GSINIT4 size 0 flags 20 addr 0
 A GSINIT5 size 0 flags 20 addr 0
 A GSINIT size 0 flags 20 addr 0
 A GSFINAL size 3 flags 20 addr 0
-A CSEG size 1F4 flags 20 addr 0
+A CSEG size 20C flags 20 addr 0
 S _main Def0001A5
 S _interrupt_init Def0001D1
 S _Intr0 Def0001F3
+S _Intr1 Def00020B
 S _timer0_interrupt Def0001D8
 A CONST size 37 flags 20 addr 0
-A XINIT size 0 flags 20 addr 0
+A XINIT size 1 flags 20 addr 0
 A CABS size 0 flags 28 addr 0
 T 00 00 00
 R 00 00 00 02
@@ -268,6 +270,10 @@ R 00 00 00 0B
 T 00 00 02
 R 00 00 00 0B
 T 00 00 00
+R 00 00 00 0D
+T 00 00 00
+R 00 00 00 0D
+T 00 00 00
 R 00 00 00 0E
 T 00 00 00 02 00 00 02 01 F3
 R 00 00 00 0E 02 04 00 BF 00 07 00 17
@@ -277,53 +283,61 @@ T 00 00 0B 02 01 D8
 R 00 00 00 0E 00 04 00 17
 T 00 00 0E
 R 00 00 00 0E
-T 00 00 10
+T 00 00 13 32
 R 00 00 00 0E
-T 00 00 10 00 00
+T 00 00 14
 R 00 00 00 0E
-T 00 00 12
-R 00 00 00 0E
-T 00 00 12 E2 FB EA F2 80 2C 00 00
-R 00 00 00 0E
-T 00 00 1A
-R 00 00 00 0E
-T 00 00 1A E0 FB EA F0 80 24
+T 00 00 1B 02 02 0B
+R 00 00 00 0E 00 04 00 17
+T 00 00 1E
 R 00 00 00 0E
 T 00 00 20
 R 00 00 00 0E
-T 00 00 20 E6 B5 02 02 EB F6 22 00
+T 00 00 20 00 00
 R 00 00 00 0E
-T 00 00 28
+T 00 00 22
 R 00 00 00 0E
-T 00 00 28 E2 B5 02 02 EB F2 22 00
+T 00 00 22 E2 FB EA F2 80 2C 00 00
+R 00 00 00 0E
+T 00 00 2A
+R 00 00 00 0E
+T 00 00 2A E0 FB EA F0 80 24
 R 00 00 00 0E
 T 00 00 30
 R 00 00 00 0E
-T 00 00 30 E0 B5 02 02 EB F0 22
+T 00 00 30 E6 B5 02 02 EB F6 22 00
 R 00 00 00 0E
-T 00 00 37
+T 00 00 38
 R 00 00 00 0E
-T 00 00 37
+T 00 00 38 E2 B5 02 02 EB F2 22 00
 R 00 00 00 0E
-T 00 00 37 30 F6 E0 A8 82 20 F5 D3
+T 00 00 40
 R 00 00 00 0E
-T 00 00 3F
-R 00 00 00 0E
-T 00 00 3F EA C6 F5 82 22
-R 00 00 00 0E
-T 00 00 44
-R 00 00 00 0E
-T 00 00 44 8B 82 22
+T 00 00 40 E0 B5 02 02 EB F0 22
 R 00 00 00 0E
 T 00 00 47
 R 00 00 00 0E
-T 00 00 47 30 F6 E6 A8 82 20 F5 D9 80 CF
+T 00 00 47
 R 00 00 00 0E
-T 00 00 00 02 00 51
+T 00 00 47 30 F6 E0 A8 82 20 F5 D3
+R 00 00 00 0E
+T 00 00 4F
+R 00 00 00 0E
+T 00 00 4F EA C6 F5 82 22
+R 00 00 00 0E
+T 00 00 54
+R 00 00 00 0E
+T 00 00 54 8B 82 22
+R 00 00 00 0E
+T 00 00 57
+R 00 00 00 0E
+T 00 00 57 30 F6 E6 A8 82 20 F5 D9 80 CF
+R 00 00 00 0E
+T 00 00 00 02 00 61
 R 00 00 00 16 00 04 00 0E
-T 00 00 51
+T 00 00 61
 R 00 00 00 0E
-T 00 00 51 02 01 A5
+T 00 00 61 02 01 A5
 R 00 00 00 0E 00 04 00 17
 T 00 00 00
 R 00 00 00 17
@@ -605,7 +619,13 @@ T 00 01 F2 32
 R 00 00 00 17
 T 00 01 F3
 R 00 00 00 17
-T 00 01 F3 32
+T 00 01 F3 C0 E0 C0 82 C0 83 C0 D0 90 00 00 E0 24
+R 00 00 00 17 00 0C 00 0D
+T 00 02 00 01 F0 D0 D0 D0 83 D0 82 D0 E0 32
+R 00 00 00 17
+T 00 02 0B
+R 00 00 00 17
+T 00 02 0B 32
 R 00 00 00 17
 T 00 00 00
 R 00 00 00 18
@@ -625,3 +645,7 @@ T 00 00 29 45 6E 64 20 70 72 6F 67 72 61 6D 0A 0D
 R 00 00 00 18
 T 00 00 36 00
 R 00 00 00 18
+T 00 00 00
+R 00 00 00 19
+T 00 00 00 00
+R 00 00 00 19

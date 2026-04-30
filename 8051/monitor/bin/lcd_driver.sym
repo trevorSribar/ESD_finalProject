@@ -493,7 +493,7 @@ Symbol Table
  16 _lcd_initdelay                                                 00000C R
   A _lcd_initdelay_delayAmount_10000_81                            000001 R
  16 _lcd_putPixel                                                  0001F6 GR
- 16 _lcd_putSpecificColorPixel                                     000232 GR
+ 16 _lcd_putSpecificColorPixel                                     000233 GR
   A _lcd_putSpecificColorPixel_PARM_2                              000053 GR
   A _lcd_putSpecificColorPixel_PARM_3                              000054 GR
   A _lcd_putSpecificColorPixel_r_10000_298                         000055 R

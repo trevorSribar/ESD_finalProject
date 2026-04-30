@@ -129,7 +129,8 @@ void lcd_init(){
 // attempts to put the color at port 0 onto the current pixel location
 void lcd_putPixel(){
     __xdata uint16_t *pixelToSend;
-    uint16_t measuredBit = P1 & LCD_PULL_PIXEL_MASK;
+    uint16_t measuredBit = P1;
+    measuredBit = measuredBit & (uint16_t)LCD_PULL_PIXEL_MASK;
     measuredBit = (measuredBit
         | (measuredBit<<LCD_GREEN_OFFSET)
         | (measuredBit<<LCD_RED_OFFSET));

@@ -1238,7 +1238,7 @@
       0001BD D2 97            [12] 1238 	setb	_P1_7
                                    1239 ;	headers/lcd_driver.h:53: *writeToLCD = address;
       0001BF 90 08 00         [24] 1240 	mov	dptr,#0x0800
-      0001C2 74 E6            [12] 1241 	mov	a,#0xe6
+      0001C2 74 FF            [12] 1241 	mov	a,#0xff
       0001C4 F0               [24] 1242 	movx	@dptr,a
                                    1243 ;	src/lcd_driver.c:59: lcd_writeAddress(0x00);
       0001C5 7C 00            [12] 1244 	mov	r4,#0x00
@@ -1290,201 +1290,202 @@
                                    1290 ;	 function lcd_putPixel
                                    1291 ;	-----------------------------------------
       0001F6                       1292 _lcd_putPixel:
-                                   1293 ;	src/lcd_driver.c:132: uint16_t measuredBit = P1 & LCD_PULL_PIXEL_MASK;
-      0001F6 AF 90            [24] 1294 	mov	r7,_P1
-      0001F8 53 07 1F         [24] 1295 	anl	ar7,#0x1f
-      0001FB 7E 00            [12] 1296 	mov	r6,#0x00
-                                   1297 ;	src/lcd_driver.c:134: | (measuredBit<<LCD_GREEN_OFFSET)
-      0001FD 8F 04            [24] 1298 	mov	ar4,r7
-      0001FF EE               [12] 1299 	mov	a,r6
-      000200 C4               [12] 1300 	swap	a
-      000201 23               [12] 1301 	rl	a
-      000202 54 E0            [12] 1302 	anl	a,#0xe0
+                                   1293 ;	src/lcd_driver.c:132: uint16_t measuredBit = P1;
+      0001F6 AE 90            [24] 1294 	mov	r6,_P1
+                                   1295 ;	src/lcd_driver.c:133: measuredBit = measuredBit & (uint16_t)LCD_PULL_PIXEL_MASK;
+      0001F8 53 06 1F         [24] 1296 	anl	ar6,#0x1f
+      0001FB 7F 00            [12] 1297 	mov	r7,#0x00
+                                   1298 ;	src/lcd_driver.c:135: | (measuredBit<<LCD_GREEN_OFFSET)
+      0001FD 8E 04            [24] 1299 	mov	ar4,r6
+      0001FF EF               [12] 1300 	mov	a,r7
+      000200 54 03            [12] 1301 	anl	a,#0x03
+      000202 A2 E0            [12] 1302 	mov	c,acc.0
       000204 CC               [12] 1303 	xch	a,r4
-      000205 C4               [12] 1304 	swap	a
-      000206 23               [12] 1305 	rl	a
-      000207 CC               [12] 1306 	xch	a,r4
-      000208 6C               [12] 1307 	xrl	a,r4
-      000209 CC               [12] 1308 	xch	a,r4
-      00020A 54 E0            [12] 1309 	anl	a,#0xe0
+      000205 13               [12] 1304 	rrc	a
+      000206 CC               [12] 1305 	xch	a,r4
+      000207 13               [12] 1306 	rrc	a
+      000208 A2 E0            [12] 1307 	mov	c,acc.0
+      00020A CC               [12] 1308 	xch	a,r4
+      00020B 13               [12] 1309 	rrc	a
       00020C CC               [12] 1310 	xch	a,r4
-      00020D 6C               [12] 1311 	xrl	a,r4
-      00020E FD               [12] 1312 	mov	r5,a
-      00020F EF               [12] 1313 	mov	a,r7
-      000210 42 04            [12] 1314 	orl	ar4,a
-      000212 EE               [12] 1315 	mov	a,r6
-      000213 42 05            [12] 1316 	orl	ar5,a
-                                   1317 ;	src/lcd_driver.c:135: | (measuredBit<<LCD_RED_OFFSET));
-      000215 EF               [12] 1318 	mov	a,r7
-      000216 C4               [12] 1319 	swap	a
-      000217 03               [12] 1320 	rr	a
-      000218 54 F8            [12] 1321 	anl	a,#0xf8
-      00021A FE               [12] 1322 	mov	r6,a
-      00021B E4               [12] 1323 	clr	a
-      00021C 42 04            [12] 1324 	orl	ar4,a
-      00021E EE               [12] 1325 	mov	a,r6
-      00021F 42 05            [12] 1326 	orl	ar5,a
-                                   1327 ;	src/lcd_driver.c:136: pixelToSend = (__xdata uint16_t*) (measuredBit|LCD_ENSURE_WRITE_ADDRESS);
-      000221 8C 06            [24] 1328 	mov	ar6,r4
-      000223 8D 07            [24] 1329 	mov	ar7,r5
-      000225 43 07 08         [24] 1330 	orl	ar7,#0x08
-      000228 8E 82            [24] 1331 	mov	dpl,r6
-      00022A 8F 83            [24] 1332 	mov	dph,r7
-                                   1333 ;	src/lcd_driver.c:137: *pixelToSend = measuredBit;
-      00022C EC               [12] 1334 	mov	a,r4
-      00022D F0               [24] 1335 	movx	@dptr,a
-      00022E ED               [12] 1336 	mov	a,r5
-      00022F A3               [24] 1337 	inc	dptr
-      000230 F0               [24] 1338 	movx	@dptr,a
-                                   1339 ;	src/lcd_driver.c:138: }
-      000231 22               [24] 1340 	ret
-                                   1341 ;------------------------------------------------------------
-                                   1342 ;Allocation info for local variables in function 'lcd_putSpecificColorPixel'
-                                   1343 ;------------------------------------------------------------
-                                   1344 ;g             Allocated with name '_lcd_putSpecificColorPixel_PARM_2'
-                                   1345 ;b             Allocated with name '_lcd_putSpecificColorPixel_PARM_3'
-                                   1346 ;r             Allocated with name '_lcd_putSpecificColorPixel_r_10000_298'
-                                   1347 ;pixelToSend   Allocated with name '_lcd_putSpecificColorPixel_pixelToSend_10000_299'
-                                   1348 ;measuredBit   Allocated with name '_lcd_putSpecificColorPixel_measuredBit_10000_299'
-                                   1349 ;------------------------------------------------------------
-                                   1350 ;	src/lcd_driver.c:141: void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b){
-                                   1351 ;	-----------------------------------------
-                                   1352 ;	 function lcd_putSpecificColorPixel
-                                   1353 ;	-----------------------------------------
-      000232                       1354 _lcd_putSpecificColorPixel:
-      000232 E5 82            [12] 1355 	mov	a,dpl
-      000234 90r00r55         [24] 1356 	mov	dptr,#_lcd_putSpecificColorPixel_r_10000_298
-      000237 F0               [24] 1357 	movx	@dptr,a
-                                   1358 ;	src/lcd_driver.c:151: uint16_t measuredBit = ((b & (LCD_NUM_VALUES_B-1)) 
-      000238 90r00r54         [24] 1359 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_3
-      00023B E0               [24] 1360 	movx	a,@dptr
-      00023C 54 1F            [12] 1361 	anl	a,#0x1f
-      00023E FF               [12] 1362 	mov	r7,a
-      00023F 90r00r53         [24] 1363 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_2
-      000242 E0               [24] 1364 	movx	a,@dptr
-      000243 54 3F            [12] 1365 	anl	a,#0x3f
-      000245 FE               [12] 1366 	mov	r6,a
-      000246 E4               [12] 1367 	clr	a
-      000247 23               [12] 1368 	rl	a
-      000248 54 E0            [12] 1369 	anl	a,#0xe0
-      00024A CE               [12] 1370 	xch	a,r6
-      00024B C4               [12] 1371 	swap	a
-      00024C 23               [12] 1372 	rl	a
-      00024D CE               [12] 1373 	xch	a,r6
-      00024E 6E               [12] 1374 	xrl	a,r6
+      00020D 13               [12] 1311 	rrc	a
+      00020E CC               [12] 1312 	xch	a,r4
+      00020F FD               [12] 1313 	mov	r5,a
+      000210 EE               [12] 1314 	mov	a,r6
+      000211 42 04            [12] 1315 	orl	ar4,a
+      000213 EF               [12] 1316 	mov	a,r7
+      000214 42 05            [12] 1317 	orl	ar5,a
+                                   1318 ;	src/lcd_driver.c:136: | (measuredBit<<LCD_RED_OFFSET));
+      000216 EE               [12] 1319 	mov	a,r6
+      000217 C4               [12] 1320 	swap	a
+      000218 03               [12] 1321 	rr	a
+      000219 54 F8            [12] 1322 	anl	a,#0xf8
+      00021B FF               [12] 1323 	mov	r7,a
+      00021C E4               [12] 1324 	clr	a
+      00021D 42 04            [12] 1325 	orl	ar4,a
+      00021F EF               [12] 1326 	mov	a,r7
+      000220 42 05            [12] 1327 	orl	ar5,a
+                                   1328 ;	src/lcd_driver.c:137: pixelToSend = (__xdata uint16_t*) (measuredBit|LCD_ENSURE_WRITE_ADDRESS);
+      000222 8C 06            [24] 1329 	mov	ar6,r4
+      000224 8D 07            [24] 1330 	mov	ar7,r5
+      000226 43 07 08         [24] 1331 	orl	ar7,#0x08
+      000229 8E 82            [24] 1332 	mov	dpl,r6
+      00022B 8F 83            [24] 1333 	mov	dph,r7
+                                   1334 ;	src/lcd_driver.c:138: *pixelToSend = measuredBit;
+      00022D EC               [12] 1335 	mov	a,r4
+      00022E F0               [24] 1336 	movx	@dptr,a
+      00022F ED               [12] 1337 	mov	a,r5
+      000230 A3               [24] 1338 	inc	dptr
+      000231 F0               [24] 1339 	movx	@dptr,a
+                                   1340 ;	src/lcd_driver.c:139: }
+      000232 22               [24] 1341 	ret
+                                   1342 ;------------------------------------------------------------
+                                   1343 ;Allocation info for local variables in function 'lcd_putSpecificColorPixel'
+                                   1344 ;------------------------------------------------------------
+                                   1345 ;g             Allocated with name '_lcd_putSpecificColorPixel_PARM_2'
+                                   1346 ;b             Allocated with name '_lcd_putSpecificColorPixel_PARM_3'
+                                   1347 ;r             Allocated with name '_lcd_putSpecificColorPixel_r_10000_298'
+                                   1348 ;pixelToSend   Allocated with name '_lcd_putSpecificColorPixel_pixelToSend_10000_299'
+                                   1349 ;measuredBit   Allocated with name '_lcd_putSpecificColorPixel_measuredBit_10000_299'
+                                   1350 ;------------------------------------------------------------
+                                   1351 ;	src/lcd_driver.c:142: void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b){
+                                   1352 ;	-----------------------------------------
+                                   1353 ;	 function lcd_putSpecificColorPixel
+                                   1354 ;	-----------------------------------------
+      000233                       1355 _lcd_putSpecificColorPixel:
+      000233 E5 82            [12] 1356 	mov	a,dpl
+      000235 90r00r55         [24] 1357 	mov	dptr,#_lcd_putSpecificColorPixel_r_10000_298
+      000238 F0               [24] 1358 	movx	@dptr,a
+                                   1359 ;	src/lcd_driver.c:152: uint16_t measuredBit = ((b & (LCD_NUM_VALUES_B-1)) 
+      000239 90r00r54         [24] 1360 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_3
+      00023C E0               [24] 1361 	movx	a,@dptr
+      00023D 54 1F            [12] 1362 	anl	a,#0x1f
+      00023F FF               [12] 1363 	mov	r7,a
+      000240 90r00r53         [24] 1364 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_2
+      000243 E0               [24] 1365 	movx	a,@dptr
+      000244 54 3F            [12] 1366 	anl	a,#0x3f
+      000246 FE               [12] 1367 	mov	r6,a
+      000247 E4               [12] 1368 	clr	a
+      000248 C3               [12] 1369 	clr	c
+      000249 CE               [12] 1370 	xch	a,r6
+      00024A 13               [12] 1371 	rrc	a
+      00024B CE               [12] 1372 	xch	a,r6
+      00024C 13               [12] 1373 	rrc	a
+      00024D A2 E0            [12] 1374 	mov	c,acc.0
       00024F CE               [12] 1375 	xch	a,r6
-      000250 54 E0            [12] 1376 	anl	a,#0xe0
-      000252 CE               [12] 1377 	xch	a,r6
-      000253 6E               [12] 1378 	xrl	a,r6
-      000254 FD               [12] 1379 	mov	r5,a
-      000255 7C 00            [12] 1380 	mov	r4,#0x00
-      000257 EF               [12] 1381 	mov	a,r7
-      000258 42 06            [12] 1382 	orl	ar6,a
-      00025A EC               [12] 1383 	mov	a,r4
-      00025B 42 05            [12] 1384 	orl	ar5,a
-      00025D 90r00r55         [24] 1385 	mov	dptr,#_lcd_putSpecificColorPixel_r_10000_298
-      000260 E0               [24] 1386 	movx	a,@dptr
-      000261 54 1F            [12] 1387 	anl	a,#0x1f
-      000263 C4               [12] 1388 	swap	a
-      000264 03               [12] 1389 	rr	a
-      000265 54 F8            [12] 1390 	anl	a,#0xf8
-      000267 FC               [12] 1391 	mov	r4,a
-      000268 E4               [12] 1392 	clr	a
-      000269 42 06            [12] 1393 	orl	ar6,a
-      00026B EC               [12] 1394 	mov	a,r4
-      00026C 42 05            [12] 1395 	orl	ar5,a
-                                   1396 ;	src/lcd_driver.c:154: pixelToSend = (__xdata uint16_t*) (measuredBit|LCD_ENSURE_WRITE_ADDRESS);
-      00026E 8E 04            [24] 1397 	mov	ar4,r6
-      000270 8D 07            [24] 1398 	mov	ar7,r5
-      000272 43 07 08         [24] 1399 	orl	ar7,#0x08
-      000275 8C 82            [24] 1400 	mov	dpl,r4
-      000277 8F 83            [24] 1401 	mov	dph,r7
-                                   1402 ;	src/lcd_driver.c:155: *pixelToSend = measuredBit;
-      000279 EE               [12] 1403 	mov	a,r6
-      00027A F0               [24] 1404 	movx	@dptr,a
-      00027B ED               [12] 1405 	mov	a,r5
-      00027C A3               [24] 1406 	inc	dptr
-      00027D F0               [24] 1407 	movx	@dptr,a
-                                   1408 ;	src/lcd_driver.c:159: }
-      00027E 22               [24] 1409 	ret
-                                   1410 ;------------------------------------------------------------
-                                   1411 ;Allocation info for local variables in function 'lcd_clear'
-                                   1412 ;------------------------------------------------------------
-                                   1413 ;i             Allocated with name '_lcd_clear_i_20000_301'
-                                   1414 ;j             Allocated with name '_lcd_clear_j_40000_303'
-                                   1415 ;------------------------------------------------------------
-                                   1416 ;	src/lcd_driver.c:162: void lcd_clear(){
-                                   1417 ;	-----------------------------------------
-                                   1418 ;	 function lcd_clear
-                                   1419 ;	-----------------------------------------
-      00027F                       1420 _lcd_clear:
-                                   1421 ;	src/lcd_driver.c:164: LCD_0_ENABLE_PIN = 0;
-                                   1422 ;	assignBit
-      00027F C2 B4            [12] 1423 	clr	_P3_4
-                                   1424 ;	src/lcd_driver.c:165: LCD_1_ENABLE_PIN = 0;
-                                   1425 ;	assignBit
-      000281 C2 B5            [12] 1426 	clr	_P3_5
-                                   1427 ;	src/lcd_driver.c:167: for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
-      000283 7E 00            [12] 1428 	mov	r6,#0x00
-      000285 7F 00            [12] 1429 	mov	r7,#0x00
-      000287                       1430 00107$:
-      000287 8E 04            [24] 1431 	mov	ar4,r6
-      000289 8F 05            [24] 1432 	mov	ar5,r7
-      00028B C3               [12] 1433 	clr	c
-      00028C EC               [12] 1434 	mov	a,r4
-      00028D 94 40            [12] 1435 	subb	a,#0x40
-      00028F ED               [12] 1436 	mov	a,r5
-      000290 94 01            [12] 1437 	subb	a,#0x01
-      000292 50 3E            [24] 1438 	jnc	00102$
-                                   1439 ;	src/lcd_driver.c:168: for(uint16_t j = 0; j < LCD_PIXEL_HRES; j++){
-      000294 7C 00            [12] 1440 	mov	r4,#0x00
-      000296 7D 00            [12] 1441 	mov	r5,#0x00
-      000298                       1442 00104$:
-      000298 8C 02            [24] 1443 	mov	ar2,r4
-      00029A 8D 03            [24] 1444 	mov	ar3,r5
-      00029C C3               [12] 1445 	clr	c
-      00029D EA               [12] 1446 	mov	a,r2
-      00029E 94 E0            [12] 1447 	subb	a,#0xe0
-      0002A0 EB               [12] 1448 	mov	a,r3
-      0002A1 94 01            [12] 1449 	subb	a,#0x01
-      0002A3 50 26            [24] 1450 	jnc	00108$
-                                   1451 ;	src/lcd_driver.c:169: lcd_putSpecificColorPixel(LCD_CLEARED_COLOR,LCD_CLEARED_COLOR,LCD_CLEARED_COLOR);
-      0002A5 90r00r53         [24] 1452 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_2
-      0002A8 E4               [12] 1453 	clr	a
-      0002A9 F0               [24] 1454 	movx	@dptr,a
-      0002AA 90r00r54         [24] 1455 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_3
-      0002AD F0               [24] 1456 	movx	@dptr,a
-      0002AE 75 82 00         [24] 1457 	mov	dpl, #0x00
-      0002B1 C0 07            [24] 1458 	push	ar7
-      0002B3 C0 06            [24] 1459 	push	ar6
-      0002B5 C0 05            [24] 1460 	push	ar5
-      0002B7 C0 04            [24] 1461 	push	ar4
-      0002B9 12r02r32         [24] 1462 	lcall	_lcd_putSpecificColorPixel
-      0002BC D0 04            [24] 1463 	pop	ar4
-      0002BE D0 05            [24] 1464 	pop	ar5
-      0002C0 D0 06            [24] 1465 	pop	ar6
-      0002C2 D0 07            [24] 1466 	pop	ar7
-                                   1467 ;	src/lcd_driver.c:168: for(uint16_t j = 0; j < LCD_PIXEL_HRES; j++){
-      0002C4 0C               [12] 1468 	inc	r4
-      0002C5 BC 00 D0         [24] 1469 	cjne	r4,#0x00,00104$
-      0002C8 0D               [12] 1470 	inc	r5
-      0002C9 80 CD            [24] 1471 	sjmp	00104$
-      0002CB                       1472 00108$:
-                                   1473 ;	src/lcd_driver.c:167: for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
-      0002CB 0E               [12] 1474 	inc	r6
-      0002CC BE 00 B8         [24] 1475 	cjne	r6,#0x00,00107$
-      0002CF 0F               [12] 1476 	inc	r7
-      0002D0 80 B5            [24] 1477 	sjmp	00107$
-      0002D2                       1478 00102$:
-                                   1479 ;	src/lcd_driver.c:174: LCD_0_ENABLE_PIN = 1;
-                                   1480 ;	assignBit
-      0002D2 D2 B4            [12] 1481 	setb	_P3_4
-                                   1482 ;	src/lcd_driver.c:175: LCD_1_ENABLE_PIN = 1;
-                                   1483 ;	assignBit
-      0002D4 D2 B5            [12] 1484 	setb	_P3_5
-                                   1485 ;	src/lcd_driver.c:176: }
-      0002D6 22               [24] 1486 	ret
-                                   1487 	.area CSEG    (CODE)
-                                   1488 	.area CONST   (CODE)
-                                   1489 	.area XINIT   (CODE)
-                                   1490 	.area CABS    (ABS,CODE)
+      000250 13               [12] 1376 	rrc	a
+      000251 CE               [12] 1377 	xch	a,r6
+      000252 13               [12] 1378 	rrc	a
+      000253 CE               [12] 1379 	xch	a,r6
+      000254 FD               [12] 1380 	mov	r5,a
+      000255 7C 00            [12] 1381 	mov	r4,#0x00
+      000257 EF               [12] 1382 	mov	a,r7
+      000258 42 06            [12] 1383 	orl	ar6,a
+      00025A EC               [12] 1384 	mov	a,r4
+      00025B 42 05            [12] 1385 	orl	ar5,a
+      00025D 90r00r55         [24] 1386 	mov	dptr,#_lcd_putSpecificColorPixel_r_10000_298
+      000260 E0               [24] 1387 	movx	a,@dptr
+      000261 54 1F            [12] 1388 	anl	a,#0x1f
+      000263 C4               [12] 1389 	swap	a
+      000264 03               [12] 1390 	rr	a
+      000265 54 F8            [12] 1391 	anl	a,#0xf8
+      000267 FC               [12] 1392 	mov	r4,a
+      000268 E4               [12] 1393 	clr	a
+      000269 42 06            [12] 1394 	orl	ar6,a
+      00026B EC               [12] 1395 	mov	a,r4
+      00026C 42 05            [12] 1396 	orl	ar5,a
+                                   1397 ;	src/lcd_driver.c:155: pixelToSend = (__xdata uint16_t*) (measuredBit|LCD_ENSURE_WRITE_ADDRESS);
+      00026E 8E 04            [24] 1398 	mov	ar4,r6
+      000270 8D 07            [24] 1399 	mov	ar7,r5
+      000272 43 07 08         [24] 1400 	orl	ar7,#0x08
+      000275 8C 82            [24] 1401 	mov	dpl,r4
+      000277 8F 83            [24] 1402 	mov	dph,r7
+                                   1403 ;	src/lcd_driver.c:156: *pixelToSend = measuredBit;
+      000279 EE               [12] 1404 	mov	a,r6
+      00027A F0               [24] 1405 	movx	@dptr,a
+      00027B ED               [12] 1406 	mov	a,r5
+      00027C A3               [24] 1407 	inc	dptr
+      00027D F0               [24] 1408 	movx	@dptr,a
+                                   1409 ;	src/lcd_driver.c:160: }
+      00027E 22               [24] 1410 	ret
+                                   1411 ;------------------------------------------------------------
+                                   1412 ;Allocation info for local variables in function 'lcd_clear'
+                                   1413 ;------------------------------------------------------------
+                                   1414 ;i             Allocated with name '_lcd_clear_i_20000_301'
+                                   1415 ;j             Allocated with name '_lcd_clear_j_40000_303'
+                                   1416 ;------------------------------------------------------------
+                                   1417 ;	src/lcd_driver.c:163: void lcd_clear(){
+                                   1418 ;	-----------------------------------------
+                                   1419 ;	 function lcd_clear
+                                   1420 ;	-----------------------------------------
+      00027F                       1421 _lcd_clear:
+                                   1422 ;	src/lcd_driver.c:165: LCD_0_ENABLE_PIN = 0;
+                                   1423 ;	assignBit
+      00027F C2 B4            [12] 1424 	clr	_P3_4
+                                   1425 ;	src/lcd_driver.c:166: LCD_1_ENABLE_PIN = 0;
+                                   1426 ;	assignBit
+      000281 C2 B5            [12] 1427 	clr	_P3_5
+                                   1428 ;	src/lcd_driver.c:168: for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
+      000283 7E 00            [12] 1429 	mov	r6,#0x00
+      000285 7F 00            [12] 1430 	mov	r7,#0x00
+      000287                       1431 00107$:
+      000287 8E 04            [24] 1432 	mov	ar4,r6
+      000289 8F 05            [24] 1433 	mov	ar5,r7
+      00028B C3               [12] 1434 	clr	c
+      00028C EC               [12] 1435 	mov	a,r4
+      00028D 94 40            [12] 1436 	subb	a,#0x40
+      00028F ED               [12] 1437 	mov	a,r5
+      000290 94 01            [12] 1438 	subb	a,#0x01
+      000292 50 3E            [24] 1439 	jnc	00102$
+                                   1440 ;	src/lcd_driver.c:169: for(uint16_t j = 0; j < LCD_PIXEL_HRES; j++){
+      000294 7C 00            [12] 1441 	mov	r4,#0x00
+      000296 7D 00            [12] 1442 	mov	r5,#0x00
+      000298                       1443 00104$:
+      000298 8C 02            [24] 1444 	mov	ar2,r4
+      00029A 8D 03            [24] 1445 	mov	ar3,r5
+      00029C C3               [12] 1446 	clr	c
+      00029D EA               [12] 1447 	mov	a,r2
+      00029E 94 E0            [12] 1448 	subb	a,#0xe0
+      0002A0 EB               [12] 1449 	mov	a,r3
+      0002A1 94 01            [12] 1450 	subb	a,#0x01
+      0002A3 50 26            [24] 1451 	jnc	00108$
+                                   1452 ;	src/lcd_driver.c:170: lcd_putSpecificColorPixel(LCD_CLEARED_COLOR,LCD_CLEARED_COLOR,LCD_CLEARED_COLOR);
+      0002A5 90r00r53         [24] 1453 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_2
+      0002A8 E4               [12] 1454 	clr	a
+      0002A9 F0               [24] 1455 	movx	@dptr,a
+      0002AA 90r00r54         [24] 1456 	mov	dptr,#_lcd_putSpecificColorPixel_PARM_3
+      0002AD F0               [24] 1457 	movx	@dptr,a
+      0002AE 75 82 00         [24] 1458 	mov	dpl, #0x00
+      0002B1 C0 07            [24] 1459 	push	ar7
+      0002B3 C0 06            [24] 1460 	push	ar6
+      0002B5 C0 05            [24] 1461 	push	ar5
+      0002B7 C0 04            [24] 1462 	push	ar4
+      0002B9 12r02r33         [24] 1463 	lcall	_lcd_putSpecificColorPixel
+      0002BC D0 04            [24] 1464 	pop	ar4
+      0002BE D0 05            [24] 1465 	pop	ar5
+      0002C0 D0 06            [24] 1466 	pop	ar6
+      0002C2 D0 07            [24] 1467 	pop	ar7
+                                   1468 ;	src/lcd_driver.c:169: for(uint16_t j = 0; j < LCD_PIXEL_HRES; j++){
+      0002C4 0C               [12] 1469 	inc	r4
+      0002C5 BC 00 D0         [24] 1470 	cjne	r4,#0x00,00104$
+      0002C8 0D               [12] 1471 	inc	r5
+      0002C9 80 CD            [24] 1472 	sjmp	00104$
+      0002CB                       1473 00108$:
+                                   1474 ;	src/lcd_driver.c:168: for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
+      0002CB 0E               [12] 1475 	inc	r6
+      0002CC BE 00 B8         [24] 1476 	cjne	r6,#0x00,00107$
+      0002CF 0F               [12] 1477 	inc	r7
+      0002D0 80 B5            [24] 1478 	sjmp	00107$
+      0002D2                       1479 00102$:
+                                   1480 ;	src/lcd_driver.c:175: LCD_0_ENABLE_PIN = 1;
+                                   1481 ;	assignBit
+      0002D2 D2 B4            [12] 1482 	setb	_P3_4
+                                   1483 ;	src/lcd_driver.c:176: LCD_1_ENABLE_PIN = 1;
+                                   1484 ;	assignBit
+      0002D4 D2 B5            [12] 1485 	setb	_P3_5
+                                   1486 ;	src/lcd_driver.c:177: }
+      0002D6 22               [24] 1487 	ret
+                                   1488 	.area CSEG    (CODE)
+                                   1489 	.area CONST   (CODE)
+                                   1490 	.area XINIT   (CODE)
+                                   1491 	.area CABS    (ABS,CODE)

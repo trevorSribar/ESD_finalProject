@@ -13,6 +13,7 @@
 //
 // functions
 //
+uint8_t numInterruptsInOneCycle = 0;
 
 void interrupt_init(void);
 
@@ -48,10 +49,10 @@ void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
 
 // INT0, Hsync
 void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
-    
+    numInterruptsInOneCycle++;
 }
 
 // INT1, Vsync
 void Intr1(void) __interrupt (INT1_INTERRUPT_NUMBER) {
-
+    
 }

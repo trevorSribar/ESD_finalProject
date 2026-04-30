@@ -459,8 +459,8 @@
                                     459 ; initialized external ram data
                                     460 ;--------------------------------------------------------
                                     461 	.area XISEG   (XDATA)
-      000080                        462 _numTimerInterrupts::
-      000080                        463 	.ds 1
+      000081                        462 _numTimerInterrupts::
+      000081                        463 	.ds 1
                                     464 	.area HOME    (CODE)
                                     465 	.area GSINIT0 (CODE)
                                     466 	.area GSINIT1 (CODE)
@@ -494,7 +494,7 @@
                                     494 ;	-----------------------------------------
                                     495 ;	 function timer0_init
                                     496 ;	-----------------------------------------
-      0007BF                        497 _timer0_init:
+      0007E7                        497 _timer0_init:
                            000007   498 	ar7 = 0x07
                            000006   499 	ar6 = 0x06
                            000005   500 	ar5 = 0x05
@@ -504,27 +504,27 @@
                            000001   504 	ar1 = 0x01
                            000000   505 	ar0 = 0x00
                                     506 ;	src/timer.c:18: CKCON0 |= TIMER0_SPEED; // reduce the speed of the timer back to the nominal value
-      0007BF 43 8F 02         [24]  507 	orl	_CKCON0,#0x02
+      0007E7 43 8F 02         [24]  507 	orl	_CKCON0,#0x02
                                     508 ;	src/timer.c:20: currentTime.mseconds = 0;
-      0007C2 90 00 65         [24]  509 	mov	dptr,#(_currentTime + 0x0002)
-      0007C5 E4               [12]  510 	clr	a
-      0007C6 F0               [24]  511 	movx	@dptr,a
+      0007EA 90 00 65         [24]  509 	mov	dptr,#(_currentTime + 0x0002)
+      0007ED E4               [12]  510 	clr	a
+      0007EE F0               [24]  511 	movx	@dptr,a
                                     512 ;	src/timer.c:21: currentTime.seconds = 0;
-      0007C7 90 00 64         [24]  513 	mov	dptr,#(_currentTime + 0x0001)
-      0007CA F0               [24]  514 	movx	@dptr,a
+      0007EF 90 00 64         [24]  513 	mov	dptr,#(_currentTime + 0x0001)
+      0007F2 F0               [24]  514 	movx	@dptr,a
                                     515 ;	src/timer.c:22: currentTime.minutes = 0;
-      0007CB 90 00 63         [24]  516 	mov	dptr,#_currentTime
-      0007CE F0               [24]  517 	movx	@dptr,a
+      0007F3 90 00 63         [24]  516 	mov	dptr,#_currentTime
+      0007F6 F0               [24]  517 	movx	@dptr,a
                                     518 ;	src/timer.c:24: TMOD |= TIMER0_16BIT_MODE; // set the timer to 16 bit mode
-      0007CF 43 89 01         [24]  519 	orl	_TMOD,#0x01
+      0007F7 43 89 01         [24]  519 	orl	_TMOD,#0x01
                                     520 ;	src/timer.c:25: IEN0 |= TIMER0_INT_EN;  // enable timer0 interrupt
-      0007D2 43 A8 02         [24]  521 	orl	_IEN0,#0x02
+      0007FA 43 A8 02         [24]  521 	orl	_IEN0,#0x02
                                     522 ;	src/timer.c:26: IEN0 |= ALL_INTERRUPTS; // enable all interrupts
-      0007D5 43 A8 80         [24]  523 	orl	_IEN0,#0x80
+      0007FD 43 A8 80         [24]  523 	orl	_IEN0,#0x80
                                     524 ;	src/timer.c:27: TCON |= TIMER0_RUN; // starts running the timer
-      0007D8 43 88 10         [24]  525 	orl	_TCON,#0x10
+      000800 43 88 10         [24]  525 	orl	_TCON,#0x10
                                     526 ;	src/timer.c:28: }
-      0007DB 22               [24]  527 	ret
+      000803 22               [24]  527 	ret
                                     528 ;------------------------------------------------------------
                                     529 ;Allocation info for local variables in function 'timer0_pause'
                                     530 ;------------------------------------------------------------
@@ -532,11 +532,11 @@
                                     532 ;	-----------------------------------------
                                     533 ;	 function timer0_pause
                                     534 ;	-----------------------------------------
-      0007DC                        535 _timer0_pause:
+      000804                        535 _timer0_pause:
                                     536 ;	src/timer.c:32: TCON &= ~(TIMER0_RUN);
-      0007DC 53 88 EF         [24]  537 	anl	_TCON,#0xef
+      000804 53 88 EF         [24]  537 	anl	_TCON,#0xef
                                     538 ;	src/timer.c:33: }
-      0007DF 22               [24]  539 	ret
+      000807 22               [24]  539 	ret
                                     540 ;------------------------------------------------------------
                                     541 ;Allocation info for local variables in function 'timer0_resume'
                                     542 ;------------------------------------------------------------
@@ -544,11 +544,11 @@
                                     544 ;	-----------------------------------------
                                     545 ;	 function timer0_resume
                                     546 ;	-----------------------------------------
-      0007E0                        547 _timer0_resume:
+      000808                        547 _timer0_resume:
                                     548 ;	src/timer.c:37: TCON |= (TIMER0_RUN);
-      0007E0 43 88 10         [24]  549 	orl	_TCON,#0x10
+      000808 43 88 10         [24]  549 	orl	_TCON,#0x10
                                     550 ;	src/timer.c:38: }
-      0007E3 22               [24]  551 	ret
+      00080B 22               [24]  551 	ret
                                     552 ;------------------------------------------------------------
                                     553 ;Allocation info for local variables in function 'timer0_reset'
                                     554 ;------------------------------------------------------------
@@ -556,27 +556,27 @@
                                     556 ;	-----------------------------------------
                                     557 ;	 function timer0_reset
                                     558 ;	-----------------------------------------
-      0007E4                        559 _timer0_reset:
+      00080C                        559 _timer0_reset:
                                     560 ;	src/timer.c:42: IEN0 &= ~TIMER0_INT_EN;
-      0007E4 53 A8 FC         [24]  561 	anl	_IEN0,#0xfc
+      00080C 53 A8 FC         [24]  561 	anl	_IEN0,#0xfc
                                     562 ;	src/timer.c:43: currentTime.minutes = 0;
-      0007E7 90 00 63         [24]  563 	mov	dptr,#_currentTime
-      0007EA E4               [12]  564 	clr	a
-      0007EB F0               [24]  565 	movx	@dptr,a
+      00080F 90 00 63         [24]  563 	mov	dptr,#_currentTime
+      000812 E4               [12]  564 	clr	a
+      000813 F0               [24]  565 	movx	@dptr,a
                                     566 ;	src/timer.c:44: currentTime.seconds = 0;
-      0007EC 90 00 64         [24]  567 	mov	dptr,#(_currentTime + 0x0001)
-      0007EF F0               [24]  568 	movx	@dptr,a
+      000814 90 00 64         [24]  567 	mov	dptr,#(_currentTime + 0x0001)
+      000817 F0               [24]  568 	movx	@dptr,a
                                     569 ;	src/timer.c:45: currentTime.mseconds = 0;
-      0007F0 90 00 65         [24]  570 	mov	dptr,#(_currentTime + 0x0002)
-      0007F3 F0               [24]  571 	movx	@dptr,a
+      000818 90 00 65         [24]  570 	mov	dptr,#(_currentTime + 0x0002)
+      00081B F0               [24]  571 	movx	@dptr,a
                                     572 ;	src/timer.c:46: TH0 = 0;
-      0007F4 F5 8C            [12]  573 	mov	_TH0,a
+      00081C F5 8C            [12]  573 	mov	_TH0,a
                                     574 ;	src/timer.c:47: TL0 = 0;
-      0007F6 F5 8A            [12]  575 	mov	_TL0,a
+      00081E F5 8A            [12]  575 	mov	_TL0,a
                                     576 ;	src/timer.c:48: TMOD |= TIMER0_16BIT_MODE;
-      0007F8 43 89 01         [24]  577 	orl	_TMOD,#0x01
+      000820 43 89 01         [24]  577 	orl	_TMOD,#0x01
                                     578 ;	src/timer.c:49: }
-      0007FB 22               [24]  579 	ret
+      000823 22               [24]  579 	ret
                                     580 ;------------------------------------------------------------
                                     581 ;Allocation info for local variables in function 'timer0_getTime'
                                     582 ;------------------------------------------------------------
@@ -584,72 +584,72 @@
                                     584 ;	-----------------------------------------
                                     585 ;	 function timer0_getTime
                                     586 ;	-----------------------------------------
-      0007FC                        587 _timer0_getTime:
+      000824                        587 _timer0_getTime:
                                     588 ;	src/timer.c:53: while(numTimerInterrupts>0){
-      0007FC                        589 00105$:
-      0007FC 90 00 80         [24]  590 	mov	dptr,#_numTimerInterrupts
-      0007FF E0               [24]  591 	movx	a,@dptr
-      000800 FF               [12]  592 	mov	r7,a
-      000801 E0               [24]  593 	movx	a,@dptr
-      000802 60 47            [24]  594 	jz	00107$
+      000824                        589 00105$:
+      000824 90 00 81         [24]  590 	mov	dptr,#_numTimerInterrupts
+      000827 E0               [24]  591 	movx	a,@dptr
+      000828 FF               [12]  592 	mov	r7,a
+      000829 E0               [24]  593 	movx	a,@dptr
+      00082A 60 47            [24]  594 	jz	00107$
                                     595 ;	src/timer.c:54: numTimerInterrupts--;
-      000804 EF               [12]  596 	mov	a,r7
-      000805 14               [12]  597 	dec	a
-      000806 90 00 80         [24]  598 	mov	dptr,#_numTimerInterrupts
-      000809 F0               [24]  599 	movx	@dptr,a
+      00082C EF               [12]  596 	mov	a,r7
+      00082D 14               [12]  597 	dec	a
+      00082E 90 00 81         [24]  598 	mov	dptr,#_numTimerInterrupts
+      000831 F0               [24]  599 	movx	@dptr,a
                                     600 ;	src/timer.c:55: currentTime.mseconds+=MS_IRQ;
-      00080A 90 00 65         [24]  601 	mov	dptr,#(_currentTime + 0x0002)
-      00080D E0               [24]  602 	movx	a,@dptr
-      00080E 24 07            [12]  603 	add	a,#0x07
+      000832 90 00 65         [24]  601 	mov	dptr,#(_currentTime + 0x0002)
+      000835 E0               [24]  602 	movx	a,@dptr
+      000836 24 07            [12]  603 	add	a,#0x07
                                     604 ;	src/timer.c:56: if(currentTime.mseconds>=MS_PER_SEC){
-      000810 90 00 65         [24]  605 	mov	dptr,#(_currentTime + 0x0002)
-      000813 F0               [24]  606 	movx	@dptr,a
-      000814 FF               [12]  607 	mov	r7,a
-      000815 BF 64 00         [24]  608 	cjne	r7,#0x64,00135$
-      000818                        609 00135$:
-      000818 40 E2            [24]  610 	jc	00105$
+      000838 90 00 65         [24]  605 	mov	dptr,#(_currentTime + 0x0002)
+      00083B F0               [24]  606 	movx	@dptr,a
+      00083C FF               [12]  607 	mov	r7,a
+      00083D BF 64 00         [24]  608 	cjne	r7,#0x64,00135$
+      000840                        609 00135$:
+      000840 40 E2            [24]  610 	jc	00105$
                                     611 ;	src/timer.c:57: currentTime.mseconds-=MS_PER_SEC;
-      00081A 90 00 65         [24]  612 	mov	dptr,#(_currentTime + 0x0002)
-      00081D E0               [24]  613 	movx	a,@dptr
-      00081E 24 9C            [12]  614 	add	a,#0x9c
-      000820 90 00 65         [24]  615 	mov	dptr,#(_currentTime + 0x0002)
-      000823 F0               [24]  616 	movx	@dptr,a
+      000842 90 00 65         [24]  612 	mov	dptr,#(_currentTime + 0x0002)
+      000845 E0               [24]  613 	movx	a,@dptr
+      000846 24 9C            [12]  614 	add	a,#0x9c
+      000848 90 00 65         [24]  615 	mov	dptr,#(_currentTime + 0x0002)
+      00084B F0               [24]  616 	movx	@dptr,a
                                     617 ;	src/timer.c:58: currentTime.seconds++;
-      000824 90 00 64         [24]  618 	mov	dptr,#(_currentTime + 0x0001)
-      000827 E0               [24]  619 	movx	a,@dptr
-      000828 FF               [12]  620 	mov	r7,a
-      000829 0F               [12]  621 	inc	r7
-      00082A 90 00 64         [24]  622 	mov	dptr,#(_currentTime + 0x0001)
-      00082D EF               [12]  623 	mov	a,r7
-      00082E F0               [24]  624 	movx	@dptr,a
+      00084C 90 00 64         [24]  618 	mov	dptr,#(_currentTime + 0x0001)
+      00084F E0               [24]  619 	movx	a,@dptr
+      000850 FF               [12]  620 	mov	r7,a
+      000851 0F               [12]  621 	inc	r7
+      000852 90 00 64         [24]  622 	mov	dptr,#(_currentTime + 0x0001)
+      000855 EF               [12]  623 	mov	a,r7
+      000856 F0               [24]  624 	movx	@dptr,a
                                     625 ;	src/timer.c:59: if(currentTime.seconds>=SEC_PER_MIN){
-      00082F BF 3C 00         [24]  626 	cjne	r7,#0x3c,00137$
-      000832                        627 00137$:
-      000832 40 C8            [24]  628 	jc	00105$
+      000857 BF 3C 00         [24]  626 	cjne	r7,#0x3c,00137$
+      00085A                        627 00137$:
+      00085A 40 C8            [24]  628 	jc	00105$
                                     629 ;	src/timer.c:60: currentTime.seconds-=SEC_PER_MIN;
-      000834 90 00 64         [24]  630 	mov	dptr,#(_currentTime + 0x0001)
-      000837 E0               [24]  631 	movx	a,@dptr
-      000838 24 C4            [12]  632 	add	a,#0xc4
-      00083A 90 00 64         [24]  633 	mov	dptr,#(_currentTime + 0x0001)
-      00083D F0               [24]  634 	movx	@dptr,a
+      00085C 90 00 64         [24]  630 	mov	dptr,#(_currentTime + 0x0001)
+      00085F E0               [24]  631 	movx	a,@dptr
+      000860 24 C4            [12]  632 	add	a,#0xc4
+      000862 90 00 64         [24]  633 	mov	dptr,#(_currentTime + 0x0001)
+      000865 F0               [24]  634 	movx	@dptr,a
                                     635 ;	src/timer.c:61: currentTime.minutes++;
-      00083E 90 00 63         [24]  636 	mov	dptr,#_currentTime
-      000841 E0               [24]  637 	movx	a,@dptr
-      000842 FF               [12]  638 	mov	r7,a
-      000843 0F               [12]  639 	inc	r7
-      000844 90 00 63         [24]  640 	mov	dptr,#_currentTime
-      000847 EF               [12]  641 	mov	a,r7
-      000848 F0               [24]  642 	movx	@dptr,a
-      000849 80 B1            [24]  643 	sjmp	00105$
-      00084B                        644 00107$:
+      000866 90 00 63         [24]  636 	mov	dptr,#_currentTime
+      000869 E0               [24]  637 	movx	a,@dptr
+      00086A FF               [12]  638 	mov	r7,a
+      00086B 0F               [12]  639 	inc	r7
+      00086C 90 00 63         [24]  640 	mov	dptr,#_currentTime
+      00086F EF               [12]  641 	mov	a,r7
+      000870 F0               [24]  642 	movx	@dptr,a
+      000871 80 B1            [24]  643 	sjmp	00105$
+      000873                        644 00107$:
                                     645 ;	src/timer.c:65: return &currentTime;
-      00084B 90 00 63         [24]  646 	mov	dptr,#_currentTime
-      00084E 75 F0 00         [24]  647 	mov	b, #0x00
+      000873 90 00 63         [24]  646 	mov	dptr,#_currentTime
+      000876 75 F0 00         [24]  647 	mov	b, #0x00
                                     648 ;	src/timer.c:66: }
-      000851 22               [24]  649 	ret
+      000879 22               [24]  649 	ret
                                     650 	.area CSEG    (CODE)
                                     651 	.area CONST   (CODE)
                                     652 	.area XINIT   (CODE)
-      001009                        653 __xinit__numTimerInterrupts:
-      001009 00                     654 	.db #0x00	; 0
+      001032                        653 __xinit__numTimerInterrupts:
+      001032 00                     654 	.db #0x00	; 0
                                     655 	.area CABS    (ABS,CODE)

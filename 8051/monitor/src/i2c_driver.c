@@ -24,9 +24,10 @@ __code const static uint8_t edid[128] = {
     0x10, // same idea, 480 w/ 45 blanking rows
     0x10, 0x60, // hsync length
     0xA2, 0x00, // vsync
-    LCD_H_SIZE_MM, LCD_V_SIZE_MM, 0x00
+    LCD_H_SIZE_MM, LCD_V_SIZE_MM, 0x00,
     0x00, 0x00, //no boarders
     0b00011000, // no audio, progressive, negitive syncs
+    {0}
     /*
 00FFFFFFFFFFFF00
 5033
