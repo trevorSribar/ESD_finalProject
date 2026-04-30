@@ -212,7 +212,6 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
-	.globl _numInterruptsInOneCycle
 	.globl _interrupt_init
 ;--------------------------------------------------------
 ; special function registers
@@ -474,8 +473,6 @@ _lcd_initdelay_delayAmount_10000_129:
 ; initialized external ram data
 ;--------------------------------------------------------
 	.area XISEG   (XDATA)
-_numInterruptsInOneCycle::
-	.ds 1
 	.area HOME    (CODE)
 	.area GSINIT0 (CODE)
 	.area GSINIT1 (CODE)
@@ -1097,29 +1094,37 @@ _main:
 	dec	sp
 ;	src/main.c:28: while(1){
 00102$:
-;	src/main.c:29: lcd_putPixel();
+;	src/main.c:31: LCD_1_ENABLE_PIN = 1;
+;	assignBit
+	setb	_P3_5
+;	src/main.c:32: lcd_putPixel();
 	lcall	_lcd_putPixel
-;	src/main.c:36: while(1);;
-;	src/main.c:37: }
+;	src/main.c:33: LCD_1_ENABLE_PIN = 0;
+;	assignBit
+	clr	_P3_5
+;	src/main.c:40: while(1);;
+;	src/main.c:41: }
 	sjmp	00102$
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'interrupt_init'
 ;------------------------------------------------------------
-;	src/main.c:39: void interrupt_init(void){
+;	src/main.c:43: void interrupt_init(void){
 ;	-----------------------------------------
 ;	 function interrupt_init
 ;	-----------------------------------------
 _interrupt_init:
-;	src/main.c:41: IEN0 |= ENABLE_INTERRUPTS;
+;	src/main.c:45: IEN0 |= ENABLE_INTERRUPTS;
 	orl	_IEN0,#0x80
-;	src/main.c:42: IEN0 |= INT0_INTERRUPT_ENABLE;
+;	src/main.c:46: IEN0 |= INT0_INTERRUPT_ENABLE;
 	orl	_IEN0,#0x01
-;	src/main.c:43: }
+;	src/main.c:47: IEN0 |= INT1_INTERRUPT_ENABLE;
+	orl	_IEN0,#0x04
+;	src/main.c:48: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'timer0_interrupt'
 ;------------------------------------------------------------
-;	src/main.c:45: void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
+;	src/main.c:50: void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
 ;	-----------------------------------------
 ;	 function timer0_interrupt
 ;	-----------------------------------------
@@ -1128,14 +1133,14 @@ _timer0_interrupt:
 	push	dpl
 	push	dph
 	push	psw
-;	src/main.c:46: numTimerInterrupts++;
+;	src/main.c:51: numTimerInterrupts++;
 	mov	dptr,#_numTimerInterrupts
 	movx	a,@dptr
 	add	a, #0x01
 	movx	@dptr,a
-;	src/main.c:47: TH0 = TIMER0_PRESCALE;
+;	src/main.c:52: TH0 = TIMER0_PRESCALE;
 	mov	_TH0,#0x03
-;	src/main.c:48: }
+;	src/main.c:53: }
 	pop	psw
 	pop	dph
 	pop	dpl
@@ -1146,37 +1151,34 @@ _timer0_interrupt:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'Intr0'
 ;------------------------------------------------------------
-;	src/main.c:51: void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
+;	src/main.c:56: void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
 ;	-----------------------------------------
 ;	 function Intr0
 ;	-----------------------------------------
 _Intr0:
-	push	acc
-	push	dpl
-	push	dph
-	push	psw
-;	src/main.c:52: numInterruptsInOneCycle++;
-	mov	dptr,#_numInterruptsInOneCycle
-	movx	a,@dptr
-	add	a, #0x01
-	movx	@dptr,a
-;	src/main.c:53: }
-	pop	psw
-	pop	dph
-	pop	dpl
-	pop	acc
+;	src/main.c:57: while(P3_2==0);
+00101$:
+	jnb	_P3_2,00101$
+;	src/main.c:58: }
 	reti
 ;	eliminated unneeded mov psw,# (no regs used in bank)
+;	eliminated unneeded push/pop not_psw
+;	eliminated unneeded push/pop dpl
+;	eliminated unneeded push/pop dph
 ;	eliminated unneeded push/pop b
+;	eliminated unneeded push/pop acc
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'Intr1'
 ;------------------------------------------------------------
-;	src/main.c:56: void Intr1(void) __interrupt (INT1_INTERRUPT_NUMBER) {
+;	src/main.c:61: void Intr1(void) __interrupt (INT1_INTERRUPT_NUMBER) {
 ;	-----------------------------------------
 ;	 function Intr1
 ;	-----------------------------------------
 _Intr1:
-;	src/main.c:58: }
+;	src/main.c:62: while(P3_3==0);
+00101$:
+	jnb	_P3_3,00101$
+;	src/main.c:63: }
 	reti
 ;	eliminated unneeded mov psw,# (no regs used in bank)
 ;	eliminated unneeded push/pop not_psw
@@ -1208,6 +1210,4 @@ ___str_2:
 	.db 0x00
 	.area CSEG    (CODE)
 	.area XINIT   (CODE)
-__xinit__numInterruptsInOneCycle:
-	.db #0x00	; 0
 	.area CABS    (ABS,CODE)

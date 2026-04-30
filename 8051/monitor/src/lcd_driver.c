@@ -13,7 +13,7 @@
 void lcd_init(){
     // For LCD 0
     LCD_0_ENABLE_PIN = 0;
-    LCD_1_ENABLE_PIN = 0;
+    // LCD_1_ENABLE_PIN = 0;
     // SOFT RESET
     LCD_COMMAND_REGISTER_PIN = 0;
     lcd_writeAddress(LCD_SOFT_RESET_ADDRESS);
@@ -128,14 +128,46 @@ void lcd_init(){
 
 // attempts to put the color at port 0 onto the current pixel location
 void lcd_putPixel(){
-    __xdata uint16_t *pixelToSend;
-    uint16_t measuredBit = P1;
-    measuredBit = measuredBit & (uint16_t)LCD_PULL_PIXEL_MASK;
-    measuredBit = (measuredBit
-        | (measuredBit<<LCD_GREEN_OFFSET)
-        | (measuredBit<<LCD_RED_OFFSET));
-    pixelToSend = (__xdata uint16_t*) (measuredBit|LCD_ENSURE_WRITE_ADDRESS);
-    *pixelToSend = measuredBit;
+    __asm 
+    mov a, _P1 ; pull the ADC data
+    anl a, #LCD_PULL_PIXEL_MASK ; mask the data
+    mov r2, a ; save the value of the accumulator
+
+    ; high byte
+    rl a
+    rl a
+    rl a
+    anl a, #0xF8
+    mov r1, a ; save the value of the accumulator
+    mov a, r2 ; reload the old value
+    rr a
+    rr a
+    anl a, #0x07
+    orl a, r1
+    mov dph, a
+
+    ; low byte
+    rl a
+    rl a
+    rl a
+    anl a, #0xC0
+    orl a, r2
+    mov dpl, a
+
+    ;write the data
+    movx @dptr, a
+    inc dptr
+    mov a, dph
+    movx @dptr, a
+    __endasm
+    // __xdata uint16_t *pixelToSend;
+    // uint16_t measuredBit = P1;
+    // measuredBit = measuredBit & (uint16_t)LCD_PULL_PIXEL_MASK;
+    // measuredBit = (measuredBit
+    //     | (measuredBit<<LCD_GREEN_OFFSET)
+    //     | (measuredBit<<LCD_RED_OFFSET));
+    // pixelToSend = (__xdata uint16_t*) (measuredBit);
+    // *pixelToSend = measuredBit;
 }
 
 // puts the color asked for onto the current pixel location

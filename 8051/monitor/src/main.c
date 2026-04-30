@@ -6,6 +6,7 @@
 
 #define ENABLE_INTERRUPTS (1<<7)
 #define INT0_INTERRUPT_ENABLE (1)
+#define INT1_INTERRUPT_ENABLE (1<<2)
 #define FALLING_EDGE (1)
 #define TIMER0_INTERRUPT_NUMBER 1 //TE0_VECTOR from 8051.h
 #define INT1_INTERRUPT_NUMBER 3 // this needs to be checked
@@ -13,7 +14,6 @@
 //
 // functions
 //
-uint8_t numInterruptsInOneCycle = 0;
 
 void interrupt_init(void);
 
@@ -26,7 +26,11 @@ int main(void)
     lcd_init();
     printf_tiny("Initialzied the LCD\n\r");
     while(1){
+        // LCD_1_ENABLE_PIN = 1;
+        // LCD_1_ENABLE_PIN = 0;
+        LCD_1_ENABLE_PIN = 1;
         lcd_putPixel();
+        LCD_1_ENABLE_PIN = 0;
         // printf_tiny("ADC valie: %u\n\r",P1&LCD_PULL_PIXEL_MASK);
     }
     // end lcd test
@@ -40,6 +44,7 @@ void interrupt_init(void){
     // TCON |= FALLING_EDGE;
     IEN0 |= ENABLE_INTERRUPTS;
     IEN0 |= INT0_INTERRUPT_ENABLE;
+    IEN0 |= INT1_INTERRUPT_ENABLE;
 }
 
 void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
@@ -49,10 +54,10 @@ void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
 
 // INT0, Hsync
 void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
-    numInterruptsInOneCycle++;
+    while(P3_2==0);
 }
 
 // INT1, Vsync
 void Intr1(void) __interrupt (INT1_INTERRUPT_NUMBER) {
-    
+    while(P3_3==0);
 }
