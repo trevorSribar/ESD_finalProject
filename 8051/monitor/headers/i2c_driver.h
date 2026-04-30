@@ -18,8 +18,10 @@
 #define I2C_ERROR_MONITR_EDID 4
 #define MONITOR_READ_ADDRESS 0xA1 // Monitors have a default address of 0x50 << 1 + 1 for R
 #define MONITOR_WRITE_ADDRESS 0xA0 // Monitors have a default address of 0x50 << 1 + 0 for W
-#define LCD_H_SIZE_CM 0x00 // change this
-#define LCD_V_SIZE_CM 0x00 // change this
+#define LCD_H_SIZE_CM 0x07 // 73.44 mm
+#define LCD_V_SIZE_CM 0x05 // 44.98 mm
+#define LCD_H_SIZE_MM 0x49
+#define LCD_V_SIZE_MM 0x31
 
 //
 // inline functions

@@ -8,6 +8,7 @@
 #define INT0_INTERRUPT_ENABLE (1)
 #define FALLING_EDGE (1)
 #define TIMER0_INTERRUPT_NUMBER 1 //TE0_VECTOR from 8051.h
+#define INT1_INTERRUPT_NUMBER 3 // this needs to be checked
 
 //
 // functions
@@ -19,28 +20,10 @@ int main(void)
 {
     serial_initX2(Baud_140625);
     printf_tiny("Initialzied UART\n\r");
-    // getchar();
     // interrupt_init();
     // i2c_init();
     lcd_init();
     printf_tiny("Initialzied the LCD\n\r");
-    // lcd test
-    // uint8_t r, g, b = 0;
-    // while(1){
-    //     lcd_putSpecificColorPixel(r,g,b);
-    //     r+=2;
-    //     if(r==LCD_NUM_VALUES_R){
-    //         r = 0;
-    //         g+=2;
-    //         if(g==LCD_NUM_VALUES_G){
-    //             g = 0;
-    //             b+=2;
-    //             if(b==LCD_NUM_VALUES_B){
-    //                 b=0;
-    //             }
-    //         }
-    //     }
-    // }
     while(1){
         lcd_putPixel();
         // printf_tiny("ADC valie: %u\n\r",P1&LCD_PULL_PIXEL_MASK);
@@ -63,6 +46,12 @@ void timer0_interrupt(void) __interrupt (TIMER0_INTERRUPT_NUMBER){
     TH0 = TIMER0_PRESCALE;
 }
 
-// INT0
+// INT0, Hsync
 void Intr0(void) __interrupt (INT0_INTERRUPT_NUMBER) {
+    
+}
+
+// INT1, Vsync
+void Intr1(void) __interrupt (INT1_INTERRUPT_NUMBER) {
+
 }

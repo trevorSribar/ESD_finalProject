@@ -16,7 +16,39 @@ __code const static uint8_t edid[128] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //25-34 Chromaticity coordinates default for now
     0x31, 0b01000000, // standard timing 1: 640 4:3 @60fps
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // we only have 1 standard timing
-    {0}
+    // custom timing
+    0x00, 0x01, // 10 kHz
+    0x80, 0xA0, // standard VGA (0x80/0x280)640 pixels, 160 blanks
+    0x20, // the upper 0x0200 and upper for 160, but that is held in the A
+    0xE0, 0x2D,
+    0x10, // same idea, 480 w/ 45 blanking rows
+    0x10, 0x60, // hsync length
+    0xA2, 0x00, // vsync
+    LCD_H_SIZE_MM, LCD_V_SIZE_MM, 0x00
+    0x00, 0x00, //no boarders
+    0b00011000, // no audio, progressive, negitive syncs
+    /*
+00FFFFFFFFFFFF00
+5033
+E6213469420F
+1124
+0103
+8007057802
+00000000000000000000
+3140
+0000000000000000000000000000
+0001
+80A0
+20
+E02D
+10
+1060
+A200
+493100
+0000
+18
+    
+    */
 };
 
 //
