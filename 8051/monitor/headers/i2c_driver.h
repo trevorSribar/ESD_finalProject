@@ -52,37 +52,37 @@ static inline char i2c_pullBit(){
 static inline char i2c_sendByte(char a){
     // ACK waits for the line to go low again
     // bit 7
+    SCL = 0;
     SDA = (1 & (a>>7));
-    while(SCL==0);
-    while(SCL==1);
+    SCL = 1;
+    SCL = 0;
     // bit 6
     SDA = (1 & (a>>6));
-    while(SCL==0);
-    while(SCL==1);
+    SCL = 1;
+    SCL = 0;
     // bit 5
     SDA = (1 & (a>>5));
-    while(SCL==0);
-    while(SCL==1);
+    SCL = 1;
+    SCL = 0;
     // bit 4
     SDA = (1 & (a>>4));
-    while(SCL==0);
-    while(SCL==1);
+    SCL = 1;
+    SCL = 0;
     // bit 3
     SDA = (1 & (a>>3));
-    while(SCL==0);
-    while(SCL==1);
+    SCL = 1;
+    SCL = 0;
     // bit 2
     SDA = (1 & (a>>2));
-    while(SCL==0);
-    while(SCL==1);
+    SCL = 1;
+    SCL = 0;
     // bit 1
     SDA = (1 & (a>>1));
-    while(SCL==0);
-    while(SCL==1);
+    SCL = 1;
+    SCL = 0;
     // bit 0
     SDA = (1 & a);
-    while(SCL==0);
-    while(SCL==1);
+    SCL = 1;
 
     // check ACK
     if(i2c_pullBit()){

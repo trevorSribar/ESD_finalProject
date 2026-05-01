@@ -609,7 +609,11 @@ _i2c_sendByte:
 	mov	a,dpl
 	mov	dptr,#_i2c_sendByte_a_10000_83
 	movx	@dptr,a
-;	headers/i2c_driver.h:55: SDA = (1 & (a>>7));
+;	headers/i2c_driver.h:55: SCL = 0;
+;	assignBit
+	clr	_P1_5
+;	headers/i2c_driver.h:56: SDA = (1 & (a>>7));
+	mov	dptr,#_i2c_sendByte_a_10000_83
 	movx	a,@dptr
 	mov	r7,a
 	rl	a
@@ -617,13 +621,13 @@ _i2c_sendByte:
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_6,c
-;	headers/i2c_driver.h:56: while(SCL==0);
-00101$:
-	jnb	_P1_5,00101$
-;	headers/i2c_driver.h:57: while(SCL==1);
-00104$:
-	jb	_P1_5,00104$
-;	headers/i2c_driver.h:59: SDA = (1 & (a>>6));
+;	headers/i2c_driver.h:57: SCL = 1;
+;	assignBit
+	setb	_P1_5
+;	headers/i2c_driver.h:58: SCL = 0;
+;	assignBit
+	clr	_P1_5
+;	headers/i2c_driver.h:60: SDA = (1 & (a>>6));
 	mov	a,r7
 	rl	a
 	rl	a
@@ -631,58 +635,54 @@ _i2c_sendByte:
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_6,c
-;	headers/i2c_driver.h:60: while(SCL==0);
-00107$:
-	jnb	_P1_5,00107$
-;	headers/i2c_driver.h:61: while(SCL==1);
-00110$:
-	jb	_P1_5,00110$
-;	headers/i2c_driver.h:63: SDA = (1 & (a>>5));
-	mov	dptr,#_i2c_sendByte_a_10000_83
-	movx	a,@dptr
-	mov	r7,a
+;	headers/i2c_driver.h:61: SCL = 1;
+;	assignBit
+	setb	_P1_5
+;	headers/i2c_driver.h:62: SCL = 0;
+;	assignBit
+	clr	_P1_5
+;	headers/i2c_driver.h:64: SDA = (1 & (a>>5));
+	mov	a,r7
 	mov	c,acc.5
 	clr	a
 	rlc	a
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_6,c
-;	headers/i2c_driver.h:64: while(SCL==0);
-00113$:
-	jnb	_P1_5,00113$
-;	headers/i2c_driver.h:65: while(SCL==1);
-00116$:
-	jb	_P1_5,00116$
-;	headers/i2c_driver.h:67: SDA = (1 & (a>>4));
+;	headers/i2c_driver.h:65: SCL = 1;
+;	assignBit
+	setb	_P1_5
+;	headers/i2c_driver.h:66: SCL = 0;
+;	assignBit
+	clr	_P1_5
+;	headers/i2c_driver.h:68: SDA = (1 & (a>>4));
 	mov	a,r7
 	swap	a
 	anl	a,#0x01
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_6,c
-;	headers/i2c_driver.h:68: while(SCL==0);
-00119$:
-	jnb	_P1_5,00119$
-;	headers/i2c_driver.h:69: while(SCL==1);
-00122$:
-	jb	_P1_5,00122$
-;	headers/i2c_driver.h:71: SDA = (1 & (a>>3));
-	mov	dptr,#_i2c_sendByte_a_10000_83
-	movx	a,@dptr
-	mov	r7,a
+;	headers/i2c_driver.h:69: SCL = 1;
+;	assignBit
+	setb	_P1_5
+;	headers/i2c_driver.h:70: SCL = 0;
+;	assignBit
+	clr	_P1_5
+;	headers/i2c_driver.h:72: SDA = (1 & (a>>3));
+	mov	a,r7
 	mov	c,acc.3
 	clr	a
 	rlc	a
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_6,c
-;	headers/i2c_driver.h:72: while(SCL==0);
-00125$:
-	jnb	_P1_5,00125$
-;	headers/i2c_driver.h:73: while(SCL==1);
-00128$:
-	jb	_P1_5,00128$
-;	headers/i2c_driver.h:75: SDA = (1 & (a>>2));
+;	headers/i2c_driver.h:73: SCL = 1;
+;	assignBit
+	setb	_P1_5
+;	headers/i2c_driver.h:74: SCL = 0;
+;	assignBit
+	clr	_P1_5
+;	headers/i2c_driver.h:76: SDA = (1 & (a>>2));
 	mov	a,r7
 	rr	a
 	rr	a
@@ -690,50 +690,45 @@ _i2c_sendByte:
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_6,c
-;	headers/i2c_driver.h:76: while(SCL==0);
-00131$:
-	jnb	_P1_5,00131$
-;	headers/i2c_driver.h:77: while(SCL==1);
-00134$:
-	jb	_P1_5,00134$
-;	headers/i2c_driver.h:79: SDA = (1 & (a>>1));
-	mov	dptr,#_i2c_sendByte_a_10000_83
-	movx	a,@dptr
-	mov	r7,a
+;	headers/i2c_driver.h:77: SCL = 1;
+;	assignBit
+	setb	_P1_5
+;	headers/i2c_driver.h:78: SCL = 0;
+;	assignBit
+	clr	_P1_5
+;	headers/i2c_driver.h:80: SDA = (1 & (a>>1));
+	mov	a,r7
 	rr	a
 	anl	a,#0x01
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_6,c
-;	headers/i2c_driver.h:80: while(SCL==0);
-00137$:
-	jnb	_P1_5,00137$
-;	headers/i2c_driver.h:81: while(SCL==1);
-00140$:
-	jb	_P1_5,00140$
-;	headers/i2c_driver.h:83: SDA = (1 & a);
+;	headers/i2c_driver.h:81: SCL = 1;
+;	assignBit
+	setb	_P1_5
+;	headers/i2c_driver.h:82: SCL = 0;
+;	assignBit
+	clr	_P1_5
+;	headers/i2c_driver.h:84: SDA = (1 & a);
 	mov	a,r7
 	anl	a,#0x01
 ;	assignBit
 	add	a,#0xff
 	mov	_P1_6,c
-;	headers/i2c_driver.h:84: while(SCL==0);
-00143$:
-	jnb	_P1_5,00143$
-;	headers/i2c_driver.h:85: while(SCL==1);
-00146$:
-	jb	_P1_5,00146$
+;	headers/i2c_driver.h:85: SCL = 1;
+;	assignBit
+	setb	_P1_5
 ;	headers/i2c_driver.h:46: while(SCL==0);
-00151$:
-	jnb	_P1_5,00151$
+00103$:
+	jnb	_P1_5,00103$
 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
 	mov	c,_P1_6
 ;	headers/i2c_driver.h:88: if(i2c_pullBit()){
-	jnc	00150$
+	jnc	00102$
 ;	headers/i2c_driver.h:89: return ERROR;
 	mov	dpl, #0x01
 	ret
-00150$:
+00102$:
 ;	headers/i2c_driver.h:91: return SUCCESS;
 	mov	dpl, #0x00
 ;	headers/i2c_driver.h:92: }

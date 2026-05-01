@@ -441,24 +441,24 @@
                                     441 ; bit data
                                     442 ;--------------------------------------------------------
                                     443 	.area BSEG    (BIT)
-      000000                        444 _i2c_edidSend_sloc0_1_0:
-      000000                        445 	.ds 1
+                                    444 ;--------------------------------------------------------
+                                    445 ; paged external ram data
                                     446 ;--------------------------------------------------------
-                                    447 ; paged external ram data
+                                    447 	.area PSEG    (PAG,XDATA)
                                     448 ;--------------------------------------------------------
-                                    449 	.area PSEG    (PAG,XDATA)
+                                    449 ; uninitialized external ram data
                                     450 ;--------------------------------------------------------
-                                    451 ; uninitialized external ram data
-                                    452 ;--------------------------------------------------------
-                                    453 	.area XSEG    (XDATA)
-      00000A                        454 _i2c_sendByte_a_10000_83:
-      00000A                        455 	.ds 1
-      00000B                        456 _i2c_printEDIDhex_checkSum_10000_127:
-      00000B                        457 	.ds 1
-      00000C                        458 _i2c_edidSend_a_60001_229:
-      00000C                        459 	.ds 1
-      00000D                        460 _i2c_edidSend_a_40001_237:
-      00000D                        461 	.ds 1
+                                    451 	.area XSEG    (XDATA)
+      00000A                        452 _i2c_sendByte_a_10000_83:
+      00000A                        453 	.ds 1
+      00000B                        454 _i2c_printEDIDhex_checkSum_10000_127:
+      00000B                        455 	.ds 1
+      00000C                        456 _i2c_edidSend_i_30001_136:
+      00000C                        457 	.ds 1
+      00000D                        458 _i2c_edidSend_a_60001_186:
+      00000D                        459 	.ds 1
+      00000E                        460 _i2c_edidSend_a_40001_194:
+      00000E                        461 	.ds 1
                                     462 ;--------------------------------------------------------
                                     463 ; absolute external ram data
                                     464 ;--------------------------------------------------------
@@ -500,7 +500,7 @@
                                     500 ;	-----------------------------------------
                                     501 ;	 function i2c_findStart
                                     502 ;	-----------------------------------------
-      00035A                        503 _i2c_findStart:
+      000341                        503 _i2c_findStart:
                            000007   504 	ar7 = 0x07
                            000006   505 	ar6 = 0x06
                            000005   506 	ar5 = 0x05
@@ -510,16 +510,16 @@
                            000001   510 	ar1 = 0x01
                            000000   511 	ar0 = 0x00
                                     512 ;	headers/i2c_driver.h:31: while(SCL==0); // make sure it isn't currently clocking values
-      00035A                        513 00101$:
-      00035A 30 95 FD         [24]  514 	jnb	_P1_5,00101$
+      000341                        513 00101$:
+      000341 30 95 FD         [24]  514 	jnb	_P1_5,00101$
                                     515 ;	headers/i2c_driver.h:32: while(SDA==1); // wait for the start condition (as both are now high)
-      00035D                        516 00104$:
-      00035D 20 96 FD         [24]  517 	jb	_P1_6,00104$
+      000344                        516 00104$:
+      000344 20 96 FD         [24]  517 	jb	_P1_6,00104$
                                     518 ;	headers/i2c_driver.h:33: while(SCL==1); // wait for the clock line to go low, so we can call pullByte without causing errors
-      000360                        519 00107$:
-      000360 20 95 FD         [24]  520 	jb	_P1_5,00107$
+      000347                        519 00107$:
+      000347 20 95 FD         [24]  520 	jb	_P1_5,00107$
                                     521 ;	headers/i2c_driver.h:34: }
-      000363 22               [24]  522 	ret
+      00034A 22               [24]  522 	ret
                                     523 ;------------------------------------------------------------
                                     524 ;Allocation info for local variables in function 'i2c_sendAck'
                                     525 ;------------------------------------------------------------
@@ -527,24 +527,24 @@
                                     527 ;	-----------------------------------------
                                     528 ;	 function i2c_sendAck
                                     529 ;	-----------------------------------------
-      000364                        530 _i2c_sendAck:
+      00034B                        530 _i2c_sendAck:
                                     531 ;	headers/i2c_driver.h:37: while(SCL==1);
-      000364                        532 00101$:
-      000364 20 95 FD         [24]  533 	jb	_P1_5,00101$
+      00034B                        532 00101$:
+      00034B 20 95 FD         [24]  533 	jb	_P1_5,00101$
                                     534 ;	headers/i2c_driver.h:38: SDA = 0;
                                     535 ;	assignBit
-      000367 C2 96            [12]  536 	clr	_P1_6
+      00034E C2 96            [12]  536 	clr	_P1_6
                                     537 ;	headers/i2c_driver.h:39: while(SCL==0);  // wait till the data is clocked in
-      000369                        538 00104$:
-      000369 30 95 FD         [24]  539 	jnb	_P1_5,00104$
+      000350                        538 00104$:
+      000350 30 95 FD         [24]  539 	jnb	_P1_5,00104$
                                     540 ;	headers/i2c_driver.h:40: while(SCL==1);  // data is being clocked in
-      00036C                        541 00107$:
-      00036C 20 95 FD         [24]  542 	jb	_P1_5,00107$
+      000353                        541 00107$:
+      000353 20 95 FD         [24]  542 	jb	_P1_5,00107$
                                     543 ;	headers/i2c_driver.h:41: SDA = 1;        // now we reset the line
                                     544 ;	assignBit
-      00036F D2 96            [12]  545 	setb	_P1_6
+      000356 D2 96            [12]  545 	setb	_P1_6
                                     546 ;	headers/i2c_driver.h:42: }
-      000371 22               [24]  547 	ret
+      000358 22               [24]  547 	ret
                                     548 ;------------------------------------------------------------
                                     549 ;Allocation info for local variables in function 'i2c_pullBit'
                                     550 ;------------------------------------------------------------
@@ -554,18 +554,18 @@
                                     554 ;	-----------------------------------------
                                     555 ;	 function i2c_pullBit
                                     556 ;	-----------------------------------------
-      000372                        557 _i2c_pullBit:
+      000359                        557 _i2c_pullBit:
                                     558 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000372                        559 00101$:
-      000372 30 95 FD         [24]  560 	jnb	_P1_5,00101$
+      000359                        559 00101$:
+      000359 30 95 FD         [24]  560 	jnb	_P1_5,00101$
                                     561 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000375 A2 96            [12]  562 	mov	c,_P1_6
-      000377 E4               [12]  563 	clr	a
-      000378 33               [12]  564 	rlc	a
+      00035C A2 96            [12]  562 	mov	c,_P1_6
+      00035E E4               [12]  563 	clr	a
+      00035F 33               [12]  564 	rlc	a
                                     565 ;	headers/i2c_driver.h:48: return toReturn;
                                     566 ;	headers/i2c_driver.h:49: }
-      000379 F5 82            [12]  567 	mov	dpl,a
-      00037B 22               [24]  568 	ret
+      000360 F5 82            [12]  567 	mov	dpl,a
+      000362 22               [24]  568 	ret
                                     569 ;------------------------------------------------------------
                                     570 ;Allocation info for local variables in function 'i2c_sendByte'
                                     571 ;------------------------------------------------------------
@@ -577,1261 +577,1069 @@
                                     577 ;	-----------------------------------------
                                     578 ;	 function i2c_sendByte
                                     579 ;	-----------------------------------------
-      00037C                        580 _i2c_sendByte:
-      00037C E5 82            [12]  581 	mov	a,dpl
-      00037E 90 00 0A         [24]  582 	mov	dptr,#_i2c_sendByte_a_10000_83
-      000381 F0               [24]  583 	movx	@dptr,a
-                                    584 ;	headers/i2c_driver.h:55: SDA = (1 & (a>>7));
-      000382 E0               [24]  585 	movx	a,@dptr
-      000383 FF               [12]  586 	mov	r7,a
-      000384 23               [12]  587 	rl	a
-      000385 54 01            [12]  588 	anl	a,#0x01
-                                    589 ;	assignBit
-      000387 24 FF            [12]  590 	add	a,#0xff
-      000389 92 96            [24]  591 	mov	_P1_6,c
-                                    592 ;	headers/i2c_driver.h:56: while(SCL==0);
-      00038B                        593 00101$:
-      00038B 30 95 FD         [24]  594 	jnb	_P1_5,00101$
-                                    595 ;	headers/i2c_driver.h:57: while(SCL==1);
-      00038E                        596 00104$:
-      00038E 20 95 FD         [24]  597 	jb	_P1_5,00104$
-                                    598 ;	headers/i2c_driver.h:59: SDA = (1 & (a>>6));
-      000391 EF               [12]  599 	mov	a,r7
-      000392 23               [12]  600 	rl	a
-      000393 23               [12]  601 	rl	a
-      000394 54 01            [12]  602 	anl	a,#0x01
-                                    603 ;	assignBit
-      000396 24 FF            [12]  604 	add	a,#0xff
-      000398 92 96            [24]  605 	mov	_P1_6,c
-                                    606 ;	headers/i2c_driver.h:60: while(SCL==0);
-      00039A                        607 00107$:
-      00039A 30 95 FD         [24]  608 	jnb	_P1_5,00107$
-                                    609 ;	headers/i2c_driver.h:61: while(SCL==1);
-      00039D                        610 00110$:
-      00039D 20 95 FD         [24]  611 	jb	_P1_5,00110$
-                                    612 ;	headers/i2c_driver.h:63: SDA = (1 & (a>>5));
-      0003A0 90 00 0A         [24]  613 	mov	dptr,#_i2c_sendByte_a_10000_83
-      0003A3 E0               [24]  614 	movx	a,@dptr
-      0003A4 FF               [12]  615 	mov	r7,a
-      0003A5 A2 E5            [12]  616 	mov	c,acc.5
-      0003A7 E4               [12]  617 	clr	a
-      0003A8 33               [12]  618 	rlc	a
-                                    619 ;	assignBit
-      0003A9 24 FF            [12]  620 	add	a,#0xff
-      0003AB 92 96            [24]  621 	mov	_P1_6,c
-                                    622 ;	headers/i2c_driver.h:64: while(SCL==0);
-      0003AD                        623 00113$:
-      0003AD 30 95 FD         [24]  624 	jnb	_P1_5,00113$
-                                    625 ;	headers/i2c_driver.h:65: while(SCL==1);
-      0003B0                        626 00116$:
-      0003B0 20 95 FD         [24]  627 	jb	_P1_5,00116$
-                                    628 ;	headers/i2c_driver.h:67: SDA = (1 & (a>>4));
-      0003B3 EF               [12]  629 	mov	a,r7
-      0003B4 C4               [12]  630 	swap	a
-      0003B5 54 01            [12]  631 	anl	a,#0x01
-                                    632 ;	assignBit
-      0003B7 24 FF            [12]  633 	add	a,#0xff
-      0003B9 92 96            [24]  634 	mov	_P1_6,c
-                                    635 ;	headers/i2c_driver.h:68: while(SCL==0);
-      0003BB                        636 00119$:
-      0003BB 30 95 FD         [24]  637 	jnb	_P1_5,00119$
-                                    638 ;	headers/i2c_driver.h:69: while(SCL==1);
-      0003BE                        639 00122$:
-      0003BE 20 95 FD         [24]  640 	jb	_P1_5,00122$
-                                    641 ;	headers/i2c_driver.h:71: SDA = (1 & (a>>3));
-      0003C1 90 00 0A         [24]  642 	mov	dptr,#_i2c_sendByte_a_10000_83
-      0003C4 E0               [24]  643 	movx	a,@dptr
-      0003C5 FF               [12]  644 	mov	r7,a
-      0003C6 A2 E3            [12]  645 	mov	c,acc.3
-      0003C8 E4               [12]  646 	clr	a
-      0003C9 33               [12]  647 	rlc	a
+      000363                        580 _i2c_sendByte:
+      000363 E5 82            [12]  581 	mov	a,dpl
+      000365 90 00 0A         [24]  582 	mov	dptr,#_i2c_sendByte_a_10000_83
+      000368 F0               [24]  583 	movx	@dptr,a
+                                    584 ;	headers/i2c_driver.h:55: SCL = 0;
+                                    585 ;	assignBit
+      000369 C2 95            [12]  586 	clr	_P1_5
+                                    587 ;	headers/i2c_driver.h:56: SDA = (1 & (a>>7));
+      00036B 90 00 0A         [24]  588 	mov	dptr,#_i2c_sendByte_a_10000_83
+      00036E E0               [24]  589 	movx	a,@dptr
+      00036F FF               [12]  590 	mov	r7,a
+      000370 23               [12]  591 	rl	a
+      000371 54 01            [12]  592 	anl	a,#0x01
+                                    593 ;	assignBit
+      000373 24 FF            [12]  594 	add	a,#0xff
+      000375 92 96            [24]  595 	mov	_P1_6,c
+                                    596 ;	headers/i2c_driver.h:57: SCL = 1;
+                                    597 ;	assignBit
+      000377 D2 95            [12]  598 	setb	_P1_5
+                                    599 ;	headers/i2c_driver.h:58: SCL = 0;
+                                    600 ;	assignBit
+      000379 C2 95            [12]  601 	clr	_P1_5
+                                    602 ;	headers/i2c_driver.h:60: SDA = (1 & (a>>6));
+      00037B EF               [12]  603 	mov	a,r7
+      00037C 23               [12]  604 	rl	a
+      00037D 23               [12]  605 	rl	a
+      00037E 54 01            [12]  606 	anl	a,#0x01
+                                    607 ;	assignBit
+      000380 24 FF            [12]  608 	add	a,#0xff
+      000382 92 96            [24]  609 	mov	_P1_6,c
+                                    610 ;	headers/i2c_driver.h:61: SCL = 1;
+                                    611 ;	assignBit
+      000384 D2 95            [12]  612 	setb	_P1_5
+                                    613 ;	headers/i2c_driver.h:62: SCL = 0;
+                                    614 ;	assignBit
+      000386 C2 95            [12]  615 	clr	_P1_5
+                                    616 ;	headers/i2c_driver.h:64: SDA = (1 & (a>>5));
+      000388 EF               [12]  617 	mov	a,r7
+      000389 A2 E5            [12]  618 	mov	c,acc.5
+      00038B E4               [12]  619 	clr	a
+      00038C 33               [12]  620 	rlc	a
+                                    621 ;	assignBit
+      00038D 24 FF            [12]  622 	add	a,#0xff
+      00038F 92 96            [24]  623 	mov	_P1_6,c
+                                    624 ;	headers/i2c_driver.h:65: SCL = 1;
+                                    625 ;	assignBit
+      000391 D2 95            [12]  626 	setb	_P1_5
+                                    627 ;	headers/i2c_driver.h:66: SCL = 0;
+                                    628 ;	assignBit
+      000393 C2 95            [12]  629 	clr	_P1_5
+                                    630 ;	headers/i2c_driver.h:68: SDA = (1 & (a>>4));
+      000395 EF               [12]  631 	mov	a,r7
+      000396 C4               [12]  632 	swap	a
+      000397 54 01            [12]  633 	anl	a,#0x01
+                                    634 ;	assignBit
+      000399 24 FF            [12]  635 	add	a,#0xff
+      00039B 92 96            [24]  636 	mov	_P1_6,c
+                                    637 ;	headers/i2c_driver.h:69: SCL = 1;
+                                    638 ;	assignBit
+      00039D D2 95            [12]  639 	setb	_P1_5
+                                    640 ;	headers/i2c_driver.h:70: SCL = 0;
+                                    641 ;	assignBit
+      00039F C2 95            [12]  642 	clr	_P1_5
+                                    643 ;	headers/i2c_driver.h:72: SDA = (1 & (a>>3));
+      0003A1 EF               [12]  644 	mov	a,r7
+      0003A2 A2 E3            [12]  645 	mov	c,acc.3
+      0003A4 E4               [12]  646 	clr	a
+      0003A5 33               [12]  647 	rlc	a
                                     648 ;	assignBit
-      0003CA 24 FF            [12]  649 	add	a,#0xff
-      0003CC 92 96            [24]  650 	mov	_P1_6,c
-                                    651 ;	headers/i2c_driver.h:72: while(SCL==0);
-      0003CE                        652 00125$:
-      0003CE 30 95 FD         [24]  653 	jnb	_P1_5,00125$
-                                    654 ;	headers/i2c_driver.h:73: while(SCL==1);
-      0003D1                        655 00128$:
-      0003D1 20 95 FD         [24]  656 	jb	_P1_5,00128$
-                                    657 ;	headers/i2c_driver.h:75: SDA = (1 & (a>>2));
-      0003D4 EF               [12]  658 	mov	a,r7
-      0003D5 03               [12]  659 	rr	a
-      0003D6 03               [12]  660 	rr	a
-      0003D7 54 01            [12]  661 	anl	a,#0x01
+      0003A6 24 FF            [12]  649 	add	a,#0xff
+      0003A8 92 96            [24]  650 	mov	_P1_6,c
+                                    651 ;	headers/i2c_driver.h:73: SCL = 1;
+                                    652 ;	assignBit
+      0003AA D2 95            [12]  653 	setb	_P1_5
+                                    654 ;	headers/i2c_driver.h:74: SCL = 0;
+                                    655 ;	assignBit
+      0003AC C2 95            [12]  656 	clr	_P1_5
+                                    657 ;	headers/i2c_driver.h:76: SDA = (1 & (a>>2));
+      0003AE EF               [12]  658 	mov	a,r7
+      0003AF 03               [12]  659 	rr	a
+      0003B0 03               [12]  660 	rr	a
+      0003B1 54 01            [12]  661 	anl	a,#0x01
                                     662 ;	assignBit
-      0003D9 24 FF            [12]  663 	add	a,#0xff
-      0003DB 92 96            [24]  664 	mov	_P1_6,c
-                                    665 ;	headers/i2c_driver.h:76: while(SCL==0);
-      0003DD                        666 00131$:
-      0003DD 30 95 FD         [24]  667 	jnb	_P1_5,00131$
-                                    668 ;	headers/i2c_driver.h:77: while(SCL==1);
-      0003E0                        669 00134$:
-      0003E0 20 95 FD         [24]  670 	jb	_P1_5,00134$
-                                    671 ;	headers/i2c_driver.h:79: SDA = (1 & (a>>1));
-      0003E3 90 00 0A         [24]  672 	mov	dptr,#_i2c_sendByte_a_10000_83
-      0003E6 E0               [24]  673 	movx	a,@dptr
-      0003E7 FF               [12]  674 	mov	r7,a
-      0003E8 03               [12]  675 	rr	a
-      0003E9 54 01            [12]  676 	anl	a,#0x01
-                                    677 ;	assignBit
-      0003EB 24 FF            [12]  678 	add	a,#0xff
-      0003ED 92 96            [24]  679 	mov	_P1_6,c
-                                    680 ;	headers/i2c_driver.h:80: while(SCL==0);
-      0003EF                        681 00137$:
-      0003EF 30 95 FD         [24]  682 	jnb	_P1_5,00137$
-                                    683 ;	headers/i2c_driver.h:81: while(SCL==1);
-      0003F2                        684 00140$:
-      0003F2 20 95 FD         [24]  685 	jb	_P1_5,00140$
-                                    686 ;	headers/i2c_driver.h:83: SDA = (1 & a);
-      0003F5 EF               [12]  687 	mov	a,r7
-      0003F6 54 01            [12]  688 	anl	a,#0x01
-                                    689 ;	assignBit
-      0003F8 24 FF            [12]  690 	add	a,#0xff
-      0003FA 92 96            [24]  691 	mov	_P1_6,c
-                                    692 ;	headers/i2c_driver.h:84: while(SCL==0);
-      0003FC                        693 00143$:
-      0003FC 30 95 FD         [24]  694 	jnb	_P1_5,00143$
-                                    695 ;	headers/i2c_driver.h:85: while(SCL==1);
-      0003FF                        696 00146$:
-      0003FF 20 95 FD         [24]  697 	jb	_P1_5,00146$
-                                    698 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000402                        699 00151$:
-      000402 30 95 FD         [24]  700 	jnb	_P1_5,00151$
-                                    701 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000405 A2 96            [12]  702 	mov	c,_P1_6
-                                    703 ;	headers/i2c_driver.h:88: if(i2c_pullBit()){
-      000407 50 04            [24]  704 	jnc	00150$
-                                    705 ;	headers/i2c_driver.h:89: return ERROR;
-      000409 75 82 01         [24]  706 	mov	dpl, #0x01
-      00040C 22               [24]  707 	ret
-      00040D                        708 00150$:
-                                    709 ;	headers/i2c_driver.h:91: return SUCCESS;
-      00040D 75 82 00         [24]  710 	mov	dpl, #0x00
-                                    711 ;	headers/i2c_driver.h:92: }
-      000410 22               [24]  712 	ret
-                                    713 ;------------------------------------------------------------
-                                    714 ;Allocation info for local variables in function 'i2c_pullByte'
-                                    715 ;------------------------------------------------------------
-                                    716 ;__200000020   Allocated with name '_i2c_pullByte___200000020_20000_91'
-                                    717 ;__200000018   Allocated with name '_i2c_pullByte___200000018_20000_91'
-                                    718 ;__200000016   Allocated with name '_i2c_pullByte___200000016_20000_91'
-                                    719 ;__200000014   Allocated with name '_i2c_pullByte___200000014_20000_91'
-                                    720 ;__200000012   Allocated with name '_i2c_pullByte___200000012_20000_91'
-                                    721 ;__200000010   Allocated with name '_i2c_pullByte___200000010_20000_91'
-                                    722 ;__200000008   Allocated with name '_i2c_pullByte___200000008_20000_91'
-                                    723 ;__200000006   Allocated with name '_i2c_pullByte___200000006_20000_91'
-                                    724 ;returned      Allocated with name '_i2c_pullByte_returned_10001_91'
-                                    725 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_95'
-                                    726 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_99'
-                                    727 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_103'
-                                    728 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_107'
-                                    729 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_111'
-                                    730 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_115'
-                                    731 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_119'
-                                    732 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_123'
-                                    733 ;------------------------------------------------------------
-                                    734 ;	headers/i2c_driver.h:94: static inline char i2c_pullByte(){
-                                    735 ;	-----------------------------------------
-                                    736 ;	 function i2c_pullByte
-                                    737 ;	-----------------------------------------
-      000411                        738 _i2c_pullByte:
-                                    739 ;	headers/i2c_driver.h:96: while(SCL==0);                      // wait till data is valid
-      000411                        740 00101$:
-      000411 30 95 FD         [24]  741 	jnb	_P1_5,00101$
-                                    742 ;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
-      000414                        743 00146$:
-      000414 30 95 FD         [24]  744 	jnb	_P1_5,00146$
-                                    745 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000417 A2 96            [12]  746 	mov	c,_P1_6
-      000419 E4               [12]  747 	clr	a
-      00041A 33               [12]  748 	rlc	a
-                                    749 ;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
-      00041B 03               [12]  750 	rr	a
-      00041C 54 80            [12]  751 	anl	a,#0x80
-      00041E FF               [12]  752 	mov	r7,a
-                                    753 ;	headers/i2c_driver.h:98: while(SCL==1);                      // wait for pulled data to go away
-      00041F                        754 00104$:
-      00041F 20 95 FD         [24]  755 	jb	_P1_5,00104$
-                                    756 ;	headers/i2c_driver.h:100: while(SCL==0);                      // wait till data is valid ... 
-      000422                        757 00107$:
-      000422 30 95 FD         [24]  758 	jnb	_P1_5,00107$
-                                    759 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000425                        760 00150$:
-      000425 30 95 FD         [24]  761 	jnb	_P1_5,00150$
-                                    762 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000428 A2 96            [12]  763 	mov	c,_P1_6
-      00042A E4               [12]  764 	clr	a
-      00042B 33               [12]  765 	rlc	a
-                                    766 ;	headers/i2c_driver.h:101: returned |= i2c_pullBit()<<6;
-      00042C 03               [12]  767 	rr	a
-      00042D 03               [12]  768 	rr	a
-      00042E 54 C0            [12]  769 	anl	a,#0xc0
-      000430 42 07            [12]  770 	orl	ar7,a
-                                    771 ;	headers/i2c_driver.h:102: while(SCL==1);
-      000432                        772 00110$:
-      000432 20 95 FD         [24]  773 	jb	_P1_5,00110$
-                                    774 ;	headers/i2c_driver.h:104: while(SCL==0);
-      000435                        775 00113$:
-      000435 30 95 FD         [24]  776 	jnb	_P1_5,00113$
-                                    777 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000438                        778 00154$:
-      000438 30 95 FD         [24]  779 	jnb	_P1_5,00154$
-                                    780 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      00043B A2 96            [12]  781 	mov	c,_P1_6
-      00043D E4               [12]  782 	clr	a
-      00043E 33               [12]  783 	rlc	a
-                                    784 ;	headers/i2c_driver.h:105: returned |= i2c_pullBit()<<5;
-      00043F C4               [12]  785 	swap	a
-      000440 23               [12]  786 	rl	a
-      000441 54 E0            [12]  787 	anl	a,#0xe0
-      000443 42 07            [12]  788 	orl	ar7,a
-                                    789 ;	headers/i2c_driver.h:106: while(SCL==1);
-      000445                        790 00116$:
-      000445 20 95 FD         [24]  791 	jb	_P1_5,00116$
-                                    792 ;	headers/i2c_driver.h:108: while(SCL==0);
-      000448                        793 00119$:
-      000448 30 95 FD         [24]  794 	jnb	_P1_5,00119$
-                                    795 ;	headers/i2c_driver.h:46: while(SCL==0);
-      00044B                        796 00158$:
-      00044B 30 95 FD         [24]  797 	jnb	_P1_5,00158$
-                                    798 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      00044E A2 96            [12]  799 	mov	c,_P1_6
-      000450 E4               [12]  800 	clr	a
-      000451 33               [12]  801 	rlc	a
-                                    802 ;	headers/i2c_driver.h:109: returned |= i2c_pullBit()<<4;
-      000452 C4               [12]  803 	swap	a
-      000453 54 F0            [12]  804 	anl	a,#0xf0
-      000455 42 07            [12]  805 	orl	ar7,a
-                                    806 ;	headers/i2c_driver.h:110: while(SCL==1);
-      000457                        807 00122$:
-      000457 20 95 FD         [24]  808 	jb	_P1_5,00122$
-                                    809 ;	headers/i2c_driver.h:112: while(SCL==0);
-      00045A                        810 00125$:
-      00045A 30 95 FD         [24]  811 	jnb	_P1_5,00125$
-                                    812 ;	headers/i2c_driver.h:46: while(SCL==0);
-      00045D                        813 00162$:
-      00045D 30 95 FD         [24]  814 	jnb	_P1_5,00162$
-                                    815 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000460 A2 96            [12]  816 	mov	c,_P1_6
-      000462 E4               [12]  817 	clr	a
-      000463 33               [12]  818 	rlc	a
-                                    819 ;	headers/i2c_driver.h:113: returned |= i2c_pullBit()<<3;
-      000464 C4               [12]  820 	swap	a
-      000465 03               [12]  821 	rr	a
-      000466 54 F8            [12]  822 	anl	a,#0xf8
-      000468 42 07            [12]  823 	orl	ar7,a
-                                    824 ;	headers/i2c_driver.h:114: while(SCL==1);
-      00046A                        825 00128$:
-      00046A 20 95 FD         [24]  826 	jb	_P1_5,00128$
-                                    827 ;	headers/i2c_driver.h:116: while(SCL==0);
-      00046D                        828 00131$:
-      00046D 30 95 FD         [24]  829 	jnb	_P1_5,00131$
-                                    830 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000470                        831 00166$:
-      000470 30 95 FD         [24]  832 	jnb	_P1_5,00166$
-                                    833 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000473 A2 96            [12]  834 	mov	c,_P1_6
-      000475 E4               [12]  835 	clr	a
-      000476 33               [12]  836 	rlc	a
-                                    837 ;	headers/i2c_driver.h:117: returned |= i2c_pullBit()<<2;
-      000477 25 E0            [12]  838 	add	a,acc
-      000479 25 E0            [12]  839 	add	a,acc
-      00047B 42 07            [12]  840 	orl	ar7,a
-                                    841 ;	headers/i2c_driver.h:118: while(SCL==1);
-      00047D                        842 00134$:
-      00047D 20 95 FD         [24]  843 	jb	_P1_5,00134$
-                                    844 ;	headers/i2c_driver.h:120: while(SCL==0);
-      000480                        845 00137$:
-      000480 30 95 FD         [24]  846 	jnb	_P1_5,00137$
-                                    847 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000483                        848 00170$:
-      000483 30 95 FD         [24]  849 	jnb	_P1_5,00170$
-                                    850 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000486 A2 96            [12]  851 	mov	c,_P1_6
-      000488 E4               [12]  852 	clr	a
-      000489 33               [12]  853 	rlc	a
-                                    854 ;	headers/i2c_driver.h:121: returned |= i2c_pullBit()<<1;
-      00048A 25 E0            [12]  855 	add	a,acc
-      00048C 42 07            [12]  856 	orl	ar7,a
-                                    857 ;	headers/i2c_driver.h:122: while(SCL==1);
-      00048E                        858 00140$:
-      00048E 20 95 FD         [24]  859 	jb	_P1_5,00140$
-                                    860 ;	headers/i2c_driver.h:124: while(SCL==0);
-      000491                        861 00143$:
-      000491 30 95 FD         [24]  862 	jnb	_P1_5,00143$
-                                    863 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000494                        864 00174$:
-      000494 30 95 FD         [24]  865 	jnb	_P1_5,00174$
-                                    866 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000497 A2 96            [12]  867 	mov	c,_P1_6
-      000499 E4               [12]  868 	clr	a
-      00049A 33               [12]  869 	rlc	a
-                                    870 ;	headers/i2c_driver.h:125: returned |= i2c_pullBit();
-      00049B 42 07            [12]  871 	orl	ar7,a
-                                    872 ;	headers/i2c_driver.h:37: while(SCL==1);
-      00049D                        873 00178$:
-      00049D 20 95 FD         [24]  874 	jb	_P1_5,00178$
-                                    875 ;	headers/i2c_driver.h:38: SDA = 0;
-                                    876 ;	assignBit
-      0004A0 C2 96            [12]  877 	clr	_P1_6
-                                    878 ;	headers/i2c_driver.h:39: while(SCL==0);  // wait till the data is clocked in
-      0004A2                        879 00181$:
-      0004A2 30 95 FD         [24]  880 	jnb	_P1_5,00181$
-                                    881 ;	headers/i2c_driver.h:40: while(SCL==1);  // data is being clocked in
-      0004A5                        882 00184$:
-      0004A5 20 95 FD         [24]  883 	jb	_P1_5,00184$
-                                    884 ;	headers/i2c_driver.h:41: SDA = 1;        // now we reset the line
-                                    885 ;	assignBit
-      0004A8 D2 96            [12]  886 	setb	_P1_6
-                                    887 ;	headers/i2c_driver.h:129: return returned;
-      0004AA 8F 82            [24]  888 	mov	dpl, r7
-                                    889 ;	headers/i2c_driver.h:130: }
-      0004AC 22               [24]  890 	ret
+      0003B3 24 FF            [12]  663 	add	a,#0xff
+      0003B5 92 96            [24]  664 	mov	_P1_6,c
+                                    665 ;	headers/i2c_driver.h:77: SCL = 1;
+                                    666 ;	assignBit
+      0003B7 D2 95            [12]  667 	setb	_P1_5
+                                    668 ;	headers/i2c_driver.h:78: SCL = 0;
+                                    669 ;	assignBit
+      0003B9 C2 95            [12]  670 	clr	_P1_5
+                                    671 ;	headers/i2c_driver.h:80: SDA = (1 & (a>>1));
+      0003BB EF               [12]  672 	mov	a,r7
+      0003BC 03               [12]  673 	rr	a
+      0003BD 54 01            [12]  674 	anl	a,#0x01
+                                    675 ;	assignBit
+      0003BF 24 FF            [12]  676 	add	a,#0xff
+      0003C1 92 96            [24]  677 	mov	_P1_6,c
+                                    678 ;	headers/i2c_driver.h:81: SCL = 1;
+                                    679 ;	assignBit
+      0003C3 D2 95            [12]  680 	setb	_P1_5
+                                    681 ;	headers/i2c_driver.h:82: SCL = 0;
+                                    682 ;	assignBit
+      0003C5 C2 95            [12]  683 	clr	_P1_5
+                                    684 ;	headers/i2c_driver.h:84: SDA = (1 & a);
+      0003C7 EF               [12]  685 	mov	a,r7
+      0003C8 54 01            [12]  686 	anl	a,#0x01
+                                    687 ;	assignBit
+      0003CA 24 FF            [12]  688 	add	a,#0xff
+      0003CC 92 96            [24]  689 	mov	_P1_6,c
+                                    690 ;	headers/i2c_driver.h:85: SCL = 1;
+                                    691 ;	assignBit
+      0003CE D2 95            [12]  692 	setb	_P1_5
+                                    693 ;	headers/i2c_driver.h:46: while(SCL==0);
+      0003D0                        694 00103$:
+      0003D0 30 95 FD         [24]  695 	jnb	_P1_5,00103$
+                                    696 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      0003D3 A2 96            [12]  697 	mov	c,_P1_6
+                                    698 ;	headers/i2c_driver.h:88: if(i2c_pullBit()){
+      0003D5 50 04            [24]  699 	jnc	00102$
+                                    700 ;	headers/i2c_driver.h:89: return ERROR;
+      0003D7 75 82 01         [24]  701 	mov	dpl, #0x01
+      0003DA 22               [24]  702 	ret
+      0003DB                        703 00102$:
+                                    704 ;	headers/i2c_driver.h:91: return SUCCESS;
+      0003DB 75 82 00         [24]  705 	mov	dpl, #0x00
+                                    706 ;	headers/i2c_driver.h:92: }
+      0003DE 22               [24]  707 	ret
+                                    708 ;------------------------------------------------------------
+                                    709 ;Allocation info for local variables in function 'i2c_pullByte'
+                                    710 ;------------------------------------------------------------
+                                    711 ;__200000020   Allocated with name '_i2c_pullByte___200000020_20000_91'
+                                    712 ;__200000018   Allocated with name '_i2c_pullByte___200000018_20000_91'
+                                    713 ;__200000016   Allocated with name '_i2c_pullByte___200000016_20000_91'
+                                    714 ;__200000014   Allocated with name '_i2c_pullByte___200000014_20000_91'
+                                    715 ;__200000012   Allocated with name '_i2c_pullByte___200000012_20000_91'
+                                    716 ;__200000010   Allocated with name '_i2c_pullByte___200000010_20000_91'
+                                    717 ;__200000008   Allocated with name '_i2c_pullByte___200000008_20000_91'
+                                    718 ;__200000006   Allocated with name '_i2c_pullByte___200000006_20000_91'
+                                    719 ;returned      Allocated with name '_i2c_pullByte_returned_10001_91'
+                                    720 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_95'
+                                    721 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_99'
+                                    722 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_103'
+                                    723 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_107'
+                                    724 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_111'
+                                    725 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_115'
+                                    726 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_119'
+                                    727 ;toReturn      Allocated with name '_i2c_pullByte_toReturn_50001_123'
+                                    728 ;------------------------------------------------------------
+                                    729 ;	headers/i2c_driver.h:94: static inline char i2c_pullByte(){
+                                    730 ;	-----------------------------------------
+                                    731 ;	 function i2c_pullByte
+                                    732 ;	-----------------------------------------
+      0003DF                        733 _i2c_pullByte:
+                                    734 ;	headers/i2c_driver.h:96: while(SCL==0);                      // wait till data is valid
+      0003DF                        735 00101$:
+      0003DF 30 95 FD         [24]  736 	jnb	_P1_5,00101$
+                                    737 ;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
+      0003E2                        738 00146$:
+      0003E2 30 95 FD         [24]  739 	jnb	_P1_5,00146$
+                                    740 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      0003E5 A2 96            [12]  741 	mov	c,_P1_6
+      0003E7 E4               [12]  742 	clr	a
+      0003E8 33               [12]  743 	rlc	a
+                                    744 ;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
+      0003E9 03               [12]  745 	rr	a
+      0003EA 54 80            [12]  746 	anl	a,#0x80
+      0003EC FF               [12]  747 	mov	r7,a
+                                    748 ;	headers/i2c_driver.h:98: while(SCL==1);                      // wait for pulled data to go away
+      0003ED                        749 00104$:
+      0003ED 20 95 FD         [24]  750 	jb	_P1_5,00104$
+                                    751 ;	headers/i2c_driver.h:100: while(SCL==0);                      // wait till data is valid ... 
+      0003F0                        752 00107$:
+      0003F0 30 95 FD         [24]  753 	jnb	_P1_5,00107$
+                                    754 ;	headers/i2c_driver.h:46: while(SCL==0);
+      0003F3                        755 00150$:
+      0003F3 30 95 FD         [24]  756 	jnb	_P1_5,00150$
+                                    757 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      0003F6 A2 96            [12]  758 	mov	c,_P1_6
+      0003F8 E4               [12]  759 	clr	a
+      0003F9 33               [12]  760 	rlc	a
+                                    761 ;	headers/i2c_driver.h:101: returned |= i2c_pullBit()<<6;
+      0003FA 03               [12]  762 	rr	a
+      0003FB 03               [12]  763 	rr	a
+      0003FC 54 C0            [12]  764 	anl	a,#0xc0
+      0003FE 42 07            [12]  765 	orl	ar7,a
+                                    766 ;	headers/i2c_driver.h:102: while(SCL==1);
+      000400                        767 00110$:
+      000400 20 95 FD         [24]  768 	jb	_P1_5,00110$
+                                    769 ;	headers/i2c_driver.h:104: while(SCL==0);
+      000403                        770 00113$:
+      000403 30 95 FD         [24]  771 	jnb	_P1_5,00113$
+                                    772 ;	headers/i2c_driver.h:46: while(SCL==0);
+      000406                        773 00154$:
+      000406 30 95 FD         [24]  774 	jnb	_P1_5,00154$
+                                    775 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      000409 A2 96            [12]  776 	mov	c,_P1_6
+      00040B E4               [12]  777 	clr	a
+      00040C 33               [12]  778 	rlc	a
+                                    779 ;	headers/i2c_driver.h:105: returned |= i2c_pullBit()<<5;
+      00040D C4               [12]  780 	swap	a
+      00040E 23               [12]  781 	rl	a
+      00040F 54 E0            [12]  782 	anl	a,#0xe0
+      000411 42 07            [12]  783 	orl	ar7,a
+                                    784 ;	headers/i2c_driver.h:106: while(SCL==1);
+      000413                        785 00116$:
+      000413 20 95 FD         [24]  786 	jb	_P1_5,00116$
+                                    787 ;	headers/i2c_driver.h:108: while(SCL==0);
+      000416                        788 00119$:
+      000416 30 95 FD         [24]  789 	jnb	_P1_5,00119$
+                                    790 ;	headers/i2c_driver.h:46: while(SCL==0);
+      000419                        791 00158$:
+      000419 30 95 FD         [24]  792 	jnb	_P1_5,00158$
+                                    793 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      00041C A2 96            [12]  794 	mov	c,_P1_6
+      00041E E4               [12]  795 	clr	a
+      00041F 33               [12]  796 	rlc	a
+                                    797 ;	headers/i2c_driver.h:109: returned |= i2c_pullBit()<<4;
+      000420 C4               [12]  798 	swap	a
+      000421 54 F0            [12]  799 	anl	a,#0xf0
+      000423 42 07            [12]  800 	orl	ar7,a
+                                    801 ;	headers/i2c_driver.h:110: while(SCL==1);
+      000425                        802 00122$:
+      000425 20 95 FD         [24]  803 	jb	_P1_5,00122$
+                                    804 ;	headers/i2c_driver.h:112: while(SCL==0);
+      000428                        805 00125$:
+      000428 30 95 FD         [24]  806 	jnb	_P1_5,00125$
+                                    807 ;	headers/i2c_driver.h:46: while(SCL==0);
+      00042B                        808 00162$:
+      00042B 30 95 FD         [24]  809 	jnb	_P1_5,00162$
+                                    810 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      00042E A2 96            [12]  811 	mov	c,_P1_6
+      000430 E4               [12]  812 	clr	a
+      000431 33               [12]  813 	rlc	a
+                                    814 ;	headers/i2c_driver.h:113: returned |= i2c_pullBit()<<3;
+      000432 C4               [12]  815 	swap	a
+      000433 03               [12]  816 	rr	a
+      000434 54 F8            [12]  817 	anl	a,#0xf8
+      000436 42 07            [12]  818 	orl	ar7,a
+                                    819 ;	headers/i2c_driver.h:114: while(SCL==1);
+      000438                        820 00128$:
+      000438 20 95 FD         [24]  821 	jb	_P1_5,00128$
+                                    822 ;	headers/i2c_driver.h:116: while(SCL==0);
+      00043B                        823 00131$:
+      00043B 30 95 FD         [24]  824 	jnb	_P1_5,00131$
+                                    825 ;	headers/i2c_driver.h:46: while(SCL==0);
+      00043E                        826 00166$:
+      00043E 30 95 FD         [24]  827 	jnb	_P1_5,00166$
+                                    828 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      000441 A2 96            [12]  829 	mov	c,_P1_6
+      000443 E4               [12]  830 	clr	a
+      000444 33               [12]  831 	rlc	a
+                                    832 ;	headers/i2c_driver.h:117: returned |= i2c_pullBit()<<2;
+      000445 25 E0            [12]  833 	add	a,acc
+      000447 25 E0            [12]  834 	add	a,acc
+      000449 42 07            [12]  835 	orl	ar7,a
+                                    836 ;	headers/i2c_driver.h:118: while(SCL==1);
+      00044B                        837 00134$:
+      00044B 20 95 FD         [24]  838 	jb	_P1_5,00134$
+                                    839 ;	headers/i2c_driver.h:120: while(SCL==0);
+      00044E                        840 00137$:
+      00044E 30 95 FD         [24]  841 	jnb	_P1_5,00137$
+                                    842 ;	headers/i2c_driver.h:46: while(SCL==0);
+      000451                        843 00170$:
+      000451 30 95 FD         [24]  844 	jnb	_P1_5,00170$
+                                    845 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      000454 A2 96            [12]  846 	mov	c,_P1_6
+      000456 E4               [12]  847 	clr	a
+      000457 33               [12]  848 	rlc	a
+                                    849 ;	headers/i2c_driver.h:121: returned |= i2c_pullBit()<<1;
+      000458 25 E0            [12]  850 	add	a,acc
+      00045A 42 07            [12]  851 	orl	ar7,a
+                                    852 ;	headers/i2c_driver.h:122: while(SCL==1);
+      00045C                        853 00140$:
+      00045C 20 95 FD         [24]  854 	jb	_P1_5,00140$
+                                    855 ;	headers/i2c_driver.h:124: while(SCL==0);
+      00045F                        856 00143$:
+      00045F 30 95 FD         [24]  857 	jnb	_P1_5,00143$
+                                    858 ;	headers/i2c_driver.h:46: while(SCL==0);
+      000462                        859 00174$:
+      000462 30 95 FD         [24]  860 	jnb	_P1_5,00174$
+                                    861 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      000465 A2 96            [12]  862 	mov	c,_P1_6
+      000467 E4               [12]  863 	clr	a
+      000468 33               [12]  864 	rlc	a
+                                    865 ;	headers/i2c_driver.h:125: returned |= i2c_pullBit();
+      000469 42 07            [12]  866 	orl	ar7,a
+                                    867 ;	headers/i2c_driver.h:37: while(SCL==1);
+      00046B                        868 00178$:
+      00046B 20 95 FD         [24]  869 	jb	_P1_5,00178$
+                                    870 ;	headers/i2c_driver.h:38: SDA = 0;
+                                    871 ;	assignBit
+      00046E C2 96            [12]  872 	clr	_P1_6
+                                    873 ;	headers/i2c_driver.h:39: while(SCL==0);  // wait till the data is clocked in
+      000470                        874 00181$:
+      000470 30 95 FD         [24]  875 	jnb	_P1_5,00181$
+                                    876 ;	headers/i2c_driver.h:40: while(SCL==1);  // data is being clocked in
+      000473                        877 00184$:
+      000473 20 95 FD         [24]  878 	jb	_P1_5,00184$
+                                    879 ;	headers/i2c_driver.h:41: SDA = 1;        // now we reset the line
+                                    880 ;	assignBit
+      000476 D2 96            [12]  881 	setb	_P1_6
+                                    882 ;	headers/i2c_driver.h:129: return returned;
+      000478 8F 82            [24]  883 	mov	dpl, r7
+                                    884 ;	headers/i2c_driver.h:130: }
+      00047A 22               [24]  885 	ret
+                                    886 ;------------------------------------------------------------
+                                    887 ;Allocation info for local variables in function 'i2c_printEDIDhex'
+                                    888 ;------------------------------------------------------------
+                                    889 ;checkSum      Allocated with name '_i2c_printEDIDhex_checkSum_10000_127'
+                                    890 ;i             Allocated with name '_i2c_printEDIDhex_i_20000_128'
                                     891 ;------------------------------------------------------------
-                                    892 ;Allocation info for local variables in function 'i2c_printEDIDhex'
-                                    893 ;------------------------------------------------------------
-                                    894 ;checkSum      Allocated with name '_i2c_printEDIDhex_checkSum_10000_127'
-                                    895 ;i             Allocated with name '_i2c_printEDIDhex_i_20000_128'
-                                    896 ;------------------------------------------------------------
-                                    897 ;	src/i2c_driver.c:82: void i2c_printEDIDhex(){
-                                    898 ;	-----------------------------------------
-                                    899 ;	 function i2c_printEDIDhex
-                                    900 ;	-----------------------------------------
-      0004AD                        901 _i2c_printEDIDhex:
-                                    902 ;	src/i2c_driver.c:83: uint8_t checkSum = 0;
-      0004AD 90 00 0B         [24]  903 	mov	dptr,#_i2c_printEDIDhex_checkSum_10000_127
-      0004B0 E4               [12]  904 	clr	a
-      0004B1 F0               [24]  905 	movx	@dptr,a
-                                    906 ;	src/i2c_driver.c:84: for(uint8_t i = 0; i < 128; i++){
-      0004B2 FF               [12]  907 	mov	r7,a
-      0004B3                        908 00105$:
-      0004B3 BF 80 00         [24]  909 	cjne	r7,#0x80,00128$
-      0004B6                        910 00128$:
-      0004B6 50 43            [24]  911 	jnc	00103$
-                                    912 ;	src/i2c_driver.c:85: checkSum+=edid[i];
-      0004B8 EF               [12]  913 	mov	a,r7
-      0004B9 90 1B 89         [24]  914 	mov	dptr,#_edid
-      0004BC 93               [24]  915 	movc	a,@a+dptr
-      0004BD FE               [12]  916 	mov	r6,a
-      0004BE 90 00 0B         [24]  917 	mov	dptr,#_i2c_printEDIDhex_checkSum_10000_127
-      0004C1 E0               [24]  918 	movx	a,@dptr
-      0004C2 2E               [12]  919 	add	a, r6
-      0004C3 F0               [24]  920 	movx	@dptr,a
-                                    921 ;	src/i2c_driver.c:86: if(edid[i]<16){
-      0004C4 BE 10 00         [24]  922 	cjne	r6,#0x10,00130$
-      0004C7                        923 00130$:
-      0004C7 50 0A            [24]  924 	jnc	00102$
-                                    925 ;	src/i2c_driver.c:87: putchar('0');
-      0004C9 90 00 30         [24]  926 	mov	dptr,#0x0030
-      0004CC C0 07            [24]  927 	push	ar7
-      0004CE 12 02 DD         [24]  928 	lcall	_putchar
-      0004D1 D0 07            [24]  929 	pop	ar7
-      0004D3                        930 00102$:
-                                    931 ;	src/i2c_driver.c:89: printf("%X",edid[i]);
-      0004D3 EF               [12]  932 	mov	a,r7
-      0004D4 90 1B 89         [24]  933 	mov	dptr,#_edid
-      0004D7 93               [24]  934 	movc	a,@a+dptr
-      0004D8 FE               [12]  935 	mov	r6,a
-      0004D9 7D 00            [12]  936 	mov	r5,#0x00
-      0004DB C0 07            [24]  937 	push	ar7
-      0004DD C0 06            [24]  938 	push	ar6
-      0004DF C0 05            [24]  939 	push	ar5
-      0004E1 74 09            [12]  940 	mov	a,#___str_0
-      0004E3 C0 E0            [24]  941 	push	acc
-      0004E5 74 1C            [12]  942 	mov	a,#(___str_0 >> 8)
-      0004E7 C0 E0            [24]  943 	push	acc
-      0004E9 74 80            [12]  944 	mov	a,#0x80
-      0004EB C0 E0            [24]  945 	push	acc
-      0004ED 12 11 0F         [24]  946 	lcall	_printf
-      0004F0 E5 81            [12]  947 	mov	a,sp
-      0004F2 24 FB            [12]  948 	add	a,#0xfb
-      0004F4 F5 81            [12]  949 	mov	sp,a
-      0004F6 D0 07            [24]  950 	pop	ar7
-                                    951 ;	src/i2c_driver.c:84: for(uint8_t i = 0; i < 128; i++){
-      0004F8 0F               [12]  952 	inc	r7
-      0004F9 80 B8            [24]  953 	sjmp	00105$
-      0004FB                        954 00103$:
-                                    955 ;	src/i2c_driver.c:91: printf("\n\rChecksum: %u\n\r",checkSum);
-      0004FB 90 00 0B         [24]  956 	mov	dptr,#_i2c_printEDIDhex_checkSum_10000_127
-      0004FE E0               [24]  957 	movx	a,@dptr
-      0004FF FE               [12]  958 	mov	r6,a
-      000500 7F 00            [12]  959 	mov	r7,#0x00
-      000502 C0 06            [24]  960 	push	ar6
-      000504 C0 07            [24]  961 	push	ar7
-      000506 74 0C            [12]  962 	mov	a,#___str_1
-      000508 C0 E0            [24]  963 	push	acc
-      00050A 74 1C            [12]  964 	mov	a,#(___str_1 >> 8)
-      00050C C0 E0            [24]  965 	push	acc
-      00050E 74 80            [12]  966 	mov	a,#0x80
-      000510 C0 E0            [24]  967 	push	acc
-      000512 12 11 0F         [24]  968 	lcall	_printf
-      000515 E5 81            [12]  969 	mov	a,sp
-      000517 24 FB            [12]  970 	add	a,#0xfb
-      000519 F5 81            [12]  971 	mov	sp,a
-                                    972 ;	src/i2c_driver.c:92: }
-      00051B 22               [24]  973 	ret
-                                    974 ;------------------------------------------------------------
-                                    975 ;Allocation info for local variables in function 'i2c_init'
-                                    976 ;------------------------------------------------------------
-                                    977 ;	src/i2c_driver.c:95: void i2c_init(){
-                                    978 ;	-----------------------------------------
-                                    979 ;	 function i2c_init
-                                    980 ;	-----------------------------------------
-      00051C                        981 _i2c_init:
-                                    982 ;	src/i2c_driver.c:96: SDA = 1;
-                                    983 ;	assignBit
-      00051C D2 96            [12]  984 	setb	_P1_6
-                                    985 ;	src/i2c_driver.c:97: SCL = 1;
-                                    986 ;	assignBit
-      00051E D2 95            [12]  987 	setb	_P1_5
-                                    988 ;	src/i2c_driver.c:98: }
-      000520 22               [24]  989 	ret
-                                    990 ;------------------------------------------------------------
-                                    991 ;Allocation info for local variables in function 'i2c_edidSend'
-                                    992 ;------------------------------------------------------------
-                                    993 ;__200000027   Allocated with name '_i2c_edidSend___200000027_20000_133'
-                                    994 ;__200000024   Allocated with name '_i2c_edidSend___200000024_20000_133'
-                                    995 ;pulledByte    Allocated with name '_i2c_edidSend_pulledByte_10001_133'
-                                    996 ;__200000020   Allocated with name '_i2c_edidSend___200000020_50001_147'
-                                    997 ;__200000018   Allocated with name '_i2c_edidSend___200000018_50001_147'
-                                    998 ;__200000016   Allocated with name '_i2c_edidSend___200000016_50001_147'
-                                    999 ;__200000014   Allocated with name '_i2c_edidSend___200000014_50001_147'
-                                   1000 ;__200000012   Allocated with name '_i2c_edidSend___200000012_50001_147'
-                                   1001 ;__200000010   Allocated with name '_i2c_edidSend___200000010_50001_147'
-                                   1002 ;__200000008   Allocated with name '_i2c_edidSend___200000008_50001_147'
-                                   1003 ;__200000006   Allocated with name '_i2c_edidSend___200000006_50001_147'
-                                   1004 ;returned      Allocated with name '_i2c_edidSend_returned_50001_147'
-                                   1005 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_151'
-                                   1006 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_155'
-                                   1007 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_159'
-                                   1008 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_163'
-                                   1009 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_167'
-                                   1010 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_171'
-                                   1011 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_175'
-                                   1012 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_179'
-                                   1013 ;__200000020   Allocated with name '_i2c_edidSend___200000020_50001_189'
-                                   1014 ;__200000018   Allocated with name '_i2c_edidSend___200000018_50001_189'
-                                   1015 ;__200000016   Allocated with name '_i2c_edidSend___200000016_50001_189'
-                                   1016 ;__200000014   Allocated with name '_i2c_edidSend___200000014_50001_189'
-                                   1017 ;__200000012   Allocated with name '_i2c_edidSend___200000012_50001_189'
-                                   1018 ;__200000010   Allocated with name '_i2c_edidSend___200000010_50001_189'
-                                   1019 ;__200000008   Allocated with name '_i2c_edidSend___200000008_50001_189'
-                                   1020 ;__200000006   Allocated with name '_i2c_edidSend___200000006_50001_189'
-                                   1021 ;returned      Allocated with name '_i2c_edidSend_returned_50001_189'
-                                   1022 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_193'
-                                   1023 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_197'
-                                   1024 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_201'
-                                   1025 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_205'
-                                   1026 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_209'
-                                   1027 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_213'
-                                   1028 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_217'
-                                   1029 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_221'
-                                   1030 ;__300010033   Allocated with name '_i2c_edidSend___300010033_30001_136'
-                                   1031 ;i             Allocated with name '_i2c_edidSend_i_30001_137'
-                                   1032 ;__500010030   Allocated with name '_i2c_edidSend___500010030_50001_138'
-                                   1033 ;__500010031   Allocated with name '_i2c_edidSend___500010031_50001_228'
-                                   1034 ;a             Allocated with name '_i2c_edidSend_a_60001_229'
-                                   1035 ;__200000004   Allocated with name '_i2c_edidSend___200000004_70001_230'
-                                   1036 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_110001_234'
-                                   1037 ;__300010034   Allocated with name '_i2c_edidSend___300010034_30001_236'
-                                   1038 ;a             Allocated with name '_i2c_edidSend_a_40001_237'
-                                   1039 ;__200000004   Allocated with name '_i2c_edidSend___200000004_50001_238'
-                                   1040 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_242'
-                                   1041 ;------------------------------------------------------------
-                                   1042 ;	src/i2c_driver.c:101: char i2c_edidSend(){
-                                   1043 ;	-----------------------------------------
-                                   1044 ;	 function i2c_edidSend
-                                   1045 ;	-----------------------------------------
-      000521                       1046 _i2c_edidSend:
-                                   1047 ;	headers/i2c_driver.h:31: while(SCL==0); // make sure it isn't currently clocking values
-      000521                       1048 00114$:
-      000521 30 95 FD         [24] 1049 	jnb	_P1_5,00114$
-                                   1050 ;	headers/i2c_driver.h:32: while(SDA==1); // wait for the start condition (as both are now high)
-      000524                       1051 00117$:
-      000524 20 96 FD         [24] 1052 	jb	_P1_6,00117$
-                                   1053 ;	headers/i2c_driver.h:33: while(SCL==1); // wait for the clock line to go low, so we can call pullByte without causing errors
-      000527                       1054 00120$:
-      000527 20 95 FD         [24] 1055 	jb	_P1_5,00120$
-                                   1056 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
-      00052A                       1057 00124$:
-      00052A 30 95 FD         [24] 1058 	jnb	_P1_5,00124$
-                                   1059 ;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
-      00052D                       1060 00127$:
-      00052D 30 95 FD         [24] 1061 	jnb	_P1_5,00127$
-                                   1062 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000530 A2 96            [12] 1063 	mov	c,_P1_6
-      000532 E4               [12] 1064 	clr	a
-      000533 33               [12] 1065 	rlc	a
-                                   1066 ;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
-      000534 03               [12] 1067 	rr	a
-      000535 54 80            [12] 1068 	anl	a,#0x80
-      000537 FF               [12] 1069 	mov	r7,a
-                                   1070 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
-      000538                       1071 00131$:
-      000538 20 95 FD         [24] 1072 	jb	_P1_5,00131$
-      00053B                       1073 00134$:
-      00053B 30 95 FD         [24] 1074 	jnb	_P1_5,00134$
-      00053E                       1075 00137$:
-      00053E 30 95 FD         [24] 1076 	jnb	_P1_5,00137$
-                                   1077 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000541 A2 96            [12] 1078 	mov	c,_P1_6
-      000543 E4               [12] 1079 	clr	a
-      000544 33               [12] 1080 	rlc	a
-                                   1081 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
-      000545 03               [12] 1082 	rr	a
-      000546 03               [12] 1083 	rr	a
-      000547 54 C0            [12] 1084 	anl	a,#0xc0
-      000549 42 07            [12] 1085 	orl	ar7,a
-      00054B                       1086 00141$:
-      00054B 20 95 FD         [24] 1087 	jb	_P1_5,00141$
-      00054E                       1088 00144$:
-      00054E 30 95 FD         [24] 1089 	jnb	_P1_5,00144$
-      000551                       1090 00147$:
-      000551 30 95 FD         [24] 1091 	jnb	_P1_5,00147$
-                                   1092 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000554 A2 96            [12] 1093 	mov	c,_P1_6
-      000556 E4               [12] 1094 	clr	a
-      000557 33               [12] 1095 	rlc	a
-                                   1096 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
-      000558 C4               [12] 1097 	swap	a
-      000559 23               [12] 1098 	rl	a
-      00055A 54 E0            [12] 1099 	anl	a,#0xe0
-      00055C 42 07            [12] 1100 	orl	ar7,a
-      00055E                       1101 00151$:
-      00055E 20 95 FD         [24] 1102 	jb	_P1_5,00151$
-      000561                       1103 00154$:
-      000561 30 95 FD         [24] 1104 	jnb	_P1_5,00154$
-      000564                       1105 00157$:
-      000564 30 95 FD         [24] 1106 	jnb	_P1_5,00157$
-                                   1107 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000567 A2 96            [12] 1108 	mov	c,_P1_6
-      000569 E4               [12] 1109 	clr	a
-      00056A 33               [12] 1110 	rlc	a
-                                   1111 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
-      00056B C4               [12] 1112 	swap	a
-      00056C 54 F0            [12] 1113 	anl	a,#0xf0
-      00056E 42 07            [12] 1114 	orl	ar7,a
-      000570                       1115 00161$:
-      000570 20 95 FD         [24] 1116 	jb	_P1_5,00161$
-      000573                       1117 00164$:
-      000573 30 95 FD         [24] 1118 	jnb	_P1_5,00164$
-      000576                       1119 00167$:
-      000576 30 95 FD         [24] 1120 	jnb	_P1_5,00167$
-                                   1121 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000579 A2 96            [12] 1122 	mov	c,_P1_6
-      00057B E4               [12] 1123 	clr	a
-      00057C 33               [12] 1124 	rlc	a
-                                   1125 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
-      00057D C4               [12] 1126 	swap	a
-      00057E 03               [12] 1127 	rr	a
-      00057F 54 F8            [12] 1128 	anl	a,#0xf8
-      000581 42 07            [12] 1129 	orl	ar7,a
-      000583                       1130 00171$:
-      000583 20 95 FD         [24] 1131 	jb	_P1_5,00171$
-      000586                       1132 00174$:
-      000586 30 95 FD         [24] 1133 	jnb	_P1_5,00174$
-      000589                       1134 00177$:
-      000589 30 95 FD         [24] 1135 	jnb	_P1_5,00177$
-                                   1136 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      00058C A2 96            [12] 1137 	mov	c,_P1_6
-      00058E E4               [12] 1138 	clr	a
-      00058F 33               [12] 1139 	rlc	a
-                                   1140 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
-      000590 25 E0            [12] 1141 	add	a,acc
-      000592 25 E0            [12] 1142 	add	a,acc
-      000594 42 07            [12] 1143 	orl	ar7,a
-      000596                       1144 00181$:
-      000596 20 95 FD         [24] 1145 	jb	_P1_5,00181$
-      000599                       1146 00184$:
-      000599 30 95 FD         [24] 1147 	jnb	_P1_5,00184$
-      00059C                       1148 00187$:
-      00059C 30 95 FD         [24] 1149 	jnb	_P1_5,00187$
-                                   1150 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      00059F A2 96            [12] 1151 	mov	c,_P1_6
-      0005A1 E4               [12] 1152 	clr	a
-      0005A2 33               [12] 1153 	rlc	a
-                                   1154 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
-      0005A3 25 E0            [12] 1155 	add	a,acc
-      0005A5 42 07            [12] 1156 	orl	ar7,a
-      0005A7                       1157 00191$:
-      0005A7 20 95 FD         [24] 1158 	jb	_P1_5,00191$
-      0005AA                       1159 00194$:
-      0005AA 30 95 FD         [24] 1160 	jnb	_P1_5,00194$
-      0005AD                       1161 00197$:
-      0005AD 30 95 FD         [24] 1162 	jnb	_P1_5,00197$
-                                   1163 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      0005B0 A2 96            [12] 1164 	mov	c,_P1_6
-      0005B2 E4               [12] 1165 	clr	a
-      0005B3 33               [12] 1166 	rlc	a
-                                   1167 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
-      0005B4 42 07            [12] 1168 	orl	ar7,a
-      0005B6                       1169 00201$:
-      0005B6 20 95 FD         [24] 1170 	jb	_P1_5,00201$
-                                   1171 ;	assignBit
-      0005B9 C2 96            [12] 1172 	clr	_P1_6
-      0005BB                       1173 00204$:
-      0005BB 30 95 FD         [24] 1174 	jnb	_P1_5,00204$
-      0005BE                       1175 00207$:
-      0005BE 20 95 FD         [24] 1176 	jb	_P1_5,00207$
-                                   1177 ;	assignBit
-      0005C1 D2 96            [12] 1178 	setb	_P1_6
-                                   1179 ;	src/i2c_driver.c:105: if(pulledByte!=MONITOR_WRITE_ADDRESS||pulledByte!=MONITOR_WRITE_ADDRESS){
-      0005C3 BF A0 03         [24] 1180 	cjne	r7,#0xa0,01318$
-      0005C6 D3               [12] 1181 	setb	c
-      0005C7 80 01            [24] 1182 	sjmp	01319$
-      0005C9                       1183 01318$:
-      0005C9 C3               [12] 1184 	clr	c
-      0005CA                       1185 01319$:
-      0005CA 92 00            [24] 1186 	mov	_i2c_edidSend_sloc0_1_0,c
-      0005CC 50 03            [24] 1187 	jnc	00101$
-      0005CE 20 00 1B         [24] 1188 	jb	_i2c_edidSend_sloc0_1_0,00212$
-      0005D1                       1189 00101$:
-                                   1190 ;	src/i2c_driver.c:106: printf_tiny("%u is not a monitor Address\n\r",pulledByte);
-      0005D1 7E 00            [12] 1191 	mov	r6,#0x00
-      0005D3 C0 07            [24] 1192 	push	ar7
-      0005D5 C0 06            [24] 1193 	push	ar6
-      0005D7 74 1D            [12] 1194 	mov	a,#___str_2
-      0005D9 C0 E0            [24] 1195 	push	acc
-      0005DB 74 1C            [12] 1196 	mov	a,#(___str_2 >> 8)
-      0005DD C0 E0            [24] 1197 	push	acc
-      0005DF 12 0F 98         [24] 1198 	lcall	_printf_tiny
-      0005E2 E5 81            [12] 1199 	mov	a,sp
-      0005E4 24 FC            [12] 1200 	add	a,#0xfc
-      0005E6 F5 81            [12] 1201 	mov	sp,a
-                                   1202 ;	src/i2c_driver.c:107: return I2C_ERROR_MONITOR_ADDRESS;
-      0005E8 75 82 02         [24] 1203 	mov	dpl, #0x02
-      0005EB 22               [24] 1204 	ret
-                                   1205 ;	headers/i2c_driver.h:37: while(SCL==1);
-      0005EC                       1206 00212$:
-      0005EC 20 95 FD         [24] 1207 	jb	_P1_5,00212$
-                                   1208 ;	headers/i2c_driver.h:38: SDA = 0;
-                                   1209 ;	assignBit
-      0005EF C2 96            [12] 1210 	clr	_P1_6
-                                   1211 ;	headers/i2c_driver.h:39: while(SCL==0);  // wait till the data is clocked in
-      0005F1                       1212 00215$:
-      0005F1 30 95 FD         [24] 1213 	jnb	_P1_5,00215$
-                                   1214 ;	headers/i2c_driver.h:40: while(SCL==1);  // data is being clocked in
-      0005F4                       1215 00218$:
-      0005F4 20 95 FD         [24] 1216 	jb	_P1_5,00218$
-                                   1217 ;	headers/i2c_driver.h:41: SDA = 1;        // now we reset the line
-                                   1218 ;	assignBit
-      0005F7 D2 96            [12] 1219 	setb	_P1_6
-                                   1220 ;	headers/i2c_driver.h:96: while(SCL==0);                      // wait till data is valid
-      0005F9                       1221 00222$:
-      0005F9 30 95 FD         [24] 1222 	jnb	_P1_5,00222$
-                                   1223 ;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
-      0005FC                       1224 00225$:
-      0005FC 30 95 FD         [24] 1225 	jnb	_P1_5,00225$
-                                   1226 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      0005FF A2 96            [12] 1227 	mov	c,_P1_6
-      000601 E4               [12] 1228 	clr	a
-      000602 33               [12] 1229 	rlc	a
-                                   1230 ;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
-      000603 03               [12] 1231 	rr	a
-      000604 54 80            [12] 1232 	anl	a,#0x80
-      000606 FF               [12] 1233 	mov	r7,a
-                                   1234 ;	headers/i2c_driver.h:98: while(SCL==1);                      // wait for pulled data to go away
-      000607                       1235 00229$:
-      000607 20 95 FD         [24] 1236 	jb	_P1_5,00229$
-                                   1237 ;	headers/i2c_driver.h:100: while(SCL==0);                      // wait till data is valid ... 
-      00060A                       1238 00232$:
-      00060A 30 95 FD         [24] 1239 	jnb	_P1_5,00232$
-                                   1240 ;	headers/i2c_driver.h:46: while(SCL==0);
-      00060D                       1241 00235$:
-      00060D 30 95 FD         [24] 1242 	jnb	_P1_5,00235$
-                                   1243 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000610 A2 96            [12] 1244 	mov	c,_P1_6
-      000612 E4               [12] 1245 	clr	a
-      000613 33               [12] 1246 	rlc	a
-                                   1247 ;	headers/i2c_driver.h:101: returned |= i2c_pullBit()<<6;
-      000614 03               [12] 1248 	rr	a
-      000615 03               [12] 1249 	rr	a
-      000616 54 C0            [12] 1250 	anl	a,#0xc0
-      000618 42 07            [12] 1251 	orl	ar7,a
-                                   1252 ;	headers/i2c_driver.h:102: while(SCL==1);
-      00061A                       1253 00239$:
-      00061A 20 95 FD         [24] 1254 	jb	_P1_5,00239$
-                                   1255 ;	headers/i2c_driver.h:104: while(SCL==0);
-      00061D                       1256 00242$:
-      00061D 30 95 FD         [24] 1257 	jnb	_P1_5,00242$
-                                   1258 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000620                       1259 00245$:
-      000620 30 95 FD         [24] 1260 	jnb	_P1_5,00245$
-                                   1261 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000623 A2 96            [12] 1262 	mov	c,_P1_6
-      000625 E4               [12] 1263 	clr	a
-      000626 33               [12] 1264 	rlc	a
-                                   1265 ;	headers/i2c_driver.h:105: returned |= i2c_pullBit()<<5;
-      000627 C4               [12] 1266 	swap	a
-      000628 23               [12] 1267 	rl	a
-      000629 54 E0            [12] 1268 	anl	a,#0xe0
-      00062B 42 07            [12] 1269 	orl	ar7,a
-                                   1270 ;	headers/i2c_driver.h:106: while(SCL==1);
-      00062D                       1271 00249$:
-      00062D 20 95 FD         [24] 1272 	jb	_P1_5,00249$
-                                   1273 ;	headers/i2c_driver.h:108: while(SCL==0);
-      000630                       1274 00252$:
-      000630 30 95 FD         [24] 1275 	jnb	_P1_5,00252$
-                                   1276 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000633                       1277 00255$:
-      000633 30 95 FD         [24] 1278 	jnb	_P1_5,00255$
-                                   1279 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000636 A2 96            [12] 1280 	mov	c,_P1_6
-      000638 E4               [12] 1281 	clr	a
-      000639 33               [12] 1282 	rlc	a
-                                   1283 ;	headers/i2c_driver.h:109: returned |= i2c_pullBit()<<4;
-      00063A C4               [12] 1284 	swap	a
-      00063B 54 F0            [12] 1285 	anl	a,#0xf0
-      00063D 42 07            [12] 1286 	orl	ar7,a
-                                   1287 ;	headers/i2c_driver.h:110: while(SCL==1);
-      00063F                       1288 00259$:
-      00063F 20 95 FD         [24] 1289 	jb	_P1_5,00259$
-                                   1290 ;	headers/i2c_driver.h:112: while(SCL==0);
-      000642                       1291 00262$:
-      000642 30 95 FD         [24] 1292 	jnb	_P1_5,00262$
-                                   1293 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000645                       1294 00265$:
-      000645 30 95 FD         [24] 1295 	jnb	_P1_5,00265$
-                                   1296 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000648 A2 96            [12] 1297 	mov	c,_P1_6
-      00064A E4               [12] 1298 	clr	a
-      00064B 33               [12] 1299 	rlc	a
-                                   1300 ;	headers/i2c_driver.h:113: returned |= i2c_pullBit()<<3;
-      00064C C4               [12] 1301 	swap	a
-      00064D 03               [12] 1302 	rr	a
-      00064E 54 F8            [12] 1303 	anl	a,#0xf8
-      000650 42 07            [12] 1304 	orl	ar7,a
-                                   1305 ;	headers/i2c_driver.h:114: while(SCL==1);
-      000652                       1306 00269$:
-      000652 20 95 FD         [24] 1307 	jb	_P1_5,00269$
-                                   1308 ;	headers/i2c_driver.h:116: while(SCL==0);
-      000655                       1309 00272$:
-      000655 30 95 FD         [24] 1310 	jnb	_P1_5,00272$
-                                   1311 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000658                       1312 00275$:
-      000658 30 95 FD         [24] 1313 	jnb	_P1_5,00275$
-                                   1314 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      00065B A2 96            [12] 1315 	mov	c,_P1_6
-      00065D E4               [12] 1316 	clr	a
-      00065E 33               [12] 1317 	rlc	a
-                                   1318 ;	headers/i2c_driver.h:117: returned |= i2c_pullBit()<<2;
-      00065F 25 E0            [12] 1319 	add	a,acc
-      000661 25 E0            [12] 1320 	add	a,acc
-      000663 42 07            [12] 1321 	orl	ar7,a
-                                   1322 ;	headers/i2c_driver.h:118: while(SCL==1);
-      000665                       1323 00279$:
-      000665 20 95 FD         [24] 1324 	jb	_P1_5,00279$
-                                   1325 ;	headers/i2c_driver.h:120: while(SCL==0);
-      000668                       1326 00282$:
-      000668 30 95 FD         [24] 1327 	jnb	_P1_5,00282$
-                                   1328 ;	headers/i2c_driver.h:46: while(SCL==0);
-      00066B                       1329 00285$:
-      00066B 30 95 FD         [24] 1330 	jnb	_P1_5,00285$
-                                   1331 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      00066E A2 96            [12] 1332 	mov	c,_P1_6
-      000670 E4               [12] 1333 	clr	a
-      000671 33               [12] 1334 	rlc	a
-                                   1335 ;	headers/i2c_driver.h:121: returned |= i2c_pullBit()<<1;
-      000672 25 E0            [12] 1336 	add	a,acc
-      000674 42 07            [12] 1337 	orl	ar7,a
-                                   1338 ;	headers/i2c_driver.h:122: while(SCL==1);
-      000676                       1339 00289$:
-      000676 20 95 FD         [24] 1340 	jb	_P1_5,00289$
-                                   1341 ;	headers/i2c_driver.h:124: while(SCL==0);
-      000679                       1342 00292$:
-      000679 30 95 FD         [24] 1343 	jnb	_P1_5,00292$
-                                   1344 ;	headers/i2c_driver.h:46: while(SCL==0);
-      00067C                       1345 00295$:
-      00067C 30 95 FD         [24] 1346 	jnb	_P1_5,00295$
-                                   1347 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      00067F A2 96            [12] 1348 	mov	c,_P1_6
-      000681 E4               [12] 1349 	clr	a
-      000682 33               [12] 1350 	rlc	a
-                                   1351 ;	headers/i2c_driver.h:125: returned |= i2c_pullBit();
-      000683 42 07            [12] 1352 	orl	ar7,a
-                                   1353 ;	headers/i2c_driver.h:37: while(SCL==1);
-      000685                       1354 00299$:
-      000685 20 95 FD         [24] 1355 	jb	_P1_5,00299$
-                                   1356 ;	headers/i2c_driver.h:38: SDA = 0;
-                                   1357 ;	assignBit
-      000688 C2 96            [12] 1358 	clr	_P1_6
-                                   1359 ;	headers/i2c_driver.h:39: while(SCL==0);  // wait till the data is clocked in
-      00068A                       1360 00302$:
-      00068A 30 95 FD         [24] 1361 	jnb	_P1_5,00302$
-                                   1362 ;	headers/i2c_driver.h:40: while(SCL==1);  // data is being clocked in
-      00068D                       1363 00305$:
-      00068D 20 95 FD         [24] 1364 	jb	_P1_5,00305$
-                                   1365 ;	headers/i2c_driver.h:41: SDA = 1;        // now we reset the line
+                                    892 ;	src/i2c_driver.c:82: void i2c_printEDIDhex(){
+                                    893 ;	-----------------------------------------
+                                    894 ;	 function i2c_printEDIDhex
+                                    895 ;	-----------------------------------------
+      00047B                        896 _i2c_printEDIDhex:
+                                    897 ;	src/i2c_driver.c:83: uint8_t checkSum = 0;
+      00047B 90 00 0B         [24]  898 	mov	dptr,#_i2c_printEDIDhex_checkSum_10000_127
+      00047E E4               [12]  899 	clr	a
+      00047F F0               [24]  900 	movx	@dptr,a
+                                    901 ;	src/i2c_driver.c:84: for(uint8_t i = 0; i < 128; i++){
+      000480 FF               [12]  902 	mov	r7,a
+      000481                        903 00105$:
+      000481 BF 80 00         [24]  904 	cjne	r7,#0x80,00128$
+      000484                        905 00128$:
+      000484 50 43            [24]  906 	jnc	00103$
+                                    907 ;	src/i2c_driver.c:85: checkSum+=edid[i];
+      000486 EF               [12]  908 	mov	a,r7
+      000487 90 1A 68         [24]  909 	mov	dptr,#_edid
+      00048A 93               [24]  910 	movc	a,@a+dptr
+      00048B FE               [12]  911 	mov	r6,a
+      00048C 90 00 0B         [24]  912 	mov	dptr,#_i2c_printEDIDhex_checkSum_10000_127
+      00048F E0               [24]  913 	movx	a,@dptr
+      000490 2E               [12]  914 	add	a, r6
+      000491 F0               [24]  915 	movx	@dptr,a
+                                    916 ;	src/i2c_driver.c:86: if(edid[i]<16){
+      000492 BE 10 00         [24]  917 	cjne	r6,#0x10,00130$
+      000495                        918 00130$:
+      000495 50 0A            [24]  919 	jnc	00102$
+                                    920 ;	src/i2c_driver.c:87: putchar('0');
+      000497 90 00 30         [24]  921 	mov	dptr,#0x0030
+      00049A C0 07            [24]  922 	push	ar7
+      00049C 12 02 C4         [24]  923 	lcall	_putchar
+      00049F D0 07            [24]  924 	pop	ar7
+      0004A1                        925 00102$:
+                                    926 ;	src/i2c_driver.c:89: printf("%X",edid[i]);
+      0004A1 EF               [12]  927 	mov	a,r7
+      0004A2 90 1A 68         [24]  928 	mov	dptr,#_edid
+      0004A5 93               [24]  929 	movc	a,@a+dptr
+      0004A6 FE               [12]  930 	mov	r6,a
+      0004A7 7D 00            [12]  931 	mov	r5,#0x00
+      0004A9 C0 07            [24]  932 	push	ar7
+      0004AB C0 06            [24]  933 	push	ar6
+      0004AD C0 05            [24]  934 	push	ar5
+      0004AF 74 E8            [12]  935 	mov	a,#___str_0
+      0004B1 C0 E0            [24]  936 	push	acc
+      0004B3 74 1A            [12]  937 	mov	a,#(___str_0 >> 8)
+      0004B5 C0 E0            [24]  938 	push	acc
+      0004B7 74 80            [12]  939 	mov	a,#0x80
+      0004B9 C0 E0            [24]  940 	push	acc
+      0004BB 12 0F EE         [24]  941 	lcall	_printf
+      0004BE E5 81            [12]  942 	mov	a,sp
+      0004C0 24 FB            [12]  943 	add	a,#0xfb
+      0004C2 F5 81            [12]  944 	mov	sp,a
+      0004C4 D0 07            [24]  945 	pop	ar7
+                                    946 ;	src/i2c_driver.c:84: for(uint8_t i = 0; i < 128; i++){
+      0004C6 0F               [12]  947 	inc	r7
+      0004C7 80 B8            [24]  948 	sjmp	00105$
+      0004C9                        949 00103$:
+                                    950 ;	src/i2c_driver.c:91: printf("\n\rChecksum: %u\n\r",checkSum);
+      0004C9 90 00 0B         [24]  951 	mov	dptr,#_i2c_printEDIDhex_checkSum_10000_127
+      0004CC E0               [24]  952 	movx	a,@dptr
+      0004CD FE               [12]  953 	mov	r6,a
+      0004CE 7F 00            [12]  954 	mov	r7,#0x00
+      0004D0 C0 06            [24]  955 	push	ar6
+      0004D2 C0 07            [24]  956 	push	ar7
+      0004D4 74 EB            [12]  957 	mov	a,#___str_1
+      0004D6 C0 E0            [24]  958 	push	acc
+      0004D8 74 1A            [12]  959 	mov	a,#(___str_1 >> 8)
+      0004DA C0 E0            [24]  960 	push	acc
+      0004DC 74 80            [12]  961 	mov	a,#0x80
+      0004DE C0 E0            [24]  962 	push	acc
+      0004E0 12 0F EE         [24]  963 	lcall	_printf
+      0004E3 E5 81            [12]  964 	mov	a,sp
+      0004E5 24 FB            [12]  965 	add	a,#0xfb
+      0004E7 F5 81            [12]  966 	mov	sp,a
+                                    967 ;	src/i2c_driver.c:92: }
+      0004E9 22               [24]  968 	ret
+                                    969 ;------------------------------------------------------------
+                                    970 ;Allocation info for local variables in function 'i2c_init'
+                                    971 ;------------------------------------------------------------
+                                    972 ;	src/i2c_driver.c:95: void i2c_init(){
+                                    973 ;	-----------------------------------------
+                                    974 ;	 function i2c_init
+                                    975 ;	-----------------------------------------
+      0004EA                        976 _i2c_init:
+                                    977 ;	src/i2c_driver.c:96: SDA = 1;
+                                    978 ;	assignBit
+      0004EA D2 96            [12]  979 	setb	_P1_6
+                                    980 ;	src/i2c_driver.c:97: SCL = 1;
+                                    981 ;	assignBit
+      0004EC D2 95            [12]  982 	setb	_P1_5
+                                    983 ;	src/i2c_driver.c:98: }
+      0004EE 22               [24]  984 	ret
+                                    985 ;------------------------------------------------------------
+                                    986 ;Allocation info for local variables in function 'i2c_edidSend'
+                                    987 ;------------------------------------------------------------
+                                    988 ;__200000024   Allocated with name '_i2c_edidSend___200000024_20000_133'
+                                    989 ;pulledByte    Allocated with name '_i2c_edidSend_pulledByte_10001_133'
+                                    990 ;__200000020   Allocated with name '_i2c_edidSend___200000020_50001_146'
+                                    991 ;__200000018   Allocated with name '_i2c_edidSend___200000018_50001_146'
+                                    992 ;__200000016   Allocated with name '_i2c_edidSend___200000016_50001_146'
+                                    993 ;__200000014   Allocated with name '_i2c_edidSend___200000014_50001_146'
+                                    994 ;__200000012   Allocated with name '_i2c_edidSend___200000012_50001_146'
+                                    995 ;__200000010   Allocated with name '_i2c_edidSend___200000010_50001_146'
+                                    996 ;__200000008   Allocated with name '_i2c_edidSend___200000008_50001_146'
+                                    997 ;__200000006   Allocated with name '_i2c_edidSend___200000006_50001_146'
+                                    998 ;returned      Allocated with name '_i2c_edidSend_returned_50001_146'
+                                    999 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_150'
+                                   1000 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_154'
+                                   1001 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_158'
+                                   1002 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_162'
+                                   1003 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_166'
+                                   1004 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_170'
+                                   1005 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_174'
+                                   1006 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_178'
+                                   1007 ;__300010030   Allocated with name '_i2c_edidSend___300010030_30001_135'
+                                   1008 ;i             Allocated with name '_i2c_edidSend_i_30001_136'
+                                   1009 ;__500010027   Allocated with name '_i2c_edidSend___500010027_50001_137'
+                                   1010 ;__500010028   Allocated with name '_i2c_edidSend___500010028_50001_185'
+                                   1011 ;a             Allocated with name '_i2c_edidSend_a_60001_186'
+                                   1012 ;__200000004   Allocated with name '_i2c_edidSend___200000004_70001_187'
+                                   1013 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_110001_191'
+                                   1014 ;__300010031   Allocated with name '_i2c_edidSend___300010031_30001_193'
+                                   1015 ;a             Allocated with name '_i2c_edidSend_a_40001_194'
+                                   1016 ;__200000004   Allocated with name '_i2c_edidSend___200000004_50001_195'
+                                   1017 ;toReturn      Allocated with name '_i2c_edidSend_toReturn_90001_199'
+                                   1018 ;------------------------------------------------------------
+                                   1019 ;	src/i2c_driver.c:101: char i2c_edidSend(){
+                                   1020 ;	-----------------------------------------
+                                   1021 ;	 function i2c_edidSend
+                                   1022 ;	-----------------------------------------
+      0004EF                       1023 _i2c_edidSend:
+                                   1024 ;	headers/i2c_driver.h:31: while(SCL==0); // make sure it isn't currently clocking values
+      0004EF                       1025 00111$:
+      0004EF 30 95 FD         [24] 1026 	jnb	_P1_5,00111$
+                                   1027 ;	headers/i2c_driver.h:32: while(SDA==1); // wait for the start condition (as both are now high)
+      0004F2                       1028 00114$:
+      0004F2 20 96 FD         [24] 1029 	jb	_P1_6,00114$
+                                   1030 ;	headers/i2c_driver.h:33: while(SCL==1); // wait for the clock line to go low, so we can call pullByte without causing errors
+      0004F5                       1031 00117$:
+      0004F5 20 95 FD         [24] 1032 	jb	_P1_5,00117$
+                                   1033 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
+      0004F8                       1034 00121$:
+      0004F8 30 95 FD         [24] 1035 	jnb	_P1_5,00121$
+                                   1036 ;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
+      0004FB                       1037 00124$:
+      0004FB 30 95 FD         [24] 1038 	jnb	_P1_5,00124$
+                                   1039 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      0004FE A2 96            [12] 1040 	mov	c,_P1_6
+      000500 E4               [12] 1041 	clr	a
+      000501 33               [12] 1042 	rlc	a
+                                   1043 ;	headers/i2c_driver.h:97: char returned = i2c_pullBit()<<7;   // data is now valid
+      000502 03               [12] 1044 	rr	a
+      000503 54 80            [12] 1045 	anl	a,#0x80
+      000505 FF               [12] 1046 	mov	r7,a
+                                   1047 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
+      000506                       1048 00128$:
+      000506 20 95 FD         [24] 1049 	jb	_P1_5,00128$
+      000509                       1050 00131$:
+      000509 30 95 FD         [24] 1051 	jnb	_P1_5,00131$
+      00050C                       1052 00134$:
+      00050C 30 95 FD         [24] 1053 	jnb	_P1_5,00134$
+                                   1054 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      00050F A2 96            [12] 1055 	mov	c,_P1_6
+      000511 E4               [12] 1056 	clr	a
+      000512 33               [12] 1057 	rlc	a
+                                   1058 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
+      000513 03               [12] 1059 	rr	a
+      000514 03               [12] 1060 	rr	a
+      000515 54 C0            [12] 1061 	anl	a,#0xc0
+      000517 42 07            [12] 1062 	orl	ar7,a
+      000519                       1063 00138$:
+      000519 20 95 FD         [24] 1064 	jb	_P1_5,00138$
+      00051C                       1065 00141$:
+      00051C 30 95 FD         [24] 1066 	jnb	_P1_5,00141$
+      00051F                       1067 00144$:
+      00051F 30 95 FD         [24] 1068 	jnb	_P1_5,00144$
+                                   1069 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      000522 A2 96            [12] 1070 	mov	c,_P1_6
+      000524 E4               [12] 1071 	clr	a
+      000525 33               [12] 1072 	rlc	a
+                                   1073 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
+      000526 C4               [12] 1074 	swap	a
+      000527 23               [12] 1075 	rl	a
+      000528 54 E0            [12] 1076 	anl	a,#0xe0
+      00052A 42 07            [12] 1077 	orl	ar7,a
+      00052C                       1078 00148$:
+      00052C 20 95 FD         [24] 1079 	jb	_P1_5,00148$
+      00052F                       1080 00151$:
+      00052F 30 95 FD         [24] 1081 	jnb	_P1_5,00151$
+      000532                       1082 00154$:
+      000532 30 95 FD         [24] 1083 	jnb	_P1_5,00154$
+                                   1084 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      000535 A2 96            [12] 1085 	mov	c,_P1_6
+      000537 E4               [12] 1086 	clr	a
+      000538 33               [12] 1087 	rlc	a
+                                   1088 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
+      000539 C4               [12] 1089 	swap	a
+      00053A 54 F0            [12] 1090 	anl	a,#0xf0
+      00053C 42 07            [12] 1091 	orl	ar7,a
+      00053E                       1092 00158$:
+      00053E 20 95 FD         [24] 1093 	jb	_P1_5,00158$
+      000541                       1094 00161$:
+      000541 30 95 FD         [24] 1095 	jnb	_P1_5,00161$
+      000544                       1096 00164$:
+      000544 30 95 FD         [24] 1097 	jnb	_P1_5,00164$
+                                   1098 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      000547 A2 96            [12] 1099 	mov	c,_P1_6
+      000549 E4               [12] 1100 	clr	a
+      00054A 33               [12] 1101 	rlc	a
+                                   1102 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
+      00054B C4               [12] 1103 	swap	a
+      00054C 03               [12] 1104 	rr	a
+      00054D 54 F8            [12] 1105 	anl	a,#0xf8
+      00054F 42 07            [12] 1106 	orl	ar7,a
+      000551                       1107 00168$:
+      000551 20 95 FD         [24] 1108 	jb	_P1_5,00168$
+      000554                       1109 00171$:
+      000554 30 95 FD         [24] 1110 	jnb	_P1_5,00171$
+      000557                       1111 00174$:
+      000557 30 95 FD         [24] 1112 	jnb	_P1_5,00174$
+                                   1113 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      00055A A2 96            [12] 1114 	mov	c,_P1_6
+      00055C E4               [12] 1115 	clr	a
+      00055D 33               [12] 1116 	rlc	a
+                                   1117 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
+      00055E 25 E0            [12] 1118 	add	a,acc
+      000560 25 E0            [12] 1119 	add	a,acc
+      000562 42 07            [12] 1120 	orl	ar7,a
+      000564                       1121 00178$:
+      000564 20 95 FD         [24] 1122 	jb	_P1_5,00178$
+      000567                       1123 00181$:
+      000567 30 95 FD         [24] 1124 	jnb	_P1_5,00181$
+      00056A                       1125 00184$:
+      00056A 30 95 FD         [24] 1126 	jnb	_P1_5,00184$
+                                   1127 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      00056D A2 96            [12] 1128 	mov	c,_P1_6
+      00056F E4               [12] 1129 	clr	a
+      000570 33               [12] 1130 	rlc	a
+                                   1131 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
+      000571 25 E0            [12] 1132 	add	a,acc
+      000573 42 07            [12] 1133 	orl	ar7,a
+      000575                       1134 00188$:
+      000575 20 95 FD         [24] 1135 	jb	_P1_5,00188$
+      000578                       1136 00191$:
+      000578 30 95 FD         [24] 1137 	jnb	_P1_5,00191$
+      00057B                       1138 00194$:
+      00057B 30 95 FD         [24] 1139 	jnb	_P1_5,00194$
+                                   1140 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      00057E A2 96            [12] 1141 	mov	c,_P1_6
+      000580 E4               [12] 1142 	clr	a
+      000581 33               [12] 1143 	rlc	a
+                                   1144 ;	src/i2c_driver.c:104: uint8_t pulledByte = i2c_pullByte();
+      000582 42 07            [12] 1145 	orl	ar7,a
+      000584                       1146 00198$:
+      000584 20 95 FD         [24] 1147 	jb	_P1_5,00198$
+                                   1148 ;	assignBit
+      000587 C2 96            [12] 1149 	clr	_P1_6
+      000589                       1150 00201$:
+      000589 30 95 FD         [24] 1151 	jnb	_P1_5,00201$
+      00058C                       1152 00204$:
+      00058C 20 95 FD         [24] 1153 	jb	_P1_5,00204$
+                                   1154 ;	assignBit
+      00058F D2 96            [12] 1155 	setb	_P1_6
+                                   1156 ;	src/i2c_driver.c:109: if(pulledByte!=MONITOR_READ_ADDRESS){
+      000591 BF A1 02         [24] 1157 	cjne	r7,#0xa1,00593$
+      000594 80 1B            [24] 1158 	sjmp	00209$
+      000596                       1159 00593$:
+                                   1160 ;	src/i2c_driver.c:110: printf_tiny("%u,(%X) is not a monitor read Address\n\r",pulledByte,pulledByte);
+      000596 7E 00            [12] 1161 	mov	r6,#0x00
+      000598 C0 07            [24] 1162 	push	ar7
+      00059A C0 06            [24] 1163 	push	ar6
+      00059C C0 07            [24] 1164 	push	ar7
+      00059E C0 06            [24] 1165 	push	ar6
+      0005A0 74 FC            [12] 1166 	mov	a,#___str_2
+      0005A2 C0 E0            [24] 1167 	push	acc
+      0005A4 74 1A            [12] 1168 	mov	a,#(___str_2 >> 8)
+      0005A6 C0 E0            [24] 1169 	push	acc
+      0005A8 12 0E 77         [24] 1170 	lcall	_printf_tiny
+      0005AB E5 81            [12] 1171 	mov	a,sp
+      0005AD 24 FA            [12] 1172 	add	a,#0xfa
+      0005AF F5 81            [12] 1173 	mov	sp,a
+                                   1174 ;	headers/i2c_driver.h:37: while(SCL==1);
+      0005B1                       1175 00209$:
+      0005B1 20 95 FD         [24] 1176 	jb	_P1_5,00209$
+                                   1177 ;	headers/i2c_driver.h:38: SDA = 0;
+                                   1178 ;	assignBit
+      0005B4 C2 96            [12] 1179 	clr	_P1_6
+                                   1180 ;	headers/i2c_driver.h:39: while(SCL==0);  // wait till the data is clocked in
+      0005B6                       1181 00212$:
+      0005B6 30 95 FD         [24] 1182 	jnb	_P1_5,00212$
+                                   1183 ;	headers/i2c_driver.h:40: while(SCL==1);  // data is being clocked in
+      0005B9                       1184 00215$:
+      0005B9 20 95 FD         [24] 1185 	jb	_P1_5,00215$
+                                   1186 ;	headers/i2c_driver.h:41: SDA = 1;        // now we reset the line
+                                   1187 ;	assignBit
+      0005BC D2 96            [12] 1188 	setb	_P1_6
+                                   1189 ;	src/i2c_driver.c:114: SCL = 0; //hold the clock down
+                                   1190 ;	assignBit
+      0005BE C2 95            [12] 1191 	clr	_P1_5
+                                   1192 ;	src/i2c_driver.c:122: while(1){
+      0005C0                       1193 00109$:
+                                   1194 ;	src/i2c_driver.c:124: for(uint8_t i = 0; i<127; i++){
+      0005C0 90 00 0C         [24] 1195 	mov	dptr,#_i2c_edidSend_i_30001_136
+      0005C3 E4               [12] 1196 	clr	a
+      0005C4 F0               [24] 1197 	movx	@dptr,a
+      0005C5 FF               [12] 1198 	mov	r7,a
+      0005C6                       1199 00234$:
+      0005C6 BF 7F 00         [24] 1200 	cjne	r7,#0x7f,00597$
+      0005C9                       1201 00597$:
+      0005C9 40 03            [24] 1202 	jc	00598$
+      0005CB 02 06 67         [24] 1203 	ljmp	00105$
+      0005CE                       1204 00598$:
+                                   1205 ;	src/i2c_driver.c:125: if(i2c_sendByte(edid[i])){
+      0005CE EF               [12] 1206 	mov	a,r7
+      0005CF 90 1A 68         [24] 1207 	mov	dptr,#_edid
+      0005D2 93               [24] 1208 	movc	a,@a+dptr
+      0005D3 FE               [12] 1209 	mov	r6,a
+                                   1210 ;	headers/i2c_driver.h:55: SCL = 0;
+                                   1211 ;	assignBit
+      0005D4 C2 95            [12] 1212 	clr	_P1_5
+                                   1213 ;	src/i2c_driver.c:56: 0x00,
+      0005D6 EE               [12] 1214 	mov	a,r6
+      0005D7 23               [12] 1215 	rl	a
+      0005D8 54 01            [12] 1216 	anl	a,#0x01
+                                   1217 ;	assignBit
+      0005DA 24 FF            [12] 1218 	add	a,#0xff
+      0005DC 92 96            [24] 1219 	mov	_P1_6,c
+                                   1220 ;	headers/i2c_driver.h:57: SCL = 1;
+                                   1221 ;	assignBit
+      0005DE D2 95            [12] 1222 	setb	_P1_5
+                                   1223 ;	headers/i2c_driver.h:58: SCL = 0;
+                                   1224 ;	assignBit
+      0005E0 C2 95            [12] 1225 	clr	_P1_5
+                                   1226 ;	src/i2c_driver.c:60: 00FFFFFFFFFFFF00
+      0005E2 EE               [12] 1227 	mov	a,r6
+      0005E3 23               [12] 1228 	rl	a
+      0005E4 23               [12] 1229 	rl	a
+      0005E5 54 01            [12] 1230 	anl	a,#0x01
+                                   1231 ;	assignBit
+      0005E7 24 FF            [12] 1232 	add	a,#0xff
+      0005E9 92 96            [24] 1233 	mov	_P1_6,c
+                                   1234 ;	headers/i2c_driver.h:61: SCL = 1;
+                                   1235 ;	assignBit
+      0005EB D2 95            [12] 1236 	setb	_P1_5
+                                   1237 ;	headers/i2c_driver.h:62: SCL = 0;
+                                   1238 ;	assignBit
+      0005ED C2 95            [12] 1239 	clr	_P1_5
+                                   1240 ;	src/i2c_driver.c:64: 0000002000003140
+      0005EF EE               [12] 1241 	mov	a,r6
+      0005F0 A2 E5            [12] 1242 	mov	c,acc.5
+      0005F2 E4               [12] 1243 	clr	a
+      0005F3 33               [12] 1244 	rlc	a
+                                   1245 ;	assignBit
+      0005F4 24 FF            [12] 1246 	add	a,#0xff
+      0005F6 92 96            [24] 1247 	mov	_P1_6,c
+                                   1248 ;	headers/i2c_driver.h:65: SCL = 1;
+                                   1249 ;	assignBit
+      0005F8 D2 95            [12] 1250 	setb	_P1_5
+                                   1251 ;	headers/i2c_driver.h:66: SCL = 0;
+                                   1252 ;	assignBit
+      0005FA C2 95            [12] 1253 	clr	_P1_5
+                                   1254 ;	src/i2c_driver.c:68: A200493100000018
+      0005FC EE               [12] 1255 	mov	a,r6
+      0005FD C4               [12] 1256 	swap	a
+      0005FE 54 01            [12] 1257 	anl	a,#0x01
+                                   1258 ;	assignBit
+      000600 24 FF            [12] 1259 	add	a,#0xff
+      000602 92 96            [24] 1260 	mov	_P1_6,c
+                                   1261 ;	headers/i2c_driver.h:69: SCL = 1;
+                                   1262 ;	assignBit
+      000604 D2 95            [12] 1263 	setb	_P1_5
+                                   1264 ;	headers/i2c_driver.h:70: SCL = 0;
+                                   1265 ;	assignBit
+      000606 C2 95            [12] 1266 	clr	_P1_5
+                                   1267 ;	src/i2c_driver.c:72: 4153204C43440A20
+      000608 EE               [12] 1268 	mov	a,r6
+      000609 A2 E3            [12] 1269 	mov	c,acc.3
+      00060B E4               [12] 1270 	clr	a
+      00060C 33               [12] 1271 	rlc	a
+                                   1272 ;	assignBit
+      00060D 24 FF            [12] 1273 	add	a,#0xff
+      00060F 92 96            [24] 1274 	mov	_P1_6,c
+                                   1275 ;	headers/i2c_driver.h:73: SCL = 1;
+                                   1276 ;	assignBit
+      000611 D2 95            [12] 1277 	setb	_P1_5
+                                   1278 ;	headers/i2c_driver.h:74: SCL = 0;
+                                   1279 ;	assignBit
+      000613 C2 95            [12] 1280 	clr	_P1_5
+                                   1281 ;	src/i2c_driver.c:76: */
+      000615 EE               [12] 1282 	mov	a,r6
+      000616 03               [12] 1283 	rr	a
+      000617 03               [12] 1284 	rr	a
+      000618 54 01            [12] 1285 	anl	a,#0x01
+                                   1286 ;	assignBit
+      00061A 24 FF            [12] 1287 	add	a,#0xff
+      00061C 92 96            [24] 1288 	mov	_P1_6,c
+                                   1289 ;	headers/i2c_driver.h:77: SCL = 1;
+                                   1290 ;	assignBit
+      00061E D2 95            [12] 1291 	setb	_P1_5
+                                   1292 ;	headers/i2c_driver.h:78: SCL = 0;
+                                   1293 ;	assignBit
+      000620 C2 95            [12] 1294 	clr	_P1_5
+                                   1295 ;	src/i2c_driver.c:80: // funcitons
+      000622 EE               [12] 1296 	mov	a,r6
+      000623 03               [12] 1297 	rr	a
+      000624 54 01            [12] 1298 	anl	a,#0x01
+                                   1299 ;	assignBit
+      000626 24 FF            [12] 1300 	add	a,#0xff
+      000628 92 96            [24] 1301 	mov	_P1_6,c
+                                   1302 ;	headers/i2c_driver.h:81: SCL = 1;
+                                   1303 ;	assignBit
+      00062A D2 95            [12] 1304 	setb	_P1_5
+                                   1305 ;	headers/i2c_driver.h:82: SCL = 0;
+                                   1306 ;	assignBit
+      00062C C2 95            [12] 1307 	clr	_P1_5
+                                   1308 ;	src/i2c_driver.c:84: for(uint8_t i = 0; i < 128; i++){
+      00062E EE               [12] 1309 	mov	a,r6
+      00062F 54 01            [12] 1310 	anl	a,#0x01
+                                   1311 ;	assignBit
+      000631 24 FF            [12] 1312 	add	a,#0xff
+      000633 92 96            [24] 1313 	mov	_P1_6,c
+                                   1314 ;	headers/i2c_driver.h:85: SCL = 1;
+                                   1315 ;	assignBit
+      000635 D2 95            [12] 1316 	setb	_P1_5
+                                   1317 ;	headers/i2c_driver.h:46: while(SCL==0);
+      000637                       1318 00219$:
+      000637 30 95 FD         [24] 1319 	jnb	_P1_5,00219$
+                                   1320 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      00063A A2 96            [12] 1321 	mov	c,_P1_6
+                                   1322 ;	headers/i2c_driver.h:88: if(i2c_pullBit()){
+      00063C 50 20            [24] 1323 	jnc	00235$
+                                   1324 ;	src/i2c_driver.c:126: printf_tiny("Nacked in read %u\n\r",i);
+      00063E 90 00 0C         [24] 1325 	mov	dptr,#_i2c_edidSend_i_30001_136
+      000641 E0               [24] 1326 	movx	a,@dptr
+      000642 FD               [12] 1327 	mov	r5,a
+      000643 7E 00            [12] 1328 	mov	r6,#0x00
+      000645 C0 05            [24] 1329 	push	ar5
+      000647 C0 06            [24] 1330 	push	ar6
+      000649 74 24            [12] 1331 	mov	a,#___str_3
+      00064B C0 E0            [24] 1332 	push	acc
+      00064D 74 1B            [12] 1333 	mov	a,#(___str_3 >> 8)
+      00064F C0 E0            [24] 1334 	push	acc
+      000651 12 0E 77         [24] 1335 	lcall	_printf_tiny
+      000654 E5 81            [12] 1336 	mov	a,sp
+      000656 24 FC            [12] 1337 	add	a,#0xfc
+      000658 F5 81            [12] 1338 	mov	sp,a
+                                   1339 ;	src/i2c_driver.c:127: return I2C_ERROR_MONITR_EDID;
+      00065A 75 82 04         [24] 1340 	mov	dpl, #0x04
+      00065D 22               [24] 1341 	ret
+      00065E                       1342 00235$:
+                                   1343 ;	src/i2c_driver.c:124: for(uint8_t i = 0; i<127; i++){
+      00065E 0F               [12] 1344 	inc	r7
+      00065F 90 00 0C         [24] 1345 	mov	dptr,#_i2c_edidSend_i_30001_136
+      000662 EF               [12] 1346 	mov	a,r7
+      000663 F0               [24] 1347 	movx	@dptr,a
+      000664 02 05 C6         [24] 1348 	ljmp	00234$
+      000667                       1349 00105$:
+                                   1350 ;	src/i2c_driver.c:131: if(i2c_sendByte(edid[127])){
+      000667 90 1A E7         [24] 1351 	mov	dptr,#(_edid + 0x007f)
+      00066A E4               [12] 1352 	clr	a
+      00066B 93               [24] 1353 	movc	a,@a+dptr
+      00066C FF               [12] 1354 	mov	r7,a
+                                   1355 ;	headers/i2c_driver.h:55: SCL = 0;
+                                   1356 ;	assignBit
+      00066D C2 95            [12] 1357 	clr	_P1_5
+                                   1358 ;	src/i2c_driver.c:56: 0x00,
+      00066F EF               [12] 1359 	mov	a,r7
+      000670 23               [12] 1360 	rl	a
+      000671 54 01            [12] 1361 	anl	a,#0x01
+                                   1362 ;	assignBit
+      000673 24 FF            [12] 1363 	add	a,#0xff
+      000675 92 96            [24] 1364 	mov	_P1_6,c
+                                   1365 ;	headers/i2c_driver.h:57: SCL = 1;
                                    1366 ;	assignBit
-      000690 D2 96            [12] 1367 	setb	_P1_6
-                                   1368 ;	src/i2c_driver.c:111: if(i2c_pullByte()!=0){
-      000692 EF               [12] 1369 	mov	a,r7
-      000693 60 13            [24] 1370 	jz	00310$
-                                   1371 ;	src/i2c_driver.c:112: printf_tiny("Monitor is not reading from 0\n\r");
-      000695 74 3B            [12] 1372 	mov	a,#___str_3
-      000697 C0 E0            [24] 1373 	push	acc
-      000699 74 1C            [12] 1374 	mov	a,#(___str_3 >> 8)
-      00069B C0 E0            [24] 1375 	push	acc
-      00069D 12 0F 98         [24] 1376 	lcall	_printf_tiny
-      0006A0 15 81            [12] 1377 	dec	sp
-      0006A2 15 81            [12] 1378 	dec	sp
-                                   1379 ;	src/i2c_driver.c:113: return I2C_ERROR_MONITR_SET_0;
-      0006A4 75 82 03         [24] 1380 	mov	dpl, #0x03
-      0006A7 22               [24] 1381 	ret
-                                   1382 ;	headers/i2c_driver.h:37: while(SCL==1);
-      0006A8                       1383 00310$:
-      0006A8 20 95 FD         [24] 1384 	jb	_P1_5,00310$
-                                   1385 ;	headers/i2c_driver.h:38: SDA = 0;
-                                   1386 ;	assignBit
-      0006AB C2 96            [12] 1387 	clr	_P1_6
-                                   1388 ;	headers/i2c_driver.h:39: while(SCL==0);  // wait till the data is clocked in
-      0006AD                       1389 00313$:
-      0006AD 30 95 FD         [24] 1390 	jnb	_P1_5,00313$
-                                   1391 ;	headers/i2c_driver.h:40: while(SCL==1);  // data is being clocked in
-      0006B0                       1392 00316$:
-      0006B0 20 95 FD         [24] 1393 	jb	_P1_5,00316$
-                                   1394 ;	headers/i2c_driver.h:41: SDA = 1;        // now we reset the line
-                                   1395 ;	assignBit
-      0006B3 D2 96            [12] 1396 	setb	_P1_6
-                                   1397 ;	src/i2c_driver.c:117: while(1){
-                                   1398 ;	src/i2c_driver.c:119: for(uint8_t i = 0; i<127; i++){
-      0006B5                       1399 00550$:
-      0006B5 7F 00            [12] 1400 	mov	r7,#0x00
-      0006B7                       1401 00431$:
-      0006B7 BF 7F 00         [24] 1402 	cjne	r7,#0x7f,01355$
-      0006BA                       1403 01355$:
-      0006BA 40 03            [24] 1404 	jc	01356$
-      0006BC 02 07 60         [24] 1405 	ljmp	00108$
-      0006BF                       1406 01356$:
-                                   1407 ;	src/i2c_driver.c:120: if(i2c_sendByte(edid[i])){
-      0006BF EF               [12] 1408 	mov	a,r7
-      0006C0 90 1B 89         [24] 1409 	mov	dptr,#_edid
-      0006C3 93               [24] 1410 	movc	a,@a+dptr
-      0006C4 FE               [12] 1411 	mov	r6,a
-      0006C5 90 00 0C         [24] 1412 	mov	dptr,#_i2c_edidSend_a_60001_229
-      0006C8 F0               [24] 1413 	movx	@dptr,a
-                                   1414 ;	src/i2c_driver.c:55: // no extension
-      0006C9 EE               [12] 1415 	mov	a,r6
-      0006CA 23               [12] 1416 	rl	a
-      0006CB 54 01            [12] 1417 	anl	a,#0x01
-                                   1418 ;	assignBit
-      0006CD 24 FF            [12] 1419 	add	a,#0xff
-      0006CF 92 96            [24] 1420 	mov	_P1_6,c
-                                   1421 ;	headers/i2c_driver.h:56: while(SCL==0);
-      0006D1                       1422 00320$:
-      0006D1 30 95 FD         [24] 1423 	jnb	_P1_5,00320$
-                                   1424 ;	headers/i2c_driver.h:57: while(SCL==1);
-      0006D4                       1425 00323$:
-      0006D4 20 95 FD         [24] 1426 	jb	_P1_5,00323$
-                                   1427 ;	src/i2c_driver.c:59: /*
-      0006D7 90 00 0C         [24] 1428 	mov	dptr,#_i2c_edidSend_a_60001_229
-      0006DA E0               [24] 1429 	movx	a,@dptr
-      0006DB 23               [12] 1430 	rl	a
-      0006DC 23               [12] 1431 	rl	a
-      0006DD 54 01            [12] 1432 	anl	a,#0x01
-                                   1433 ;	assignBit
-      0006DF 24 FF            [12] 1434 	add	a,#0xff
-      0006E1 92 96            [24] 1435 	mov	_P1_6,c
-                                   1436 ;	headers/i2c_driver.h:60: while(SCL==0);
-      0006E3                       1437 00326$:
-      0006E3 30 95 FD         [24] 1438 	jnb	_P1_5,00326$
-                                   1439 ;	headers/i2c_driver.h:61: while(SCL==1);
-      0006E6                       1440 00329$:
-      0006E6 20 95 FD         [24] 1441 	jb	_P1_5,00329$
-                                   1442 ;	src/i2c_driver.c:63: 0200000000000000
-      0006E9 90 00 0C         [24] 1443 	mov	dptr,#_i2c_edidSend_a_60001_229
-      0006EC E0               [24] 1444 	movx	a,@dptr
-      0006ED A2 E5            [12] 1445 	mov	c,acc.5
-      0006EF E4               [12] 1446 	clr	a
-      0006F0 33               [12] 1447 	rlc	a
+      000677 D2 95            [12] 1367 	setb	_P1_5
+                                   1368 ;	headers/i2c_driver.h:58: SCL = 0;
+                                   1369 ;	assignBit
+      000679 C2 95            [12] 1370 	clr	_P1_5
+                                   1371 ;	src/i2c_driver.c:60: 00FFFFFFFFFFFF00
+      00067B EF               [12] 1372 	mov	a,r7
+      00067C 23               [12] 1373 	rl	a
+      00067D 23               [12] 1374 	rl	a
+      00067E 54 01            [12] 1375 	anl	a,#0x01
+                                   1376 ;	assignBit
+      000680 24 FF            [12] 1377 	add	a,#0xff
+      000682 92 96            [24] 1378 	mov	_P1_6,c
+                                   1379 ;	headers/i2c_driver.h:61: SCL = 1;
+                                   1380 ;	assignBit
+      000684 D2 95            [12] 1381 	setb	_P1_5
+                                   1382 ;	headers/i2c_driver.h:62: SCL = 0;
+                                   1383 ;	assignBit
+      000686 C2 95            [12] 1384 	clr	_P1_5
+                                   1385 ;	src/i2c_driver.c:64: 0000002000003140
+      000688 EF               [12] 1386 	mov	a,r7
+      000689 A2 E5            [12] 1387 	mov	c,acc.5
+      00068B E4               [12] 1388 	clr	a
+      00068C 33               [12] 1389 	rlc	a
+                                   1390 ;	assignBit
+      00068D 24 FF            [12] 1391 	add	a,#0xff
+      00068F 92 96            [24] 1392 	mov	_P1_6,c
+                                   1393 ;	headers/i2c_driver.h:65: SCL = 1;
+                                   1394 ;	assignBit
+      000691 D2 95            [12] 1395 	setb	_P1_5
+                                   1396 ;	headers/i2c_driver.h:66: SCL = 0;
+                                   1397 ;	assignBit
+      000693 C2 95            [12] 1398 	clr	_P1_5
+                                   1399 ;	src/i2c_driver.c:68: A200493100000018
+      000695 EF               [12] 1400 	mov	a,r7
+      000696 C4               [12] 1401 	swap	a
+      000697 54 01            [12] 1402 	anl	a,#0x01
+                                   1403 ;	assignBit
+      000699 24 FF            [12] 1404 	add	a,#0xff
+      00069B 92 96            [24] 1405 	mov	_P1_6,c
+                                   1406 ;	headers/i2c_driver.h:69: SCL = 1;
+                                   1407 ;	assignBit
+      00069D D2 95            [12] 1408 	setb	_P1_5
+                                   1409 ;	headers/i2c_driver.h:70: SCL = 0;
+                                   1410 ;	assignBit
+      00069F C2 95            [12] 1411 	clr	_P1_5
+                                   1412 ;	src/i2c_driver.c:72: 4153204C43440A20
+      0006A1 EF               [12] 1413 	mov	a,r7
+      0006A2 A2 E3            [12] 1414 	mov	c,acc.3
+      0006A4 E4               [12] 1415 	clr	a
+      0006A5 33               [12] 1416 	rlc	a
+                                   1417 ;	assignBit
+      0006A6 24 FF            [12] 1418 	add	a,#0xff
+      0006A8 92 96            [24] 1419 	mov	_P1_6,c
+                                   1420 ;	headers/i2c_driver.h:73: SCL = 1;
+                                   1421 ;	assignBit
+      0006AA D2 95            [12] 1422 	setb	_P1_5
+                                   1423 ;	headers/i2c_driver.h:74: SCL = 0;
+                                   1424 ;	assignBit
+      0006AC C2 95            [12] 1425 	clr	_P1_5
+                                   1426 ;	src/i2c_driver.c:76: */
+      0006AE EF               [12] 1427 	mov	a,r7
+      0006AF 03               [12] 1428 	rr	a
+      0006B0 03               [12] 1429 	rr	a
+      0006B1 54 01            [12] 1430 	anl	a,#0x01
+                                   1431 ;	assignBit
+      0006B3 24 FF            [12] 1432 	add	a,#0xff
+      0006B5 92 96            [24] 1433 	mov	_P1_6,c
+                                   1434 ;	headers/i2c_driver.h:77: SCL = 1;
+                                   1435 ;	assignBit
+      0006B7 D2 95            [12] 1436 	setb	_P1_5
+                                   1437 ;	headers/i2c_driver.h:78: SCL = 0;
+                                   1438 ;	assignBit
+      0006B9 C2 95            [12] 1439 	clr	_P1_5
+                                   1440 ;	src/i2c_driver.c:80: // funcitons
+      0006BB EF               [12] 1441 	mov	a,r7
+      0006BC 03               [12] 1442 	rr	a
+      0006BD 54 01            [12] 1443 	anl	a,#0x01
+                                   1444 ;	assignBit
+      0006BF 24 FF            [12] 1445 	add	a,#0xff
+      0006C1 92 96            [24] 1446 	mov	_P1_6,c
+                                   1447 ;	headers/i2c_driver.h:81: SCL = 1;
                                    1448 ;	assignBit
-      0006F1 24 FF            [12] 1449 	add	a,#0xff
-      0006F3 92 96            [24] 1450 	mov	_P1_6,c
-                                   1451 ;	headers/i2c_driver.h:64: while(SCL==0);
-      0006F5                       1452 00332$:
-      0006F5 30 95 FD         [24] 1453 	jnb	_P1_5,00332$
-                                   1454 ;	headers/i2c_driver.h:65: while(SCL==1);
-      0006F8                       1455 00335$:
-      0006F8 20 95 FD         [24] 1456 	jb	_P1_5,00335$
-                                   1457 ;	src/i2c_driver.c:67: 80A020E02D101060
-      0006FB 90 00 0C         [24] 1458 	mov	dptr,#_i2c_edidSend_a_60001_229
-      0006FE E0               [24] 1459 	movx	a,@dptr
-      0006FF C4               [12] 1460 	swap	a
-      000700 54 01            [12] 1461 	anl	a,#0x01
-                                   1462 ;	assignBit
-      000702 24 FF            [12] 1463 	add	a,#0xff
-      000704 92 96            [24] 1464 	mov	_P1_6,c
-                                   1465 ;	headers/i2c_driver.h:68: while(SCL==0);
-      000706                       1466 00338$:
-      000706 30 95 FD         [24] 1467 	jnb	_P1_5,00338$
-                                   1468 ;	headers/i2c_driver.h:69: while(SCL==1);
-      000709                       1469 00341$:
-      000709 20 95 FD         [24] 1470 	jb	_P1_5,00341$
-                                   1471 ;	src/i2c_driver.c:71: 2020000000FC0054
-      00070C 90 00 0C         [24] 1472 	mov	dptr,#_i2c_edidSend_a_60001_229
-      00070F E0               [24] 1473 	movx	a,@dptr
-      000710 A2 E3            [12] 1474 	mov	c,acc.3
-      000712 E4               [12] 1475 	clr	a
-      000713 33               [12] 1476 	rlc	a
-                                   1477 ;	assignBit
-      000714 24 FF            [12] 1478 	add	a,#0xff
-      000716 92 96            [24] 1479 	mov	_P1_6,c
-                                   1480 ;	headers/i2c_driver.h:72: while(SCL==0);
-      000718                       1481 00344$:
-      000718 30 95 FD         [24] 1482 	jnb	_P1_5,00344$
-                                   1483 ;	headers/i2c_driver.h:73: while(SCL==1);
-      00071B                       1484 00347$:
-      00071B 20 95 FD         [24] 1485 	jb	_P1_5,00347$
-                                   1486 ;	src/i2c_driver.c:75: 00000000000000D4
-      00071E 90 00 0C         [24] 1487 	mov	dptr,#_i2c_edidSend_a_60001_229
-      000721 E0               [24] 1488 	movx	a,@dptr
-      000722 03               [12] 1489 	rr	a
-      000723 03               [12] 1490 	rr	a
-      000724 54 01            [12] 1491 	anl	a,#0x01
-                                   1492 ;	assignBit
-      000726 24 FF            [12] 1493 	add	a,#0xff
-      000728 92 96            [24] 1494 	mov	_P1_6,c
-                                   1495 ;	headers/i2c_driver.h:76: while(SCL==0);
-      00072A                       1496 00350$:
-      00072A 30 95 FD         [24] 1497 	jnb	_P1_5,00350$
-                                   1498 ;	headers/i2c_driver.h:77: while(SCL==1);
-      00072D                       1499 00353$:
-      00072D 20 95 FD         [24] 1500 	jb	_P1_5,00353$
-                                   1501 ;	src/i2c_driver.c:79: //
-      000730 90 00 0C         [24] 1502 	mov	dptr,#_i2c_edidSend_a_60001_229
-      000733 E0               [24] 1503 	movx	a,@dptr
-      000734 03               [12] 1504 	rr	a
-      000735 54 01            [12] 1505 	anl	a,#0x01
-                                   1506 ;	assignBit
-      000737 24 FF            [12] 1507 	add	a,#0xff
-      000739 92 96            [24] 1508 	mov	_P1_6,c
-                                   1509 ;	headers/i2c_driver.h:80: while(SCL==0);
-      00073B                       1510 00356$:
-      00073B 30 95 FD         [24] 1511 	jnb	_P1_5,00356$
-                                   1512 ;	headers/i2c_driver.h:81: while(SCL==1);
-      00073E                       1513 00359$:
-      00073E 20 95 FD         [24] 1514 	jb	_P1_5,00359$
-                                   1515 ;	src/i2c_driver.c:83: uint8_t checkSum = 0;
-      000741 90 00 0C         [24] 1516 	mov	dptr,#_i2c_edidSend_a_60001_229
-      000744 E0               [24] 1517 	movx	a,@dptr
-      000745 54 01            [12] 1518 	anl	a,#0x01
-                                   1519 ;	assignBit
-      000747 24 FF            [12] 1520 	add	a,#0xff
-      000749 92 96            [24] 1521 	mov	_P1_6,c
-                                   1522 ;	headers/i2c_driver.h:84: while(SCL==0);
-      00074B                       1523 00362$:
-      00074B 30 95 FD         [24] 1524 	jnb	_P1_5,00362$
-                                   1525 ;	headers/i2c_driver.h:85: while(SCL==1);
-      00074E                       1526 00365$:
-      00074E 20 95 FD         [24] 1527 	jb	_P1_5,00365$
-                                   1528 ;	headers/i2c_driver.h:46: while(SCL==0);
-      000751                       1529 00368$:
-      000751 30 95 FD         [24] 1530 	jnb	_P1_5,00368$
-                                   1531 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      000754 A2 96            [12] 1532 	mov	c,_P1_6
-                                   1533 ;	headers/i2c_driver.h:88: if(i2c_pullBit()){
-      000756 50 04            [24] 1534 	jnc	00432$
-                                   1535 ;	src/i2c_driver.c:121: return I2C_ERROR_MONITR_EDID;
-      000758 75 82 04         [24] 1536 	mov	dpl, #0x04
-      00075B 22               [24] 1537 	ret
-      00075C                       1538 00432$:
-                                   1539 ;	src/i2c_driver.c:119: for(uint8_t i = 0; i<127; i++){
-      00075C 0F               [12] 1540 	inc	r7
-      00075D 02 06 B7         [24] 1541 	ljmp	00431$
-      000760                       1542 00108$:
-                                   1543 ;	src/i2c_driver.c:125: if(i2c_sendByte(edid[127])){
-      000760 90 1C 08         [24] 1544 	mov	dptr,#(_edid + 0x007f)
-      000763 E4               [12] 1545 	clr	a
-      000764 93               [24] 1546 	movc	a,@a+dptr
-                                   1547 ;	src/i2c_driver.c:55: // no extension
-      000765 FF               [12] 1548 	mov	r7,a
-      000766 23               [12] 1549 	rl	a
-      000767 54 01            [12] 1550 	anl	a,#0x01
-                                   1551 ;	assignBit
-      000769 24 FF            [12] 1552 	add	a,#0xff
-      00076B 92 96            [24] 1553 	mov	_P1_6,c
-                                   1554 ;	headers/i2c_driver.h:56: while(SCL==0);
-      00076D                       1555 00375$:
-      00076D 30 95 FD         [24] 1556 	jnb	_P1_5,00375$
-                                   1557 ;	headers/i2c_driver.h:57: while(SCL==1);
-      000770                       1558 00378$:
-      000770 20 95 FD         [24] 1559 	jb	_P1_5,00378$
-                                   1560 ;	src/i2c_driver.c:59: /*
-      000773 EF               [12] 1561 	mov	a,r7
-      000774 23               [12] 1562 	rl	a
-      000775 23               [12] 1563 	rl	a
-      000776 54 01            [12] 1564 	anl	a,#0x01
-                                   1565 ;	assignBit
-      000778 24 FF            [12] 1566 	add	a,#0xff
-      00077A 92 96            [24] 1567 	mov	_P1_6,c
-                                   1568 ;	headers/i2c_driver.h:60: while(SCL==0);
-      00077C                       1569 00381$:
-      00077C 30 95 FD         [24] 1570 	jnb	_P1_5,00381$
-                                   1571 ;	headers/i2c_driver.h:61: while(SCL==1);
-      00077F                       1572 00384$:
-      00077F 20 95 FD         [24] 1573 	jb	_P1_5,00384$
-                                   1574 ;	src/i2c_driver.c:63: 0200000000000000
-      000782 EF               [12] 1575 	mov	a,r7
-      000783 A2 E5            [12] 1576 	mov	c,acc.5
-      000785 E4               [12] 1577 	clr	a
-      000786 33               [12] 1578 	rlc	a
-                                   1579 ;	assignBit
-      000787 24 FF            [12] 1580 	add	a,#0xff
-      000789 92 96            [24] 1581 	mov	_P1_6,c
-                                   1582 ;	headers/i2c_driver.h:64: while(SCL==0);
-      00078B                       1583 00387$:
-      00078B 30 95 FD         [24] 1584 	jnb	_P1_5,00387$
-                                   1585 ;	headers/i2c_driver.h:65: while(SCL==1);
-      00078E                       1586 00390$:
-      00078E 20 95 FD         [24] 1587 	jb	_P1_5,00390$
-                                   1588 ;	src/i2c_driver.c:67: 80A020E02D101060
-      000791 EF               [12] 1589 	mov	a,r7
-      000792 C4               [12] 1590 	swap	a
-      000793 54 01            [12] 1591 	anl	a,#0x01
-                                   1592 ;	assignBit
-      000795 24 FF            [12] 1593 	add	a,#0xff
-      000797 92 96            [24] 1594 	mov	_P1_6,c
-                                   1595 ;	headers/i2c_driver.h:68: while(SCL==0);
-      000799                       1596 00393$:
-      000799 30 95 FD         [24] 1597 	jnb	_P1_5,00393$
-                                   1598 ;	headers/i2c_driver.h:69: while(SCL==1);
-      00079C                       1599 00396$:
-      00079C 20 95 FD         [24] 1600 	jb	_P1_5,00396$
-                                   1601 ;	src/i2c_driver.c:71: 2020000000FC0054
-      00079F EF               [12] 1602 	mov	a,r7
-      0007A0 A2 E3            [12] 1603 	mov	c,acc.3
-      0007A2 E4               [12] 1604 	clr	a
-      0007A3 33               [12] 1605 	rlc	a
-                                   1606 ;	assignBit
-      0007A4 24 FF            [12] 1607 	add	a,#0xff
-      0007A6 92 96            [24] 1608 	mov	_P1_6,c
-                                   1609 ;	headers/i2c_driver.h:72: while(SCL==0);
-      0007A8                       1610 00399$:
-      0007A8 30 95 FD         [24] 1611 	jnb	_P1_5,00399$
-                                   1612 ;	headers/i2c_driver.h:73: while(SCL==1);
-      0007AB                       1613 00402$:
-      0007AB 20 95 FD         [24] 1614 	jb	_P1_5,00402$
-                                   1615 ;	src/i2c_driver.c:75: 00000000000000D4
-      0007AE EF               [12] 1616 	mov	a,r7
-      0007AF 03               [12] 1617 	rr	a
-      0007B0 03               [12] 1618 	rr	a
-      0007B1 54 01            [12] 1619 	anl	a,#0x01
-                                   1620 ;	assignBit
-      0007B3 24 FF            [12] 1621 	add	a,#0xff
-      0007B5 92 96            [24] 1622 	mov	_P1_6,c
-                                   1623 ;	headers/i2c_driver.h:76: while(SCL==0);
-      0007B7                       1624 00405$:
-      0007B7 30 95 FD         [24] 1625 	jnb	_P1_5,00405$
-                                   1626 ;	headers/i2c_driver.h:77: while(SCL==1);
-      0007BA                       1627 00408$:
-      0007BA 20 95 FD         [24] 1628 	jb	_P1_5,00408$
-                                   1629 ;	src/i2c_driver.c:79: //
-      0007BD EF               [12] 1630 	mov	a,r7
-      0007BE 03               [12] 1631 	rr	a
-      0007BF 54 01            [12] 1632 	anl	a,#0x01
-                                   1633 ;	assignBit
-      0007C1 24 FF            [12] 1634 	add	a,#0xff
-      0007C3 92 96            [24] 1635 	mov	_P1_6,c
-                                   1636 ;	headers/i2c_driver.h:80: while(SCL==0);
-      0007C5                       1637 00411$:
-      0007C5 30 95 FD         [24] 1638 	jnb	_P1_5,00411$
-                                   1639 ;	headers/i2c_driver.h:81: while(SCL==1);
-      0007C8                       1640 00414$:
-      0007C8 20 95 FD         [24] 1641 	jb	_P1_5,00414$
-                                   1642 ;	src/i2c_driver.c:83: uint8_t checkSum = 0;
-      0007CB EF               [12] 1643 	mov	a,r7
-      0007CC 54 01            [12] 1644 	anl	a,#0x01
-                                   1645 ;	assignBit
-      0007CE 24 FF            [12] 1646 	add	a,#0xff
-      0007D0 92 96            [24] 1647 	mov	_P1_6,c
-                                   1648 ;	headers/i2c_driver.h:84: while(SCL==0);
-      0007D2                       1649 00417$:
-      0007D2 30 95 FD         [24] 1650 	jnb	_P1_5,00417$
-                                   1651 ;	headers/i2c_driver.h:85: while(SCL==1);
-      0007D5                       1652 00420$:
-      0007D5 20 95 FD         [24] 1653 	jb	_P1_5,00420$
-                                   1654 ;	headers/i2c_driver.h:46: while(SCL==0);
-      0007D8                       1655 00423$:
-      0007D8 30 95 FD         [24] 1656 	jnb	_P1_5,00423$
-                                   1657 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
-      0007DB A2 96            [12] 1658 	mov	c,_P1_6
-                                   1659 ;	headers/i2c_driver.h:88: if(i2c_pullBit()){
-      0007DD 40 03            [24] 1660 	jc	01392$
-      0007DF 02 06 B5         [24] 1661 	ljmp	00550$
-      0007E2                       1662 01392$:
-                                   1663 ;	src/i2c_driver.c:126: return 0;
-      0007E2 75 82 00         [24] 1664 	mov	dpl, #0x00
-                                   1665 ;	src/i2c_driver.c:129: }
-      0007E5 22               [24] 1666 	ret
-                                   1667 	.area CSEG    (CODE)
-                                   1668 	.area CONST   (CODE)
-                                   1669 	.area CONST   (CODE)
-      001B89                       1670 _edid:
-      001B89 00                    1671 	.db #0x00	; 0
-      001B8A FF                    1672 	.db #0xff	; 255
-      001B8B FF                    1673 	.db #0xff	; 255
-      001B8C FF                    1674 	.db #0xff	; 255
-      001B8D FF                    1675 	.db #0xff	; 255
-      001B8E FF                    1676 	.db #0xff	; 255
-      001B8F FF                    1677 	.db #0xff	; 255
-      001B90 00                    1678 	.db #0x00	; 0
-      001B91 50                    1679 	.db #0x50	; 80	'P'
-      001B92 33                    1680 	.db #0x33	; 51	'3'
-      001B93 E6                    1681 	.db #0xe6	; 230
-      001B94 21                    1682 	.db #0x21	; 33
-      001B95 34                    1683 	.db #0x34	; 52	'4'
-      001B96 69                    1684 	.db #0x69	; 105	'i'
-      001B97 42                    1685 	.db #0x42	; 66	'B'
-      001B98 0F                    1686 	.db #0x0f	; 15
-      001B99 11                    1687 	.db #0x11	; 17
-      001B9A 24                    1688 	.db #0x24	; 36
-      001B9B 01                    1689 	.db #0x01	; 1
-      001B9C 03                    1690 	.db #0x03	; 3
-      001B9D 80                    1691 	.db #0x80	; 128
-      001B9E 07                    1692 	.db #0x07	; 7
-      001B9F 05                    1693 	.db #0x05	; 5
-      001BA0 78                    1694 	.db #0x78	; 120	'x'
-      001BA1 0A                    1695 	.db #0x0a	; 10
-      001BA2 00                    1696 	.db #0x00	; 0
-      001BA3 00                    1697 	.db #0x00	; 0
-      001BA4 00                    1698 	.db #0x00	; 0
-      001BA5 00                    1699 	.db #0x00	; 0
-      001BA6 00                    1700 	.db #0x00	; 0
-      001BA7 00                    1701 	.db #0x00	; 0
-      001BA8 00                    1702 	.db #0x00	; 0
-      001BA9 00                    1703 	.db #0x00	; 0
-      001BAA 00                    1704 	.db #0x00	; 0
-      001BAB 00                    1705 	.db #0x00	; 0
-      001BAC 20                    1706 	.db #0x20	; 32
-      001BAD 00                    1707 	.db #0x00	; 0
-      001BAE 00                    1708 	.db #0x00	; 0
-      001BAF 31                    1709 	.db #0x31	; 49	'1'
-      001BB0 40                    1710 	.db #0x40	; 64
-      001BB1 01                    1711 	.db #0x01	; 1
-      001BB2 01                    1712 	.db #0x01	; 1
-      001BB3 01                    1713 	.db #0x01	; 1
-      001BB4 01                    1714 	.db #0x01	; 1
-      001BB5 01                    1715 	.db #0x01	; 1
-      001BB6 01                    1716 	.db #0x01	; 1
-      001BB7 01                    1717 	.db #0x01	; 1
-      001BB8 01                    1718 	.db #0x01	; 1
-      001BB9 01                    1719 	.db #0x01	; 1
-      001BBA 01                    1720 	.db #0x01	; 1
-      001BBB 01                    1721 	.db #0x01	; 1
-      001BBC 01                    1722 	.db #0x01	; 1
-      001BBD 01                    1723 	.db #0x01	; 1
-      001BBE 01                    1724 	.db #0x01	; 1
-      001BBF 0F                    1725 	.db #0x0f	; 15
-      001BC0 00                    1726 	.db #0x00	; 0
-      001BC1 80                    1727 	.db #0x80	; 128
-      001BC2 A0                    1728 	.db #0xa0	; 160
-      001BC3 20                    1729 	.db #0x20	; 32
-      001BC4 E0                    1730 	.db #0xe0	; 224
-      001BC5 2D                    1731 	.db #0x2d	; 45
-      001BC6 10                    1732 	.db #0x10	; 16
-      001BC7 10                    1733 	.db #0x10	; 16
-      001BC8 60                    1734 	.db #0x60	; 96
-      001BC9 A2                    1735 	.db #0xa2	; 162
-      001BCA 00                    1736 	.db #0x00	; 0
-      001BCB 49                    1737 	.db #0x49	; 73	'I'
-      001BCC 31                    1738 	.db #0x31	; 49	'1'
-      001BCD 00                    1739 	.db #0x00	; 0
-      001BCE 00                    1740 	.db #0x00	; 0
-      001BCF 00                    1741 	.db #0x00	; 0
-      001BD0 18                    1742 	.db #0x18	; 24
-      001BD1 00                    1743 	.db #0x00	; 0
-      001BD2 00                    1744 	.db #0x00	; 0
-      001BD3 00                    1745 	.db #0x00	; 0
-      001BD4 FD                    1746 	.db #0xfd	; 253
-      001BD5 00                    1747 	.db #0x00	; 0
-      001BD6 01                    1748 	.db #0x01	; 1
-      001BD7 3C                    1749 	.db #0x3c	; 60
-      001BD8 01                    1750 	.db #0x01	; 1
-      001BD9 50                    1751 	.db #0x50	; 80	'P'
-      001BDA 1A                    1752 	.db #0x1a	; 26
-      001BDB 00                    1753 	.db #0x00	; 0
-      001BDC 0A                    1754 	.db #0x0a	; 10
-      001BDD 20                    1755 	.db #0x20	; 32
-      001BDE 20                    1756 	.db #0x20	; 32
-      001BDF 20                    1757 	.db #0x20	; 32
-      001BE0 20                    1758 	.db #0x20	; 32
-      001BE1 20                    1759 	.db #0x20	; 32
-      001BE2 20                    1760 	.db #0x20	; 32
-      001BE3 00                    1761 	.db #0x00	; 0
-      001BE4 00                    1762 	.db #0x00	; 0
-      001BE5 00                    1763 	.db #0x00	; 0
-      001BE6 FC                    1764 	.db #0xfc	; 252
-      001BE7 00                    1765 	.db #0x00	; 0
-      001BE8 54                    1766 	.db #0x54	; 84	'T'
-      001BE9 41                    1767 	.db #0x41	; 65	'A'
-      001BEA 53                    1768 	.db #0x53	; 83	'S'
-      001BEB 20                    1769 	.db #0x20	; 32
-      001BEC 4C                    1770 	.db #0x4c	; 76	'L'
-      001BED 43                    1771 	.db #0x43	; 67	'C'
-      001BEE 44                    1772 	.db #0x44	; 68	'D'
-      001BEF 0A                    1773 	.db #0x0a	; 10
-      001BF0 20                    1774 	.db #0x20	; 32
-      001BF1 20                    1775 	.db #0x20	; 32
-      001BF2 20                    1776 	.db #0x20	; 32
-      001BF3 20                    1777 	.db #0x20	; 32
-      001BF4 20                    1778 	.db #0x20	; 32
-      001BF5 00                    1779 	.db #0x00	; 0
-      001BF6 00                    1780 	.db #0x00	; 0
-      001BF7 00                    1781 	.db #0x00	; 0
-      001BF8 10                    1782 	.db #0x10	; 16
-      001BF9 00                    1783 	.db #0x00	; 0
-      001BFA 00                    1784 	.db #0x00	; 0
-      001BFB 00                    1785 	.db #0x00	; 0
-      001BFC 00                    1786 	.db #0x00	; 0
-      001BFD 00                    1787 	.db #0x00	; 0
-      001BFE 00                    1788 	.db #0x00	; 0
-      001BFF 00                    1789 	.db #0x00	; 0
-      001C00 00                    1790 	.db #0x00	; 0
-      001C01 00                    1791 	.db #0x00	; 0
-      001C02 00                    1792 	.db #0x00	; 0
-      001C03 00                    1793 	.db #0x00	; 0
-      001C04 00                    1794 	.db #0x00	; 0
-      001C05 00                    1795 	.db #0x00	; 0
-      001C06 00                    1796 	.db #0x00	; 0
-      001C07 00                    1797 	.db #0x00	; 0
-      001C08 98                    1798 	.db #0x98	; 152
-                                   1799 	.area CSEG    (CODE)
-                                   1800 	.area CONST   (CODE)
-      001C09                       1801 ___str_0:
-      001C09 25 58                 1802 	.ascii "%X"
-      001C0B 00                    1803 	.db 0x00
-                                   1804 	.area CSEG    (CODE)
-                                   1805 	.area CONST   (CODE)
-      001C0C                       1806 ___str_1:
-      001C0C 0A                    1807 	.db 0x0a
-      001C0D 0D                    1808 	.db 0x0d
-      001C0E 43 68 65 63 6B 73 75  1809 	.ascii "Checksum: %u"
+      0006C3 D2 95            [12] 1449 	setb	_P1_5
+                                   1450 ;	headers/i2c_driver.h:82: SCL = 0;
+                                   1451 ;	assignBit
+      0006C5 C2 95            [12] 1452 	clr	_P1_5
+                                   1453 ;	src/i2c_driver.c:84: for(uint8_t i = 0; i < 128; i++){
+      0006C7 EF               [12] 1454 	mov	a,r7
+      0006C8 54 01            [12] 1455 	anl	a,#0x01
+                                   1456 ;	assignBit
+      0006CA 24 FF            [12] 1457 	add	a,#0xff
+      0006CC 92 96            [24] 1458 	mov	_P1_6,c
+                                   1459 ;	headers/i2c_driver.h:85: SCL = 1;
+                                   1460 ;	assignBit
+      0006CE D2 95            [12] 1461 	setb	_P1_5
+                                   1462 ;	headers/i2c_driver.h:46: while(SCL==0);
+      0006D0                       1463 00226$:
+      0006D0 30 95 FD         [24] 1464 	jnb	_P1_5,00226$
+                                   1465 ;	headers/i2c_driver.h:47: char toReturn = (volatile char)SDA;
+      0006D3 A2 96            [12] 1466 	mov	c,_P1_6
+                                   1467 ;	headers/i2c_driver.h:88: if(i2c_pullBit()){
+      0006D5 40 03            [24] 1468 	jc	00602$
+      0006D7 02 05 C0         [24] 1469 	ljmp	00109$
+      0006DA                       1470 00602$:
+                                   1471 ;	src/i2c_driver.c:132: return 0;
+      0006DA 75 82 00         [24] 1472 	mov	dpl, #0x00
+                                   1473 ;	src/i2c_driver.c:135: }
+      0006DD 22               [24] 1474 	ret
+                                   1475 	.area CSEG    (CODE)
+                                   1476 	.area CONST   (CODE)
+                                   1477 	.area CONST   (CODE)
+      001A68                       1478 _edid:
+      001A68 00                    1479 	.db #0x00	; 0
+      001A69 FF                    1480 	.db #0xff	; 255
+      001A6A FF                    1481 	.db #0xff	; 255
+      001A6B FF                    1482 	.db #0xff	; 255
+      001A6C FF                    1483 	.db #0xff	; 255
+      001A6D FF                    1484 	.db #0xff	; 255
+      001A6E FF                    1485 	.db #0xff	; 255
+      001A6F 00                    1486 	.db #0x00	; 0
+      001A70 50                    1487 	.db #0x50	; 80	'P'
+      001A71 33                    1488 	.db #0x33	; 51	'3'
+      001A72 E6                    1489 	.db #0xe6	; 230
+      001A73 21                    1490 	.db #0x21	; 33
+      001A74 34                    1491 	.db #0x34	; 52	'4'
+      001A75 69                    1492 	.db #0x69	; 105	'i'
+      001A76 42                    1493 	.db #0x42	; 66	'B'
+      001A77 0F                    1494 	.db #0x0f	; 15
+      001A78 11                    1495 	.db #0x11	; 17
+      001A79 24                    1496 	.db #0x24	; 36
+      001A7A 01                    1497 	.db #0x01	; 1
+      001A7B 03                    1498 	.db #0x03	; 3
+      001A7C 80                    1499 	.db #0x80	; 128
+      001A7D 07                    1500 	.db #0x07	; 7
+      001A7E 05                    1501 	.db #0x05	; 5
+      001A7F 78                    1502 	.db #0x78	; 120	'x'
+      001A80 0A                    1503 	.db #0x0a	; 10
+      001A81 00                    1504 	.db #0x00	; 0
+      001A82 00                    1505 	.db #0x00	; 0
+      001A83 00                    1506 	.db #0x00	; 0
+      001A84 00                    1507 	.db #0x00	; 0
+      001A85 00                    1508 	.db #0x00	; 0
+      001A86 00                    1509 	.db #0x00	; 0
+      001A87 00                    1510 	.db #0x00	; 0
+      001A88 00                    1511 	.db #0x00	; 0
+      001A89 00                    1512 	.db #0x00	; 0
+      001A8A 00                    1513 	.db #0x00	; 0
+      001A8B 20                    1514 	.db #0x20	; 32
+      001A8C 00                    1515 	.db #0x00	; 0
+      001A8D 00                    1516 	.db #0x00	; 0
+      001A8E 31                    1517 	.db #0x31	; 49	'1'
+      001A8F 40                    1518 	.db #0x40	; 64
+      001A90 01                    1519 	.db #0x01	; 1
+      001A91 01                    1520 	.db #0x01	; 1
+      001A92 01                    1521 	.db #0x01	; 1
+      001A93 01                    1522 	.db #0x01	; 1
+      001A94 01                    1523 	.db #0x01	; 1
+      001A95 01                    1524 	.db #0x01	; 1
+      001A96 01                    1525 	.db #0x01	; 1
+      001A97 01                    1526 	.db #0x01	; 1
+      001A98 01                    1527 	.db #0x01	; 1
+      001A99 01                    1528 	.db #0x01	; 1
+      001A9A 01                    1529 	.db #0x01	; 1
+      001A9B 01                    1530 	.db #0x01	; 1
+      001A9C 01                    1531 	.db #0x01	; 1
+      001A9D 01                    1532 	.db #0x01	; 1
+      001A9E 0F                    1533 	.db #0x0f	; 15
+      001A9F 00                    1534 	.db #0x00	; 0
+      001AA0 80                    1535 	.db #0x80	; 128
+      001AA1 A0                    1536 	.db #0xa0	; 160
+      001AA2 20                    1537 	.db #0x20	; 32
+      001AA3 E0                    1538 	.db #0xe0	; 224
+      001AA4 2D                    1539 	.db #0x2d	; 45
+      001AA5 10                    1540 	.db #0x10	; 16
+      001AA6 10                    1541 	.db #0x10	; 16
+      001AA7 60                    1542 	.db #0x60	; 96
+      001AA8 A2                    1543 	.db #0xa2	; 162
+      001AA9 00                    1544 	.db #0x00	; 0
+      001AAA 49                    1545 	.db #0x49	; 73	'I'
+      001AAB 31                    1546 	.db #0x31	; 49	'1'
+      001AAC 00                    1547 	.db #0x00	; 0
+      001AAD 00                    1548 	.db #0x00	; 0
+      001AAE 00                    1549 	.db #0x00	; 0
+      001AAF 18                    1550 	.db #0x18	; 24
+      001AB0 00                    1551 	.db #0x00	; 0
+      001AB1 00                    1552 	.db #0x00	; 0
+      001AB2 00                    1553 	.db #0x00	; 0
+      001AB3 FD                    1554 	.db #0xfd	; 253
+      001AB4 00                    1555 	.db #0x00	; 0
+      001AB5 01                    1556 	.db #0x01	; 1
+      001AB6 3C                    1557 	.db #0x3c	; 60
+      001AB7 01                    1558 	.db #0x01	; 1
+      001AB8 50                    1559 	.db #0x50	; 80	'P'
+      001AB9 1A                    1560 	.db #0x1a	; 26
+      001ABA 00                    1561 	.db #0x00	; 0
+      001ABB 0A                    1562 	.db #0x0a	; 10
+      001ABC 20                    1563 	.db #0x20	; 32
+      001ABD 20                    1564 	.db #0x20	; 32
+      001ABE 20                    1565 	.db #0x20	; 32
+      001ABF 20                    1566 	.db #0x20	; 32
+      001AC0 20                    1567 	.db #0x20	; 32
+      001AC1 20                    1568 	.db #0x20	; 32
+      001AC2 00                    1569 	.db #0x00	; 0
+      001AC3 00                    1570 	.db #0x00	; 0
+      001AC4 00                    1571 	.db #0x00	; 0
+      001AC5 FC                    1572 	.db #0xfc	; 252
+      001AC6 00                    1573 	.db #0x00	; 0
+      001AC7 54                    1574 	.db #0x54	; 84	'T'
+      001AC8 41                    1575 	.db #0x41	; 65	'A'
+      001AC9 53                    1576 	.db #0x53	; 83	'S'
+      001ACA 20                    1577 	.db #0x20	; 32
+      001ACB 4C                    1578 	.db #0x4c	; 76	'L'
+      001ACC 43                    1579 	.db #0x43	; 67	'C'
+      001ACD 44                    1580 	.db #0x44	; 68	'D'
+      001ACE 0A                    1581 	.db #0x0a	; 10
+      001ACF 20                    1582 	.db #0x20	; 32
+      001AD0 20                    1583 	.db #0x20	; 32
+      001AD1 20                    1584 	.db #0x20	; 32
+      001AD2 20                    1585 	.db #0x20	; 32
+      001AD3 20                    1586 	.db #0x20	; 32
+      001AD4 00                    1587 	.db #0x00	; 0
+      001AD5 00                    1588 	.db #0x00	; 0
+      001AD6 00                    1589 	.db #0x00	; 0
+      001AD7 10                    1590 	.db #0x10	; 16
+      001AD8 00                    1591 	.db #0x00	; 0
+      001AD9 00                    1592 	.db #0x00	; 0
+      001ADA 00                    1593 	.db #0x00	; 0
+      001ADB 00                    1594 	.db #0x00	; 0
+      001ADC 00                    1595 	.db #0x00	; 0
+      001ADD 00                    1596 	.db #0x00	; 0
+      001ADE 00                    1597 	.db #0x00	; 0
+      001ADF 00                    1598 	.db #0x00	; 0
+      001AE0 00                    1599 	.db #0x00	; 0
+      001AE1 00                    1600 	.db #0x00	; 0
+      001AE2 00                    1601 	.db #0x00	; 0
+      001AE3 00                    1602 	.db #0x00	; 0
+      001AE4 00                    1603 	.db #0x00	; 0
+      001AE5 00                    1604 	.db #0x00	; 0
+      001AE6 00                    1605 	.db #0x00	; 0
+      001AE7 98                    1606 	.db #0x98	; 152
+                                   1607 	.area CSEG    (CODE)
+                                   1608 	.area CONST   (CODE)
+      001AE8                       1609 ___str_0:
+      001AE8 25 58                 1610 	.ascii "%X"
+      001AEA 00                    1611 	.db 0x00
+                                   1612 	.area CSEG    (CODE)
+                                   1613 	.area CONST   (CODE)
+      001AEB                       1614 ___str_1:
+      001AEB 0A                    1615 	.db 0x0a
+      001AEC 0D                    1616 	.db 0x0d
+      001AED 43 68 65 63 6B 73 75  1617 	.ascii "Checksum: %u"
              6D 3A 20 25 75
-      001C1A 0A                    1810 	.db 0x0a
-      001C1B 0D                    1811 	.db 0x0d
-      001C1C 00                    1812 	.db 0x00
-                                   1813 	.area CSEG    (CODE)
-                                   1814 	.area CONST   (CODE)
-      001C1D                       1815 ___str_2:
-      001C1D 25 75 20 69 73 20 6E  1816 	.ascii "%u is not a monitor Address"
-             6F 74 20 61 20 6D 6F
-             6E 69 74 6F 72 20 41
-             64 64 72 65 73 73
-      001C38 0A                    1817 	.db 0x0a
-      001C39 0D                    1818 	.db 0x0d
-      001C3A 00                    1819 	.db 0x00
-                                   1820 	.area CSEG    (CODE)
-                                   1821 	.area CONST   (CODE)
-      001C3B                       1822 ___str_3:
-      001C3B 4D 6F 6E 69 74 6F 72  1823 	.ascii "Monitor is not reading from 0"
+      001AF9 0A                    1618 	.db 0x0a
+      001AFA 0D                    1619 	.db 0x0d
+      001AFB 00                    1620 	.db 0x00
+                                   1621 	.area CSEG    (CODE)
+                                   1622 	.area CONST   (CODE)
+      001AFC                       1623 ___str_2:
+      001AFC 25 75 2C 28 25 58 29  1624 	.ascii "%u,(%X) is not a monitor read Address"
              20 69 73 20 6E 6F 74
-             20 72 65 61 64 69 6E
-             67 20 66 72 6F 6D 20
-             30
-      001C58 0A                    1824 	.db 0x0a
-      001C59 0D                    1825 	.db 0x0d
-      001C5A 00                    1826 	.db 0x00
-                                   1827 	.area CSEG    (CODE)
-                                   1828 	.area XINIT   (CODE)
-                                   1829 	.area CABS    (ABS,CODE)
+             20 61 20 6D 6F 6E 69
+             74 6F 72 20 72 65 61
+             64 20 41 64 64 72 65
+             73 73
+      001B21 0A                    1625 	.db 0x0a
+      001B22 0D                    1626 	.db 0x0d
+      001B23 00                    1627 	.db 0x00
+                                   1628 	.area CSEG    (CODE)
+                                   1629 	.area CONST   (CODE)
+      001B24                       1630 ___str_3:
+      001B24 4E 61 63 6B 65 64 20  1631 	.ascii "Nacked in read %u"
+             69 6E 20 72 65 61 64
+             20 25 75
+      001B35 0A                    1632 	.db 0x0a
+      001B36 0D                    1633 	.db 0x0d
+      001B37 00                    1634 	.db 0x00
+                                   1635 	.area CSEG    (CODE)
+                                   1636 	.area XINIT   (CODE)
+                                   1637 	.area CABS    (ABS,CODE)
