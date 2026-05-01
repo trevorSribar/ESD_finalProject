@@ -97,11 +97,16 @@ static inline char i2c_sendByte(uint8_t a){
     // bit 0
     SDA = (1 & a);
     SCL = 1;
+    while(SCL == 0);   // wait for master to clock bit 0 high
+    while(SCL == 1);   // wait for master to bring SCL low (bit 0 sampled)
+    SCL = 0;           // hold clock low during ACK phase
+    SDA = 1;           // release SDA so master can drive ACK/NACK
 
     // check ACK
     if(i2c_pullBit()){
         return ERROR;
     }
+    while(SCL == 1);   // wait for ACK clock pulse to end
     return SUCCESS;
 }
 
