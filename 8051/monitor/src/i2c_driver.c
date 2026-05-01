@@ -102,22 +102,11 @@ char i2c_edidSend(){
     i2c_findStart();
     // saying it wants to talk to the monitor
     uint8_t pulledByte = i2c_pullByte();
-    // if(pulledByte!=MONITOR_WRITE_ADDRESS&&pulledByte!=MONITOR_READ_ADDRESS){
-    //     printf_tiny("%u,(%X) is not a monitor Address\n\r",pulledByte,pulledByte);
-    //     // return I2C_ERROR_MONITOR_ADDRESS;
-    // }
+    SCL = 0; //hold the clock down
     if(pulledByte!=MONITOR_READ_ADDRESS){
         printf_tiny("%u,(%X) is not a monitor read Address\n\r",pulledByte,pulledByte);
-        // return I2C_ERROR_MONITOR_ADDRESS;
+        return I2C_ERROR_MONITOR_ADDRESS;
     }
-    i2c_sendAck();
-    SCL = 0; //hold the clock down
-    // saying it wants to read from byte 0
-    // if(i2c_pullByte()!=0){
-    //     printf_tiny("Monitor is not reading from 0\n\r");
-    //     return I2C_ERROR_MONITR_SET_0;
-    // }
-    // i2c_sendAck();
     // now we are sending the EDID
     while(1){
         // send EDID, if NACK then we restart
