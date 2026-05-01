@@ -79,10 +79,10 @@ C:   000000BD  s_GSINIT5
 C:   000000C0  s_CSEG                          
 C:   000000E9  l_SSEG                          
 C:   00000100  l_IRAM                          
-C:   00000270  l_CONST                         
-C:   00001962  l_CSEG                          
-C:   00001A22  s_CONST                         
-C:   00001C92  s_XINIT                         
+C:   00000254  l_CONST                         
+C:   00001AD9  l_CSEG                          
+C:   00001B99  s_CONST                         
+C:   00001DED  s_XINIT                         
 
 ASxxxx Linker V03.00/V05.40 + sdld,  page 3.
 Hexadecimal  [32-Bits]
@@ -465,52 +465,55 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                000000C0    00001962 =        6498. bytes (REL,CON,CODE)
+CSEG                                000000C0    00001AD9 =        6873. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   0000024C  _main                              main
-C:   00000297  _interrupt_init                    main
-C:   000002A1  _timer0_interrupt                  main
-C:   000002BC  _Intr0                             main
-C:   000002C0  _Intr1                             main
-C:   000002C4  _putchar                           my_serial
-C:   000002EA  _getchar                           my_serial
-C:   000002FF  _getandputchar                     my_serial
-C:   00000323  _serial_initX2                     my_serial
-C:   0000047B  _i2c_printEDIDhex                  i2c_driver
-C:   000004EA  _i2c_init                          i2c_driver
-C:   000004EF  _i2c_edidSend                      i2c_driver
-C:   00000730  _lcd_init                          lcd_driver
-C:   000008D2  _lcd_putPixel                      lcd_driver
-C:   000008F1  _lcd_putSpecificColorPixel         lcd_driver
-C:   0000093D  _lcd_clear                         lcd_driver
-C:   00000995  _timer0_init                       timer
-C:   000009B2  _timer0_pause                      timer
-C:   000009B6  _timer0_resume                     timer
-C:   000009BA  _timer0_reset                      timer
-C:   000009D2  _timer0_getTime                    timer
-C:   00000BB4  _Terminal_run                      terminal
-C:   00000BF7  _Terminal_Help                     terminal
-C:   00000C43  _Terminal_Timer                    terminal
-C:   00000C97  _getInputOfSize                    terminal
-C:   00000D85  _getInputString                    terminal
-C:   00000E16  _getandputcharUpdate               terminal
-C:   00000E5C  __gptrput                          _gptrput
-C:   00000E77  _printf_tiny                       printf_tiny
-C:   00000F80  __mulint                           _mulint
-C:   00000FAF  _vprintf                           vprintf
-C:   00000FEE  _printf                            vprintf
-C:   000010F2  __print_format                     printf_large
-C:   000019EA  _strlen                            strlen
-C:   00001A02  __gptrget                          _gptrget
-C:   00001A1E  ___sdcc_external_startup           _startup
+C:   0000028B  _main                              main
+C:   00000306  _interrupt_init                    main
+C:   00000310  _timer0_interrupt                  main
+C:   0000032B  _Intr0                             main
+C:   0000032F  _Intr1                             main
+C:   00000333  _putchar                           my_serial
+C:   00000359  _getchar                           my_serial
+C:   0000036E  _getandputchar                     my_serial
+C:   00000392  _serial_initX2                     my_serial
+C:   00000529  _i2c_printEDIDhex                  i2c_driver
+C:   00000598  _i2c_init                          i2c_driver
+C:   0000059D  _i2c_edidSend                      i2c_driver
+C:   0000085A  _lcd_init                          lcd_driver
+C:   00000A00  _lcd_putPixel                      lcd_driver
+C:   00000A1F  _lcd_putSpecificColorPixel         lcd_driver
+C:   00000A6B  _lcd_clear                         lcd_driver
+C:   00000AC3  _lcd0_write                        lcd_driver
+C:   00000AC8  _lcd1_write                        lcd_driver
+C:   00000ACD  _timer0_init                       timer
+C:   00000AEA  _timer0_pause                      timer
+C:   00000AEE  _timer0_resume                     timer
+C:   00000AF2  _timer0_reset                      timer
+C:   00000B0A  _timer0_getTime                    timer
+C:   00000D2B  _Terminal_run                      terminal
+C:   00000D6E  _Terminal_Help                     terminal
+C:   00000DBA  _Terminal_Timer                    terminal
+C:   00000E0E  _getInputOfSize                    terminal
+C:   00000EFC  _getInputString                    terminal
+C:   00000F8D  _getandputcharUpdate               terminal
+C:   00000FD3  __gptrput                          _gptrput
+C:   00000FEE  _printf_tiny                       printf_tiny
+C:   000010F7  __mulint                           _mulint
+C:   00001126  _vprintf                           vprintf
+C:   00001165  _printf                            vprintf
+C:   00001269  __print_format                     printf_large
+C:   00001B61  _strlen                            strlen
+C:   00001B79  __gptrget                          _gptrget
+C:   00001B95  ___sdcc_external_startup           _startup
+
 ASxxxx Linker V03.00/V05.40 + sdld,  page 20.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CONST                               00001A22    00000270 =         624. bytes (REL,CON,CODE)
+CONST                               00001B99    00000254 =         596. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -519,7 +522,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-XINIT                               00001C92    00000002 =           2. bytes (REL,CON,CODE)
+XINIT                               00001DED    00000002 =           2. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------

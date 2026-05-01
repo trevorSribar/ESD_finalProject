@@ -77,4 +77,10 @@ void lcd_putSpecificColorPixel(uint8_t r, uint8_t g, uint8_t b);
 // clears the LCD
 void lcd_clear();
 
+// swaps from writing to LCD1 to LCD0
+void lcd0_write();
+
+// swaps from writing to LCD0 to LCD1
+void lcd1_write();
+
 #endif // LCD_DRIVER_H_

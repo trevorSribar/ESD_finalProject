@@ -21,17 +21,25 @@ int main(void)
 {
     serial_initX2(Baud_140625);
     printf_tiny("Initialized UART\n\r");
-    i2c_init();
-    printf_tiny("Attempting to send EDID...\n\r");
-    while(i2c_edidSend()!=0){
-        
-    }
+    // i2c_init();
+    // printf_tiny("Attempting to send EDID...\n\r");
+    // while(i2c_edidSend()!=0){
+    //     printf_tiny("retrying...\n\r");
+    //     SCL = 1;
+    // }
     lcd_init();
-    printf_tiny("Initialzied the LCD\n\r");
+    printf_tiny("Initialzied the LCDs\n\r");
     while(P3_3 == 0);
     interrupt_init();
     while(1){
-        lcd_putPixel();
+        for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
+            lcd_putPixel();
+        }
+        lcd1_write();
+        for(uint16_t i = 0; i < LCD_PIXEL_VRES; i++){
+            lcd_putPixel();
+        }
+        lcd0_write();
     }
     // Return
     printf_tiny("End program\n\r");

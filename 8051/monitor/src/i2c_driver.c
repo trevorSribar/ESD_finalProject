@@ -111,10 +111,12 @@ char i2c_edidSend(){
     while(1){
         // send EDID, if NACK then we restart
         for(uint8_t i = 0; i<127; i++){
+            SCL=1;
             if(i2c_sendByte(edid[i])){
                 printf_tiny("Nacked in read %u\n\r",i);
                 return I2C_ERROR_MONITR_EDID;
             }
+            SCL=0;
         }
         // send last byte of EDID, if nack we are done!
         if(i2c_sendByte(edid[127])){

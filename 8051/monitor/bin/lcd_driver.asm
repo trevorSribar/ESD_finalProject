@@ -210,6 +210,8 @@
 	.globl _lcd_putPixel
 	.globl _lcd_putSpecificColorPixel
 	.globl _lcd_clear
+	.globl _lcd0_write
+	.globl _lcd1_write
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -945,6 +947,9 @@ _lcd_init:
 ;	src/lcd_driver.c:15: LCD_0_ENABLE_PIN = 0;
 ;	assignBit
 	clr	_P3_4
+;	src/lcd_driver.c:16: LCD_1_ENABLE_PIN = 0;
+;	assignBit
+	clr	_P3_5
 ;	src/lcd_driver.c:18: LCD_COMMAND_REGISTER_PIN = 0;
 ;	assignBit
 	clr	_P1_7
@@ -1274,6 +1279,9 @@ _lcd_init:
 ;	src/lcd_driver.c:123: LCD_COMMAND_REGISTER_PIN = 1; //remove this later
 ;	assignBit
 	setb	_P1_7
+;	src/lcd_driver.c:126: LCD_1_ENABLE_PIN = 1;
+;	assignBit
+	setb	_P3_5
 ;	src/lcd_driver.c:127: }
 	ret
 ;------------------------------------------------------------
@@ -1458,6 +1466,38 @@ _lcd_clear:
 ;	assignBit
 	setb	_P3_5
 ;	src/lcd_driver.c:208: }
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'lcd0_write'
+;------------------------------------------------------------
+;	src/lcd_driver.c:211: void lcd0_write(){
+;	-----------------------------------------
+;	 function lcd0_write
+;	-----------------------------------------
+_lcd0_write:
+;	src/lcd_driver.c:212: LCD_1_ENABLE_PIN = 1;
+;	assignBit
+	setb	_P3_5
+;	src/lcd_driver.c:213: LCD_0_ENABLE_PIN = 0;
+;	assignBit
+	clr	_P3_4
+;	src/lcd_driver.c:217: }
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'lcd1_write'
+;------------------------------------------------------------
+;	src/lcd_driver.c:220: void lcd1_write(){
+;	-----------------------------------------
+;	 function lcd1_write
+;	-----------------------------------------
+_lcd1_write:
+;	src/lcd_driver.c:221: LCD_0_ENABLE_PIN = 1;
+;	assignBit
+	setb	_P3_4
+;	src/lcd_driver.c:222: LCD_1_ENABLE_PIN = 0;
+;	assignBit
+	clr	_P3_5
+;	src/lcd_driver.c:226: }
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

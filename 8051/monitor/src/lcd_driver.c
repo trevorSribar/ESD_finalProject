@@ -13,7 +13,7 @@
 void lcd_init(){
     // For LCD 0
     LCD_0_ENABLE_PIN = 0;
-    // LCD_1_ENABLE_PIN = 0;
+    LCD_1_ENABLE_PIN = 0;
     // SOFT RESET
     LCD_COMMAND_REGISTER_PIN = 0;
     lcd_writeAddress(LCD_SOFT_RESET_ADDRESS);
@@ -122,8 +122,8 @@ void lcd_init(){
     lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
     LCD_COMMAND_REGISTER_PIN = 1; //remove this later
 
-    // we are no longer sending commands to LCD 0
-    // LCD_0_ENABLE_PIN = 1;
+    // We now only want to write to LCD 0
+    LCD_1_ENABLE_PIN = 1;
 }
 
 // attempts to put the color at port 0 onto the current pixel location
@@ -205,4 +205,22 @@ void lcd_clear(){
     // we are no long sending data to LCD 0
     LCD_0_ENABLE_PIN = 1;
     LCD_1_ENABLE_PIN = 1;
+}
+
+// swaps from writing to LCD1 to LCD0
+void lcd0_write(){
+    LCD_1_ENABLE_PIN = 1;
+    LCD_0_ENABLE_PIN = 0;
+    // LCD_COMMAND_REGISTER_PIN = 0;
+    // lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
+    // LCD_COMMAND_REGISTER_PIN = 1;
+}
+
+// swaps from writing to LCD0 to LCD1
+void lcd1_write(){
+    LCD_0_ENABLE_PIN = 1;
+    LCD_1_ENABLE_PIN = 0;
+    // LCD_COMMAND_REGISTER_PIN = 0;
+    // lcd_writeAddress(LCD_MEMORY_WRITE_ADDRESS);
+    // LCD_COMMAND_REGISTER_PIN = 1;
 }

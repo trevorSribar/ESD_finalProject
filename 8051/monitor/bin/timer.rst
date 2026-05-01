@@ -494,7 +494,7 @@
                                     494 ;	-----------------------------------------
                                     495 ;	 function timer0_init
                                     496 ;	-----------------------------------------
-      000995                        497 _timer0_init:
+      000ACD                        497 _timer0_init:
                            000007   498 	ar7 = 0x07
                            000006   499 	ar6 = 0x06
                            000005   500 	ar5 = 0x05
@@ -504,27 +504,27 @@
                            000001   504 	ar1 = 0x01
                            000000   505 	ar0 = 0x00
                                     506 ;	src/timer.c:18: CKCON0 |= TIMER0_SPEED; // reduce the speed of the timer back to the nominal value
-      000995 43 8F 02         [24]  507 	orl	_CKCON0,#0x02
+      000ACD 43 8F 02         [24]  507 	orl	_CKCON0,#0x02
                                     508 ;	src/timer.c:20: currentTime.mseconds = 0;
-      000998 90 00 67         [24]  509 	mov	dptr,#(_currentTime + 0x0002)
-      00099B E4               [12]  510 	clr	a
-      00099C F0               [24]  511 	movx	@dptr,a
+      000AD0 90 00 67         [24]  509 	mov	dptr,#(_currentTime + 0x0002)
+      000AD3 E4               [12]  510 	clr	a
+      000AD4 F0               [24]  511 	movx	@dptr,a
                                     512 ;	src/timer.c:21: currentTime.seconds = 0;
-      00099D 90 00 66         [24]  513 	mov	dptr,#(_currentTime + 0x0001)
-      0009A0 F0               [24]  514 	movx	@dptr,a
+      000AD5 90 00 66         [24]  513 	mov	dptr,#(_currentTime + 0x0001)
+      000AD8 F0               [24]  514 	movx	@dptr,a
                                     515 ;	src/timer.c:22: currentTime.minutes = 0;
-      0009A1 90 00 65         [24]  516 	mov	dptr,#_currentTime
-      0009A4 F0               [24]  517 	movx	@dptr,a
+      000AD9 90 00 65         [24]  516 	mov	dptr,#_currentTime
+      000ADC F0               [24]  517 	movx	@dptr,a
                                     518 ;	src/timer.c:24: TMOD |= TIMER0_16BIT_MODE; // set the timer to 16 bit mode
-      0009A5 43 89 01         [24]  519 	orl	_TMOD,#0x01
+      000ADD 43 89 01         [24]  519 	orl	_TMOD,#0x01
                                     520 ;	src/timer.c:25: IEN0 |= TIMER0_INT_EN;  // enable timer0 interrupt
-      0009A8 43 A8 02         [24]  521 	orl	_IEN0,#0x02
+      000AE0 43 A8 02         [24]  521 	orl	_IEN0,#0x02
                                     522 ;	src/timer.c:26: IEN0 |= ALL_INTERRUPTS; // enable all interrupts
-      0009AB 43 A8 80         [24]  523 	orl	_IEN0,#0x80
+      000AE3 43 A8 80         [24]  523 	orl	_IEN0,#0x80
                                     524 ;	src/timer.c:27: TCON |= TIMER0_RUN; // starts running the timer
-      0009AE 43 88 10         [24]  525 	orl	_TCON,#0x10
+      000AE6 43 88 10         [24]  525 	orl	_TCON,#0x10
                                     526 ;	src/timer.c:28: }
-      0009B1 22               [24]  527 	ret
+      000AE9 22               [24]  527 	ret
                                     528 ;------------------------------------------------------------
                                     529 ;Allocation info for local variables in function 'timer0_pause'
                                     530 ;------------------------------------------------------------
@@ -532,11 +532,11 @@
                                     532 ;	-----------------------------------------
                                     533 ;	 function timer0_pause
                                     534 ;	-----------------------------------------
-      0009B2                        535 _timer0_pause:
+      000AEA                        535 _timer0_pause:
                                     536 ;	src/timer.c:32: TCON &= ~(TIMER0_RUN);
-      0009B2 53 88 EF         [24]  537 	anl	_TCON,#0xef
+      000AEA 53 88 EF         [24]  537 	anl	_TCON,#0xef
                                     538 ;	src/timer.c:33: }
-      0009B5 22               [24]  539 	ret
+      000AED 22               [24]  539 	ret
                                     540 ;------------------------------------------------------------
                                     541 ;Allocation info for local variables in function 'timer0_resume'
                                     542 ;------------------------------------------------------------
@@ -544,11 +544,11 @@
                                     544 ;	-----------------------------------------
                                     545 ;	 function timer0_resume
                                     546 ;	-----------------------------------------
-      0009B6                        547 _timer0_resume:
+      000AEE                        547 _timer0_resume:
                                     548 ;	src/timer.c:37: TCON |= (TIMER0_RUN);
-      0009B6 43 88 10         [24]  549 	orl	_TCON,#0x10
+      000AEE 43 88 10         [24]  549 	orl	_TCON,#0x10
                                     550 ;	src/timer.c:38: }
-      0009B9 22               [24]  551 	ret
+      000AF1 22               [24]  551 	ret
                                     552 ;------------------------------------------------------------
                                     553 ;Allocation info for local variables in function 'timer0_reset'
                                     554 ;------------------------------------------------------------
@@ -556,27 +556,27 @@
                                     556 ;	-----------------------------------------
                                     557 ;	 function timer0_reset
                                     558 ;	-----------------------------------------
-      0009BA                        559 _timer0_reset:
+      000AF2                        559 _timer0_reset:
                                     560 ;	src/timer.c:42: IEN0 &= ~TIMER0_INT_EN;
-      0009BA 53 A8 FC         [24]  561 	anl	_IEN0,#0xfc
+      000AF2 53 A8 FC         [24]  561 	anl	_IEN0,#0xfc
                                     562 ;	src/timer.c:43: currentTime.minutes = 0;
-      0009BD 90 00 65         [24]  563 	mov	dptr,#_currentTime
-      0009C0 E4               [12]  564 	clr	a
-      0009C1 F0               [24]  565 	movx	@dptr,a
+      000AF5 90 00 65         [24]  563 	mov	dptr,#_currentTime
+      000AF8 E4               [12]  564 	clr	a
+      000AF9 F0               [24]  565 	movx	@dptr,a
                                     566 ;	src/timer.c:44: currentTime.seconds = 0;
-      0009C2 90 00 66         [24]  567 	mov	dptr,#(_currentTime + 0x0001)
-      0009C5 F0               [24]  568 	movx	@dptr,a
+      000AFA 90 00 66         [24]  567 	mov	dptr,#(_currentTime + 0x0001)
+      000AFD F0               [24]  568 	movx	@dptr,a
                                     569 ;	src/timer.c:45: currentTime.mseconds = 0;
-      0009C6 90 00 67         [24]  570 	mov	dptr,#(_currentTime + 0x0002)
-      0009C9 F0               [24]  571 	movx	@dptr,a
+      000AFE 90 00 67         [24]  570 	mov	dptr,#(_currentTime + 0x0002)
+      000B01 F0               [24]  571 	movx	@dptr,a
                                     572 ;	src/timer.c:46: TH0 = 0;
-      0009CA F5 8C            [12]  573 	mov	_TH0,a
+      000B02 F5 8C            [12]  573 	mov	_TH0,a
                                     574 ;	src/timer.c:47: TL0 = 0;
-      0009CC F5 8A            [12]  575 	mov	_TL0,a
+      000B04 F5 8A            [12]  575 	mov	_TL0,a
                                     576 ;	src/timer.c:48: TMOD |= TIMER0_16BIT_MODE;
-      0009CE 43 89 01         [24]  577 	orl	_TMOD,#0x01
+      000B06 43 89 01         [24]  577 	orl	_TMOD,#0x01
                                     578 ;	src/timer.c:49: }
-      0009D1 22               [24]  579 	ret
+      000B09 22               [24]  579 	ret
                                     580 ;------------------------------------------------------------
                                     581 ;Allocation info for local variables in function 'timer0_getTime'
                                     582 ;------------------------------------------------------------
@@ -584,72 +584,72 @@
                                     584 ;	-----------------------------------------
                                     585 ;	 function timer0_getTime
                                     586 ;	-----------------------------------------
-      0009D2                        587 _timer0_getTime:
+      000B0A                        587 _timer0_getTime:
                                     588 ;	src/timer.c:53: while(numTimerInterrupts>0){
-      0009D2                        589 00105$:
-      0009D2 90 00 B9         [24]  590 	mov	dptr,#_numTimerInterrupts
-      0009D5 E0               [24]  591 	movx	a,@dptr
-      0009D6 FF               [12]  592 	mov	r7,a
-      0009D7 E0               [24]  593 	movx	a,@dptr
-      0009D8 60 47            [24]  594 	jz	00107$
+      000B0A                        589 00105$:
+      000B0A 90 00 B9         [24]  590 	mov	dptr,#_numTimerInterrupts
+      000B0D E0               [24]  591 	movx	a,@dptr
+      000B0E FF               [12]  592 	mov	r7,a
+      000B0F E0               [24]  593 	movx	a,@dptr
+      000B10 60 47            [24]  594 	jz	00107$
                                     595 ;	src/timer.c:54: numTimerInterrupts--;
-      0009DA EF               [12]  596 	mov	a,r7
-      0009DB 14               [12]  597 	dec	a
-      0009DC 90 00 B9         [24]  598 	mov	dptr,#_numTimerInterrupts
-      0009DF F0               [24]  599 	movx	@dptr,a
+      000B12 EF               [12]  596 	mov	a,r7
+      000B13 14               [12]  597 	dec	a
+      000B14 90 00 B9         [24]  598 	mov	dptr,#_numTimerInterrupts
+      000B17 F0               [24]  599 	movx	@dptr,a
                                     600 ;	src/timer.c:55: currentTime.mseconds+=MS_IRQ;
-      0009E0 90 00 67         [24]  601 	mov	dptr,#(_currentTime + 0x0002)
-      0009E3 E0               [24]  602 	movx	a,@dptr
-      0009E4 24 07            [12]  603 	add	a,#0x07
+      000B18 90 00 67         [24]  601 	mov	dptr,#(_currentTime + 0x0002)
+      000B1B E0               [24]  602 	movx	a,@dptr
+      000B1C 24 07            [12]  603 	add	a,#0x07
                                     604 ;	src/timer.c:56: if(currentTime.mseconds>=MS_PER_SEC){
-      0009E6 90 00 67         [24]  605 	mov	dptr,#(_currentTime + 0x0002)
-      0009E9 F0               [24]  606 	movx	@dptr,a
-      0009EA FF               [12]  607 	mov	r7,a
-      0009EB BF 64 00         [24]  608 	cjne	r7,#0x64,00135$
-      0009EE                        609 00135$:
-      0009EE 40 E2            [24]  610 	jc	00105$
+      000B1E 90 00 67         [24]  605 	mov	dptr,#(_currentTime + 0x0002)
+      000B21 F0               [24]  606 	movx	@dptr,a
+      000B22 FF               [12]  607 	mov	r7,a
+      000B23 BF 64 00         [24]  608 	cjne	r7,#0x64,00135$
+      000B26                        609 00135$:
+      000B26 40 E2            [24]  610 	jc	00105$
                                     611 ;	src/timer.c:57: currentTime.mseconds-=MS_PER_SEC;
-      0009F0 90 00 67         [24]  612 	mov	dptr,#(_currentTime + 0x0002)
-      0009F3 E0               [24]  613 	movx	a,@dptr
-      0009F4 24 9C            [12]  614 	add	a,#0x9c
-      0009F6 90 00 67         [24]  615 	mov	dptr,#(_currentTime + 0x0002)
-      0009F9 F0               [24]  616 	movx	@dptr,a
+      000B28 90 00 67         [24]  612 	mov	dptr,#(_currentTime + 0x0002)
+      000B2B E0               [24]  613 	movx	a,@dptr
+      000B2C 24 9C            [12]  614 	add	a,#0x9c
+      000B2E 90 00 67         [24]  615 	mov	dptr,#(_currentTime + 0x0002)
+      000B31 F0               [24]  616 	movx	@dptr,a
                                     617 ;	src/timer.c:58: currentTime.seconds++;
-      0009FA 90 00 66         [24]  618 	mov	dptr,#(_currentTime + 0x0001)
-      0009FD E0               [24]  619 	movx	a,@dptr
-      0009FE FF               [12]  620 	mov	r7,a
-      0009FF 0F               [12]  621 	inc	r7
-      000A00 90 00 66         [24]  622 	mov	dptr,#(_currentTime + 0x0001)
-      000A03 EF               [12]  623 	mov	a,r7
-      000A04 F0               [24]  624 	movx	@dptr,a
+      000B32 90 00 66         [24]  618 	mov	dptr,#(_currentTime + 0x0001)
+      000B35 E0               [24]  619 	movx	a,@dptr
+      000B36 FF               [12]  620 	mov	r7,a
+      000B37 0F               [12]  621 	inc	r7
+      000B38 90 00 66         [24]  622 	mov	dptr,#(_currentTime + 0x0001)
+      000B3B EF               [12]  623 	mov	a,r7
+      000B3C F0               [24]  624 	movx	@dptr,a
                                     625 ;	src/timer.c:59: if(currentTime.seconds>=SEC_PER_MIN){
-      000A05 BF 3C 00         [24]  626 	cjne	r7,#0x3c,00137$
-      000A08                        627 00137$:
-      000A08 40 C8            [24]  628 	jc	00105$
+      000B3D BF 3C 00         [24]  626 	cjne	r7,#0x3c,00137$
+      000B40                        627 00137$:
+      000B40 40 C8            [24]  628 	jc	00105$
                                     629 ;	src/timer.c:60: currentTime.seconds-=SEC_PER_MIN;
-      000A0A 90 00 66         [24]  630 	mov	dptr,#(_currentTime + 0x0001)
-      000A0D E0               [24]  631 	movx	a,@dptr
-      000A0E 24 C4            [12]  632 	add	a,#0xc4
-      000A10 90 00 66         [24]  633 	mov	dptr,#(_currentTime + 0x0001)
-      000A13 F0               [24]  634 	movx	@dptr,a
+      000B42 90 00 66         [24]  630 	mov	dptr,#(_currentTime + 0x0001)
+      000B45 E0               [24]  631 	movx	a,@dptr
+      000B46 24 C4            [12]  632 	add	a,#0xc4
+      000B48 90 00 66         [24]  633 	mov	dptr,#(_currentTime + 0x0001)
+      000B4B F0               [24]  634 	movx	@dptr,a
                                     635 ;	src/timer.c:61: currentTime.minutes++;
-      000A14 90 00 65         [24]  636 	mov	dptr,#_currentTime
-      000A17 E0               [24]  637 	movx	a,@dptr
-      000A18 FF               [12]  638 	mov	r7,a
-      000A19 0F               [12]  639 	inc	r7
-      000A1A 90 00 65         [24]  640 	mov	dptr,#_currentTime
-      000A1D EF               [12]  641 	mov	a,r7
-      000A1E F0               [24]  642 	movx	@dptr,a
-      000A1F 80 B1            [24]  643 	sjmp	00105$
-      000A21                        644 00107$:
+      000B4C 90 00 65         [24]  636 	mov	dptr,#_currentTime
+      000B4F E0               [24]  637 	movx	a,@dptr
+      000B50 FF               [12]  638 	mov	r7,a
+      000B51 0F               [12]  639 	inc	r7
+      000B52 90 00 65         [24]  640 	mov	dptr,#_currentTime
+      000B55 EF               [12]  641 	mov	a,r7
+      000B56 F0               [24]  642 	movx	@dptr,a
+      000B57 80 B1            [24]  643 	sjmp	00105$
+      000B59                        644 00107$:
                                     645 ;	src/timer.c:65: return &currentTime;
-      000A21 90 00 65         [24]  646 	mov	dptr,#_currentTime
-      000A24 75 F0 00         [24]  647 	mov	b, #0x00
+      000B59 90 00 65         [24]  646 	mov	dptr,#_currentTime
+      000B5C 75 F0 00         [24]  647 	mov	b, #0x00
                                     648 ;	src/timer.c:66: }
-      000A27 22               [24]  649 	ret
+      000B5F 22               [24]  649 	ret
                                     650 	.area CSEG    (CODE)
                                     651 	.area CONST   (CODE)
                                     652 	.area XINIT   (CODE)
-      001C92                        653 __xinit__numTimerInterrupts:
-      001C92 00                     654 	.db #0x00	; 0
+      001DED                        653 __xinit__numTimerInterrupts:
+      001DED 00                     654 	.db #0x00	; 0
                                     655 	.area CABS    (ABS,CODE)
