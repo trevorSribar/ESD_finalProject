@@ -1,0 +1,6 @@
+VS Code
+Flip32
+Phyton Chip programmer
+GNU make
+Batchchip
+PuTTY
